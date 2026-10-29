@@ -1,0 +1,476 @@
+{
+  "source_root": "/root/voice-lab",
+  "purpose": "Exact production source snapshot; tooling/docs added separately",
+  "files": [
+    {
+      "path": "voice_app/__init__.py",
+      "sha256": "b265d4215b2f147abf8bc059b37e8f6f7adb13f157eeb08abf0cedcd4f9fd60e",
+      "bytes": 67
+    },
+    {
+      "path": "voice_app/approved_conditioning.py",
+      "sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+      "bytes": 3336
+    },
+    {
+      "path": "voice_app/audio.py",
+      "sha256": "b1cb6a934eac739cea174ae020ca93408c7f86a45de3a86d318db3264ab67f9b",
+      "bytes": 621
+    },
+    {
+      "path": "voice_app/auth.py",
+      "sha256": "0c02b44b02e60ff1b56d4029d47ea7c0920daa27c63de4a5747e9cf78d0fbb1b",
+      "bytes": 6809
+    },
+    {
+      "path": "voice_app/automatic_conditioning.py",
+      "sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+      "bytes": 6107
+    },
+    {
+      "path": "voice_app/automatic_conditioning_rules.json",
+      "sha256": "2b097ea9b3c6dbe22d4df37891e9ccad040d068aba84367a9fdcd4fa73c06b7b",
+      "bytes": 249
+    },
+    {
+      "path": "voice_app/delivery.py",
+      "sha256": "959f55d248983239f2027d269fa3dc4ef26b78167e6a27572b0215a9c06d7b69",
+      "bytes": 6150
+    },
+    {
+      "path": "voice_app/delivery_registry.json",
+      "sha256": "a0b67b0a3b9959ce7269acc48538fa8d8fb27ec41f57a81020ebc4b3b00a15b6",
+      "bytes": 968
+    },
+    {
+      "path": "voice_app/local_audio_worker.py",
+      "sha256": "cfa6a2a543ebbef3fe2b51a212a2200f11ac1db427bfa8a26ec3f75fef57eebf",
+      "bytes": 8192
+    },
+    {
+      "path": "voice_app/pronunciation-id.json",
+      "sha256": "1854d1e60ad2bd985d2deea0aeae9f6aa3b5eee04b45c60939d5782ed8c3e6c1",
+      "bytes": 43
+    },
+    {
+      "path": "voice_app/prosody.py",
+      "sha256": "54d3168aa216cdc62e53f9b610eb1892f3441444d7b0de6d0fe543b3d4e1c2a6",
+      "bytes": 2147
+    },
+    {
+      "path": "voice_app/providers.py",
+      "sha256": "80105da43ea721e213e47822f91298e6cd2ae8a167bb7503f1e97767d0451f96",
+      "bytes": 4517
+    },
+    {
+      "path": "voice_app/server.py",
+      "sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5",
+      "bytes": 42761
+    },
+    {
+      "path": "voice_app/session_core.py",
+      "sha256": "14063a463652cde2d784151ed9f1a369723729bc7f432ca14096c0c4de4da06a",
+      "bytes": 7204
+    },
+    {
+      "path": "voice_app/speech.py",
+      "sha256": "85aead061b6fb72f458252ccf42c8664cd743dd34883f6cf9b0a111f10b1c3c1",
+      "bytes": 37403
+    },
+    {
+      "path": "voice_app/stateful_asr.py",
+      "sha256": "221d88e009d036c4adb1881c09b3a367dc8b50cc19396e9112fe8ef81a208d5e",
+      "bytes": 3342
+    },
+    {
+      "path": "voice_app/stream_asr.py",
+      "sha256": "d8d5e854dcb05114158bb049d1bf2abd8d4c77ae4bdc222bf8feb65e24385a8e",
+      "bytes": 7692
+    },
+    {
+      "path": "voice_app/supertonic3_worker.py",
+      "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+      "bytes": 14002
+    },
+    {
+      "path": "voice_app/tts_chunks.py",
+      "sha256": "c504be16522727c2a5b355182f0f5c91c891861c59bdbee47e54a0a6edd86ec6",
+      "bytes": 2887
+    },
+    {
+      "path": "voice_app/zipformer_state.py",
+      "sha256": "3b89f2a6ee1f22fcce35026150699d540630e35547e366de79b1ed450613919c",
+      "bytes": 2828
+    },
+    {
+      "path": "voice_app/zipformer_stateful_worker.py",
+      "sha256": "26e9f6c14967ce0378b8be45866b64fd89f08b036a35257d0c282d55497a879a",
+      "bytes": 6008
+    },
+    {
+      "path": "voice_app/zipformer_worker.py",
+      "sha256": "dd34189a5e8bc29a7cf61a2f760b778c6f42fc638e83a92fe6e5c57ac8c392fb",
+      "bytes": 4094
+    },
+    {
+      "path": "web/app.js",
+      "sha256": "0803b5774c0e9f2e23332150276cc5d3fd5970b844423d94c2b544e0371222ef",
+      "bytes": 43842
+    },
+    {
+      "path": "web/audio-core.js",
+      "sha256": "bf0f82e423fdc9b302b60a1aca92f1f00ffee71da54e94b4ea1ada363995c21b",
+      "bytes": 1159
+    },
+    {
+      "path": "web/audio.test.cjs",
+      "sha256": "f79897b31e8e9de09465ea6bb20a9df6b8d054a29f397e824cf32a29480b34da",
+      "bytes": 2083
+    },
+    {
+      "path": "web/auth.css",
+      "sha256": "5e69bfbf7bad2a42dd7e5eae5768470d32ee51f09762ba8316c893454fe8e362",
+      "bytes": 1403
+    },
+    {
+      "path": "web/auth.html",
+      "sha256": "19cf4c165ccee5c6bba97d4696eb182260d597d9cfdf73514dfd67fc6d9668fa",
+      "bytes": 1164
+    },
+    {
+      "path": "web/auth.js",
+      "sha256": "727cabb2746038e8c72f8793ddf8438f81ad5192ec23c3757305037a4c84956f",
+      "bytes": 2032
+    },
+    {
+      "path": "web/auth.test.cjs",
+      "sha256": "e58e71b3cc2cb70501e9fba0856e5d7e95a41ffdc7d2e921853976beb85128a7",
+      "bytes": 2118
+    },
+    {
+      "path": "web/client.test.cjs",
+      "sha256": "bb38ff96bb85232d2c9580a8cb012cb9abc01f449cc19a6df6ad49e3e34eef0f",
+      "bytes": 77710
+    },
+    {
+      "path": "web/index.html",
+      "sha256": "867a68494d1c27598903b2d56ede571d1fe39d61f78f19d02789bfab5d6cc426",
+      "bytes": 5449
+    },
+    {
+      "path": "web/pcm-worklet.js",
+      "sha256": "df5382aacd0659d132357c5bd5658c98b41c55cab62b2a4d6441244c23b19eb2",
+      "bytes": 1385
+    },
+    {
+      "path": "web/styles.css",
+      "sha256": "9f4b01937e19f7197f2f12f513f108f242a4c3dbfb6ada8b736fd131d27e6f11",
+      "bytes": 8852
+    },
+    {
+      "path": "web/supertonic3-LICENSE.txt",
+      "sha256": "0d944a9110fed9a9602d60e0423a272903e7bd21ab060490774efc77c2275e9f",
+      "bytes": 15007
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b.json",
+      "sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828",
+      "bytes": 421903
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_active_high.json",
+      "sha256": "4575171ea1b5ffbd96a1b03a92704262a2c338d190dc969e137656904097b95a",
+      "bytes": 421722
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_active_low.json",
+      "sha256": "f948e966e00dba822e19da9d0207a5f5f0254618e652a624810a5c89985e1a56",
+      "bytes": 421839
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_active_medium.json",
+      "sha256": "294c2d705bf8f5fd3388725e28bac3850b39a8f479b5c23afc40cced3bae17b6",
+      "bytes": 421815
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_calm_high.json",
+      "sha256": "d90e418153d8b3d0e7234a92541fcfb4d1f054efba60adf08f327dad001f4bc4",
+      "bytes": 422105
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_calm_low.json",
+      "sha256": "f89348574a02a68771e47bb9fd23e33dbada5fc9ca0b876c29fdc6da049ce832",
+      "bytes": 422059
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_calm_medium.json",
+      "sha256": "64fa0c071863db434a22ca080228eb93ae4f954553226ea4f4f267f4150b5618",
+      "bytes": 422055
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/manifest.json",
+      "sha256": "ba9257f9c745accddcbc64c017c4638d39f5c1255f6923f5f499acc099aaf403",
+      "bytes": 5547
+    },
+    {
+      "path": "voice_assets/conditioning-b/manifest.json",
+      "sha256": "08a34381da17292b652d384b1316365218f1c4d9fc0ae22405fe8909bcb55cfc",
+      "bytes": 2103
+    },
+    {
+      "path": "voice_assets/conditioning-b/profile.json",
+      "sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828",
+      "bytes": 421903
+    },
+    {
+      "path": "test_approved_conditioning.py",
+      "sha256": "d8afa3cde68bab8b3953a54d6a863f8cef2bee92087ef87648de332722162d84",
+      "bytes": 18420
+    },
+    {
+      "path": "test_audio.py",
+      "sha256": "1bfdba7efb353de1cac0fa3d33aa2c8bfd84ed60b5060ddcf68ca3a44579185e",
+      "bytes": 1074
+    },
+    {
+      "path": "test_audio_diagnostics.py",
+      "sha256": "e0c128323ae43fb264ab71b015cc7f2ffc5f61709d903dfd0794ca80b5248d38",
+      "bytes": 4620
+    },
+    {
+      "path": "test_audio_failures.py",
+      "sha256": "1f86ffe8b14599852942c131dff37d5f272098a91c8e1c1b19d5b6ff127d7ccb",
+      "bytes": 2330
+    },
+    {
+      "path": "test_auth.py",
+      "sha256": "8aa5a5bdbe8b69a97b4e9eea0bb7ab5cdf24e69b2bd6d759dd4677b2a80d438a",
+      "bytes": 11031
+    },
+    {
+      "path": "test_automatic_conditioning.py",
+      "sha256": "995e147cd2202be2a5bd63c3006ba006a1a3a87e8b85589553b8080a3cc6e79f",
+      "bytes": 14576
+    },
+    {
+      "path": "test_automatic_conditioning_server.py",
+      "sha256": "a5030e2427a57cfbc0cefda52030db884091fe64bfd4a215a434ced10f0e5059",
+      "bytes": 14986
+    },
+    {
+      "path": "test_browser_choice.py",
+      "sha256": "b9b752f7c4bfdbbaeb5393fd76bed894cd71f3b8a760fafd3c70f7e08776478d",
+      "bytes": 3628
+    },
+    {
+      "path": "test_chunked_tts.py",
+      "sha256": "666ad5fea196d3fb0ad275bdbadabece024cc364e30f8ab7309fe4872cf0a629",
+      "bytes": 20285
+    },
+    {
+      "path": "test_conditioning_capabilities.py",
+      "sha256": "b089815bc1b423d8ed10dd61229bd870cdb37a25d48a4ea3c419cee56f1a0a71",
+      "bytes": 1720
+    },
+    {
+      "path": "test_delivery_boundaries.py",
+      "sha256": "b03252ab4e45209778dee60ff1f80bdff3806393c0bf07560fa5beb43467871c",
+      "bytes": 1585
+    },
+    {
+      "path": "test_delivery_native.py",
+      "sha256": "685f7f6c3e539b722e0b6fe36706bf0dd13e64bc1e2bb6511acce6fa60298323",
+      "bytes": 16584
+    },
+    {
+      "path": "test_delivery_protocol.py",
+      "sha256": "29c6bd73008a4514941cb7e9f0085c6ee97c00569f8975df9ace834b5860659b",
+      "bytes": 14965
+    },
+    {
+      "path": "test_diagnostic_logging.py",
+      "sha256": "47ed5aa22884a8bbd3aed6cfd85a80278646b67355b53e2b46367c50338b82a8",
+      "bytes": 478
+    },
+    {
+      "path": "test_fast_worker.py",
+      "sha256": "5c2bd3d5a47d0ca587da6c0ce67460471beb1144f23acb47026cb93e77f81506",
+      "bytes": 6544
+    },
+    {
+      "path": "test_live_web.py",
+      "sha256": "37c7663944d08747f1781fcf1d6eb9357197cb1e5d559a06299ed693a25141b2",
+      "bytes": 9565
+    },
+    {
+      "path": "test_local_audio.py",
+      "sha256": "9dfd098c039bfe64c7c2a9ff33517e6bfa0fefadbf9e8a262d6672202bd0e705",
+      "bytes": 12538
+    },
+    {
+      "path": "test_preview_adapter.py",
+      "sha256": "d4a0d82491aad039ea554e371cb2d8a25050334152756c23e579f8b0bb9f9a7a",
+      "bytes": 2155
+    },
+    {
+      "path": "test_preview_protocol.py",
+      "sha256": "fcdaf4110a38162f54f2ec1b982ed59211d387b9b4bc0a0c5731785e7490e216",
+      "bytes": 8680
+    },
+    {
+      "path": "test_promotion_fixes.py",
+      "sha256": "8d81a16aafe095dc6e2578a1468e321b2a12fde7d096a080889457249d4c81db",
+      "bytes": 15893
+    },
+    {
+      "path": "test_prosody.py",
+      "sha256": "63c0ffadbeb4ab19979fc0175946067c4f3cd3e3292f2e4114908a45fba76c5b",
+      "bytes": 2959
+    },
+    {
+      "path": "test_providers.py",
+      "sha256": "d9c57a83c3b5dc8dacf28b2b66b4faf6f868ec38a8ea662ef353be8582da3b80",
+      "bytes": 10483
+    },
+    {
+      "path": "test_response_stages.py",
+      "sha256": "e65f9188dd18b7762da97167e402ebae871c494bc4208ff0649ea88802eb001a",
+      "bytes": 3085
+    },
+    {
+      "path": "test_server.py",
+      "sha256": "a045d3fbdc1047caedcdf2b4600f9ea21bfe847d87f576263adf01a8ed80556d",
+      "bytes": 26468
+    },
+    {
+      "path": "test_speech.py",
+      "sha256": "7f93fac2abd63447d55851dfeb838c5d65a6ef24b32bbeae05b7c811eadeba10",
+      "bytes": 9279
+    },
+    {
+      "path": "test_spoken_style_b.py",
+      "sha256": "cfd6bbebb75d377cde0110908dc40777e982acb19ba246d7c541f96fada85fbc",
+      "bytes": 2924
+    },
+    {
+      "path": "test_stateful_integration.py",
+      "sha256": "2f0360490bf5704b18e8591c3996c13176de34e4d4d2961c17d98fb07da64953",
+      "bytes": 10893
+    },
+    {
+      "path": "test_stateful_worker.py",
+      "sha256": "2d2d77b76696a964bf36784f91e75447cf36908abd31cf4cd9ffc7038f5ece03",
+      "bytes": 10787
+    },
+    {
+      "path": "test_stream_worker.py",
+      "sha256": "a30f452a169652a360a46297c9435aedc03916b1c309827dcba0c4378163c40d",
+      "bytes": 3910
+    },
+    {
+      "path": "test_supertonic3.py",
+      "sha256": "53fbf0eba5de365ed7a4e853a893753467bd86da1dc3ab711097762774466f15",
+      "bytes": 3595
+    },
+    {
+      "path": "test_supertonic3_adapter.py",
+      "sha256": "d7278afb6ee0e595bebb86544c5008d3ca15c10428e51211ea5d8c4910aeac14",
+      "bytes": 13669
+    },
+    {
+      "path": "test_tts_failure_diagnostics.py",
+      "sha256": "2ec6ca93b4f0de09b90334bee7a48dd1ebd25a65661f94aef6b8ffd57146c1a4",
+      "bytes": 12247
+    },
+    {
+      "path": "test_zipformer.py",
+      "sha256": "c56de4c1e0fe4bfa8b1d6d082088628c9412740d3d152c48d6154d3227757495",
+      "bytes": 4974
+    },
+    {
+      "path": "test_zipformer_bounds.py",
+      "sha256": "9ad7ba09f40ae0fbd1521b0935b5c0c1ce1f6056e52b93ae59dc082fdd988fa1",
+      "bytes": 1367
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "5aa3679c0c034facfc1b8f793f95c6e673504ebcfa31037c26671ace29876083",
+      "bytes": 285
+    },
+    {
+      "path": "AUTOMATIC-CONDITIONING.md",
+      "sha256": "1a627ebf739ec5935312e76ac97dd5488af25fec8badbda3a7087ed841066380",
+      "bytes": 3271
+    },
+    {
+      "path": "APPROVED-CONDITIONING-B.md",
+      "sha256": "353cf85e64577d8a77ab46b582e103253a88e16997f893450abf1c857383386a",
+      "bytes": 3553
+    },
+    {
+      "path": "EXTENSIBLE-DELIVERY.md",
+      "sha256": "719e6f98947f6da8ba3c86425755cb1bf96419b69f83e8614a7a46ed27ecfbd5",
+      "bytes": 3960
+    },
+    {
+      "path": "SUPERTONIC3.md",
+      "sha256": "5d0e6fee23eaf1e6b949bd0ea6057abb52a4cb6084bab2b17d057c132d1eb154",
+      "bytes": 5370
+    },
+    {
+      "path": "STATEFUL-STT.md",
+      "sha256": "3f616d264ef70951df7ee1fdbe56cc9edee60fef0eb07899b2c9ab9612f6f7f5",
+      "bytes": 3890
+    },
+    {
+      "path": "EMOTION-DELIVERY-REQUIREMENTS.md",
+      "sha256": "a14a2ec727c4474fe44ff61634c5f940914b42d8a6b7e2ebaef6b5595d578824",
+      "bytes": 2513
+    },
+    {
+      "path": "PLATFORM-REQUIREMENTS.md",
+      "sha256": "8fe6bc9f7e2ebc526e77b843b8f88f4ec4b7081364c786dcfa7ad9212ce00d85",
+      "bytes": 3108
+    },
+    {
+      "path": "BROWSER-STT-CHOICE.md",
+      "sha256": "79358d6d3a8f71a9aac2f8cfab007ae510b14f5ff915f0de6efc6a4e453d0b4d",
+      "bytes": 2865
+    },
+    {
+      "path": "SPOKEN-STYLE-B.md",
+      "sha256": "1cee126b2164d172aaa2f1d8055ba3f6004850e145b46c2d01208f76832301b5",
+      "bytes": 1111
+    },
+    {
+      "path": "autonomous/zipformer/helpers.py",
+      "sha256": "654ef74fb91e13f0b4cf9430ebaf38db98dc4e806cd74c2fdf745a533ed6788b",
+      "bytes": 5193
+    },
+    {
+      "path": "autonomous/zipformer/artifact-verification.json",
+      "sha256": "2d4da3943a361150b1359629f81002df4a82ec064ff784177d5940d253cd5635",
+      "bytes": 3444
+    },
+    {
+      "path": "autonomous/zipformer/requirements.lock",
+      "sha256": "14cb190fd99eca3ab79bb28d38d9b2779111f22ccec8073091e7f1c6a24015ec",
+      "bytes": 615
+    },
+    {
+      "path": "autonomous/expressive-tts/assets-manifest.json",
+      "sha256": "0fd578199ae89d38c94b57935ea1f92f7c5aab26ca918cd17e116276953cfe47",
+      "bytes": 3868
+    },
+    {
+      "path": "autonomous/expressive-tts/requirements.lock",
+      "sha256": "08f532c20c11668f33c27938dff45af3bb4659aabf35027100f68a17876f4f5a",
+      "bytes": 507
+    },
+    {
+      "path": "autonomous/expressive-tts/wheels-manifest.json",
+      "sha256": "769fab2f244f76304d18ba91f57e62ce5549db32e26b371bc4cd450c72ac24c7",
+      "bytes": 11081
+    }
+  ]
+}

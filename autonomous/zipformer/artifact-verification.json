@@ -1,0 +1,82 @@
+{
+  "revision": "4e5a13cbe3e9cd4e3775447d86178ef51759096f",
+  "artifacts": [
+    {
+      "path": "model/encoder-iter-100000-avg-15-chunk-32-left-256.int8.onnx",
+      "bytes": 70103186,
+      "sha256": "3a6f85f5d199ad0d495562988af017a75d4ae81b51126db240d959b065d6eaad",
+      "upstream": {
+        "rfilename": "encoder-iter-100000-avg-15-chunk-32-left-256.int8.onnx",
+        "blobId": "0512422e530e60550d057b2376e327c1f897096a",
+        "size": 70103186,
+        "lfs": {
+          "sha256": "3a6f85f5d199ad0d495562988af017a75d4ae81b51126db240d959b065d6eaad",
+          "size": 70103186,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "model/decoder-iter-100000-avg-15-chunk-32-left-256.int8.onnx",
+      "bytes": 540688,
+      "sha256": "6544848ca80b557ec3c8569169522dc6243b5bc9b296ea73791728510caacb4a",
+      "upstream": {
+        "rfilename": "decoder-iter-100000-avg-15-chunk-32-left-256.int8.onnx",
+        "blobId": "f0dfa6cca781e90a937eb3bfe6fcc3127017c32a",
+        "size": 540688,
+        "lfs": {
+          "sha256": "6544848ca80b557ec3c8569169522dc6243b5bc9b296ea73791728510caacb4a",
+          "size": 540688,
+          "pointerSize": 131
+        }
+      }
+    },
+    {
+      "path": "model/joiner-iter-100000-avg-15-chunk-32-left-256.int8.onnx",
+      "bytes": 259417,
+      "sha256": "4b89d96292460a92dedcb39e0b17904f10dbad335a8ab11015e567b4864102e0",
+      "upstream": {
+        "rfilename": "joiner-iter-100000-avg-15-chunk-32-left-256.int8.onnx",
+        "blobId": "f162481d2e4115bd092e31435bdba915dc327834",
+        "size": 259417,
+        "lfs": {
+          "sha256": "4b89d96292460a92dedcb39e0b17904f10dbad335a8ab11015e567b4864102e0",
+          "size": 259417,
+          "pointerSize": 131
+        }
+      }
+    },
+    {
+      "path": "model/tokens.txt",
+      "bytes": 5403,
+      "sha256": "f0b6f5bf602d96f60d79bb17192c51eeffb6189250f132b1dfdf72b130d66968",
+      "upstream": {
+        "rfilename": "tokens.txt",
+        "blobId": "9fd832a069249b78131a71f1df49f9addf91a6a0",
+        "size": 5403
+      }
+    },
+    {
+      "path": "wheels/numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 16527618,
+      "sha256": "fd83c01228a688733f1ded5201c678f0c53ecc1006ffbc404db9f7a899ac6249",
+      "url": "https://files.pythonhosted.org/packages/8c/3d/1e1db36cfd41f895d266b103df00ca5b3cbe965184df824dec5c08c6b803/numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+    },
+    {
+      "path": "wheels/sherpa_onnx-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 4226197,
+      "sha256": "d6156b206ee79f36c5866dc70481805127f40f119d73aa19bcb10eea752ea040",
+      "url": "https://files.pythonhosted.org/packages/85/ba/1ba4d5a15d7e676ea32c4fbdfbb09ff395b40d908ac791900ecd4e7932f0/sherpa_onnx-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+    },
+    {
+      "path": "wheels/sherpa_onnx_core-2.0.0-py3-none-manylinux2014_x86_64.whl",
+      "bytes": 10519032,
+      "sha256": "ba5945c53bb248151ce602cc32c3a7c7994b3093ff03bdb2488b0c16a3b8cbcc",
+      "url": "https://files.pythonhosted.org/packages/ae/66/e234ca87aa77b6e834bafc61c772539120a5095bd38ad949957b9fbbe9ba/sherpa_onnx_core-2.0.0-py3-none-manylinux2014_x86_64.whl"
+    }
+  ],
+  "candidate_weights_and_source_metadata_bytes": 72666775,
+  "budget_bytes": 80000000,
+  "declared_license": "MIT",
+  "model_redistribution_bundle_created": false
+}

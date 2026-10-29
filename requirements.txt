@@ -1,0 +1,7 @@
+# Web transport; no local LLM, ASR, neural TTS, torch or model downloads.
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+httpx>=0.27,<1
+websockets>=13,<17
+# Default Hermes Codex authentication uses the existing Hermes runtime/SDK.
+# Install system package espeak-ng for rule-based Indonesian TTS.

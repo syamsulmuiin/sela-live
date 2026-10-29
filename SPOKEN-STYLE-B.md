@@ -1,0 +1,5 @@
+# Selected spoken style B
+
+User chose the punctuation/joining variant B from the same Supertonic-3 M1/id comparison. It is now the production provider-instruction default: conversational Indonesian, natural short pauses through context-appropriate punctuation, no excessive exclamations, no automatic laughter/sigh tags, no emotion-detection claims. This guides response generation, not a post-processing rewrite of code, paths, identifiers or already-generated text. Voice identity, speed, synthesis steps and remote provider connection are unchanged. It does not guarantee arbitrary emotional conditioning or perceptual parity on every sentence.
+
+Reviewed two-file promotion and rollback: `autonomous/spoken-style-b/DEPLOYMENT-RECEIPT.json`. Installed source passed 173 Python tests with 4 opt-in skips; unchanged web passed 116 tests in staging. Two installed-root authenticated network turns through stateful STT, real remote Codex and Supertonic completed with full source ACKs and retained ASR. Public unauthenticated guards were verified. Listener acceptance on the user's actual device remains pending.

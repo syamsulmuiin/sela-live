@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "routes": {
+    "neutral": "base",
+    "sadness": "calm",
+    "trust": "calm",
+    "disgust": "calm",
+    "joy": "active",
+    "fear": "active",
+    "surprise": "active",
+    "anger": "active",
+    "anticipation": "active"
+  }
+}

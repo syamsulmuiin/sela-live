@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "entries": {
+    "neutral": {"speed": 1.05, "silence_duration": 0.3, "support_level": "prosody_only_experimental"},
+    "joy": {"speed": 1.07, "silence_duration": 0.27, "support_level": "prosody_only_experimental"},
+    "trust": {"speed": 1.02, "silence_duration": 0.32, "support_level": "prosody_only_experimental"},
+    "fear": {"speed": 1.03, "silence_duration": 0.33, "support_level": "prosody_only_experimental"},
+    "surprise": {"speed": 1.06, "silence_duration": 0.31, "support_level": "prosody_only_experimental"},
+    "sadness": {"speed": 0.99, "silence_duration": 0.36, "support_level": "prosody_only_experimental"},
+    "disgust": {"speed": 1.02, "silence_duration": 0.32, "support_level": "prosody_only_experimental"},
+    "anger": {"speed": 1.06, "silence_duration": 0.29, "support_level": "prosody_only_experimental"},
+    "anticipation": {"speed": 1.07, "silence_duration": 0.28, "support_level": "prosody_only_experimental"}
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "profile_id": "conditioning_b",
+  "style_label": "Conditioning B (+0.4)",
+  "profile_file": "profile.json",
+  "profile_sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828",
+  "base_voice": "M1",
+  "base_profile_sha256": "e35604687f5d23694b8e91593a93eec0e4eca6c0b02bb8ed69139ab2ea6b0a5b",
+  "model": "Supertone/supertonic-3",
+  "model_revision": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+  "model_manifest_sha256": "0fd578199ae89d38c94b57935ea1f92f7c5aab26ca918cd17e116276953cfe47",
+  "coefficient": 0.4,
+  "derivation": "Starting from official M1: style_ttl = float32 row-normalize(base_ttl + float32(0.4) * mix_arousal.ttl); style_dp and source metadata unchanged. Exact listener-selected high_activation bytes; no runtime derivation, DSP, tempo change, prerecorded audio, or phrase matching.",
+  "community": {
+    "repository": "https://github.com/franciscocarloserra/supertonic-voicelab",
+    "revision": "e3a92e1473b85426b220cafdefa98043228218fb",
+    "direction": "vectors/mix_arousal.npz",
+    "direction_sha256": "1b3f95ee31328b88c7943ecda20d4c5fe496d4b7092b3958bae5a6b797b035a3",
+    "status": "Community conditioning direction, not an official Supertone emotion preset or a trained emotion taxonomy."
+  },
+  "reference_selected_audio_sha256": "86d7b97a3fdd673188ac8ab3e0ef6564a270aa7b79bbd24958cdd1254f11c501",
+  "scope": "One user-approved fixed default delivery for arbitrary dynamic utterances; not approval of all named emotions and not a claim of unchanged acoustic speaker identity.",
+  "native_emotion_conditioning": false,
+  "license": {
+    "name": "OpenRAIL-M",
+    "attribution": "Derived from Supertone Inc. Supertonic-3 M1 voice style. Community direction credited above; derivative profile is modified, not an official voice. Preserve upstream model LICENSE and README notices, use restrictions and downstream obligations.",
+    "upstream_license": "LICENSE in the pinned official model assets; unchanged and validated by the bound model manifest."
+  },
+  "inference": {"seed": 20261026, "language": "id", "steps": 8, "speed": 1.05}
+}

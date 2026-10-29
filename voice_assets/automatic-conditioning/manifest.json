@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "native_emotion_conditioning": false,
+  "operation": "TTL only: float32(base + coefficient*mix_arousal), row L2 normalized; DP and metadata untouched",
+  "profiles": {
+    "conditioning_b": {
+      "coefficient": 0.4,
+      "path": "conditioning_b.json",
+      "sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828",
+      "bytes": 421903,
+      "dp_bit_exact": true,
+      "metadata_unchanged": true,
+      "ttl_sha256": "4f64d3b0549937e6ec14fce314f684acdb6623e10c95a62262ab0394473df19a",
+      "dp_sha256": "2eb6d16f4ede0ea14c9e84ba1f8b8d62bdfd28cce4bfd18fef963a9f4097ea62"
+    },
+    "conditioning_b_calm_low": {
+      "coefficient": 0.35,
+      "path": "conditioning_b_calm_low.json",
+      "sha256": "f89348574a02a68771e47bb9fd23e33dbada5fc9ca0b876c29fdc6da049ce832",
+      "bytes": 422059,
+      "dp_bit_exact": true,
+      "metadata_unchanged": true,
+      "ttl_sha256": "54e3a9941998f2af7b3ec2b171b18e6c31d4151b71beaeb10b8bbc70dadc46e6",
+      "dp_sha256": "2eb6d16f4ede0ea14c9e84ba1f8b8d62bdfd28cce4bfd18fef963a9f4097ea62"
+    },
+    "conditioning_b_calm_medium": {
+      "coefficient": 0.3,
+      "path": "conditioning_b_calm_medium.json",
+      "sha256": "64fa0c071863db434a22ca080228eb93ae4f954553226ea4f4f267f4150b5618",
+      "bytes": 422055,
+      "dp_bit_exact": true,
+      "metadata_unchanged": true,
+      "ttl_sha256": "a60571926f178420c79623af22e76a510fea8520ae740d4fa62f2aee207a4094",
+      "dp_sha256": "2eb6d16f4ede0ea14c9e84ba1f8b8d62bdfd28cce4bfd18fef963a9f4097ea62"
+    },
+    "conditioning_b_calm_high": {
+      "coefficient": 0.25,
+      "path": "conditioning_b_calm_high.json",
+      "sha256": "d90e418153d8b3d0e7234a92541fcfb4d1f054efba60adf08f327dad001f4bc4",
+      "bytes": 422105,
+      "dp_bit_exact": true,
+      "metadata_unchanged": true,
+      "ttl_sha256": "ebba93babcc5805947ed1865fee04137c5f1a29fe1021acce69dc0407db0ca2d",
+      "dp_sha256": "2eb6d16f4ede0ea14c9e84ba1f8b8d62bdfd28cce4bfd18fef963a9f4097ea62"
+    },
+    "conditioning_b_active_low": {
+      "coefficient": 0.45,
+      "path": "conditioning_b_active_low.json",
+      "sha256": "f948e966e00dba822e19da9d0207a5f5f0254618e652a624810a5c89985e1a56",
+      "bytes": 421839,
+      "dp_bit_exact": true,
+      "metadata_unchanged": true,
+      "ttl_sha256": "fa9c5d5054936bf6685e574cac18c5f00924e225becab4bb2dae5f2c500c18cb",
+      "dp_sha256": "2eb6d16f4ede0ea14c9e84ba1f8b8d62bdfd28cce4bfd18fef963a9f4097ea62"
+    },
+    "conditioning_b_active_medium": {
+      "coefficient": 0.5,
+      "path": "conditioning_b_active_medium.json",
+      "sha256": "294c2d705bf8f5fd3388725e28bac3850b39a8f479b5c23afc40cced3bae17b6",
+      "bytes": 421815,
+      "dp_bit_exact": true,
+      "metadata_unchanged": true,
+      "ttl_sha256": "7b5766561bfe7b3e8f0edaf42181c3c862b380724ead8693a7bd3879b129808d",
+      "dp_sha256": "2eb6d16f4ede0ea14c9e84ba1f8b8d62bdfd28cce4bfd18fef963a9f4097ea62"
+    },
+    "conditioning_b_active_high": {
+      "coefficient": 0.55,
+      "path": "conditioning_b_active_high.json",
+      "sha256": "4575171ea1b5ffbd96a1b03a92704262a2c338d190dc969e137656904097b95a",
+      "bytes": 421722,
+      "dp_bit_exact": true,
+      "metadata_unchanged": true,
+      "ttl_sha256": "07ff83d40e9fee1d613ab5e4f2e8d5cb49410ef8d6dd8f4755e6cdcce567b079",
+      "dp_sha256": "2eb6d16f4ede0ea14c9e84ba1f8b8d62bdfd28cce4bfd18fef963a9f4097ea62"
+    }
+  },
+  "community": {
+    "revision": "e3a92e1473b85426b220cafdefa98043228218fb",
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 11157,
+        "git_blob_sha1": "6dc381a1ba5a68282a7fb7ffb6af60fc1e41a934",
+        "sha256": "5b9d5a2f05b366b01e19599d225b06ee6754e7628f79e52c73a35eb49bbf41e9"
+      },
+      {
+        "path": "voicelab/lib.py",
+        "bytes": 3391,
+        "git_blob_sha1": "87515f3d8f496d8e5b05626ee19172c76d6f2b00",
+        "sha256": "402e5fde418aadd59f7821518f4c76abc15e8315bad27a485483eab4ea93275b"
+      },
+      {
+        "path": "vectors/mix_arousal.npz",
+        "bytes": 52208,
+        "git_blob_sha1": "cd2f7e59b03d5c8994838fde26b82dfa3d34a3dd",
+        "sha256": "1b3f95ee31328b88c7943ecda20d4c5fe496d4b7092b3958bae5a6b797b035a3"
+      },
+      {
+        "path": "vectors/limits.json",
+        "bytes": 1893,
+        "git_blob_sha1": "a3f09aac71d1d230afc765986bd121f3e994fe91",
+        "sha256": "51c2ad07f87372637c1b3bfec7a81af80a422215138dfa71ea61c9881a95fde1"
+      },
+      {
+        "path": "results/42_regress.md",
+        "bytes": 629,
+        "git_blob_sha1": "4952e87be0229a4bb2ce4ae9ad3b7fbeae195ee6",
+        "sha256": "35ddbbcf6b73bd9ebcbca2e7488b959f9423e208bb3a5bf4843319e4eda1ff88"
+      },
+      {
+        "path": "results/AXES.md",
+        "bytes": 3697,
+        "git_blob_sha1": "cb69aae591062ea599f03738b2700ff215569a99",
+        "sha256": "f4ce243b667086e7680c3ef42d63b1209bc8dcb539f523fea67d8d942fb8d6ba"
+      }
+    ]
+  },
+  "base_sha256": "e35604687f5d23694b8e91593a93eec0e4eca6c0b02bb8ed69139ab2ea6b0a5b",
+  "model_manifest_sha256": "0fd578199ae89d38c94b57935ea1f92f7c5aab26ca918cd17e116276953cfe47",
+  "helpers": {
+    "/root/voice-lab/autonomous/automatic-conditioning/backend/prepare_assets.py": "ac6fd2c25e3d998a53ba840cb14b3a16ffea6b7b8052efdfefefe30135ab85db",
+    "/root/voice-lab/autonomous/emotional-renderer/conditioning/conditioning.py": "a0b01d13b1d1bb13cb1607493ad304a90ae9cb192ddd470923ab860fb655fb7b",
+    "/root/voice-lab/autonomous/automatic-conditioning/stage/voice_app/approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca"
+  }
+}

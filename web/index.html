@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2eb">
+  <title>Sela — ruang percakapan</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/audio-core.js" defer></script><script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="wordmark" href="/" aria-label="Sela, beranda">sela<span> / </span></a><span class="tagline">Ruang untuk berpikir lantang.</span><button id="history-toggle" class="quiet mobile-history" aria-expanded="false" aria-controls="history-panel">Transkrip</button><span id="connection" class="connection">Menghubungkan…</span><button id="logout" class="quiet" type="button">Keluar ↗</button></header>
+  <div class="workspace">
+    <main id="main">
+      <div class="section-heading"><span class="eyebrow">PERCAKAPAN SUARA</span><button id="settings-toggle" class="quiet" aria-expanded="false" aria-controls="settings">Pengaturan <span aria-hidden="true">↗</span></button></div>
+      <section id="settings" class="settings" hidden aria-label="Pengaturan percakapan">
+        <label>AI API<select id="provider" disabled><option value="">Memuat penyedia API…</option></select></label>
+        <label>Kepekaan suara <output id="sensitivity-value">Sedang</output><input id="sensitivity" type="range" min="1" max="100" value="55"><small id="sensitivity-help">Naikkan untuk suara pelan; turunkan jika suara sekitar ikut tertangkap. Bukan pengatur volume.</small></label>
+        <p>Penyedia API mengikuti konfigurasi server. Mode mikrofon dipilih sebelum mulai.</p>
+      </section>
+      <section class="voice-surface" aria-labelledby="voice-title">
+        <div class="session-label"><span id="session-dot" class="dot"></span><span id="session-label">MIKROFON BELUM AKTIF</span></div>
+        <h1 id="voice-title">Beri pikiranmu<br>sedikit ruang.</h1>
+        <p id="voice-description" class="voice-description">Mulai dengan suara, atau tulis sesuatu di bawah.</p>
+        <div id="voice-orb" class="voice-orb" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="18" y="7" width="12" height="23" rx="6" stroke="currentColor" stroke-width="2"/><path d="M12 24a12 12 0 0 0 24 0M24 36v6M18 42h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="level-wrap"><meter id="level" min="0" max="1" value="0" aria-label="Tingkat suara mikrofon"></meter><span id="level-label">Level mikrofon · tidak aktif</span></div>
+        <fieldset id="mode-options" class="mode-options"><legend class="sr-only">Mode mikrofon</legend><label><input name="mode" type="radio" value="hands_free" checked><span>Bebas tangan</span></label><label><input name="mode" type="radio" value="push_to_talk"><span>Tahan untuk bicara</span></label></fieldset>
+        <div class="browser-choice"><label><input id="browser-consent" type="checkbox" disabled> Pengenalan suara daring browser (eksperimental)</label><p id="browser-help">Pilihan opsional: audio dapat dikirim ke vendor browser. Perlu internet; dukungan berbeda tiap browser. Tidak mengunduh model AI lokal.</p></div>
+        <div class="primary-controls"><button id="start" class="primary" disabled>Mulai percakapan <span aria-hidden="true">↗</span></button><button id="ptt" class="primary" hidden disabled>Tahan untuk bicara</button></div>
+        <div class="secondary-controls"><button id="mute" class="quiet" disabled aria-pressed="false">Bisukan mikrofon</button><span aria-hidden="true">·</span><button id="interrupt" class="quiet" disabled>Hentikan jawaban</button></div>
+        <p id="status" class="status" role="status" aria-live="polite">Memuat konfigurasi API…</p>
+        <p id="local-draft" class="status" style="overflow-wrap:anywhere" role="status" aria-live="polite"></p>
+        <p id="error" class="error" role="alert" hidden></p>
+      </section>
+      <div class="compose-area"><form id="text-form"><label class="sr-only" for="text-input">Pesan tertulis</label><textarea id="text-input" rows="1" placeholder="Atau, mulai dari satu kalimat…" maxlength="12000"></textarea><button id="send" type="submit" aria-label="Kirim pesan" disabled>↑</button></form><div class="compose-meta"><span id="model-label">AI API · memuat konfigurasi</span><span>Enter untuk kirim · Shift + Enter untuk baris baru</span></div></div>
+      <footer class="footnotes"><p>Gunakan headphone untuk mengurangi gema. Pembatalan gema bergantung pada perangkat; suara jawaban masih bisa tertangkap.</p><p id="delivery-note">AI menggunakan API. Memuat cara pengiriman jawaban…</p><p id="tts-note">Memuat konfigurasi suara sintetis…</p></footer>
+    </main>
+    <aside id="history-panel" class="history-panel" aria-label="Riwayat percakapan"><div class="history-heading"><div><span class="eyebrow">CATATAN SESI</span><h2>Jejak percakapan</h2></div><span id="message-count">0 pesan</span></div><div id="history" class="history" aria-live="off"><div class="empty-history"><span class="empty-mark" aria-hidden="true">“</span><h3>Belum ada yang terucap.</h3><p>Ucapan dan balasan akan tersimpan di sini selama sesi ini. Kamu bisa kembali membacanya kapan saja.</p></div></div><div class="history-footer"><span class="dot"></span><span id="privacy-note">Percakapan menggunakan layanan AI API. Memuat informasi mikrofon…</span></div></aside>
+  </div>
+</body>
+</html>

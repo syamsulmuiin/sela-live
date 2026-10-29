@@ -1,0 +1,125 @@
+{
+  "revision": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+  "files": [
+    {
+      "path": "onnx/duration_predictor.onnx",
+      "bytes": 3700147,
+      "sha256": "c3eb91414d5ff8a7a239b7fe9e34e7e2bf8a8140d8375ffb14718b1c639325db",
+      "source": {
+        "rfilename": "onnx/duration_predictor.onnx",
+        "blobId": "3dc0f3ca70185b0ecb20ee812832fa8fd87d5f77",
+        "size": 3700147,
+        "lfs": {
+          "sha256": "c3eb91414d5ff8a7a239b7fe9e34e7e2bf8a8140d8375ffb14718b1c639325db",
+          "size": 3700147,
+          "pointerSize": 132
+        }
+      }
+    },
+    {
+      "path": "onnx/text_encoder.onnx",
+      "bytes": 36416150,
+      "sha256": "c7befd5ea8c3119769e8a6c1486c4edc6a3bc8365c67621c881bbb774b9902ff",
+      "source": {
+        "rfilename": "onnx/text_encoder.onnx",
+        "blobId": "001b50875741258a8681a472d63929b2e18abe55",
+        "size": 36416150,
+        "lfs": {
+          "sha256": "c7befd5ea8c3119769e8a6c1486c4edc6a3bc8365c67621c881bbb774b9902ff",
+          "size": 36416150,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "onnx/vector_estimator.onnx",
+      "bytes": 256534781,
+      "sha256": "883ac868ea0275ef0e991524dc64f16b3c0376efd7c320af6b53f5b780d7c61c",
+      "source": {
+        "rfilename": "onnx/vector_estimator.onnx",
+        "blobId": "e5e45d221db3825dc28fe20039cfca7e329cfd18",
+        "size": 256534781,
+        "lfs": {
+          "sha256": "883ac868ea0275ef0e991524dc64f16b3c0376efd7c320af6b53f5b780d7c61c",
+          "size": 256534781,
+          "pointerSize": 134
+        }
+      }
+    },
+    {
+      "path": "onnx/vocoder.onnx",
+      "bytes": 101424195,
+      "sha256": "085de76dd8e8d5836d6ca66826601f615939218f90e519f70ee8a36ed2a4c4ba",
+      "source": {
+        "rfilename": "onnx/vocoder.onnx",
+        "blobId": "b50be323eb0a124468b665e0e3e8380710090744",
+        "size": 101424195,
+        "lfs": {
+          "sha256": "085de76dd8e8d5836d6ca66826601f615939218f90e519f70ee8a36ed2a4c4ba",
+          "size": 101424195,
+          "pointerSize": 134
+        }
+      }
+    },
+    {
+      "path": "onnx/tts.json",
+      "bytes": 8253,
+      "sha256": "42078d3aef1cd43ab43021f3c54f47d2d75ceb4e75f627f118890128b06a0d09",
+      "source": {
+        "rfilename": "onnx/tts.json",
+        "blobId": "28575b0793c92607a0f0a292550df9bd17709a79",
+        "size": 8253
+      }
+    },
+    {
+      "path": "onnx/unicode_indexer.json",
+      "bytes": 277676,
+      "sha256": "9bf7346e43883a81f8645c81224f786d43c5b57f3641f6e7671a7d6c493cb24f",
+      "source": {
+        "rfilename": "onnx/unicode_indexer.json",
+        "blobId": "3aaf4d33024aff0be455633c24b3636b3a810150",
+        "size": 277676
+      }
+    },
+    {
+      "path": "config.json",
+      "bytes": 174,
+      "sha256": "4099082b107a9d4029849ac76b89eca65e03732660969c2babe5bf308c7357f2",
+      "source": {
+        "rfilename": "config.json",
+        "blobId": "19c2e8b0aa701c1017ca22a22cd519354854e4b1",
+        "size": 174
+      }
+    },
+    {
+      "path": "voice_styles/M1.json",
+      "bytes": 291748,
+      "sha256": "e35604687f5d23694b8e91593a93eec0e4eca6c0b02bb8ed69139ab2ea6b0a5b",
+      "source": {
+        "rfilename": "voice_styles/M1.json",
+        "blobId": "bddfff85a7c4c140c11620bd7005d86681dccdac",
+        "size": 291748
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 9189,
+      "sha256": "d414e4b085fb9989ebfd2b64f868ff861694022b4bdb805b09e702386dbdc7d5",
+      "source": {
+        "rfilename": "README.md",
+        "blobId": "6f4f5c5d7afbe9d45bc107ebc9c6629c3ea5c135",
+        "size": 9189
+      }
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 15007,
+      "sha256": "0d944a9110fed9a9602d60e0423a272903e7bd21ab060490774efc77c2275e9f",
+      "source": {
+        "rfilename": "LICENSE",
+        "blobId": "1e2cbe6cef94c8cdf3ed1fcebc0f5317ca7ad5a1",
+        "size": 15007
+      }
+    }
+  ]
+}

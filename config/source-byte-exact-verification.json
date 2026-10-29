@@ -1,0 +1,476 @@
+{
+  "files_checked": 94,
+  "all_byte_exact": true,
+  "files": [
+    {
+      "path": "voice_app/__init__.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/approved_conditioning.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/audio.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/auth.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/automatic_conditioning.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/automatic_conditioning_rules.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/delivery.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/delivery_registry.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/local_audio_worker.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/pronunciation-id.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/prosody.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/providers.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/server.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/session_core.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/speech.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/stateful_asr.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/stream_asr.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/supertonic3_worker.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/tts_chunks.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/zipformer_state.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/zipformer_stateful_worker.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_app/zipformer_worker.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/app.js",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/audio-core.js",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/audio.test.cjs",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/auth.css",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/auth.html",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/auth.js",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/auth.test.cjs",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/client.test.cjs",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/index.html",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/pcm-worklet.js",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/styles.css",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "web/supertonic3-LICENSE.txt",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_active_high.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_active_low.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_active_medium.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_calm_high.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_calm_low.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/conditioning_b_calm_medium.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/automatic-conditioning/manifest.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/conditioning-b/manifest.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "voice_assets/conditioning-b/profile.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_approved_conditioning.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_audio.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_audio_diagnostics.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_audio_failures.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_auth.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_automatic_conditioning.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_automatic_conditioning_server.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_browser_choice.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_chunked_tts.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_conditioning_capabilities.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_delivery_boundaries.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_delivery_native.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_delivery_protocol.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_diagnostic_logging.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_fast_worker.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_live_web.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_local_audio.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_preview_adapter.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_preview_protocol.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_promotion_fixes.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_prosody.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_providers.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_response_stages.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_server.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_speech.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_spoken_style_b.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_stateful_integration.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_stateful_worker.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_stream_worker.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_supertonic3.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_supertonic3_adapter.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_tts_failure_diagnostics.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_zipformer.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "test_zipformer_bounds.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "requirements.txt",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "AUTOMATIC-CONDITIONING.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "APPROVED-CONDITIONING-B.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "EXTENSIBLE-DELIVERY.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "SUPERTONIC3.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "STATEFUL-STT.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "EMOTION-DELIVERY-REQUIREMENTS.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "PLATFORM-REQUIREMENTS.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "BROWSER-STT-CHOICE.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "SPOKEN-STYLE-B.md",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "autonomous/zipformer/helpers.py",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "autonomous/zipformer/artifact-verification.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "autonomous/zipformer/requirements.lock",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "autonomous/expressive-tts/assets-manifest.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "autonomous/expressive-tts/requirements.lock",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    },
+    {
+      "path": "autonomous/expressive-tts/wheels-manifest.json",
+      "snapshot_matches_original_manifest": true,
+      "live_matches_original_manifest": true
+    }
+  ]
+}

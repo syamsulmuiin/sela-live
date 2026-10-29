@@ -1,0 +1,8 @@
+{
+  "read_only": true,
+  "canonical_root": "/root/voice-lab",
+  "checkout": "/root/sela-voice",
+  "python_3_12": true,
+  "configured": false,
+  "install_requires": "fresh /root/voice-lab; Ubuntu 24.04; Python3.12; x86_64; network namespace capability; python3.12-venv"
+}

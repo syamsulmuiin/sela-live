@@ -1,0 +1,32 @@
+# Template only: bootstrap never installs/enables/starts this unit.
+# Requires completed bootstrap/configure/doctor on a fresh canonical host.
+# .env is JSON-string data parsed by run.py, NOT a systemd EnvironmentFile.
+# Keep CAP_SYS_ADMIN: pinned native workers fail closed without network unshare.
+# Do not enable PrivateNetwork: the web process needs the remote LLM endpoint.
+[Unit]
+Description=Sela authenticated loopback voice app (remote LLM, isolated local speech)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/voice-lab
+ExecStart=/usr/bin/python3.12 /root/voice-lab/scripts/run.py
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONUNBUFFERED=1
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+CapabilityBoundingSet=CAP_SYS_ADMIN
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target

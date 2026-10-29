@@ -463,6 +463,12 @@ class Speech:
             audio = (await self._synthesize(source, controls, profile_id=profile_id) if profile_id is not None
                      else await self.synthesize(source) if controls is None
                      else await self._synthesize(source, controls))
+            # Only multipart Supertonic responses: source/ACK spans and the
+            # already captured conditioning/controls remain untouched.
+            if self._backend == 'supertonic3' and len(parts) > 1:
+                from .audio_continuity import trim_boundary_silence
+                audio = trim_boundary_silence(audio, first=index == 0,
+                    last=index == len(parts) - 1, max_output_bytes=MAX_WAV_BYTES)
             yield part, audio, index == len(parts) - 1
 
     async def synthesize(self, text, *, delivery=None):

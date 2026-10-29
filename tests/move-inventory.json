@@ -1,0 +1,590 @@
+[
+  {
+    "source": "test_approved_conditioning.py",
+    "destination": "tests/python/test_approved_conditioning.py",
+    "source_sha256": "d8afa3cde68bab8b3953a54d6a863f8cef2bee92087ef87648de332722162d84",
+    "destination_sha256": "ce4d1c2a7c0d65ba90dd444dc9732fda266396ab3e2075032964839c60fcb219",
+    "edited": true,
+    "test_functions": [
+      "test_exact_profile_and_bound_manifest_relocate_without_experiment_dependency",
+      "test_isolated_cli_selection_and_legacy_check_safe_errors",
+      "test_missing_corrupt_mismatched_symlink_assets_fail_closed",
+      "test_original_resolver_needs_no_assets_selected_errors_are_safe",
+      "test_real_sdk_style_loader_and_seed_defaults_with_lightweight_array_fixture",
+      "test_relocated_isolated_worker_fails_closed_and_original_needs_no_new_assets",
+      "test_sdk_uses_approved_path_original_remains_asset_independent",
+      "test_selected_profile_both_commands_dynamic_payload_and_truthful_identity",
+      "test_selected_readiness_or_synthesis_failure_never_retries_original",
+      "test_selected_sdk_style_load_failures_are_safe_asset_errors",
+      "test_shapes_finite_values_source_and_unchanged_dp_are_explicitly_validated",
+      "test_unknown_profile_and_other_backend_rejected_before_probe"
+    ]
+  },
+  {
+    "source": "test_audio.py",
+    "destination": "tests/python/test_audio.py",
+    "source_sha256": "1bfdba7efb353de1cac0fa3d33aa2c8bfd84ed60b5060ddcf68ca3a44579185e",
+    "destination_sha256": "1bfdba7efb353de1cac0fa3d33aa2c8bfd84ed60b5060ddcf68ca3a44579185e",
+    "edited": false,
+    "test_functions": [
+      "test_invalid_pcm_is_rejected",
+      "test_pcm_becomes_canonical_wav"
+    ]
+  },
+  {
+    "source": "test_audio_diagnostics.py",
+    "destination": "tests/python/test_audio_diagnostics.py",
+    "source_sha256": "e0c128323ae43fb264ab71b015cc7f2ffc5f61709d903dfd0794ca80b5248d38",
+    "destination_sha256": "7058818890e7f6a3678d223258ae9950075c371de65e14dc73db0c93af909819",
+    "edited": true,
+    "test_functions": [
+      "test_browser_text_has_no_acoustic_or_emotion_evidence",
+      "test_failed_asr_still_reports_capture_quality_without_exception_content",
+      "test_original_audio_diagnostics_precede_asr_preserve_string_adapter_and_private_logs"
+    ]
+  },
+  {
+    "source": "test_audio_failures.py",
+    "destination": "tests/python/test_audio_failures.py",
+    "source_sha256": "1f86ffe8b14599852942c131dff37d5f272098a91c8e1c1b19d5b6ff127d7ccb",
+    "destination_sha256": "1f86ffe8b14599852942c131dff37d5f272098a91c8e1c1b19d5b6ff127d7ccb",
+    "edited": false,
+    "test_functions": [
+      "test_transcription_failure_categories_are_distinct_and_socket_recovers"
+    ]
+  },
+  {
+    "source": "test_auth.py",
+    "destination": "tests/python/test_auth.py",
+    "source_sha256": "8aa5a5bdbe8b69a97b4e9eea0bb7ab5cdf24e69b2bd6d759dd4677b2a80d438a",
+    "destination_sha256": "f88061d6d64418ebb7f261a4679275d5352fd0630d34a0dd59cfd2b1951134a9",
+    "edited": true,
+    "test_functions": [
+      "test_auth_pages_and_headers_are_safe_and_static_secrets_unreachable",
+      "test_failed_attempt_global_bound_and_expiry_are_persistent",
+      "test_login_cookie_expiry_logout_and_hash_at_rest",
+      "test_owner_cli_renews_expired_bootstrap_but_never_overwrites_account",
+      "test_setup_is_secret_gated_once_only_and_persistent",
+      "test_setup_validation_expiry_csrf_and_failed_attempt_throttle",
+      "test_unconfigured_public_app_never_exposes_config_or_ui",
+      "test_websocket_requires_auth_origin_and_rechecks_after_logout"
+    ]
+  },
+  {
+    "source": "test_automatic_conditioning.py",
+    "destination": "tests/python/test_automatic_conditioning.py",
+    "source_sha256": "995e147cd2202be2a5bd63c3006ba006a1a3a87e8b85589553b8080a3cc6e79f",
+    "destination_sha256": "1f90f7dafc0e75e1f3bcc8670a5ce55eb43839f373966e02dd59fa3cf45dfd6c",
+    "edited": true,
+    "test_functions": [
+      "test_all_profiles_sdk_native_json_and_neutral_exact",
+      "test_bounded_profiles_and_pure_neutral",
+      "test_chunk_snapshot_and_concurrent_response_isolation",
+      "test_enabled_readiness_fails_closed_for_any_new_level",
+      "test_extension_fallback_and_strict_rules",
+      "test_flags_and_auto_without_pacing",
+      "test_neutral_all_intensities_and_plain_input_exact_fixed_b",
+      "test_relocated_isolated_checks_and_asset_failure_no_fallback",
+      "test_selection_once_pacing_separate_and_new_failure_no_retry"
+    ]
+  },
+  {
+    "source": "test_automatic_conditioning_server.py",
+    "destination": "tests/python/test_automatic_conditioning_server.py",
+    "source_sha256": "a5030e2427a57cfbc0cefda52030db884091fe64bfd4a215a434ced10f0e5059",
+    "destination_sha256": "a5030e2427a57cfbc0cefda52030db884091fe64bfd4a215a434ced10f0e5059",
+    "edited": false,
+    "test_functions": [
+      "test_auth_revocation_drops_pending_reply_and_unauthorized_config_and_socket",
+      "test_cancelled_or_superseded_reply_never_selects_or_emits_stale_status",
+      "test_capabilities_are_experimental_activation_not_emotion_or_identity_claims",
+      "test_disabled_automatic_has_no_extra_event_and_invalid_metadata_has_no_choice",
+      "test_status_does_not_authorize_stale_ack_or_survive_chunk_interruption",
+      "test_three_turns_delivery_is_separate_exact_and_acknowledged"
+    ]
+  },
+  {
+    "source": "test_browser_choice.py",
+    "destination": "tests/python/test_browser_choice.py",
+    "source_sha256": "b9b752f7c4bfdbbaeb5393fd76bed894cd71f3b8a760fafd3c70f7e08776478d",
+    "destination_sha256": "b9b752f7c4bfdbbaeb5393fd76bed894cd71f3b8a760fafd3c70f7e08776478d",
+    "edited": false,
+    "test_functions": [
+      "test_browser_choice_rejects_ambiguous_configuration",
+      "test_local_backend_can_explicitly_advertise_browser_choice_without_losing_local_stt",
+      "test_two_browser_transcript_turns_bypass_local_asr_and_preserve_history_and_audio_ack"
+    ]
+  },
+  {
+    "source": "test_chunked_tts.py",
+    "destination": "tests/python/test_chunked_tts.py",
+    "source_sha256": "666ad5fea196d3fb0ad275bdbadabece024cc364e30f8ab7309fe4872cf0a629",
+    "destination_sha256": "a6d04381ca0c4decbd9fe3458d446548a9b201f419c61fb112ad290f6c923e92",
+    "edited": true,
+    "test_functions": [
+      "test_ack_timeout_is_per_piece_and_cancels_successor",
+      "test_boundaries_invalid_source_and_other_engines_remain_buffered",
+      "test_cancel_on_restart_stop_supersession_and_disconnect",
+      "test_completed_prefetch_is_discarded_when_interrupted_waiting_for_ack",
+      "test_config_advertises_chunked_only_when_selected",
+      "test_currency_internal_whitespace_keeps_reading_and_exact_ack_source",
+      "test_each_ack_has_fresh_deadline_not_a_whole_answer_deadline",
+      "test_long_source_is_preserved_exactly_and_normalized_per_small_piece",
+      "test_one_chunk_and_legacy_adapters_keep_audio_done_ack_order_and_repeated_asr",
+      "test_partial_failure_keeps_acknowledged_source_and_complete_visible_text",
+      "test_prefetch_is_one_ahead_delivery_requires_matching_ack",
+      "test_repeated_interrupt_does_not_cancel_prefetch_reaping",
+      "test_revoked_auth_prevents_successor_emission"
+    ]
+  },
+  {
+    "source": "test_conditioning_capabilities.py",
+    "destination": "tests/python/test_conditioning_capabilities.py",
+    "source_sha256": "b089815bc1b423d8ed10dd61229bd870cdb37a25d48a4ea3c419cee56f1a0a71",
+    "destination_sha256": "9105f2ace8130d5cd9383d667434dd6b139a9972dfe5057d602897af36461e5d",
+    "edited": true,
+    "test_functions": [
+      "test_modified_B_is_not_a_claim_of_unchanged_identity_or_all_emotions",
+      "test_original_fixed_conditioning_keeps_legacy_capability"
+    ]
+  },
+  {
+    "source": "test_delivery_boundaries.py",
+    "destination": "tests/python/test_delivery_boundaries.py",
+    "source_sha256": "b03252ab4e45209778dee60ff1f80bdff3806393c0bf07560fa5beb43467871c",
+    "destination_sha256": "03caa33292edf76abe8066eb1e2a87889bc2539a7d9b1fc0af2876097900976f",
+    "edited": true,
+    "test_functions": [
+      "test_full_length_astral_text_survives_json_escaping",
+      "test_registry_numeric_boundaries_at_all_intensities"
+    ]
+  },
+  {
+    "source": "test_delivery_native.py",
+    "destination": "tests/python/test_delivery_native.py",
+    "source_sha256": "685f7f6c3e539b722e0b6fe36706bf0dd13e64bc1e2bb6511acce6fa60298323",
+    "destination_sha256": "e76a47979a564974b4434d6c35bfde74cfb21ffa80e82031f225cffb609d3a1d",
+    "edited": true,
+    "test_functions": [
+      "test_chunk_delivery_snapshot_is_stable_across_prefetch_and_other_calls",
+      "test_delivery_preserves_pronunciation_and_exact_source_ack",
+      "test_delivery_retains_source_and_audio_guards",
+      "test_delivery_validation_precedes_spawn_without_weakening_text_guards",
+      "test_experimental_prosody_requires_explicit_listener_trial_opt_in",
+      "test_invalid_delivery_has_safe_fixed_failure_reason",
+      "test_numeric_delivery_crosses_real_process_and_cancel_reaps_child",
+      "test_old_opening_trigger_is_always_fully_synthesized",
+      "test_only_bounded_finite_numeric_delivery_is_accepted",
+      "test_per_call_delivery_is_numeric_only_and_never_changes_source",
+      "test_runtime_passes_controls_without_changing_voice_text_or_defaults",
+      "test_worker_cli_rejects_delivery_labels_before_loading_assets"
+    ]
+  },
+  {
+    "source": "test_delivery_protocol.py",
+    "destination": "tests/python/test_delivery_protocol.py",
+    "source_sha256": "29c6bd73008a4514941cb7e9f0085c6ee97c00569f8975df9ace834b5860659b",
+    "destination_sha256": "9cd315386b04c7bfc2d82ceba96487158df0a7d805847fec61bf649b23d9001f",
+    "edited": true,
+    "test_functions": [
+      "test_capabilities_auth_gate_and_default_off_are_explicit",
+      "test_envelope_is_never_rendered_spoken_or_stored_and_turns_are_isolated",
+      "test_invalid_envelopes_reject_without_lexical_echo",
+      "test_invalid_remote_metadata_never_reaches_text_history_audio_or_logs",
+      "test_legacy_plain_reply_gets_neutral_and_chunked_snapshot_is_hidden",
+      "test_literal_reply_is_separate_from_immutable_numeric_delivery",
+      "test_neutral_preserves_installed_m1_speed_at_every_intensity",
+      "test_real_adapters_mark_protocol_and_reserve_metadata_budget",
+      "test_registry_extension_is_data_only_bounded_and_immutable"
+    ]
+  },
+  {
+    "source": "test_diagnostic_logging.py",
+    "destination": "tests/python/test_diagnostic_logging.py",
+    "source_sha256": "47ed5aa22884a8bbd3aed6cfd85a80278646b67355b53e2b46367c50338b82a8",
+    "destination_sha256": "47ed5aa22884a8bbd3aed6cfd85a80278646b67355b53e2b46367c50338b82a8",
+    "edited": false,
+    "test_functions": [
+      "test_aggregate_logger_is_enabled_and_has_a_stderr_handler"
+    ]
+  },
+  {
+    "source": "test_fast_worker.py",
+    "destination": "tests/python/test_fast_worker.py",
+    "source_sha256": "5c2bd3d5a47d0ca587da6c0ce67460471beb1144f23acb47026cb93e77f81506",
+    "destination_sha256": "5c2bd3d5a47d0ca587da6c0ce67460471beb1144f23acb47026cb93e77f81506",
+    "edited": false,
+    "test_functions": [
+      "test_cumulative_cpu_recycles_before_next_request",
+      "test_draft_beam_one_final_settings_identical",
+      "test_explicit_draft_config_and_final_identity",
+      "test_fast_draft_final_switch_evicts_previous_process",
+      "test_final_priority_survives_cancelled_draft_consumer",
+      "test_idle_reaps_worker_and_next_preview_restarts",
+      "test_idle_settings_reject_unbounded_or_invalid",
+      "test_malformed_metrics_reaped_and_next_request_restarts",
+      "test_shutdown_drains_native_work_blocks_new_preview_and_restarts",
+      "test_worker_reports_cpu_and_enforces_each_request_budget"
+    ]
+  },
+  {
+    "source": "test_live_web.py",
+    "destination": "tests/python/test_live_web.py",
+    "source_sha256": "37c7663944d08747f1781fcf1d6eb9357197cb1e5d559a06299ed693a25141b2",
+    "destination_sha256": "d03d14dcd2959a39221b06a3fc6b2f90055daeb2f9483f0bd4bfb0c41946d138",
+    "edited": true,
+    "test_functions": [
+      "test_real_remote_reply_to_valid_neural_wav_over_network"
+    ]
+  },
+  {
+    "source": "test_local_audio.py",
+    "destination": "tests/python/test_local_audio.py",
+    "source_sha256": "9dfd098c039bfe64c7c2a9ff33517e6bfa0fefadbf9e8a262d6672202bd0e705",
+    "destination_sha256": "9dfd098c039bfe64c7c2a9ff33517e6bfa0fefadbf9e8a262d6672202bd0e705",
+    "edited": false,
+    "test_functions": [
+      "test_conservative_indonesian_currency_dates_numbers_lexicon",
+      "test_ctranslate_model_does_not_require_optional_preprocessor_file",
+      "test_local_defaults_fail_closed_with_missing_runtime",
+      "test_local_subprocess_protocol_normalization_offline_and_wav_validation",
+      "test_local_wait_is_bounded_and_cancellation_does_not_release_running_worker",
+      "test_missing_models_never_spawns_or_falls_back",
+      "test_retry_waits_for_previous_local_worker_cleanup_instead_of_immediate_busy",
+      "test_worker_cli_missing_models_is_sanitized_and_never_downloads",
+      "test_worker_piper_fixed_cpu_session_and_bounded_wav",
+      "test_worker_preserves_upstream_accepted_speech_without_accepting_low_confidence_silence",
+      "test_worker_stt_enforces_offline_cpu_and_silence_filter"
+    ]
+  },
+  {
+    "source": "test_preview_adapter.py",
+    "destination": "tests/python/test_preview_adapter.py",
+    "source_sha256": "d4a0d82491aad039ea554e371cb2d8a25050334152756c23e579f8b0bb9f9a7a",
+    "destination_sha256": "d4a0d82491aad039ea554e371cb2d8a25050334152756c23e579f8b0bb9f9a7a",
+    "edited": false,
+    "test_functions": [
+      "test_preparation_cannot_load_whisper_while_piper_slot_is_held",
+      "test_preview_explicit_default_off_and_local_only",
+      "test_real_adapter_routes_preview_and_final_to_same_worker_not_remote"
+    ]
+  },
+  {
+    "source": "test_preview_protocol.py",
+    "destination": "tests/python/test_preview_protocol.py",
+    "source_sha256": "fcdaf4110a38162f54f2ec1b982ed59211d387b9b4bc0a0c5731785e7490e216",
+    "destination_sha256": "8fb4ff2affdd3ba467ff9beed5c38a1e1e4252a36fbdac94f789226e86819f38",
+    "edited": true,
+    "test_functions": [
+      "test_disabled_closed_muted_and_playback_reject_preview",
+      "test_muted_generation_cannot_be_resubmitted_after_unmute",
+      "test_prepare_ack_is_correlated_and_stop_during_load_discards_it",
+      "test_preview_size_schema_bounds_before_decode",
+      "test_provisional_revised_final_enters_history_once_and_acks",
+      "test_running_and_pending_preview_suppressed_at_lifecycle_boundaries"
+    ]
+  },
+  {
+    "source": "test_promotion_fixes.py",
+    "destination": "tests/python/test_promotion_fixes.py",
+    "source_sha256": "8d81a16aafe095dc6e2578a1468e321b2a12fde7d096a080889457249d4c81db",
+    "destination_sha256": "e72df056af13012910a8bc74282aa13127286863433a8f1962a90c9572d5d4fe",
+    "edited": true,
+    "test_functions": [
+      "test_cancelled_lock_waiter_leaves_producer_owned_capacity",
+      "test_cancelled_piper_retains_exclusion_until_cleanup_completes",
+      "test_delayed_native_readiness_and_owned_timeout_cleanup",
+      "test_failed_readiness_reports_matching_start_id",
+      "test_lock_busy_timeout_does_not_reap_active_producer",
+      "test_quiesce_timeout_and_cancellation_preserve_active_capacity",
+      "test_ready_timeout_and_cancel_cannot_reap_live_native_producer",
+      "test_real_authorized_model_check_from_relocated_worker",
+      "test_real_zipformer_pid_survives_real_piper_and_second_turn",
+      "test_zipformer_retained_quiescent_through_piper_whisper_reaped"
+    ]
+  },
+  {
+    "source": "test_prosody.py",
+    "destination": "tests/python/test_prosody.py",
+    "source_sha256": "63c0ffadbeb4ab19979fc0175946067c4f3cd3e3292f2e4114908a45fba76c5b",
+    "destination_sha256": "63c0ffadbeb4ab19979fc0175946067c4f3cd3e3292f2e4114908a45fba76c5b",
+    "edited": false,
+    "test_functions": [
+      "test_clipping_and_short_capture_warnings_are_actionable",
+      "test_input_bounds_do_not_expand_audio_protocol",
+      "test_partial_frames_are_sample_weighted_and_dc_is_not_speech",
+      "test_silence_is_finite_private_aggregate_with_unknown_emotion",
+      "test_synthetic_periodic_pcm_energy_does_not_claim_pitch_or_emotion"
+    ]
+  },
+  {
+    "source": "test_providers.py",
+    "destination": "tests/python/test_providers.py",
+    "source_sha256": "d9c57a83c3b5dc8dacf28b2b66b4faf6f868ec38a8ea662ef353be8582da3b80",
+    "destination_sha256": "bf53a9868b52823a0cb70ec602dfe7d17c30a046d10ecc1af243662811e64ef8",
+    "edited": true,
+    "test_functions": [
+      "test_actual_selected_backend_returns_reply",
+      "test_api_http_errors_are_not_successful_chunks",
+      "test_bridge_never_refreshes_forbidden_or_server_errors_and_bounds_unauthorized_retry",
+      "test_bridge_refreshes_expired_codex_auth_once_without_provider_fallback",
+      "test_bridge_rejects_empty_or_nontext_completions",
+      "test_bridge_reports_missing_hermes_auth_without_fallback",
+      "test_bridge_resolves_sdk_and_yields_buffered_text",
+      "test_explicit_api_sends_auth_and_streams_sse",
+      "test_factory_defaults_to_hermes_session_model",
+      "test_factory_rejects_invalid_configuration_without_echoing_values",
+      "test_factory_selects_explicit_api_and_hides_key",
+      "test_streaming_content_parser"
+    ]
+  },
+  {
+    "source": "test_response_stages.py",
+    "destination": "tests/python/test_response_stages.py",
+    "source_sha256": "e65f9188dd18b7762da97167e402ebae871c494bc4208ff0649ea88802eb001a",
+    "destination_sha256": "e65f9188dd18b7762da97167e402ebae871c494bc4208ff0649ea88802eb001a",
+    "edited": false,
+    "test_functions": [
+      "test_llm_and_tts_failures_have_safe_specific_codes_and_preserve_text"
+    ]
+  },
+  {
+    "source": "test_server.py",
+    "destination": "tests/python/test_server.py",
+    "source_sha256": "a045d3fbdc1047caedcdf2b4600f9ea21bfe847d87f576263adf01a8ed80556d",
+    "destination_sha256": "a045d3fbdc1047caedcdf2b4600f9ea21bfe847d87f576263adf01a8ed80556d",
+    "edited": false,
+    "test_functions": [
+      "test_audio_transcription_is_background_and_interrupt_suppresses_it",
+      "test_authenticated_browser_transcript_requires_open_unmuted_session",
+      "test_cancelled_connections_do_not_release_running_remote_work",
+      "test_closed_lifecycle_cleanup_is_idempotent_without_starting_session",
+      "test_closed_session_error_is_structured_safe_and_does_not_start_session",
+      "test_completed_history_is_bounded",
+      "test_config_reports_browser_transcripts_separately_from_api_stt",
+      "test_configured_audio_validation_and_successful_voice_turn",
+      "test_interrupt_supersession_stale_ack_and_workload_bound",
+      "test_invalid_message_never_echoes_untrusted_command_or_reason",
+      "test_local_config_and_browser_transcript_rejected_without_fallback",
+      "test_muted_browser_transcript_has_actionable_error_without_work",
+      "test_rejects_rebinding_and_mismatched_origins",
+      "test_server_publishes_one_neural_voice_identity_for_all_clients",
+      "test_start_id_is_optional_validated_and_acknowledged_before_state",
+      "test_stt_workload_full_has_provider_busy_code",
+      "test_text_session_can_start_microphone_mode_without_losing_history",
+      "test_text_session_emits_wav_before_done_and_ack_updates_history",
+      "test_unavailable_api_stt_is_safe_even_when_reason_contains_secrets",
+      "test_validation_errors_keep_socket_usable_and_stt_is_explicit"
+    ]
+  },
+  {
+    "source": "test_speech.py",
+    "destination": "tests/python/test_speech.py",
+    "source_sha256": "7f93fac2abd63447d55851dfeb838c5d65a6ef24b32bbeae05b7c811eadeba10",
+    "destination_sha256": "eba356f682bfd52e69948fb32dced6e53d3b0b441fab2c714f12f031abe29cad",
+    "edited": true,
+    "test_functions": [
+      "test_cancelling_synthesis_reaps_real_subprocess",
+      "test_edge_failure_never_falls_back_to_espeak",
+      "test_edge_mp3_subprocess_is_converted_to_canonical_pcm16_wav",
+      "test_edge_output_bound_timeout_and_cancel_reap_real_processes",
+      "test_explicit_edge_neural_and_invalid_backend_is_rejected",
+      "test_real_espeak_indonesian_wav_and_limits",
+      "test_real_online_edge_synthesis_is_valid_pcm16_wav",
+      "test_stt_configuration_rejects_credential_urls_and_partial_config",
+      "test_stt_posts_explicit_wav_multipart_configuration"
+    ]
+  },
+  {
+    "source": "test_spoken_style_b.py",
+    "destination": "tests/python/test_spoken_style_b.py",
+    "source_sha256": "cfd6bbebb75d377cde0110908dc40777e982acb19ba246d7c541f96fada85fbc",
+    "destination_sha256": "cfd6bbebb75d377cde0110908dc40777e982acb19ba246d7c541f96fada85fbc",
+    "edited": false,
+    "test_functions": [
+      "test_style_b_reaches_provider_without_rewriting_reply_or_user_literals"
+    ]
+  },
+  {
+    "source": "test_stateful_integration.py",
+    "destination": "tests/python/test_stateful_integration.py",
+    "source_sha256": "2f0360490bf5704b18e8591c3996c13176de34e4d4d2961c17d98fb07da64953",
+    "destination_sha256": "90c5b37b4590bd71cca43b65224acf372d05ceffa19cbd350eff66cf1a8bbd7e",
+    "edited": true,
+    "test_functions": [
+      "test_config_advertises_stateful_half_second_updates",
+      "test_final_does_not_discard_live_state_before_using_it",
+      "test_forget_does_not_construct_an_inactive_worker",
+      "test_half_second_partial_and_final_share_owner_but_sockets_do_not",
+      "test_lifecycle_boundary_discards_only_its_own_stream",
+      "test_muted_then_unmuted_final_cannot_dispatch_late_transcript_or_llm",
+      "test_preview_final_and_forget_share_explicit_owner_without_remote_route",
+      "test_ptt_release_after_final_admission_does_not_invalidate_that_final",
+      "test_stateful_constructs_only_the_new_worker_transport",
+      "test_stateful_is_explicit_and_requires_selected_zipformer"
+    ]
+  },
+  {
+    "source": "test_stateful_worker.py",
+    "destination": "tests/python/test_stateful_worker.py",
+    "source_sha256": "2d2d77b76696a964bf36784f91e75447cf36908abd31cf4cd9ffc7038f5ece03",
+    "destination_sha256": "eedf90c1f4e19c2115d6e0e3571cd6497512cdbfbd5ce2b9c4de3db11178c70d",
+    "edited": true,
+    "test_functions": [
+      "test_bad_frames_and_wav_fail_closed_before_feed",
+      "test_duplicate_mutation_shrink_and_owner_switch",
+      "test_forget_deadline_and_cancellation_do_not_steal_live_capacity",
+      "test_framing_wav_prefix_final_and_owner_scoped_forget",
+      "test_idle_cpu_quiesce_and_caps",
+      "test_process_preserves_stream_cancellation_final_and_forget",
+      "test_same_native_stream_across_growing_prefixes_and_final",
+      "test_validation_before_native_mutation"
+    ]
+  },
+  {
+    "source": "test_stream_worker.py",
+    "destination": "tests/python/test_stream_worker.py",
+    "source_sha256": "a30f452a169652a360a46297c9435aedc03916b1c309827dcba0c4378163c40d",
+    "destination_sha256": "a30f452a169652a360a46297c9435aedc03916b1c309827dcba0c4378163c40d",
+    "edited": false,
+    "test_functions": [
+      "test_framed_worker_multiple_requests_and_oversize_header",
+      "test_repeated_prefix_and_final_share_loaded_model_without_changing_decoding",
+      "test_request_and_response_caps",
+      "test_reuses_one_process_and_holds_capacity_after_cancel"
+    ]
+  },
+  {
+    "source": "test_supertonic3.py",
+    "destination": "tests/python/test_supertonic3.py",
+    "source_sha256": "53fbf0eba5de365ed7a4e853a893753467bd86da1dc3ab711097762774466f15",
+    "destination_sha256": "4750d3337ead272af1ae8279b000fc45311e8501cd7c0c2b5d37883f833bd91e",
+    "edited": true,
+    "test_functions": [
+      "test_actual_local_m1_indonesian_wav",
+      "test_bounded_speech_only_documented_tags",
+      "test_check_and_bounded_invalid_input_without_model_allocation",
+      "test_pinned_local_runtime_and_identity"
+    ]
+  },
+  {
+    "source": "test_supertonic3_adapter.py",
+    "destination": "tests/python/test_supertonic3_adapter.py",
+    "source_sha256": "d7278afb6ee0e595bebb86544c5008d3ca15c10428e51211ea5d8c4910aeac14",
+    "destination_sha256": "55e0282ce9d78f7c1944e87823b208a7652f9d31c52d944c9f508f380c89a57a",
+    "edited": true,
+    "test_functions": [
+      "test_accepts_only_documented_tags_no_automatic_insertion",
+      "test_default_remains_piper_without_supertonic_probe",
+      "test_explicit_identity_and_bounded_offline_check",
+      "test_missing_relative_wrong_kind_paths_fail_before_probe",
+      "test_paths_require_explicit_backend_selection",
+      "test_real_process_protocol_and_normalized_copy_preserve_history_ack",
+      "test_request_validation_before_spawning_and_after_normalization",
+      "test_unavailable_probe_fails_explicitly_no_fallback",
+      "test_whisper_closed_before_tts_and_stt_command_unchanged",
+      "test_wrong_audio_format_and_worker_failure_do_not_fallback",
+      "test_zipformer_quiescence_retained_until_real_child_reaped"
+    ]
+  },
+  {
+    "source": "test_tts_failure_diagnostics.py",
+    "destination": "tests/python/test_tts_failure_diagnostics.py",
+    "source_sha256": "2ec6ca93b4f0de09b90334bee7a48dd1ebd25a65661f94aef6b8ffd57146c1a4",
+    "destination_sha256": "6acd71e36cdecaa2fc82a6cb2dbca058f4d2db042ba3f9f466a62c0cd296e871",
+    "edited": true,
+    "test_functions": [
+      "test_actual_output_validators_distinguish_duration_clipping_and_invalid_audio",
+      "test_allowlisted_native_failure_and_exit_code_survive_boundary",
+      "test_cancel_reaps_real_child_and_stderr_task",
+      "test_early_exit_during_large_write_preserves_native_reason",
+      "test_explicit_worker_reasons_are_fixed_and_unknown_messages_are_discarded",
+      "test_legacy_disabled_mode_remains_generic",
+      "test_memory_admission_and_resource_abort_emit_distinct_safe_markers",
+      "test_missing_malformed_assets_are_explicit_without_native_error_text",
+      "test_noisy_fragmented_and_unknown_stderr_do_not_leak_or_deadlock",
+      "test_selected_supertonic_adapter_enables_diagnostics_only",
+      "test_server_logs_only_revalidated_reason_exit_and_preserves_public_contract"
+    ]
+  },
+  {
+    "source": "test_zipformer.py",
+    "destination": "tests/python/test_zipformer.py",
+    "source_sha256": "c56de4c1e0fe4bfa8b1d6d082088628c9412740d3d152c48d6154d3227757495",
+    "destination_sha256": "311a453aceda6e18ae8680826a913d15ce30082b1ed96df6fab11287ff8fd0af",
+    "edited": true,
+    "test_functions": [
+      "test_config_and_partial_report_the_selected_engine_honestly",
+      "test_explicit_engine_routes_both_without_changing_piper",
+      "test_real_binary_worker_check_and_serial_frames",
+      "test_rejects_invalid_or_unavailable_explicit_selection"
+    ]
+  },
+  {
+    "source": "test_zipformer_bounds.py",
+    "destination": "tests/python/test_zipformer_bounds.py",
+    "source_sha256": "9ad7ba09f40ae0fbd1521b0935b5c0c1ce1f6056e52b93ae59dc082fdd988fa1",
+    "destination_sha256": "8047d1ef4f8ed1388e94832af0f232a7e04ed7daad1dd06779bcdf2ed548ebb8",
+    "edited": true,
+    "test_functions": [
+      "test_rejects_unknown_action_model_and_malformed_audio_without_text_logs"
+    ]
+  },
+  {
+    "source": "tests_setup/check_install_wheels.py",
+    "destination": "tests/setup/check_install_wheels.py",
+    "source_sha256": "f226305f322d2b383632bb31a0e64ba243c3d1689637d9d320b9426e9665a8a0",
+    "destination_sha256": "9f34111adcb680a70cd71316a872e732ccf68ec67e27abcd3c9dbe9ba0f1ffcc",
+    "edited": true,
+    "test_functions": []
+  },
+  {
+    "source": "tests_setup/test_setup.py",
+    "destination": "tests/setup/test_setup.py",
+    "source_sha256": "0885748dae8313e5e69b1a014958971a7a91bf0ae5096c70a5f4ade5bb225c65",
+    "destination_sha256": "fd55c5341143e7961cd3f1ada94f76b5dd5cf5d23ebecea8534f97416f3dc993",
+    "edited": true,
+    "test_functions": [
+      "test_bootstrap_default_is_readonly_and_install_refuses_snapshot",
+      "test_configuration_defaults_and_secret_isolation",
+      "test_doctor_auth_uses_selected_interpreter_and_presence_is_labeled",
+      "test_doctor_effective_speech_selection_and_dependency_separation",
+      "test_doctor_never_imports_application_or_calls_provider",
+      "test_doctor_sanitizes_both_env_branches",
+      "test_download_corrupt_sha_leaves_no_installed_artifact",
+      "test_effective_api_url_private_env_rejected_without_echo",
+      "test_env_is_data_not_shell",
+      "test_env_rejects_executable_duplicate_and_existing_files",
+      "test_helper_source_pins_reject_tampering_without_import",
+      "test_launcher_backend_selects_python_and_filters_environment",
+      "test_manifest_traversal_and_modified_revision_are_rejected",
+      "test_offline_venv_installer_is_available_and_blocks_source_archives",
+      "test_paths_and_corruption_fail_closed",
+      "test_production_and_symlink_scope_guards",
+      "test_secret_prompt_requires_hidden_tty_and_never_echoes",
+      "test_service_is_manual_loopback_without_external_origin",
+      "test_source_pins_and_plan"
+    ]
+  },
+  {
+    "source": "web/audio.test.cjs",
+    "destination": "tests/web/audio.test.cjs",
+    "source_sha256": "f79897b31e8e9de09465ea6bb20a9df6b8d054a29f397e824cf32a29480b34da",
+    "destination_sha256": "8e0666299d70372b499800fac327ffc1a7b70ffacd1bddd04932ffaf02d395ec",
+    "edited": true
+  },
+  {
+    "source": "web/auth.test.cjs",
+    "destination": "tests/web/auth.test.cjs",
+    "source_sha256": "e58e71b3cc2cb70501e9fba0856e5d7e95a41ffdc7d2e921853976beb85128a7",
+    "destination_sha256": "9f812e09bb30e7117943f36dc1d07d50326b5388b3e0117a7863452d4a6af938",
+    "edited": true
+  },
+  {
+    "source": "web/client.test.cjs",
+    "destination": "tests/web/client.test.cjs",
+    "source_sha256": "bb38ff96bb85232d2c9580a8cb012cb9abc01f449cc19a6df6ad49e3e34eef0f",
+    "destination_sha256": "b0e0c92c2f8f7bf8815e0510c801f044445bac39ffcf2631162e3a6023f01d91",
+    "edited": true
+  }
+]

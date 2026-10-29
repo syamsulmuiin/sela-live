@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "release": "audio-continuity-2026-10-29",
+  "baseline_git_commit": "27810ec89072593749c0a51a87f3370f57329f3c",
+  "historical_source_receipt": {
+    "path": "docs/PRODUCTION-SOURCE-MANIFEST.json",
+    "sha256": "0542113cf1c32e143f2481c0dc10a108535c2b8c098216e3569235de37c8f05e",
+    "unchanged": true,
+    "role": "Historical baseline, not a claim that delta bytes equal original snapshot."
+  },
+  "historical_migration_inventory": {
+    "path": "tests/move-inventory.json",
+    "sha256": "47a3053cf9386cea862f33612d84914b767589ea384042e6a4dd177dacf0a0f7",
+    "entries": 39,
+    "unchanged": true
+  },
+  "deployed_source_evidence": {
+    "review_manifest_sha256": "dbd40a4120345dd23acd72614e8d15c7129d838fb70ffe5c26e926a12dc86572",
+    "promotion_receipt_sha256": "d66099741824909d8b783a0fbd06f1d28af72f93eff5e32bd5d49fe6dff3ccb0",
+    "installed": true,
+    "note": "Existing private deployment evidence is referenced by hash only; no installer, fixtures, logs, accounts or audio copied."
+  },
+  "files": [
+    {
+      "path": "voice_app/speech.py",
+      "baseline_sha256": "85aead061b6fb72f458252ccf42c8664cd743dd34883f6cf9b0a111f10b1c3c1",
+      "sha256": "d7fcd0083c3adeb8dec4b50475f1e6ac8f9643b787e13a792f80f62f6fd91d92",
+      "role": "exact-installed-copy"
+    },
+    {
+      "path": "voice_app/audio_continuity.py",
+      "baseline_sha256": null,
+      "sha256": "e4ed467895bebf58769832e9ec9426b7ea0e98b83050771f3b69759c3cad775b",
+      "role": "exact-installed-copy"
+    },
+    {
+      "path": "tests/python/test_audio_continuity.py",
+      "baseline_sha256": null,
+      "sha256": "462c5d5c6db496a672bed5be280fd8ad8f01ff6cec7bf680d09c54092b848bf2",
+      "role": "exact-installed-copy"
+    },
+    {
+      "path": "tests/setup/test_layout.py",
+      "baseline_sha256": "2d6ca5ede386548cfc9aa1c5af95c3027a4cb0219c01eb32918cdb52b9853a57",
+      "sha256": "14186b2dd75dab0b88efeb6e19015e5b0251fc6cf58f0be4b2a21c1c808cb7b7",
+      "role": "package-contract-or-documentation"
+    },
+    {
+      "path": "tests/additions-inventory.json",
+      "baseline_sha256": null,
+      "sha256": "17ec792578ffce6b34aa7ce1daf6c547102127be6dad250989e9425a296cce2d",
+      "role": "package-contract-or-documentation"
+    },
+    {
+      "path": "docs/AUDIO-CONTINUITY.md",
+      "baseline_sha256": null,
+      "sha256": "8dfebebce5e09fe7238c20dc2a475ccfc9c8f646e74701eef4756524cdc491f6",
+      "role": "package-contract-or-documentation"
+    },
+    {
+      "path": "README.md",
+      "baseline_sha256": "22c33a05807eb96a11a710e4a3710a9f904eb37b1db683e14ed7b2373d49a3b4",
+      "sha256": "3d3c8bc98a8b86b0ad908bbd76f243b275d929f18a99923dabf29409baa6093f",
+      "role": "package-contract-or-documentation"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "baseline_sha256": "e91648150560efde34fe5a510ebe28c8ee98c58ae867a280608d876306a839c4",
+      "sha256": "5f286dc9c3bfc4af993387658e563610946e67765c066630fd201e4221a0d00c",
+      "role": "package-contract-or-documentation"
+    }
+  ],
+  "limitations": [
+    "Local package delta only; no deployment or service operation by this task.",
+    "No fresh native inference, remote model call or physical listening verification.",
+    "ACK/transport floor and internal pauses remain.",
+    "Historical source and 39-file migration receipts remain unchanged.",
+    "Manifest excludes its own digest; final handoff binds this manifest."
+  ]
+}

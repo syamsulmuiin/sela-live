@@ -1,0 +1,29 @@
+{
+  "fresh_host_install_verified": false,
+  "provider_calls": 0,
+  "models_loaded": false,
+  "environments": [
+    {
+      "environment": "deploy",
+      "wheel_count": 17,
+      "pip_check": "passed",
+      "native_import_probe": "passed",
+      "inference": false
+    },
+    {
+      "environment": "autonomous/zipformer",
+      "wheel_count": 3,
+      "pip_check": "passed",
+      "native_import_probe": "passed",
+      "inference": false
+    },
+    {
+      "environment": "autonomous/expressive-tts",
+      "wheel_count": 31,
+      "pip_check": "passed",
+      "native_import_probe": "passed",
+      "inference": false
+    }
+  ],
+  "small_archived_assets_sha256_verified": 6
+}

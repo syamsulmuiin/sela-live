@@ -1,0 +1,24 @@
+{
+  "read_only": true,
+  "ready": false,
+  "provider_called": false,
+  "application_imported": false,
+  "checks": {
+    "canonical_checkout": false,
+    "network_namespace_capability": true,
+    "helper_source_pins": true,
+    "speech_asset_sha256": false,
+    "zipformer_python_modules": false,
+    "supertonic_python_modules": false,
+    "auth_capability": true,
+    "launch_configuration": false,
+    "web_python_modules": false,
+    "auth_data_safe": false,
+    "private_env_file": false
+  },
+  "notes": [
+    "Missing or unsafe private .env; configure explicitly on fresh canonical host. No app imported.",
+    "Fresh auth enrollment required after first start; runtime creates private data/bootstrap-token, valid 30 minutes. Do not publish token.",
+    "No provider call, OAuth refresh, app import, inference, weights allocation, service start or auth data write."
+  ]
+}

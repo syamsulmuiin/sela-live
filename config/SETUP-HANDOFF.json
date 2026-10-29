@@ -1,0 +1,123 @@
+{
+  "status": "setup tooling implemented and exercised; fresh-host deployment NOT verified",
+  "scope": "Only scripts/**, tests_setup/**, deploy/**, config/** and requirements-web.lock changed by setup subagent",
+  "runtime_byte_exact": {
+    "receipt": "config/source-byte-exact-verification.json",
+    "files_checked": 94,
+    "all_byte_exact": true
+  },
+  "public_commands": {
+    "check": "/usr/bin/python3.12 scripts/bootstrap.py --check",
+    "verify_existingdeps_readonly": "/usr/bin/python3.12 scripts/bootstrap.py --verify-assets --dependency-root /root/voice-lab",
+    "verify_public_sources_opt_in": "/usr/bin/python3.12 scripts/bootstrap.py --check-sources",
+    "fresh_install_only": "/usr/bin/python3.12 scripts/bootstrap.py --install",
+    "configure_api_validate": "/usr/bin/python3.12 scripts/configure.py --backend api --model YOUR_REMOTE_MODEL --base-url https://YOUR_REMOTE_API/v1",
+    "configure_api_write": "/usr/bin/python3.12 scripts/configure.py --backend api --model YOUR_REMOTE_MODEL --base-url https://YOUR_REMOTE_API/v1 --write",
+    "configure_hermes_write": "/usr/bin/python3.12 scripts/configure.py --backend hermes --model YOUR_CODEX_MODEL --hermes-python /absolute/path/to/hermes/python --write",
+    "doctor": "/usr/bin/python3.12 scripts/doctor.py",
+    "launch_check": "/usr/bin/python3.12 scripts/run.py --check",
+    "launch": "/usr/bin/python3.12 scripts/run.py",
+    "tests": "PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m unittest discover -s tests_setup -v",
+    "real_wheel_integration": "/usr/bin/python3.12 tests_setup/check_install_wheels.py --dependency-root /root/voice-lab --fetch-web",
+    "service_syntax": "systemd-analyze verify deploy/sela-voice.service",
+    "help": "All four public commands support --help"
+  },
+  "fresh_install_requirements": [
+    "Fresh canonical /root/voice-lab checkout only, Ubuntu24.04 Linux x86_64, CPython3.12 with venv/ensurepip (OS packages python3.12 and python3.12-venv installed separately).",
+    "Root/CAP_SYS_ADMIN must allow child unshare(CLONE_NEWNET); runtime guards unchanged. Bootstrap preflights this; no fallback.",
+    "No existing .env, auth/data, speech assets/wheels/venvs, audio-runtime, bootstrap marker, known Sela/voice-lab systemd service, or listener on loopback8091.",
+    "Bootstrap must precede configure. Bootstrap never installs or starts systemd and never installs a local LLM.",
+    "Hermes is installed/authenticated separately. Explicit Hermes interpreter must already provide agent, hermes_cli, openai and web dependencies. No Hermes credentials copied, read, refreshed or inferred.",
+    "API backend uses created deploy/web-venv. Hermes backend uses SELA_HERMES_PYTHON, not the API web interpreter."
+  ],
+  "secret_handling": [
+    "No API secret CLI argument exists; rejected arguments are not echoed by configure.",
+    "Use VOICE_API_KEY environment or interactive hidden terminal prompt. Non-TTY echo fallback is forbidden.",
+    "configure --write creates new .env with O_EXCL/O_NOFOLLOW mode0600. No overwrite. KEY=JSON-string data; never source with a shell or EnvironmentFile.",
+    "Launcher strips inherited stale VOICE_* and unrelated token/proxy settings; only key override VOICE_API_KEY plus minimal HOME/PATH/HERMES_HOME/etc. are retained.",
+    "Launcher never prints launch environment, binds only127.0.0.1:8091 and uses existing authenticated create_app factory.",
+    "New account enrollment is the runtime auth flow after first start. Private data/bootstrap-token lasts30min; no production account/database copied."
+  ],
+  "preserved_defaults": {
+    "stt": "local Zipformer int8",
+    "preview": "local/stateful enabled",
+    "tts": "Supertonic3",
+    "style": "conditioning_b",
+    "automatic_conditioning": "1",
+    "experimental_numeric_prosody": "0",
+    "browser_stt": "0",
+    "public_origin": "empty; no production hostname"
+  },
+  "source_resolution": {
+    "supertonic_original_runtime_revision": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+    "original_revision_archived_metadata_http": 404,
+    "archive_repository": "supertone-oss-archive/supertonic-3",
+    "archive_download_revision": "aafc6e32416a594460b32413efc49d7fe4ce6d46",
+    "equivalence": "All ten original asset Git blob IDs/sizes and four LFS SHA256s match pinned archived metadata. All six small non-ONNX archived files downloaded and passed ORIGINAL manifest SHA256s. Original runtime manifest untouched.",
+    "zipformer_repository": "spacewave/sherpa-onnx-streaming-zipformer2-id",
+    "zipformer_revision": "4e5a13cbe3e9cd4e3775447d86178ef51759096f",
+    "speech_wheels": "Existing original manifests pin exact published files and SHA256s; binary-only --no-index --no-deps --require-hashes install.",
+    "web_wheels": "17 distributions pinned to installed transport package versions and CPython3.12 Linux binary hashes. config/web-resolution.json is actual pip --dry-run resolution provenance; requirements-web.lock and config/web-wheels.json are derived from it.",
+    "source_receipt": "config/source-url-verification.json",
+    "head_200_count": 65
+  },
+  "executed_verification": {
+    "unit_tests": {
+      "count": 14,
+      "passed": true,
+      "receipt": "config/setup-tests.log"
+    },
+    "real_wheel_install_test": {
+      "fresh_host_install_verified": false,
+      "provider_calls": 0,
+      "models_loaded": false,
+      "environments": [
+        {
+          "environment": "deploy",
+          "wheel_count": 17,
+          "pip_check": "passed",
+          "native_import_probe": "passed",
+          "inference": false
+        },
+        {
+          "environment": "autonomous/zipformer",
+          "wheel_count": 3,
+          "pip_check": "passed",
+          "native_import_probe": "passed",
+          "inference": false
+        },
+        {
+          "environment": "autonomous/expressive-tts",
+          "wheel_count": 31,
+          "pip_check": "passed",
+          "native_import_probe": "passed",
+          "inference": false
+        }
+      ],
+      "small_archived_assets_sha256_verified": 6
+    },
+    "real_wheel_install_receipts": [
+      "config/wheel-install-integration.json",
+      "config/wheel-install-integration.log"
+    ],
+    "readonly_existingdeps": {
+      "all_verified": true,
+      "verified_count": 48,
+      "receipt": "config/readonly-existingdeps-verification.json"
+    },
+    "current_production_guard": "assert_fresh(Path(/root/voice-lab)) refused with existing installation/data detected; no writes/network performed",
+    "unconfigured_doctor": "Expected exit1, ready=false, namespace=true, helper pins=true; config/doctor-unconfigured.json",
+    "configure_validation": "API example validated read-only, no key or provider needed; actual execution exit0",
+    "run_check_snapshot": "Expected exit1 before application import on noncanonical snapshot",
+    "service_template": "systemd-analyze verify returned exit0; unit NOT installed/enabled/started"
+  },
+  "unverified_limits": [
+    "Full bootstrap --install on a genuinely fresh Ubuntu24.04 machine has NOT been run. Read-only existingdeps checks and temp venv install checks are not that claim.",
+    "No app start, provider inference, OAuth refresh, auth enrollment, audio inference, heavy model loading, external deployment or GitHub publishing performed.",
+    "Large archived ONNX downloads were HEAD/metadata verified, not re-downloaded. Existing installed exact original files passed streaming SHA256. All small archived assets were actual GET+SHA256 checked.",
+    "Hermes adapter module presence/auth file existence checks do not prove OAuth validity, account authorization, endpoint/model availability or quota.",
+    "Bootstrap intentionally refuses partial or existing installations. A failed install retains .setup-installing and generated directories; no automatic retry, cleanup, resume or live upgrade.",
+    "The web requirements lock targets Python3.12 Linux x86_64. Do not use its CP312-only binary hashes to mutate a separately installed Hermes interpreter on a different Python version.",
+    "Systemd template is canonical/root-only due to existing hardcoded worker paths and network namespace guard. No public origin, reverse proxy or TLS setup is provisioned."
+  ]
+}

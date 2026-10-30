@@ -86,5 +86,12 @@
     "/": 303,
     "/ws": 403
   },
-  "source_to_installed_manifest": "docs/LIVE-TTS-DELTA-MANIFEST.json"
+  "source_to_installed_manifest": "docs/LIVE-TTS-DELTA-MANIFEST.json",
+  "github_runtime_source": {
+    "repository": "syamsulmuiin/sela-live",
+    "branch": "main",
+    "commit": "8e537a572fe0326cbe8c1c4afc91db9cb90c5ad3",
+    "remote_sha_verified": true,
+    "note": "Subsequent status-only commits do not change installed runtime source."
+  }
 }

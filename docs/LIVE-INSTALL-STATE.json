@@ -1,10 +1,10 @@
 {
-  "phase": "installed_and_verified_github_publication_pending",
+  "phase": "installed_github_synced_ready_for_user_test",
   "production_switched": true,
   "accepted_sample_sha256": "622c1ba2ebf2fcc0e63c5e2acf224f46971420423ba022210901b958116b94ad",
   "github_repo": "syamsulmuiin/sela-live",
   "github_private_verified": true,
-  "github_code_pushed": false,
+  "github_code_pushed": true,
   "active_jobs": false,
   "production_before": {
     "pid": 750,
@@ -337,6 +337,10 @@
     "/": 303,
     "/ws": 403
   },
-  "pending": "GitHub source publication/readback; user physical microphone/listening test after ready notice",
-  "canonical_status": true
+  "pending": "User physical microphone/listening test; no implementation or publishing job running",
+  "canonical_status": true,
+  "github_branch": "main",
+  "github_runtime_source_commit": "8e537a572fe0326cbe8c1c4afc91db9cb90c5ad3",
+  "github_runtime_source_readback_verified": true,
+  "ready_for_user_test": true
 }

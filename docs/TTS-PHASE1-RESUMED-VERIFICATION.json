@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "reviewer": "Parent verification of resumed child-written runtime/probe; not an external security audit or production deployment approval",
+  "scope": "authorize one private native probe only: one 8-step parity plus seven 12-step full-original-paragraph pieces; all existing native guards retained",
+  "security_concerns": [],
+  "logic_errors": [],
+  "resolved": [
+    "S1 host-shared nonblocking flock and production-priority detection",
+    "L1 zero queued waiters, fail-fast admission",
+    "L2 owned-child cancellation and cleanup join on every exit",
+    "L3 terminal failed/cancelled receipts, unique attempts, artifact inventory",
+    "L4 bounded asynchronous converter deadline/output/reaping",
+    "L5 explicit acceptance/budget gates remain under optimized interpreter"
+  ],
+  "limitations": [
+    "Unchanged production does not participate in evaluation flock; read-only production priority is best-effort, not atomic exclusion.",
+    "No production activation or acoustic-quality acceptance.",
+    "Full-paragraph/native verification remains to execute; synthetic tests are not model output."
+  ],
+  "tests": {
+    "targeted": 47,
+    "targeted_optimized": 47,
+    "setup": 22,
+    "all_passed": true,
+    "post_resume_fixture_fix": "Owned-child PID readiness now atomically renamed after complete write; observed empty PID race was a test-fixture issue, not masked by retry."
+  },
+  "exact_sha256": {
+    "sela_live_tts/backend.py": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a",
+    "sela_live_tts/admission.py": "f20fddcb9d3a3b7e405885d1b5388c18a840bd7ae43ab0badc7789276bc3060e",
+    "sela_live_tts/worker.py": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+    "sela_live_tts/controls.py": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+    "sela_live_tts/source_pins.py": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+    "sela_live_tts/upstream-manifest.json": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+    "tools/tts_same_text_probe.py": "397c0b4c5135db38c78424da86967b7d1483a8d744cf4b560cce6cb131a49d51",
+    "tests/python/test_sela_live_tts.py": "16590f006f791d08554021f337f31d9d5b4c8659c9328e3d1acb38db69e4afaa",
+    "tests/python/test_sela_live_admission.py": "63c8e33847f97db1b21d8ed8c95e5038d785702af32110b06ce7b66f7a54a715",
+    "tests/python/test_sela_live_probe.py": "824890e1b393e46b044487b4435e01c0e8e6839639191b055bba2773dbe94f70",
+    "tests/additions-inventory.json": "1a1309e15e302aa120d2998cda55357c07a069b04180af71ca0df9c5d5b72bca",
+    "tests/setup/test_layout.py": "488206ed1773a1b7b9b3fc8cd55ad5a7018bd499ab1f0d77d3d2e7c6874fc7bc"
+  },
+  "native_budget": {
+    "parity8": 1,
+    "quality12": 7,
+    "max_calls": 8
+  },
+  "baseline_receipt_sha256": "903c30579fb1b55051a7e2a3d4b0b43abe0bcf332b0ff53e0c939418901fed52",
+  "original_migration_manifest_sha256": "47a3053cf9386cea862f33612d84914b767589ea384042e6a4dd177dacf0a0f7",
+  "production_chunker_sha256": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26"
+}

@@ -1,0 +1,89 @@
+{
+  "status": "installer_implemented_fixture_verified_not_deployed",
+  "scope": {
+    "modified": ["tools/install_live_tts.py", "tests/setup/test_live_tts_install.py"],
+    "created": ["docs/LIVE-INSTALLER-FINAL-HANDOFF.json"],
+    "production_writes": false,
+    "real_service_operations": false,
+    "native_inference": false,
+    "downloads": false,
+    "git_commit_or_push": false,
+    "parent_owned_inventory_edits": false,
+    "LIVE-INSTALL-STATE.json_modified_by_this_agent": false
+  },
+  "owned_source": {
+    "tools/install_live_tts.py": {
+      "sha256": "7f871219361b9a7a4b222f1ec281c0d4e7fc1ff8a3b93b69c063f4a97833dc4d",
+      "mode": 420
+    },
+    "tests/setup/test_live_tts_install.py": {
+      "sha256": "4975f9e1ba2c1fcf42edcf8c53e5725aa05e9ff2e3909eef8b682138272dbb70",
+      "mode": 420
+    }
+  },
+  "implemented": [
+    "Read-only default run and CLI; --plan and optional --apply are the only CLI arguments.",
+    "CLI roots fixed to /root/voice-lab, /etc/systemd/system and /root/sela-live-install-snapshots. Fixture roots/hooks available only through Python Installer construction.",
+    "Cooperative nonblocking writer flock on the existing application-directory inode, held through preflight, snapshot, installation and recovery; no release-local deployment lock replacement.",
+    "Exact installer/testsource/baseline/runtime-review/unsigned-plan/payload SHA bindings, nonblank approved reviewers, artifact mode bindings, source hash/mode checks and compiled payload allowlist.",
+    "Exact new environment map: enabled=1, Python equal to the baseline legacy Supertonic interpreter, installed worker path, reviewed installed worker SHA and fixed persistent shared-lock path. No extra environment keys, shell syntax, model/profile/steps/speed/seed overrides.",
+    "Baseline source trees and service drop-in inventory checked, including existing new runtime/vendor trees. Unbound existing destinations/drop-in, symlinks, hardlinked source files, unsafe lock directory/file and unexpected unit overrides reject before archive/stop.",
+    "Observe -> revalidate frozen inputs -> private readback-verified snapshot -> stop -> atomic writes -> daemon-reload/restart -> exact installed file/unit/preserved inventory and runtime observation.",
+    "Snapshot manifest records both missing and existing app destinations and prior drop-in; archived files/manifest mode0400, directories0500, private parent0700. Original file bytes and modes retained separately from archive permissions.",
+    "Persistent .runtime directory provisioned0700 and shared lock0600 with owner/regular/nlink checks. Existing lock never unlinked, truncated or replaced; flock excludes concurrent native use during payload writes. Infrastructure deliberately remains after rollback.",
+    "Same-directory fsync+replace writes; rollback restores original bytes/modes or removes only newly introduced allowlisted destinations. Recovery verifies baseline files, tree inventory and previous selectors/health.",
+    "Terminal installed/rolled_back/rollback_failed/receipt_failed states; installed requires exact post-readback. Cleanup/recovery errors expose safe stage/type categories, not raw exceptions or environment secrets.",
+    "Real fixed systemd hooks, filtered /proc environment and owned loopback-listener/root checks, bounded /health probing, unauthenticated API401/WebSocket403 and invalid-Host400 checks. Restart polls health before final full observation; no authentication credentials, inference calls or provider access."
+  ],
+  "plan_contract_for_parent": {
+    "schema_version": 1,
+    "baseline": "Use a separately frozen normalized document with app={relative path:{sha256,mode}}, units={paths relative to /etc/systemd/system:{sha256,mode}}, selectors={complete exact SELECTOR_KEYS/LIVE_KEYS observed in process}, trees=[source tree names]. Preserve the original LIVE-INSTALL-STATE.json as provenance; do not overwrite it to normalize schema.",
+    "selectors": "Include all actually present allowlisted process selectors, notably VOICE_SUPERTONIC3_PYTHON, MODEL_PATH and MANIFEST as well as existing public-origin/model/STT/TTS/conditioning flags; observation compares the complete filtered map, not only anchors.",
+    "payload": "files covers the complete reviewed writable payload, preserved contains exactly the three unchanged native guard helpers. Payload inventory must equal files union preserved; keep package report/evidence outside payload. Every existing destination and prior drop-in must appear in frozen baseline; omitted destinations must be absent.",
+    "approval_required": ["verdict=approved", "nonblank reviewer", "installer_sha256", "testsource_sha256", "baseline_sha256", "runtime_review_sha256", "payload_sha256", "plan_sha256", "artifact_modes", "plan_mode"],
+    "artifact_modes": "Exact integer stat.S_IMODE values for installer, testsource, baseline, runtime_review and payload_root. All must be free of group/other write bits. This is the small approval-map extension enforcing mode binding; all original digest fields and schema_version1 remain.",
+    "plan_mode": "Exact on-disk CLI plan mode, either decimal384 (0600) or decimal420 (0644). CLI rejects mismatch before constructing Installer.",
+    "digest_formulas": {
+      "canonical": "json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()",
+      "payload_sha256": "sha256(canonical({files,preserved,live_env}))",
+      "plan_sha256": "sha256(canonical(plan excluding approval))"
+    },
+    "snapshot_location": "/root/sela-live-install-snapshots/<unique transaction>/snapshot.json",
+    "terminal_receipt_location": "/root/sela-live-install-snapshots/<unique transaction>.receipt.json",
+    "runtime_lock": "/root/voice-lab/.runtime/live-tts.lock"
+  },
+  "verification": {
+    "interpreter": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+    "normal": {"arguments": "-m unittest discover -s tests/setup -p test_live_tts_install.py -v", "tests": 30, "failures": 0, "errors": 0, "skipped": 0, "seconds": 1.031},
+    "optimized": {"arguments": "-O -m unittest discover -s tests/setup -p test_live_tts_install.py -v", "tests": 30, "failures": 0, "errors": 0, "skipped": 0, "seconds": 1.05},
+    "original_tests_retained": 4,
+    "added_tests": 26,
+    "coverage": "Success, actual orchestration order with harmless hooks, partial-write/restart/hash/selector rollback, old drop-in mode restoration, stable lock inode/busy lock, immutable snapshot readback, failed restoration/recovery/receipt persistence, input bindings/modes/inventory/anchors, read-only CLI/fixed roots, safe process filtering/owned listener and valid unauthenticated WebSocket probe.",
+    "tdd_red_green_slices": [
+      "Existing selector regression: eight invalid live-env cases accepted -> exact live map enforced -> four original tests green.",
+      "Apply rejected by stub -> real snapshot/install/readback orchestration -> success test green.",
+      "Unbound existing destination/drop-in accepted -> baseline binding enforced -> green.",
+      "Unsafe persistent lock directory accepted until after stop -> pre-archive lock guard -> green.",
+      "CLI rejected every plan and real SystemHooks absent -> fixed-root CLI and safe system hooks -> green.",
+      "Artifact mode binding ignored -> exact artifact_modes required -> green.",
+      "Competing writer admitted -> root-directory flock -> green.",
+      "Unlisted runtime source/unit override accepted -> live inventories enforced -> green.",
+      "Observe-time source drift archived -> repeated frozen-input validation before archive -> green.",
+      "CLI plan mode ignored -> explicit approved plan_mode gate -> green.",
+      "Corrupt snapshot accepted -> snapshot and manifest readback before stop -> green.",
+      "Invalid17-byte WebSocket key -> valid16-byte key -> green.",
+      "Restart returned before readiness -> bounded non-inference health polling -> green.",
+      "World-writable snapshot parent accepted -> private parent ownership/mode gate -> green.",
+      "Recovery inventory drift reported rolled_back -> recovery inventory gate -> green."
+    ],
+    "full_repository_suite": "Not run: this assignment prohibits native inference and parent owns current inventory reconciliation. Only the explicitly selected installer test module was executed; no layout/inventory edits made."
+  },
+  "limitations_and_parent_actions": [
+    "Parent must independently review these exact installer/test hashes, populate approval artifact_modes and CLI plan_mode, bind the final relocated payload/runtime review and separately frozen normalized baseline, then perform authorized production installation and GitHub update.",
+    "All systemd/process/HTTP boundaries were fixture-tested without invoking production hooks. Real systemd sandbox behavior, authenticated/public-domain browser flow and native quality12 inference remain parent-owned and unverified here.",
+    "The snapshot is immutable by installer convention and read-only permissions, not filesystem chattr protection against privileged root. SIGKILL/power-loss automatic recovery is not implemented; reconcile retained snapshot/receipt against exact installed state before retrying.",
+    "If terminal receipt persistence itself fails, returned status is receipt_failed and applied=false, but application files may already be installed. The durable prior receipt can remain archived; reconcile rather than treating this as a successful or automatically rolled-back deployment.",
+    "Rollback intentionally retains persistent shared-lock infrastructure and may leave empty newly created source directories. It does not delete production data or replace the shared lock inode.",
+    "The installer only proves a reviewed source/configuration transaction, not acoustic voice quality or end-to-end inference. Quality12/sample acceptance belongs to existing accepted evidence and the parent's relocated native preflight."
+  ]
+}

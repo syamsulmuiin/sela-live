@@ -24,10 +24,24 @@ class TestLayout(unittest.TestCase):
         inventory = json.loads((ROOT / 'tests/move-inventory.json').read_text())
         # The original migration receipt is immutable; additions are not migrations.
         additions = json.loads((ROOT / 'tests/additions-inventory.json').read_text())
-        self.assertEqual(additions, [{
-            'path': 'tests/python/test_audio_continuity.py',
-            'sha256': '462c5d5c6db496a672bed5be280fd8ad8f01ff6cec7bf680d09c54092b848bf2',
-        }])
+        self.assertEqual(additions, [
+            {'path': 'tests/python/test_audio_continuity.py',
+             'sha256': '462c5d5c6db496a672bed5be280fd8ad8f01ff6cec7bf680d09c54092b848bf2'},
+            {'path': 'tests/python/test_quoted_tts_boundaries.py',
+             'sha256': '9b69a725e65fa5dbbadaa0b2e1eed85775f618d28c36a4bf2d79dffe7013de20'},
+            {'path': 'tests/python/test_sela_live_tts.py',
+             'sha256': '16590f006f791d08554021f337f31d9d5b4c8659c9328e3d1acb38db69e4afaa'},
+            {'path': 'tests/python/test_sela_live_admission.py',
+             'sha256': '63c8e33847f97db1b21d8ed8c95e5038d785702af32110b06ce7b66f7a54a715'},
+            {'path': 'tests/python/test_sela_live_probe.py',
+             'sha256': '824890e1b393e46b044487b4435e01c0e8e6839639191b055bba2773dbe94f70'},
+            {'path': 'tests/python/test_sela_live_integration.py',
+             'sha256': '8a5782239ec29fdac3025bd4d8c0704f4325099ac0161d87eda5a6980b7b8724'},
+            {'path': 'tests/setup/test_live_runtime_package.py',
+             'sha256': '892b471a65f284e2bdd9090764c5f972eeba89f7b8e2039b97b4c02fd6713bcf'},
+            {'path': 'tests/setup/test_live_tts_install.py',
+             'sha256': '4f7927efc04124229cee5ea29c177b446f31dcbaf96bf39b0a9f7d8cd5c33779'},
+        ])
         for row in additions:
             path = ROOT / row['path']
             self.assertFalse(path.is_symlink())

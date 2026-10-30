@@ -1,0 +1,154 @@
+{
+  "status": "staged_bridge_implemented_not_deployed",
+  "owned_source_sha256": {
+    "voice_app/speech.py": "f91ce2cac04e2a8d6a3ee7b4b5dc19b44d2b31cdb9cd8d190872679bb8cee519",
+    "voice_app/sela_live_bridge.py": "880731409d5165bbc99a13644786265e8c1aa3c73c949657ab9673c31ff49a88",
+    "sela_live_tts/admission.py": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1",
+    "tests/python/test_sela_live_integration.py": "8a5782239ec29fdac3025bd4d8c0704f4325099ac0161d87eda5a6980b7b8724"
+  },
+  "configuration_contract": {
+    "VOICE_SELA_LIVE_TTS": "strict string 0 or 1; absent/0 preserves original Supertonic3 commands, readiness, payload, output, identity, audio admission and ASR behavior",
+    "VOICE_SELA_LIVE_WORKER": "explicit absolute installed path, recommended /root/voice-lab/sela_live_tts/worker.py; symlink-free bounded regular file",
+    "VOICE_SELA_LIVE_WORKER_SHA256": "exact lowercase 64-character digest of parent-reviewed RELOCATED worker, checked at initialization and each check/tts argv construction; do not use stage worker SHA after manifest rebinding",
+    "VOICE_SELA_LIVE_PYTHON": "explicit absolute executable in installed app-owned speech runtime; venv executable symlinks allowed as in legacy runtime",
+    "VOICE_SELA_LIVE_LOCK": "explicit absolute stable shared host lock; recommended /root/voice-lab/.runtime/live-tts.lock. Both service and evaluation environment must use this SAME path/inode, never a copied release-local lock",
+    "required_unchanged": {
+      "VOICE_TTS_BACKEND": "supertonic3",
+      "VOICE_SUPERTONIC3_STYLE_PROFILE": "conditioning_b",
+      "VOICE_AUTOMATIC_CONDITIONING": "keep existing 1",
+      "VOICE_SUPERTONIC3_PYTHON": "still required legacy explicit runtime path",
+      "VOICE_SUPERTONIC3_MODEL_PATH": "keep existing assets",
+      "VOICE_SUPERTONIC3_MANIFEST": "keep existing assets manifest"
+    },
+    "fixed_total_steps": 12,
+    "no_new_steps_speed_seed_or_profile_path_override": true,
+    "runtime_argv": [
+      "VOICE_SELA_LIVE_PYTHON",
+      "-I",
+      "VOICE_SELA_LIVE_WORKER",
+      "check|tts",
+      "VOICE_SUPERTONIC3_MODEL_PATH",
+      "VOICE_SUPERTONIC3_MANIFEST",
+      "existing allowlisted conditioning_b[_calm|active_low|medium|high] ID",
+      "12"
+    ]
+  },
+  "relocation_contract": [
+    "Parent owns installer, exact manifest rebinding, worker MANIFEST_SHA replacement, relocated worker SHA review, venv/package pins, deployment, rollback and GitHub sync.",
+    "Install voice_app/sela_live_bridge.py with Speech, and install importable sela_live_tts package including updated admission.py. Worker need not be modified for profile IDs: all seven existing IDs already have conditioning_b prefix and unchanged guard checks exact allowlist.",
+    "Parent builds byte-identical pinned SDK under installed app vendor/supertonic; sdk_root must end at supertonic package, whose parent worker prepends to sys.path. The path must resolve to cloned SDK, not site-packages.",
+    "Existing stage manifest does NOT hash worker.py, speech.py or admission.py. It hashes source_pins.py, controls.py, __init__.py plus SDK and unchanged native guard helpers. Explicit reviewed worker SHA is bridge trust anchor; worker still checks helper+manifest+all listed native sources before importing SDK/guard.",
+    "Relocated manifest guard_root must be installed voice_app, live_root installed sela_live_tts, sdk_root installed pinned SDK. Do not leave /root/sela-live, /root/supertonic-live-fix or scratch fixtures in installed payload.",
+    "Native guard/resource/seccomp/seed20261026/speed1.05/PCM logic unchanged. Native steps overridden ONLY by cloned worker at fixed12; router, source spans, pronunciation, trim and chunk ACK unchanged.",
+    "Installer provisions /root/voice-lab/.runtime once with owner-only permissions before enabling. Admission never creates parent directories. Persistent lock is owned by euid, regular, nlink1, mode0600, no symlink path/parents; never unlink/replace across deployments.",
+    "Evaluation AdmissionCoordinator default is now /root/voice-lab/.runtime/live-tts.lock and can explicitly use VOICE_SELA_LIVE_LOCK. Evaluation production_busy detects fixed /root/voice-lab/sela_live_tts/worker.py and exact configured VOICE_SELA_LIVE_WORKER (also relative argv via cwd). Keep both environments aligned for relocated worker paths.",
+    "Production uses ProductionAdmissionCoordinator.check_production=no-op, never evaluation production_busy. Speech retains local bounded slot/one cleanup waiter and ASR quiescence, then nonblocking shared flock, through native child reap. Host contention rejects with LocalAudioBusy; zero additional global queued waiters and zero fallback.",
+    "Evaluation retains its read-only production priority checks and cancels/reaps its own work on detected production. A currently held evaluation flock makes new production TTS fail fast; no new preemption/intent signalling was introduced.",
+    "Bridge shields the child-owning bounded-process task and sends cancellation once, draining repeated caller cancellations before releasing host lock/ASR/local slot. Existing disabled process path untouched."
+  ],
+  "initial_comparison": {
+    "stage_vs_production_before_edits": "speech.py, automatic_conditioning.py, rules JSON and supertonic3_worker.py byte-identical; parent confirmed all voice_app/*.py identical",
+    "speech_sha256_before": "d7fcd0083c3adeb8dec4b50475f1e6ac8f9643b787e13a792f80f62f6fd91d92"
+  },
+  "unmodified_worker_sha256": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+  "unmodified_manifest_sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+  "tdd": {
+    "new_test_count": 10,
+    "new_test_names": [
+      "test_strict_opt_in_requires_explicit_reviewed_runtime_and_b_anchor",
+      "test_readiness_checks_actual_live_worker_for_every_routed_profile",
+      "test_shared_host_admission_excludes_other_apps_and_evaluation_without_asr_probe",
+      "test_evaluation_detects_installed_live_worker_and_uses_same_lock",
+      "test_repeated_cancellation_reaps_child_before_releasing_shared_lock_and_asr",
+      "test_worker_drift_after_startup_fails_closed_before_spawn",
+      "test_shared_lock_rejects_unsafe_parent_or_relative_configuration",
+      "test_live_preserves_router_chunk_snapshot_ack_and_native_failure_without_fallback",
+      "test_real_child_success_safe_failure_output_limit_and_timeout_reap_before_asr_resume",
+      "test_opt_in_dispatches_installed_clone_worker_at_quality12"
+    ],
+    "red_green_vertical_cycles": [
+      {
+        "behavior": "quality12 clone-backed opt-in argv",
+        "red": "1 failure: legacy supertonic3_worker argv",
+        "green": "1 test passed"
+      },
+      {
+        "behavior": "strict default-off config and B anchor",
+        "red": "21 assertion failures + 6 missing-feature type/key errors across malformed config subtests",
+        "green": "2 tests passed"
+      },
+      {
+        "behavior": "actual Live readiness for all existing profiles",
+        "red": "1 failure: legacy check argv",
+        "green": "3 tests passed"
+      },
+      {
+        "behavior": "shared host admission across apps/evaluation, no production_busy",
+        "red": "1 failure: evaluation admitted alongside production",
+        "green": "4 tests passed"
+      },
+      {
+        "behavior": "stable shared default lock and installed worker detection",
+        "red": "first wrong default, then second RED false production_busy for installed worker",
+        "green": "5 integration +13 admission passed"
+      },
+      {
+        "behavior": "repeated cancellation ownership/reaping",
+        "red": "ASR resumed before reaping after second cancellation",
+        "green": "6 integration passed"
+      },
+      {
+        "behavior": "worker digest rechecked after startup",
+        "red": "3 failures drift/symlink/missing did not reject",
+        "green": "7 integration passed"
+      },
+      {
+        "behavior": "unsafe shared-lock parent and relative paths denied",
+        "red": "symlink-parent and relative lock admitted/created",
+        "green": "8 integration +13 admission passed"
+      }
+    ],
+    "additional_existing_behavior_coverage": "2 additional regression-only tests for routing/chunk snapshot/no fallback and real harmless child success/safe failure/output limit/timeout; no production changes were needed for these"
+  },
+  "verification": [
+    {
+      "command": "PYTHONPATH=tests/python /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -m unittest test_sela_live_integration -v",
+      "result": {
+        "ran": 10,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 2.635
+      }
+    },
+    {
+      "command": "env -u SUPERTONIC_REAL -u VOICE_WEB_INTEGRATION -u VOICE_INTEGRATION -u VOICE_EDGE_INTEGRATION PYTHONPATH=tests/python /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -m unittest discover -s tests/python -v",
+      "result": {
+        "ran": 296,
+        "passed": 292,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 4,
+        "seconds": 117.92
+      },
+      "full_output": "/root/.hermes/cache/terminal-output/out-1793379535-1691-1810.log"
+    },
+    {
+      "command": "PYTHONPATH=tests/python /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -O -m unittest test_sela_live_integration test_sela_live_admission test_sela_live_tts test_sela_live_probe test_supertonic3_adapter test_automatic_conditioning.SpeechTests test_automatic_conditioning.RouterTests test_automatic_conditioning.StrictRouterTests test_chunked_tts test_audio_continuity test_delivery_native test_tts_failure_diagnostics -q",
+      "result": {
+        "ran": 122,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 18.291
+      }
+    }
+  ],
+  "issues_and_unresolved_blockers": [
+    "No Live/Supertonic3 inference, native quality12 call, production deployment, service edit, download, commit or push performed by this subagent. Parent must perform reviewed relocated native preflight/inference and installation/GitHub update.",
+    "Execution-scope issue: full historical discover unexpectedly ran an ungated existing NATIVE_WARM_PIPER test (and real espeak regression) despite disabling named inference opt-ins. Output confirms native ASR/Piper readiness/inference and owned child reaped. This was not a Live/Supertonic3 native call. Do NOT claim all verification was inference-free. Optimized rerun used an explicit safe module list excluding those tests.",
+    "Manifest/source_pins/worker not edited. Parent must bind relocated source paths and reviewed worker digest before enabling; stage worker remains bound to stage guard and external clone until parent packaging.",
+    "Installation/public authenticated browser end-to-end and GitHub update remain parent-owned and not verified here."
+  ],
+  "accepted_sample_sha256": "622c1ba2ebf2fcc0e63c5e2acf224f46971420423ba022210901b958116b94ad"
+}

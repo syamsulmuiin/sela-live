@@ -1,0 +1,12 @@
+{
+  "release_root": "/root/sela-live-releases/live-release-4kkkhooe",
+  "payload_root": "/root/sela-live-releases/live-release-4kkkhooe/payload",
+  "target_app_root": "/root/voice-lab",
+  "relocated_worker_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+  "relocated_manifest_sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+  "payload_file_count": 27,
+  "source_package_report": "/root/sela-live-releases/live-release-4kkkhooe/runtime-package.json",
+  "status": "installed_verified",
+  "original_build_root": "/root/.hermes/cache/scratch/live-release-4kkkhooe",
+  "snapshot": "/root/sela-live-install-snapshots/9d7509a6587142c69e3cc11518189589"
+}

@@ -1,0 +1,239 @@
+{
+  "accepted_sample_sha256": "622c1ba2ebf2fcc0e63c5e2acf224f46971420423ba022210901b958116b94ad",
+  "audit_findings": [
+    {
+      "area": "repeated cancellation / reaping",
+      "evidence": "Bridge.run shields a single child-owning task, sends its cancellation at most once, drains repeated consumer cancellation until the task finishes, and retrieves its terminal exception. Speech retains shared flock inside ASR quiescence and local slot until run returns/raises. Real harmless SIGTERM-ignoring child test forces terminate timeout/kill/reap across repeated cancellation; shared lock remains denied and ASR resumes only after returncode is set and PID is absent. Success, safe native failure, output overflow and timeout paths also pass.",
+      "result": "pass"
+    },
+    {
+      "area": "shared secure stable host flock",
+      "evidence": "Production and evaluation use AdmissionCoordinator same persistent nonblocking exclusive flock. Canonical evaluation default is /root/voice-lab/.runtime/live-tts.lock; explicit environment can align both. Production subclass deliberately disables evaluation production detection, avoiding false contention from quiesced ASR. Absolute/no-traversal/no-symlink path, O_NOFOLLOW/O_NONBLOCK/O_CLOEXEC, regular file/euid/mode0600/nlink1 and post-flock device/inode equality enforced; never unlink. Unsafe paths/types/modes/links and cross-process contention tested.",
+      "result": "pass"
+    },
+    {
+      "area": "worker hash and readiness",
+      "evidence": "Bridge uses bounded regular-file pinned reader at construction and every check/tts argv construction. Missing, drifted and symlink worker tests reject before spawn. Readiness invokes explicitly selected cloned worker with quality12 for all seven enabled B profiles, fails on first rejection, and does not silently test legacy worker. Worker separately checks verifier digest, manifest digest and native guard/live/SDK source inventory before imports.",
+      "result": "pass"
+    },
+    {
+      "area": "strict opt-in / no fallback",
+      "evidence": "VOICE_SELA_LIVE_TTS accepts only strings 0/1, defaults off; enabled requires supertonic3 plus conditioning_b and explicit installed interpreter/worker/digest/lock. Disabled path preserves original argv/identity. Native failure metadata survives once with no retry/fallback. Legacy local STT/ASR path remains unchanged.",
+      "result": "pass"
+    },
+    {
+      "area": "complete source / chunk ACK path",
+      "evidence": "Chunk source partition/pronunciation/immutable per-response conditioning snapshot, boundary trimming and final flags remain unchanged from production. Server queues original source span, registers ACK before emission, prefetches at most one successor, requires matching ACK, and cancels/drains prefetch before stream close. Session appends original span to heard_text only on matching token/chunk ACK. Integration and server regressions pass for complete text, partial failure, interruption and repeated cancellation.",
+      "result": "pass"
+    },
+    {
+      "area": "conditioning / seed / quality12",
+      "evidence": "Production bridge fixes argv steps to 12, no environment step/seed/speed override added. Exact guarded profile allowlist follows worker prefix precheck; immutable B and six app-relative routed profile pins unchanged. Guard seeds numpy with 20261026 and preserves speed1.05/default silence unless separately enabled existing experimental controls. Step context overrides only original total_steps=8 to12 and restores method. Native PCM, resource, offline and seccomp controls preserved byte-for-byte.",
+      "result": "pass"
+    },
+    {
+      "area": "durable paths / offline relocation",
+      "evidence": "Stage manifest intentionally references staging guard/live and external clone; it must not be deployed untransformed. Builder actual-source plan validates pinned vendor provenance/license/inventory, changes only three roots to /root/voice-lab/{voice_app,sela_live_tts,vendor/supertonic} and the worker MANIFEST_SHA literal, binds supplied reviewed source worker digest and writes nothing in plan mode. Model/runtime dependencies under /root/voice-lab/autonomous/expressive-tts are pre-existing durable dependencies, not disposable paths. Parent must use transformed worker SHA, not source SHA.",
+      "result": "pass"
+    }
+  ],
+  "blockers": [],
+  "checked_at_utc": "2026-10-30T22:41:05.937379+00:00",
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=tests/python /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest test_sela_live_integration test_sela_live_admission test_sela_live_tts test_sela_live_probe test_supertonic3_adapter test_automatic_conditioning.SpeechTests test_automatic_conditioning.RouterTests test_automatic_conditioning.StrictRouterTests test_chunked_tts test_audio_continuity test_delivery_native test_tts_failure_diagnostics -v",
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "name": "focused_sdk_runtime_tests",
+      "passed": 122,
+      "ran": 122,
+      "seconds": 17.515,
+      "skipped": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=tests/python /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -O -m unittest test_sela_live_integration test_sela_live_admission test_sela_live_tts test_sela_live_probe test_supertonic3_adapter test_automatic_conditioning.SpeechTests test_automatic_conditioning.RouterTests test_automatic_conditioning.StrictRouterTests test_chunked_tts test_audio_continuity test_delivery_native test_tts_failure_diagnostics -q",
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "name": "focused_sdk_runtime_tests_optimized",
+      "passed": 122,
+      "ran": 122,
+      "seconds": 17.174,
+      "skipped": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest discover -s tests/setup -p test_live_runtime_package.py -v",
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "name": "offline_runtime_package_tests",
+      "passed": 10,
+      "ran": 10,
+      "seconds": 0.504,
+      "skipped": 0
+    },
+    {
+      "exit_code": 0,
+      "name": "actual_source_readonly_packaging_plan",
+      "output_not_created": true,
+      "planned_manifest_sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+      "planned_worker_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+      "reviewed_source_worker_binding": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+      "target": "/root/voice-lab"
+    },
+    {
+      "details": "Read complete bridge, Speech, PersistentASR, StatefulASR, native guard and profile helpers, admission, worker, source_pins, controls, builder and integration/package tests. Read complete integration and package handoffs. Read server chunk-delivery/finally and Session ACK paths. diff -u versus production shows only explicit opt-in, readiness/identity and TTS-dispatch additions in Speech; tts_chunks is byte-identical to production.",
+      "name": "complete_requested_source_review_and_production_delta",
+      "passed": true
+    },
+    {
+      "name": "integration_handoff_hash_match_and_final_hash_recheck",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "No native/model inference performed. Tests use mocked native calls, harmless Python subprocess fixtures, offline source/dependency inspection and fixture ffmpeg conversion. Full discovery intentionally not run because historical ungated native tests exist.",
+    "Already-held evaluation lock makes new production TTS fail fast; no new preemption signalling is claimed or required by current integration contract.",
+    "Filesystem pin/lock checks assume trusted app-owned directories not being adversarially replaced concurrently; installer owns durable parent provisioning.",
+    "Readiness check verifies source/assets/profile/sandbox admission without model synthesis, matching existing guard semantics; native execution remains parent-owned."
+  ],
+  "mutations": {
+    "git_writes": false,
+    "only_repository_file_created": "docs/reviews/LIVE-INTEGRATION-RUNTIME-REVIEW.json",
+    "production_writes": false,
+    "service_writes": false,
+    "source_edits": false
+  },
+  "package_plan": {
+    "files": {
+      "sela_live_tts/__init__.py": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e",
+      "sela_live_tts/admission.py": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1",
+      "sela_live_tts/backend.py": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a",
+      "sela_live_tts/controls.py": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+      "sela_live_tts/source_pins.py": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+      "sela_live_tts/upstream-manifest.json": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+      "sela_live_tts/worker.py": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+      "vendor/SUPERTONIC-PROVENANCE.json": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5",
+      "vendor/supertonic-LICENSE.txt": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03",
+      "vendor/supertonic/__init__.py": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18",
+      "vendor/supertonic/cli.py": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba",
+      "vendor/supertonic/config.py": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+      "vendor/supertonic/core.py": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+      "vendor/supertonic/loader.py": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f",
+      "vendor/supertonic/pipeline.py": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd",
+      "vendor/supertonic/server/__init__.py": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b",
+      "vendor/supertonic/server/app.py": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0",
+      "vendor/supertonic/server/audio.py": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b",
+      "vendor/supertonic/server/routes.py": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720",
+      "vendor/supertonic/server/schemas.py": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db",
+      "vendor/supertonic/server/styles_store.py": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e",
+      "vendor/supertonic/utils.py": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3",
+      "voice_app/approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+      "voice_app/automatic_conditioning.py": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+      "voice_app/supertonic3_worker.py": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+    },
+    "manifest_sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+    "mode": "plan",
+    "output_root": "/root/.hermes/cache/scratch/live-runtime-independent-review-plan",
+    "schema_version": 1,
+    "source_app_root": "/root/sela-live",
+    "source_files": {
+      "sela_live_tts/__init__.py": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e",
+      "sela_live_tts/admission.py": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1",
+      "sela_live_tts/backend.py": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a",
+      "sela_live_tts/controls.py": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+      "sela_live_tts/source_pins.py": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+      "sela_live_tts/upstream-manifest.json": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+      "sela_live_tts/worker.py": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+      "vendor/SUPERTONIC-PROVENANCE.json": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5",
+      "vendor/supertonic-LICENSE.txt": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03",
+      "vendor/supertonic/__init__.py": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18",
+      "vendor/supertonic/cli.py": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba",
+      "vendor/supertonic/config.py": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+      "vendor/supertonic/core.py": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+      "vendor/supertonic/loader.py": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f",
+      "vendor/supertonic/pipeline.py": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd",
+      "vendor/supertonic/server/__init__.py": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b",
+      "vendor/supertonic/server/app.py": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0",
+      "vendor/supertonic/server/audio.py": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b",
+      "vendor/supertonic/server/routes.py": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720",
+      "vendor/supertonic/server/schemas.py": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db",
+      "vendor/supertonic/server/styles_store.py": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e",
+      "vendor/supertonic/utils.py": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3",
+      "voice_app/approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+      "voice_app/automatic_conditioning.py": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+      "voice_app/supertonic3_worker.py": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+    },
+    "target_app_root": "/root/voice-lab",
+    "transforms": {
+      "manifest": {
+        "kind": "three_roots_only",
+        "output_sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+        "source_sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74"
+      },
+      "worker": {
+        "kind": "MANIFEST_SHA_literal_only",
+        "output_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+        "source_sha256": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066"
+      }
+    },
+    "worker_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142"
+  },
+  "production_baseline_sha256": {
+    "voice_app/approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+    "voice_app/audio_continuity.py": "e4ed467895bebf58769832e9ec9426b7ea0e98b83050771f3b69759c3cad775b",
+    "voice_app/automatic_conditioning.py": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+    "voice_app/automatic_conditioning_rules.json": "2b097ea9b3c6dbe22d4df37891e9ccad040d068aba84367a9fdcd4fa73c06b7b",
+    "voice_app/server.py": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5",
+    "voice_app/session_core.py": "14063a463652cde2d784151ed9f1a369723729bc7f432ca14096c0c4de4da06a",
+    "voice_app/speech.py": "d7fcd0083c3adeb8dec4b50475f1e6ac8f9643b787e13a792f80f62f6fd91d92",
+    "voice_app/stateful_asr.py": "221d88e009d036c4adb1881c09b3a367dc8b50cc19396e9112fe8ef81a208d5e",
+    "voice_app/stream_asr.py": "d8d5e854dcb05114158bb049d1bf2abd8d4c77ae4bdc222bf8feb65e24385a8e",
+    "voice_app/supertonic3_worker.py": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+    "voice_app/tts_chunks.py": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26"
+  },
+  "required_separate_gates": [
+    "Independent installer/service/rollback review of its exact final hashes; not reviewed or classified as a runtime blocker here.",
+    "Parent exact relocated worker/payload review and native preflight/inference under existing sandbox/resource controls. Planned transformed worker digest in this report is not a substitute for final payload readback.",
+    "Parent deployment must provision owner-only persistent lock parent and keep production/evaluation on identical canonical lock path/inode; do not copy/unlink release-local locks.",
+    "Parent deployed health/authentication/browser and GitHub verification remain separate; this review performed none."
+  ],
+  "reviewer": "independent-runtime-reviewer / Hermes subagent",
+  "schema_version": 1,
+  "scope": "Exact staged TTS-first runtime integration and offline packaging readiness only; not installation, relocated native execution, service, browser, GitHub or whole-application migration approval.",
+  "source_root": "/root/sela-live",
+  "source_sha256": {
+    "docs/LIVE-INTEGRATION-HANDOFF.json": "07e0940ed99b31d954fbf10bb3f51fe830e72d157c89ca57051167b1d0db9cac",
+    "docs/LIVE-RUNTIME-PACKAGE-HANDOFF.json": "02605e6aef72de5ac9e7734b6bb7eca51a4c33424035c7f9e9d6ab981ae67481",
+    "docs/LIVE-RUNTIME-PACKAGE-PARENT-VERIFICATION.json": "5e0ec3b65e23fb1e28abc3176cedd5c0ab4ec3adfbf5622d31345f2c9136ec3f",
+    "sela_live_tts/__init__.py": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e",
+    "sela_live_tts/admission.py": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1",
+    "sela_live_tts/backend.py": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a",
+    "sela_live_tts/controls.py": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+    "sela_live_tts/source_pins.py": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+    "sela_live_tts/upstream-manifest.json": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+    "sela_live_tts/worker.py": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+    "tests/python/test_sela_live_admission.py": "63c8e33847f97db1b21d8ed8c95e5038d785702af32110b06ce7b66f7a54a715",
+    "tests/python/test_sela_live_integration.py": "8a5782239ec29fdac3025bd4d8c0704f4325099ac0161d87eda5a6980b7b8724",
+    "tests/python/test_sela_live_probe.py": "824890e1b393e46b044487b4435e01c0e8e6839639191b055bba2773dbe94f70",
+    "tests/python/test_sela_live_tts.py": "16590f006f791d08554021f337f31d9d5b4c8659c9328e3d1acb38db69e4afaa",
+    "tests/setup/test_live_runtime_package.py": "892b471a65f284e2bdd9090764c5f972eeba89f7b8e2039b97b4c02fd6713bcf",
+    "tools/build_live_runtime.py": "8fe11522339d6ccba3b06bf00880845f7d4607faa4e578a1453cddb2e93dc0f6",
+    "vendor/SUPERTONIC-PROVENANCE.json": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5",
+    "vendor/supertonic-LICENSE.txt": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03",
+    "voice_app/approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+    "voice_app/audio_continuity.py": "e4ed467895bebf58769832e9ec9426b7ea0e98b83050771f3b69759c3cad775b",
+    "voice_app/automatic_conditioning.py": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+    "voice_app/automatic_conditioning_rules.json": "2b097ea9b3c6dbe22d4df37891e9ccad040d068aba84367a9fdcd4fa73c06b7b",
+    "voice_app/sela_live_bridge.py": "880731409d5165bbc99a13644786265e8c1aa3c73c949657ab9673c31ff49a88",
+    "voice_app/server.py": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5",
+    "voice_app/session_core.py": "14063a463652cde2d784151ed9f1a369723729bc7f432ca14096c0c4de4da06a",
+    "voice_app/speech.py": "f91ce2cac04e2a8d6a3ee7b4b5dc19b44d2b31cdb9cd8d190872679bb8cee519",
+    "voice_app/stateful_asr.py": "221d88e009d036c4adb1881c09b3a367dc8b50cc19396e9112fe8ef81a208d5e",
+    "voice_app/stream_asr.py": "d8d5e854dcb05114158bb049d1bf2abd8d4c77ae4bdc222bf8feb65e24385a8e",
+    "voice_app/supertonic3_worker.py": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+    "voice_app/tts_chunks.py": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26"
+  },
+  "verdict": "approved"
+}

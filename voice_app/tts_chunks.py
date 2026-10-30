@@ -57,12 +57,25 @@ def source_parts(text, normalize, target=180):
                 units.append(unit[:end]); unit = unit[end:]
     parts, pending = [], ''
     for unit in units:
-        if pending.strip() and (not fits(pending + unit) or
-                (len(normalize(pending.strip())) >= target // 2 and re.search(r'[.!?]\s+$', pending))):
+        if pending.strip() and not fits(pending + unit):
             if unit.isspace():
                 pending += unit
                 continue
-            parts.append(pending); pending = ''
+            # Split only when the native bound requires it. Prefer an existing
+            # sentence boundary, then a clause boundary; do not invent phrasing.
+            cut = 0
+            for punctuation in (r'[.!?]', r'[,;:]'):
+                for boundary in re.finditer(punctuation + r"""["'”’»)\]}]*\s+""", pending):
+                    left, right = pending[:boundary.end()], pending[boundary.end():]
+                    if (len(normalize(left.strip())) >= target // 2
+                            and fits(left) and fits(right + unit)):
+                        cut = boundary.end()
+                if cut:
+                    break
+            if cut:
+                parts.append(pending[:cut]); pending = pending[cut:]
+            else:
+                parts.append(pending); pending = ''
         pending += unit
     if pending.strip():
         parts.append(pending)

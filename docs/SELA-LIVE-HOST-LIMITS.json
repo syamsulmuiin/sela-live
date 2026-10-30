@@ -1,0 +1,137 @@
+{
+  "scope": "static source inventory; not acoustic proof",
+  "files": [
+    {
+      "path": "/root/voice-lab/voice_app/speech.py",
+      "sha256": "d7fcd0083c3adeb8dec4b50475f1e6ac8f9643b787e13a792f80f62f6fd91d92",
+      "hits": [
+        {
+          "line": 17,
+          "code": "LOCAL_RETRY_WAIT = 3"
+        },
+        {
+          "line": 52,
+          "code": "MAX_WAV_BYTES = 4_000_000"
+        },
+        {
+          "line": 54,
+          "code": "TTS_TIMEOUT = 45"
+        },
+        {
+          "line": 471,
+          "code": "last=index == len(parts) - 1, max_output_bytes=MAX_WAV_BYTES)"
+        },
+        {
+          "line": 580,
+          "code": "async with asyncio.timeout(90), AsyncExitStack() as retained:"
+        }
+      ]
+    },
+    {
+      "path": "/root/voice-lab/voice_app/supertonic3_worker.py",
+      "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+      "hits": [
+        {
+          "line": 87,
+          "code": "if not isinstance(text,str) or not text.strip() or len(text)>800 or len(text.encode('utf8'))>3200:raise ValueError('text_limit')"
+        },
+        {
+          "line": 187,
+          "code": "np.random.seed(20261026) # SDK uses numpy.random.randn; no invented API seed argument."
+        },
+        {
+          "line": 191,
+          "code": "samples,duration=self.engine.synthesize(text,voice_style=self.style,lang='id',total_steps=8,verbose=False,**controls)"
+        },
+        {
+          "line": 195,
+          "code": "if samples.size>44100*30:raise ValueError('duration_limit')"
+        },
+        {
+          "line": 237,
+          "code": "resource.setrlimit(resource.RLIMIT_CPU,(60,65));resource.setrlimit(resource.RLIMIT_AS,(3*1024**3,3*1024**3));resource.setrlimit(resource.RLIMIT_FSIZE,(4_000_000,4_000_000));resource.setrlimit(resource.RLIMIT_NOFILE,(128,128));signal.alarm(75)"
+        },
+        {
+          "line": 247,
+          "code": "if len(payload)>4096:raise ValueError('input_limit')"
+        },
+        {
+          "line": 262,
+          "code": "if len(data)>2_646_044:raise ValueError('output_limit')"
+        }
+      ]
+    },
+    {
+      "path": "/root/voice-lab/voice_app/tts_chunks.py",
+      "sha256": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26",
+      "hits": [
+        {
+          "line": 20,
+          "code": "def source_parts(text, normalize, target=180):"
+        },
+        {
+          "line": 27,
+          "code": "if not isinstance(text, str) or not text.strip() or len(text) > 4000:"
+        },
+        {
+          "line": 39,
+          "code": "return (len(source) <= 800 and len(source.encode('utf-8')) <= 3200"
+        },
+        {
+          "line": 40,
+          "code": "and len(spoken) <= target and len(spoken.encode('utf-8')) <= target * 4"
+        }
+      ]
+    },
+    {
+      "path": "/root/voice-lab/voice_app/audio_continuity.py",
+      "sha256": "e4ed467895bebf58769832e9ec9426b7ea0e98b83050771f3b69759c3cad775b",
+      "hits": [
+        {
+          "line": 17,
+          "code": "MIN_QUIET_FRAMES = 11025  # 250 ms"
+        },
+        {
+          "line": 18,
+          "code": "MAX_REMOVE_FRAMES = 33075  # 750 ms per edge"
+        }
+      ]
+    },
+    {
+      "path": "/root/voice-lab/voice_app/server.py",
+      "sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5",
+      "hits": [
+        {
+          "line": 56,
+          "code": "MAX_WAV_BYTES = 4_000_000"
+        },
+        {
+          "line": 59,
+          "code": "CHUNK_ACK_TIMEOUT = 60"
+        },
+        {
+          "line": 352,
+          "code": "session = Session(provider='default', max_audio_bytes=MAX_WAV_BYTES)"
+        }
+      ]
+    },
+    {
+      "path": "/root/voice-lab/voice_app/delivery.py",
+      "sha256": "959f55d248983239f2027d269fa3dc4ef26b78167e6a27572b0215a9c06d7b69",
+      "hits": [
+        {
+          "line": 14,
+          "code": "MAX_TEXT_CHARS = 4000"
+        },
+        {
+          "line": 15,
+          "code": "MAX_ENVELOPE_CHARS = 65536  # Includes 12-character surrogate-pair escapes per source character."
+        },
+        {
+          "line": 91,
+          "code": "'characters and at most three sentences. Choose neutral when unsure.')"
+        }
+      ]
+    }
+  ]
+}

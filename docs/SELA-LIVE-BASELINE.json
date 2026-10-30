@@ -1,0 +1,32 @@
+{
+  "source_repository": "syamsulmuiin/sela-voice",
+  "source_commit": "24321c7fb2b278ab20e0b1b908ed525b44bd6328",
+  "runtime_delta_copied": [
+    {
+      "path": "voice_app/tts_chunks.py",
+      "sha256": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26"
+    },
+    {
+      "path": "tests/python/test_quoted_tts_boundaries.py",
+      "sha256": "9b69a725e65fa5dbbadaa0b2e1eed85775f618d28c36a4bf2d79dffe7013de20"
+    },
+    {
+      "path": "tests/additions-inventory.json",
+      "sha256": "3439a2dcf7f94a351839d33cc677c955c703bcd204843dd6b91f385e56c8ddc1"
+    },
+    {
+      "path": "tests/setup/test_layout.py",
+      "sha256": "a109b0fce3c808e323988ec3d96252e1899db9b0782282e6a23c2f570d43b8fc"
+    },
+    {
+      "path": "docs/LIVE-DELIVERY-FIX.md",
+      "sha256": "dc1c73dd57793a3f3e0a142a32d9ecae2665dd337207bc79c2c7f925eea893e4"
+    },
+    {
+      "path": "docs/REPOSITORY-SCOPE.md",
+      "sha256": "85c365b0fea055e3f5d2f5904f0b1206b61f2b5007fd58e752ef79dfc9960127"
+    }
+  ],
+  "scope": "TTS provider first; eventual full live pipeline; production not switched",
+  "remote_sela_live_created": false
+}

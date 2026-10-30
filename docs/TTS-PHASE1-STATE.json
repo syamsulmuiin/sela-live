@@ -1,0 +1,54 @@
+{
+  "phase": "TTS provider first; eventual full live pipeline",
+  "production_switched": false,
+  "production_service": "active",
+  "production_chunker_sha256": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26",
+  "workspace": "/root/sela-live",
+  "sdk_clone": "/root/supertonic-live-fix",
+  "sdk_commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+  "source_files": {
+    "sela_live_tts/admission.py": "f20fddcb9d3a3b7e405885d1b5388c18a840bd7ae43ab0badc7789276bc3060e",
+    "sela_live_tts/source_pins.py": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+    "sela_live_tts/controls.py": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+    "sela_live_tts/__init__.py": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e",
+    "sela_live_tts/upstream-manifest.json": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+    "sela_live_tts/worker.py": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+    "sela_live_tts/backend.py": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a"
+  },
+  "verified": {
+    "unit_tests": 47,
+    "setup_tests": 22,
+    "isolated_worker_check": true,
+    "native_network_denied": true,
+    "primary_github_content_matched": true,
+    "synthetic_control_flow_probe": true,
+    "unit_tests_optimized": 47
+  },
+  "native_parity_executed": true,
+  "same_paragraph_quality_trial_executed": true,
+  "acceptance": "listener_prefers_quality12_for_exact_same_paragraph",
+  "pending": "technical integration and deployment verification; no new activation performed",
+  "native_inference_budget": {
+    "planned_baseline_parity_calls": 1,
+    "planned_quality12_calls": 7,
+    "executed": 8
+  },
+  "review_delegation": "deleg_038fb3fd",
+  "new_remote_created": false,
+  "active_jobs": false,
+  "historical_blocking_review": {
+    "path": "docs/reviews/TTS-PHASE1-CODE-REVIEW-rejected.json",
+    "sha256": "62ebeb9cc63c60eb88f1045f262752fdc297b39cd5d70e3fe13f3d081e2e3efd",
+    "passed": false
+  },
+  "current_verification": {
+    "path": "docs/TTS-PHASE1-RESUMED-VERIFICATION.json",
+    "scope": "private native probe only, not deployment or naturalness acceptance",
+    "passed": true
+  },
+  "native_receipt": "/root/sela-live/autonomous/tts-phase1-same-text/attempt-efkfza21/receipt.json",
+  "native_readback": "/root/sela-live/autonomous/tts-phase1-same-text/attempt-efkfza21/PARENT-NATIVE-READBACK.json",
+  "listener_feedback": "/root/sela-live/autonomous/tts-phase1-same-text/attempt-efkfza21/listener-feedback.json",
+  "historical_phase1_only": true,
+  "current_installation_status": "docs/LIVE-INSTALL-STATE.json"
+}

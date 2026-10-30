@@ -1,0 +1,25 @@
+{
+  "status": "resumed_probe_verified_native_complete_listening_pending",
+  "partial_child": "probe child interrupted without final handoff; parent read full resulting sources, reran tests, completed inventory and private native probe",
+  "closed_review_findings": [
+    "S1",
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5"
+  ],
+  "tests_actual": {
+    "normal": 47,
+    "optimized": 47,
+    "setup": 22,
+    "all_passed": true
+  },
+  "verification": "/root/sela-live/docs/TTS-PHASE1-RESUMED-VERIFICATION.json",
+  "native_receipt": "/root/sela-live/autonomous/tts-phase1-same-text/attempt-efkfza21/receipt.json",
+  "parent_native_readback": "/root/sela-live/autonomous/tts-phase1-same-text/attempt-efkfza21/PARENT-NATIVE-READBACK.json",
+  "production_switched": false,
+  "no_native_guard_relaxed": true,
+  "listening_accepted": false,
+  "active_jobs": false
+}

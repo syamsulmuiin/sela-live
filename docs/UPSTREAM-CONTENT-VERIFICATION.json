@@ -1,0 +1,34 @@
+{
+  "repository": "supertone-oss-archive/supertonic-py",
+  "retrieval": "GitHub contents API at exact pinned commit; all file bytes compared",
+  "files": [
+    {
+      "path": "supertonic/core.py",
+      "git_blob_sha": "6a054877769eec1491271fdfab23488b56edc72d",
+      "sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+      "matches_clone": true,
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622"
+    },
+    {
+      "path": "supertonic/pipeline.py",
+      "git_blob_sha": "3427c1379091aae019b09be2eb15387322f2cff8",
+      "sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd",
+      "matches_clone": true,
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622"
+    },
+    {
+      "path": "supertonic/config.py",
+      "git_blob_sha": "93392680799acbaac026e95888dafda83a9bf673",
+      "sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+      "matches_clone": true,
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622"
+    },
+    {
+      "path": "supertonic/utils.py",
+      "git_blob_sha": "319ca8620516ebca7052c529936313f98ea6ebb3",
+      "sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3",
+      "matches_clone": true,
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622"
+    }
+  ]
+}

@@ -36,6 +36,8 @@ autonomous/expressive-tts/assets/
 autonomous/zipformer/model/
 
 # Rekaman pribadi, output inference, hasil uji lokal
+autonomous/tts-phase1-same-text/
+.build/
 *.wav
 *.mp3
 *.m4a

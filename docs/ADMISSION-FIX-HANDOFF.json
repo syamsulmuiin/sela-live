@@ -1,0 +1,160 @@
+{
+  "status": "ADMISSION_FOCUSED_GREEN",
+  "scope": "Backend/admission repair only; parallel probe fixes and parent integration are separate.",
+  "changed_files_sha256": {
+    "sela_live_tts/backend.py": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a",
+    "sela_live_tts/admission.py": "f20fddcb9d3a3b7e405885d1b5388c18a840bd7ae43ab0badc7789276bc3060e",
+    "tests/python/test_sela_live_tts.py": "16590f006f791d08554021f337f31d9d5b4c8659c9328e3d1acb38db69e4afaa",
+    "tests/python/test_sela_live_admission.py": "79d0ce80685607589a7c1a6d40297a0f3b83423c09031fc964a6d2eb3f0c214f"
+  },
+  "report_hash_policy": "This report is not included in its own SHA256 map.",
+  "admission": {
+    "policy": "Fail fast: at most one active evaluation, zero queued waiters. Contention raises LiveTTSBusy.",
+    "lock": "/root/sela-live/.runtime/live-tts-evaluation.lock",
+    "locking": "Persistent app-owned inode; O_CREAT|O_RDWR|O_NOFOLLOW|O_NONBLOCK|O_CLOEXEC, mode 0600, regular file, current uid, single hardlink; LOCK_EX|LOCK_NB; verify path inode after acquisition. Never unlink or replace lock.",
+    "lifecycle": "Acquire host lock before native task; retain both workload slot and host flock through cancellation-resistant owned-child cleanup/reaping, including repeated caller cancellation.",
+    "constructor_injection": "SelaLiveTTS(..., coordinator=AdmissionCoordinator(temp_lock, production_probe=synthetic_probe)). All focused backend fixtures inject isolated coordinators.",
+    "shared_api": [
+      "sela_live_tts.admission.LiveTTSBusy",
+      "sela_live_tts.admission.production_busy",
+      "sela_live_tts.admission.AdmissionCoordinator"
+    ],
+    "production_priority": "Read-only /proc cmdline/cwd detection before lock, after lock, during evaluation every 0.05 seconds by default, and before returning native output. Probe errors deny/cancel evaluation. Vanished PIDs are ignored; incomplete live snapshots deny.",
+    "production_workers": [
+      "/root/voice-lab/voice_app/supertonic3_worker.py",
+      "/root/voice-lab/voice_app/zipformer_worker.py",
+      "/root/voice-lab/voice_app/zipformer_stateful_worker.py",
+      "/root/voice-lab/voice_app/local_audio_worker.py"
+    ],
+    "production_atomicity": "Production does not participate in this new flock. Detection/cancel is best-effort, NOT atomic exclusion against unchanged production. Start/snapshot races and between-poll overlap remain possible.",
+    "owned_process_only": "Only the evaluation native task and its _bounded_process-owned child are cancelled/terminated/reaped. No production signal or coordinator modification."
+  },
+  "tdd_evidence": [
+    {
+      "slice": "S1/L1 original behavior",
+      "command": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -m unittest test_sela_live_admission -v",
+      "environment": {
+        "PYTHONPATH": "tests/python"
+      },
+      "red": {
+        "tests_run": 2,
+        "failures": 2,
+        "errors": 0,
+        "S1": "AssertionError: 2 != 1 : S1: two adapter instances entered native concurrently",
+        "L1": "AssertionError: False is not true : L1: excess arrivals queued behind active native"
+      },
+      "green_after_shared_nonblocking_admission": {
+        "tests_run": 2,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    {
+      "slice": "production snapshot API",
+      "red": "3 tests run; missing proc_root seam caused 6 expected TypeError errors in newly introduced snapshot tests; injected-probe-error test already passed.",
+      "green": "3 tests passed after read-only snapshot implementation"
+    },
+    {
+      "slice": "idle-to-production-busy/error cancellation",
+      "red": {
+        "tests_run": 1,
+        "subtest_failures": 2,
+        "message": "production change did not cancel owned evaluation"
+      },
+      "green": "Both busy and probe-error transitions pass after monitored native wait; cleanup retains host lock."
+    },
+    {
+      "slice": "native error preservation",
+      "red": {
+        "tests_run": 1,
+        "errors": 1,
+        "message": "OSError fixture native IO was incorrectly converted into LiveTTSBusy by lock context manager"
+      },
+      "green": "Acquisition errors are translated before yield; native errors forward unchanged, verified with six NativeTTSFailure reasons and OSError."
+    },
+    {
+      "slice": "incomplete live snapshot fail-closed",
+      "red": {
+        "tests_run": 1,
+        "failures": 1,
+        "message": "AssertionError: LiveTTSBusy not raised"
+      },
+      "green": "Missing cwd for a still-present worker PID now denies evaluation."
+    }
+  ],
+  "final_tests": [
+    {
+      "command": [
+        "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+        "-m",
+        "unittest",
+        "test_sela_live_tts",
+        "test_sela_live_admission",
+        "-v"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "tests/python"
+      },
+      "cwd": "/root/sela-live",
+      "returncode": 0,
+      "output": "test_cancellation_retains_slot_until_native_cleanup_finishes (test_sela_live_tts.LiveTTSBackendTests.test_cancellation_retains_slot_until_native_cleanup_finishes) ... ok\ntest_chunk_sources_and_native_quality_are_forwarded_without_rewriting (test_sela_live_tts.LiveTTSBackendTests.test_chunk_sources_and_native_quality_are_forwarded_without_rewriting) ... ok\ntest_only_bounded_quality_controls_are_enabled (test_sela_live_tts.LiveTTSSettingsTests.test_only_bounded_quality_controls_are_enabled) ... ok\ntest_method_restored_after_native_error (test_sela_live_tts.NativeStepOverrideTests.test_method_restored_after_native_error) ... ok\ntest_steps_only_forwarded_and_method_restored_after_success (test_sela_live_tts.NativeStepOverrideTests.test_steps_only_forwarded_and_method_restored_after_success) ... ok\ntest_changed_sdk_source_is_rejected_without_importing_it (test_sela_live_tts.SourcePinTests.test_changed_sdk_source_is_rejected_without_importing_it) ... ok\ntest_excess_arrivals_have_zero_queued_waiters (test_sela_live_admission.AdmissionBackendTests.test_excess_arrivals_have_zero_queued_waiters) ... ok\ntest_native_errors_forward_unchanged_and_release (test_sela_live_admission.AdmissionBackendTests.test_native_errors_forward_unchanged_and_release) ... ok\ntest_process_backed_cleanup_holds_host_lock_through_repeated_cancellation (test_sela_live_admission.AdmissionBackendTests.test_process_backed_cleanup_holds_host_lock_through_repeated_cancellation) ... ok\ntest_production_busy_before_admission_never_calls_native (test_sela_live_admission.AdmissionBackendTests.test_production_busy_before_admission_never_calls_native) ... ok\ntest_production_start_or_probe_error_cancels_owned_work_and_keeps_lock (test_sela_live_admission.AdmissionBackendTests.test_production_start_or_probe_error_cancels_owned_work_and_keeps_lock) ... ok\ntest_two_instances_cannot_enter_native_concurrently (test_sela_live_admission.AdmissionBackendTests.test_two_instances_cannot_enter_native_concurrently) ... ok\ntest_external_flock_owner_blocks_coordinator_until_process_reaped (test_sela_live_admission.HostFlockTests.test_external_flock_owner_blocks_coordinator_until_process_reaped) ... ok\ntest_subprocess_and_instances_share_persistent_inode (test_sela_live_admission.HostFlockTests.test_subprocess_and_instances_share_persistent_inode) ... ok\ntest_symlink_fifo_wrong_mode_and_hardlink_fail_closed (test_sela_live_admission.HostFlockTests.test_symlink_fifo_wrong_mode_and_hardlink_fail_closed) ... ok\ntest_all_production_native_workers_detected_from_read_only_snapshot (test_sela_live_admission.ProductionProbeTests.test_all_production_native_workers_detected_from_read_only_snapshot) ... ok\ntest_live_worker_snapshot_missing_cwd_fails_closed (test_sela_live_admission.ProductionProbeTests.test_live_worker_snapshot_missing_cwd_fails_closed) ... ok\ntest_probe_errors_fail_closed (test_sela_live_admission.ProductionProbeTests.test_probe_errors_fail_closed) ... ok\ntest_relative_production_worker_uses_process_cwd (test_sela_live_admission.ProductionProbeTests.test_relative_production_worker_uses_process_cwd) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 4.468s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+        "-O",
+        "-m",
+        "unittest",
+        "test_sela_live_tts",
+        "test_sela_live_admission",
+        "-v"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "tests/python"
+      },
+      "cwd": "/root/sela-live",
+      "returncode": 0,
+      "output": "test_cancellation_retains_slot_until_native_cleanup_finishes (test_sela_live_tts.LiveTTSBackendTests.test_cancellation_retains_slot_until_native_cleanup_finishes) ... ok\ntest_chunk_sources_and_native_quality_are_forwarded_without_rewriting (test_sela_live_tts.LiveTTSBackendTests.test_chunk_sources_and_native_quality_are_forwarded_without_rewriting) ... ok\ntest_only_bounded_quality_controls_are_enabled (test_sela_live_tts.LiveTTSSettingsTests.test_only_bounded_quality_controls_are_enabled) ... ok\ntest_method_restored_after_native_error (test_sela_live_tts.NativeStepOverrideTests.test_method_restored_after_native_error) ... ok\ntest_steps_only_forwarded_and_method_restored_after_success (test_sela_live_tts.NativeStepOverrideTests.test_steps_only_forwarded_and_method_restored_after_success) ... ok\ntest_changed_sdk_source_is_rejected_without_importing_it (test_sela_live_tts.SourcePinTests.test_changed_sdk_source_is_rejected_without_importing_it) ... ok\ntest_excess_arrivals_have_zero_queued_waiters (test_sela_live_admission.AdmissionBackendTests.test_excess_arrivals_have_zero_queued_waiters) ... ok\ntest_native_errors_forward_unchanged_and_release (test_sela_live_admission.AdmissionBackendTests.test_native_errors_forward_unchanged_and_release) ... ok\ntest_process_backed_cleanup_holds_host_lock_through_repeated_cancellation (test_sela_live_admission.AdmissionBackendTests.test_process_backed_cleanup_holds_host_lock_through_repeated_cancellation) ... ok\ntest_production_busy_before_admission_never_calls_native (test_sela_live_admission.AdmissionBackendTests.test_production_busy_before_admission_never_calls_native) ... ok\ntest_production_start_or_probe_error_cancels_owned_work_and_keeps_lock (test_sela_live_admission.AdmissionBackendTests.test_production_start_or_probe_error_cancels_owned_work_and_keeps_lock) ... ok\ntest_two_instances_cannot_enter_native_concurrently (test_sela_live_admission.AdmissionBackendTests.test_two_instances_cannot_enter_native_concurrently) ... ok\ntest_external_flock_owner_blocks_coordinator_until_process_reaped (test_sela_live_admission.HostFlockTests.test_external_flock_owner_blocks_coordinator_until_process_reaped) ... ok\ntest_subprocess_and_instances_share_persistent_inode (test_sela_live_admission.HostFlockTests.test_subprocess_and_instances_share_persistent_inode) ... ok\ntest_symlink_fifo_wrong_mode_and_hardlink_fail_closed (test_sela_live_admission.HostFlockTests.test_symlink_fifo_wrong_mode_and_hardlink_fail_closed) ... ok\ntest_all_production_native_workers_detected_from_read_only_snapshot (test_sela_live_admission.ProductionProbeTests.test_all_production_native_workers_detected_from_read_only_snapshot) ... ok\ntest_live_worker_snapshot_missing_cwd_fails_closed (test_sela_live_admission.ProductionProbeTests.test_live_worker_snapshot_missing_cwd_fails_closed) ... ok\ntest_probe_errors_fail_closed (test_sela_live_admission.ProductionProbeTests.test_probe_errors_fail_closed) ... ok\ntest_relative_production_worker_uses_process_cwd (test_sela_live_admission.ProductionProbeTests.test_relative_production_worker_uses_process_cwd) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 4.449s\n\nOK\n"
+    }
+  ],
+  "actual_counts": {
+    "original_tests_retained": 6,
+    "new_admission_tests": 13,
+    "unique_tests_per_final_run": 19,
+    "final_runs": 2,
+    "skipped_per_run": 0
+  },
+  "coverage": [
+    "Two separate adapters contend on one temporary host lock; only one native call enters.",
+    "Four excess same-adapter arrivals finish immediately with LiveTTSBusy; no lock waiters queued.",
+    "Subprocess flock exclusion both directions and reuse of persistent inode after release.",
+    "Symlink, FIFO, wrong mode and hardlinked lock rejected without replacing/truncating target.",
+    "Busy-before-start prevents native call; busy/error during evaluation triggers owned task cancellation.",
+    "Synthetic cleanup gate plus repeated cancellation retains workload slot and shared host lock.",
+    "Two harmless Python children ignore SIGTERM: caller cancellation and production-start paths retain locks while cleanup is pending, then inherited terminate/kill/wait reaps child; PID is absent before readmission.",
+    "Original quality/chunk/controls/source pin fixtures retained; native failure identity preserved with no fallback."
+  ],
+  "production_unchanged": {
+    "source_config_service_assets_writes": [],
+    "production_signals_or_service_operations": [],
+    "evidence": "All implementation/report writes were under /root/sela-live; fixtures use temporary locks and fake /proc snapshots. No real host coordination lock or real production worker check was invoked by focused tests. No native inference, model download, commit, push or activation.",
+    "cryptographic_full_inventory": "Not rerun by this child; parent owns final production hashes/inventory verification. No claim of complete before/after source/config/assets cryptographic audit here."
+  },
+  "preserved": [
+    "NativeSettings int-only 8/10/12",
+    "accepted profile/speaker path",
+    "text normalization/chunk source rules",
+    "speed/seed controls",
+    "native guard and worker paths",
+    "source_pins/controls/__init__.py untouched"
+  ],
+  "limitations_and_parent_actions": [
+    "Parent must update source hashes/manifest/layout/additions inventory after both child tasks finish; none were edited by this child.",
+    "Worker/source pin integration remains pending those parent hash updates; focused source-pin test is an isolated fixture, not verification of current candidate manifest.",
+    "Probe-tool lifecycle/artifact/converter fixes are owned by parallel child, not claimed complete here.",
+    "Best-effort production priority cannot prevent transient resource overlap with nonparticipating production.",
+    "No acoustic quality, real native inference, actual guard enforcement or production activation was tested."
+  ]
+}

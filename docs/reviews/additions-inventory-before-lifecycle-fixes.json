@@ -1,0 +1,14 @@
+[
+  {
+    "path": "tests/python/test_audio_continuity.py",
+    "sha256": "462c5d5c6db496a672bed5be280fd8ad8f01ff6cec7bf680d09c54092b848bf2"
+  },
+  {
+    "path": "tests/python/test_quoted_tts_boundaries.py",
+    "sha256": "9b69a725e65fa5dbbadaa0b2e1eed85775f618d28c36a4bf2d79dffe7013de20"
+  },
+  {
+    "path": "tests/python/test_sela_live_tts.py",
+    "sha256": "70a19f42a744bef813c768280d76e3a8e983be8f3e3c29031287d2a998add0b1"
+  }
+]

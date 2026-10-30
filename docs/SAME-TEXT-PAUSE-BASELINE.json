@@ -1,0 +1,82 @@
+{
+  "text_sha256": "8db8324821c73335b199e5f1f62ccbf18557dd3e754b6def6ffd7b3b79dba4bb",
+  "same_text_required": true,
+  "same_source_parts_required": true,
+  "cases": [
+    {
+      "source_phrase": "bangku depan warung",
+      "source_char_offset": 693,
+      "source_word_offset": 105,
+      "source_part": 5,
+      "diagnostic_words": [
+        {
+          "word": " di",
+          "start": 7.0,
+          "end": 7.3,
+          "probability": 0.6148
+        },
+        {
+          "word": " banku,",
+          "start": 7.3,
+          "end": 7.84,
+          "probability": 0.5124
+        },
+        {
+          "word": " depan",
+          "start": 8.2,
+          "end": 8.46,
+          "probability": 0.9751
+        },
+        {
+          "word": " warung.",
+          "start": 8.46,
+          "end": 8.84,
+          "probability": 0.9099
+        }
+      ],
+      "method": "approximate Whisper-base timings only; raw words unmodified"
+    },
+    {
+      "source_phrase": "pucuk jambu",
+      "source_char_offset": 858,
+      "source_word_offset": 126,
+      "source_part": 6,
+      "diagnostic_words": [
+        {
+          "word": " menggoyangkan",
+          "start": 8.42,
+          "end": 9.0,
+          "probability": 0.8188
+        },
+        {
+          "word": " pujuk",
+          "start": 9.0,
+          "end": 9.44,
+          "probability": 0.759
+        },
+        {
+          "word": " jambu",
+          "start": 9.44,
+          "end": 9.86,
+          "probability": 0.8804
+        },
+        {
+          "word": " di",
+          "start": 9.86,
+          "end": 10.32,
+          "probability": 0.6845
+        },
+        {
+          "word": " tepi",
+          "start": 10.32,
+          "end": 10.58,
+          "probability": 0.8516
+        }
+      ],
+      "method": "approximate Whisper-base timings only; raw words unmodified"
+    }
+  ],
+  "all_flagged_locations_must_be_reviewed": true,
+  "context_trial_previously_rejected": true,
+  "candidate_results": null
+}

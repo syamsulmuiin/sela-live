@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "verdict": "rejected",
+  "reviewer": "independent-installer-reviewer / Hermes subagent",
+  "scope": "Entire current installer and 31-test installer module; fixture-only execution, no production mutation or real systemd hooks, inference or git. Real baseline/payload/plan approval remains parent-owned.",
+  "installer_sha256": "9e22d139403b2b0449ac93a4785373cef8f64e050bd46c44e8cff8a47295a448",
+  "testsource_sha256": "7ceba96b214cb7b28b8a075815cbf3c0fa4381a020ba3ddffac597ca91072321",
+  "artifacts": {
+    "tools/install_live_tts.py": {"sha256": "9e22d139403b2b0449ac93a4785373cef8f64e050bd46c44e8cff8a47295a448", "mode": 420, "mode_octal": "0644"},
+    "tests/setup/test_live_tts_install.py": {"sha256": "7ceba96b214cb7b28b8a075815cbf3c0fa4381a020ba3ddffac597ca91072321", "mode": 420, "mode_octal": "0644"}
+  },
+  "tests": [
+    {"command": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest discover -s tests/setup -p test_live_tts_install.py -v", "cwd": "/root/sela-live", "ran": 31, "passed": 31, "failed": 0, "errors": 0, "skipped": 0, "seconds": 1.324, "exit_code": 0},
+    {"command": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -O -m unittest discover -s tests/setup -p test_live_tts_install.py -v", "cwd": "/root/sela-live", "ran": 31, "passed": 31, "failed": 0, "errors": 0, "skipped": 0, "seconds": 1.395, "exit_code": 0}
+  ],
+  "blockers": [
+    {
+      "id": "unsafe-recovery-order",
+      "severity": "high",
+      "location": "tools/install_live_tts.py:310-336",
+      "finding": "Rollback continues source restoration after its stop fails, and unconditionally restarts after restore failures. Baseline file/mode/inventory verification occurs only AFTER restart. Consequently mixed or unverified code can be started, or source rewritten without successful quiescence. A terminal rollback_failed receipt does not prevent this unsafe side effect.",
+      "executed_evidence": [
+        "Disposable existing fixture with initial restart failure plus persistent restoration failure for voice_app/speech.py: recovery restart was called with speech.py still b'new'; restart_source_bytes=['new','new']; final receipt rollback_failed with restore:OSError and recovery:ValueError.",
+        "Disposable existing fixture with initial restart failure plus rollback stop failure: baseline was restored and recovery restart still called despite failed stop; events=['observe','stop','stop','restart','observe']; receipt rollback_failed with stop:OSError."
+      ],
+      "required_change": "Fail closed on unsuccessful rollback stop; do not restore or restart in that branch. After successful quiescence, restore all baseline bytes/modes/absences, verify complete baseline/inventory before recovery restart, and do not restart if restoration or verification failed. Preserve terminal failure receipts. Add fixture assertions that no recovery restart occurs after failed stop/restore/pre-restart verification. No new framework or additional review layer is required."
+    }
+  ],
+  "checks": {
+    "approval_bindings": "Preflight compares exact installer/test/baseline/runtime-review/payload/unsigned-plan SHA256; canonical payload includes file and preserved modes and live selectors. Artifact modes cover installer/test/baseline/runtime-review/payload directory; CLI binds actual plan mode 0600 or 0644. Drift tests pass before archive/stop. Parent must author and verify actual deployment bindings; this report does not approve unseen real plan values.",
+    "fixed_cli_and_readonly": "CLI exposes only --plan and explicit --apply, with fixed /root/voice-lab, /etc/systemd/system and /root/sela-live-install-snapshots roots. Default preflight observes without deployment writes. Injectable roots/hooks are fixture API only.",
+    "transaction": "Source inspection and actual fixture tests verify observation, re-preflight, archive hash readback, archive-before-stop-before-write, atomic file fsync/replace, dropin-only selector change, restart and exact final bytes/modes/selector/auth guard observation. Unsafe recovery ordering is the blocker above.",
+    "terminal_receipts": "Installed/rolled_back/rollback_failed receipts are written owner-only. Receipt write failures return receipt_failed instead of success; on such filesystem failure an older on-disk archived receipt can remain. Receipt status is not a substitute for safe recovery ordering.",
+    "persistent_shared_flock": "Compiled live lock path is durable /root/voice-lab/.runtime/live-tts.lock; 0700 owner directory, 0600 regular owner/nlink1 lock, O_NOFOLLOW and nonblocking exclusive flock; existing inode never replaced/unlinked and survives rollback. Root-directory flock serializes installer writers. Fixture contention and inode tests pass.",
+    "preserved_native_guards": "Read-only comparison confirms production, staging and final payload all match SHA256 and mode0644 for approved_conditioning.py (8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca), automatic_conditioning.py (0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c), supertonic3_worker.py (eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625). Installer allowlist cannot overwrite them. No native resource limits changed.",
+    "startup_regression": "120-second monotonic readiness allowance and independent maximum480 polls retain finite startup bounds; each HTTP attempt itself has timeout5s and sleep0.25s, so a final in-flight attempt can slightly overrun deadline. Seven-profile readiness timeout15s limits are untouched. New startup regression passes normally and under -O. No blocker in this specific change.",
+    "credentials_and_publication": "No credential files, conversational data, publication/git actions, inference calls or remote outbound hooks in installer. Environment observation filters to selector allowlist; HTTP probes are credential-free loopback. Compiled payload rejects credential/config/data destinations. Snapshot archival of approved source/unit bytes is local owner-only, not publication."
+  },
+  "mutations": {"source_edits": false, "production_writes": false, "real_systemd_hooks": false, "inference": false, "git": false, "review_file_created": "docs/reviews/LIVE-INSTALLER-APPROVAL.json"}
+}

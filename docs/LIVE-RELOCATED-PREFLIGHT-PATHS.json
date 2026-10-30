@@ -1,0 +1,8 @@
+{
+  "base": "/root/.hermes/cache/scratch/live-install-preflight-5wpfmoz6",
+  "target": "/root/.hermes/cache/scratch/live-install-preflight-5wpfmoz6/app",
+  "payload": "/root/.hermes/cache/scratch/live-install-preflight-5wpfmoz6/payload",
+  "plan": "/root/.hermes/cache/scratch/live-install-preflight-5wpfmoz6/payload/LIVE-RUNTIME-PACKAGE.json",
+  "worker_sha256": "288a384fa9f093c1128969188d8ca63f7df9eb7491d537739088aed476063adf",
+  "source_worker_sha256": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066"
+}

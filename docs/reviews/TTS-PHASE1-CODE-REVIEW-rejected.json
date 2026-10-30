@@ -1,0 +1,174 @@
+{
+  "passed": false,
+  "summary": "Static/pure-Python review rejects approval for the native probe or production integration: pins and 28 unit/layout tests pass, but shared resource admission, monitor cancellation cleanup, and failure/artifact handling remain incomplete.",
+  "scope": "Independent review only; no code edits, model inference, asset corruption, production activation, service operation, downloads, installation, or GitHub push.",
+  "security_concerns": [
+    {
+      "id": "S1",
+      "severity": "high",
+      "paths": [
+        "sela_live_tts/backend.py:31,50-68",
+        "tools/tts_same_text_probe.py:16-35,37-75"
+      ],
+      "finding": "No shared evaluation lock/admission coordinator exists across SelaLiveTTS instances or evaluation processes. The per-instance asyncio lock allows simultaneous native workers; synthetic execution demonstrated two concurrent native calls from two instances. Probe mkdir excludes only another run using the identical artifact directory, not other clients/evaluations. Production yielding exists only in this probe and only recognizes one absolute TTS-worker argv suffix; direct adapter use has no production-activity check and ASR activity is not detected. The 200ms polling is best-effort and not atomic admission with production. Individual CPU/RSS/headroom guards remain, but do not establish shared resource exclusion.",
+      "required": "Use a host-shared evaluation lock with explicitly bounded admission and a defined production-priority protocol; test concurrent adapters/processes, TTS and relevant ASR activity, contention, cancellation and lock release."
+    }
+  ],
+  "logic_errors": [
+    {
+      "id": "L1",
+      "severity": "medium",
+      "path": "sela_live_tts/backend.py:50",
+      "finding": "Admission waits are time-bounded to 3 seconds but the number of waiters is unbounded. A synthetic single-instance run admitted five pending lock waiters simultaneously. This does not preserve the existing Speech one-running/at-most-one-cleanup-waiter policy.",
+      "required": "Bound the waiter count and fail excess arrivals immediately with a defined busy error; retain the slot until process cleanup completes."
+    },
+    {
+      "id": "L2",
+      "severity": "high",
+      "path": "tools/tts_same_text_probe.py:24-35",
+      "finding": "External cancellation of monitored() while awaiting asyncio.wait() does not cancel/await its independently created child. Synthetic AST-extracted execution left one child task running after monitor cancellation. The explicit production-busy branch does await cancellation, but caller cancellation or another monitor exception bypasses it. The backend cleanup guarantee applies only after its child receives cancellation. asyncio.run shutdown may eventually clean up some CLI exits; that is not monitor ownership/reaping.",
+      "required": "Use try/finally with cancellation-resistant child cancel-and-await for every exit and explicitly close the stream in main cleanup."
+    },
+    {
+      "id": "L3",
+      "severity": "medium",
+      "path": "tools/tts_same_text_probe.py:8-11,37-75",
+      "finding": "The probe has no failure/finally receipt path. Guard/parity/source/encoding/production-drift failures leave status=\"started\", possibly with partial WAV/MP3 files and no sanitized failed/cancelled marker or final cleanup/readback. OUT is created at import before input validation and exist_ok=False prevents retry after such a partial attempt. A failure even before main can leave an empty, permanently conflicting output directory.",
+      "required": "Move setup under main, preflight before native work, write atomic terminal failed/cancelled receipts with safe reason codes, list partial artifacts explicitly, and provide a unique attempt directory or an explicit safe retry policy. Do not mark completion before all required artifacts are verified."
+    },
+    {
+      "id": "L4",
+      "severity": "medium",
+      "path": "tools/tts_same_text_probe.py:66-67",
+      "finding": "Both ffmpeg subprocess.run calls are blocking inside the async function with no timeout, output/resource budget, production-activity monitoring or asynchronous cancellation/reaping path. A stuck converter/decoder can prevent final status and production yielding indefinitely. Actual ffmpeg resolution exists, so this is a bounded-lifecycle issue, not a missing-executable claim.",
+      "required": "Use the explicit resolved converter through a bounded asynchronous subprocess lifecycle with deadlines, limited diagnostics/output, cancellation/reaping and a production-priority policy."
+    },
+    {
+      "id": "L5",
+      "severity": "medium",
+      "path": "tools/tts_same_text_probe.py:11,45,53,56,61-62,69-70",
+      "finding": "Parity, source identity, final coverage, WAV format and no-drift acceptance gates use assert. Python -O disables these checks while the receipt can still claim byte-exact parity and completion. The native-call budget is declared as metadata, not enforced by an explicit upfront parts-validation/call counter.",
+      "required": "Use explicit conditional validation and exceptions for acceptance/budget gates, with negative fixtures and optimized-interpreter coverage."
+    }
+  ],
+  "suggestions": [
+    "Extend the six package tests with real worker-entry plumbing under the selected -I interpreter but stub Runtime/inference; test sys.argv rewriting, ControlledRuntime dispatch, SDK origin and profile resolution. Current native_call stubs bypass worker.py entirely.",
+    "Add guard-failure/no-fallback, runtime-version mismatch, missing interpreter/assets/manifest, invalid profile, source-manifest/helper drift, added SDK file and symlink negative cases. Do not mutate production files; use fixtures or injection.",
+    "Add timeout, output overflow, malformed/empty/stereo/wrong-rate WAV and cancellation while spawning/writing/reading/reaping subprocess tests. Current repeated-cancel test uses a coroutine, not a child process.",
+    "Add probe tests for idle-to-production-busy transitions, busy-before-start, outer cancellation, cleanup failures, converter failure, missing baseline receipt, pre-existing output directory, partial artifact terminal status and success receipt integrity.",
+    "Test controls restoration for an already instance-owned synthesize method, baseline step mismatch, 8-step pass-through and exact 10-step forwarding; current tests cover only successful 12-step kwargs and failing 10-step restoration.",
+    "Record probe/tool, interpreter, actual SDK origin/pin manifest and final WAV hash in the final artifact receipt; source_hashes currently covers only sela_live_tts files. Distinguish source-only production hashing from production configuration/assets/process state.",
+    "Document fixed workspace roots and external shared interpreter/assets: this is a candidate adapter, not a relocation-ready installed package. No integration into Speech or production selector is present."
+  ],
+  "verified_findings": {
+    "entire_requested_sources_read": [
+      "sela_live_tts/** (six files)",
+      "tools/tts_same_text_probe.py",
+      "tests/python/test_sela_live_tts.py",
+      "upstream manifest and layout/additions delta"
+    ],
+    "settings": "NativeSettings strictly accepts int 8/10/12, rejecting bool/float/string. Only total_steps is overridden; guard retains M1 Indonesian, seed 20261026, speed 1.05, silence default 0.3.",
+    "source_pins": "Actual pinned sources/inventory verified successfully without SDK/model inference. Manifest/helper constants match exact bytes; pinned SDK source set matches the clone. SDK HEAD equals declared df0f9686dac7fbbde391b759e2ee5286a3737622 and SDK worktree status was clean.",
+    "isolated_worker": "Backend argv uses external speech venv Python with -I and absolute worker; offline environment allowlists PATH/HOME/TMPDIR/LANG/SYSTEMROOT and thread/offline flags, excluding API keys/proxies. Worker loads only verified stdlib helpers/guard before guard.main.",
+    "sdk_selection": {
+      "method": "find_spec under intended isolated interpreter after same sys.path insertion; SDK not imported and no engine constructed",
+      "origin": "/root/supertonic-live-fix/supertonic/__init__.py",
+      "sdk_imported": false
+    },
+    "versions_actual": {
+      "supertonic": "1.3.1",
+      "numpy": "2.2.6",
+      "onnxruntime": "1.23.2"
+    },
+    "profile_actual": "/root/sela-live/voice_assets/conditioning-b/profile.json; resolver and its pinned manifest/model manifest/base/profile validation executed successfully without inference.",
+    "resources_static": "Inherited guard retains fail-closed seccomp network syscall denial, auto_download=False, CPU 60/65s, AS 3GiB, file 4000000 bytes, 128 descriptors, alarm 75s, initial available memory 1100MiB, ongoing available memory 500MiB/RSS 720MiB, 30s audio and 2646044-byte native-output cap. Parent retains 90s timeout and bounded-process terminate/kill/reap. Actual sandbox/resource enforcement was not executed in this review.",
+    "no_fallback": "No alternate provider or automatic retry exists in adapter. Six synthetic NativeTTSFailure reasons (memory_headroom,resource_limit,network_sandbox,runtime_version,duration_limit,asset_error) propagated unchanged, exactly one native call each, and slot unlocked after failure. This is synthetic forwarding proof, not real native-guard execution.",
+    "same_source_actual": {
+      "baseline_receipt": "/root/voice-lab/autonomous/one-minute-c2a5a7l8/receipt.json",
+      "sha256": "903c30579fb1b55051a7e2a3d4b0b43abe0bcf332b0ff53e0c939418901fed52",
+      "characters": 1008,
+      "baseline_parts": 7,
+      "candidate_parts": 7,
+      "source_parts_exact": true,
+      "reassembled_exact": true,
+      "profile": "conditioning_b"
+    },
+    "cancel_reap": "Backend repeated-cancellation synthetic test passes and slot remains owned through cleanup; _bounded_process statically terminates then kills/reaps. Probe outer-cancel ownership fails as L2.",
+    "activation": "No production selector/service change or automatic activation in these candidate files; Speech supported backend enum excludes this adapter. No native probe was run, and acoustic quality/native parity/full native fix are unverified.",
+    "probe_preflight_readonly": {
+      "ffmpeg_from_PATH": "/root/.hermes/tools/ffmpeg-9.0.1-linux-x64/bin/ffmpeg",
+      "probe_output_directory_exists": false
+    }
+  },
+  "testsactual": {
+    "interpreter": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "tests/python"
+    },
+    "cwd": "/root/sela-live",
+    "suites": [
+      {
+        "command": "python -B -m unittest tests.python.test_sela_live_tts -v",
+        "run": 6,
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 0.085,
+        "exit_code": 0
+      },
+      {
+        "command": "python -B -m unittest discover -s tests/setup -p 'test_*.py' -v",
+        "run": 22,
+        "passed": 22,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 4.168,
+        "exit_code": 0
+      }
+    ],
+    "total_run": 28,
+    "total_passed": 28,
+    "native_inference_calls": 0,
+    "synthetic_diagnostics": "Additional uncommitted in-memory diagnostics only: 2 simultaneous instances, 5 same-instance waiters, leaked monitor child, 6 failure forwarding cases. Not counted as committed unit tests."
+  },
+  "exactreviewedSHA": {
+    "algorithm": "sha256",
+    "repository_HEAD": "24321c7fb2b278ab20e0b1b908ed525b44bd6328",
+    "sdk_HEAD": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+    "note": "HEAD identifies baseline only; the candidate is dirty/untracked. Verdict binds to exact file bytes below, not HEAD alone. SDK per-file pins are bound through upstream-manifest.json; hashes are pin verification, not a claim to have read all SDK implementations.",
+    "files": {
+      "sela_live_tts/__init__.py": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e",
+      "sela_live_tts/backend.py": "891f4fa24e0ff38e90d2441f803f43b024c7304f3d20e5d60182bdebe699f85b",
+      "sela_live_tts/worker.py": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+      "sela_live_tts/controls.py": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+      "sela_live_tts/source_pins.py": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+      "sela_live_tts/upstream-manifest.json": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+      "tools/tts_same_text_probe.py": "e3ec2f319cfba9007c2cc2c12b257bd751ab253cffb9645eed21187912ba78bd",
+      "tests/python/test_sela_live_tts.py": "70a19f42a744bef813c768280d76e3a8e983be8f3e3c29031287d2a998add0b1",
+      "tests/additions-inventory.json": "9bd2120e173a622ae50d51420ad82f57207a1f976b8c9335a0d13eb27f4d17b1",
+      "tests/setup/test_layout.py": "920ee4bc251d35a2fb0483ff8f2b1456248ed03ad2f9557ba8e2dd3bf6e6b5e5",
+      "tests/setup/test_setup.py": "fd55c5341143e7961cd3f1ada94f76b5dd5cf5d23ebecea8534f97416f3dc993",
+      "docs/REPOSITORY-SCOPE.md": "85c365b0fea055e3f5d2f5904f0b1206b61f2b5007fd58e752ef79dfc9960127",
+      "docs/SELA-LIVE-HOST-LIMITS.json": "7b21c0e6cb4b28e045342e9a429101bd462ba9bdab857634e0813dd615c09473",
+      "voice_app/speech.py": "d7fcd0083c3adeb8dec4b50475f1e6ac8f9643b787e13a792f80f62f6fd91d92",
+      "voice_app/tts_chunks.py": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26",
+      "voice_app/approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+      "voice_app/automatic_conditioning.py": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+      "voice_app/supertonic3_worker.py": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+    },
+    "file_manifest_sha256": "7a076f2057ab6d93921522b9fcc0b656dad2ffc220a9018cf029de7f8d36e6ff",
+    "file_manifest_hash_serialization": "UTF-8 JSON of files mapping with sort_keys=True,separators=(comma,colon)"
+  },
+  "files_created": [
+    "docs/TTS-PHASE1-CODE-REVIEW.json"
+  ],
+  "other_files_modified": [],
+  "remaining_gates": [
+    "Fix and re-review blockers against new exact hashes before authorizing probe execution.",
+    "Any later native run remains separate: actual sandbox/limits, parity, final artifacts, listening approval, production activity and cleanup evidence.",
+    "No production deployment approved by this review."
+  ]
+}

@@ -1,4 +1,22 @@
-# Sela — snapshot aplikasi percakapan suara
+# Sela Live — tahap pertama TTS untuk Sela
+
+**Status: TTS Live quality12 sudah dipasang pada Sela; pengembangan aplikasi Live penuh tetap bertahap.**
+
+Komponen TTS memakai source SDK Supertonic yang diclone dan dipin; ini bukan model baru atau hasil training ulang. STT Zipformer stateful, LLM remote API/Codex, UI, autentikasi, anchor conditioning B dan pemilihan conditioning otomatis yang sudah ada dipertahankan. Kontrol native diubah dari8 menjadi12 langkah setelah pengguna memilih hasil paragraf identik yang lebih bagus; preferensi satu sampel bukan jaminan setiap intonasi/emosi sudah benar.
+
+- Source native: `sela_live_tts/` dan `vendor/supertonic/`, commit upstream `df0f9686dac7fbbde391b759e2ee5286a3737622`, dengan lisensi/provenance dan hash sumber. Worker terpasang berada di root aplikasi produksi, tidak bergantung pada clone/scratch.
+- Adapter aktif ditandai `tts_identity.adapter=sela_live`, `total_steps=12`, backend dasar tetap `supertonic3`. Tidak ada penggantian LLM dengan model lokal atau fallback TTS diam-diam.
+- Pemasangan memakai allowlist, snapshot/rollback, sumber terikat review/hash/mode dan lock host persisten. Guard CPU/RSS/network/deadline tidak dihapus. Baca [kontrak dan pemasangan TTS Live](docs/SELA-LIVE-TTS-INSTALL.md).
+- Verifikasi:296 tes aplikasi tanpa kegagalan (4 opt-in skip),66 setup/layout,121 tes Node; suite runtime122 juga lulus normal/optimized dan dari ekspor source bersih dengan dependensi yang sudah terpasang. Full suite mencakup fixture native ASR/Piper yang sudah ada; tidak diklaim inference-free atau fresh-host.
+- Empat sintesis12-langkah pada jalur Codex/API dan browser terisolasi lulus, dua turn per jalur dengan playback selesai, ACK dan riwayat sesuai. Sintesis baru dari source terpasang serta health/auth/Host/loopback terpasang diperiksa lagi. Akun produksi tidak diubah; login produksi dan mikrofon/speaker fisik tetap pengujian pengguna.
+- Status transaksi dan publikasi: `docs/LIVE-INSTALL-STATE.json`; hasil pengujian: `docs/LIVE-RELEASE-VERIFICATION.json`. `syamsulmuiin/sela-voice` tetap snapshot baseline, sedangkan `syamsulmuiin/sela-live` memuat source proyek Live penuh bertahap ini.
+
+Jangan menjalankan fresh-install baseline di bawah pada host produksi yang sudah berisi Sela. Jalur quality12 saat ini adalah upgrade terverifikasi pada host dengan dependensi speech terpasang; instalasi Sela Live lengkap pada host kosong belum diklaim teruji. Source/receipt eksperimen lama tetap provenance historis, bukan status pemasangan terbaru.
+
+## Dokumentasi baseline snapshot (historis)
+
+Bagian berikut dipertahankan dari snapshot `sela-voice` sebagai konteks rekonstruksi. Nama, status dan langkah instalasinya bukan pernyataan bahwa Sela Live sudah diluncurkan.
+
 
 Repository ini menyimpan **seluruh sistem yang sudah dibangun**: mikrofon → STT Indonesia → LLM remote API/Codex → Supertonic TTS → playback dan ACK, beserta antarmuka, autentikasi, lifecycle dan pengujiannya.
 
@@ -99,7 +117,7 @@ PYTHONDONTWRITEBYTECODE=1 python3.12 -B -m unittest discover -s tests/setup -t .
 node --test tests/web/*.test.cjs
 ```
 
-Full aplikasi: `PYTHONPATH=tests/python python -B -m unittest discover -s tests/python -t . -v` (interpreter dengan SDK Hermes; path fixture diperlukan oleh tes continuity byte-exact). Memerlukan environment pengembangan, SDK Hermes dan dependency native/legacy; sebagian tes menjalankan inference native. Tes korupsi aset yang diaudit memakai salinan sementara, bukan aset produksi. Jalankan suite pada checkout pengembangan terisolasi, bukan server aktif. Hasil eksekusi historis sebelum relokasi: 225 run/221 pass/4 skip, Node121 pass; penemuan 225 test setelah relokasi bukan bukti semuanya dijalankan ulang. Tes setup+layout kini 22 pass; perintah/hasil baru dicatat di `docs/VERIFICATION.md`.
+Full aplikasi: `PYTHONPATH=tests/python python -B -m unittest discover -s tests/python -t . -v` (interpreter dengan SDK Hermes; path fixture diperlukan oleh tes continuity byte-exact). Memerlukan environment pengembangan, SDK Hermes dan dependency native/legacy; sebagian tes menjalankan inference native. Tes korupsi aset yang diaudit memakai salinan sementara, bukan aset produksi. Jalankan suite pada checkout pengembangan terisolasi, bukan server aktif. Snapshot historis sebelumnya mencatat225 run/221 pass/4 skip dan22 setup/layout. Release TTS Live kini telah menjalankan296 tes aplikasi (4 opt-in skip, tanpa kegagalan),66 setup/layout dan121 Node; lihat `docs/LIVE-RELEASE-VERIFICATION.json`. Pengujian memakai dependensi host yang sudah tersedia, bukan klaim fresh-host.
 
 ## Batas reproduksi dan keamanan
 

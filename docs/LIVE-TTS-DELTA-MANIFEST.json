@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "release": "sela-live-tts-quality12",
+  "baseline_git_commit": "24321c7fb2b278ab20e0b1b908ed525b44bd6328",
+  "installed": true,
+  "runtime_files": [
+    {
+      "path": "sela_live_tts/__init__.py",
+      "repository_source_sha256": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e",
+      "installed_sha256": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "sela_live_tts/admission.py",
+      "repository_source_sha256": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1",
+      "installed_sha256": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "sela_live_tts/backend.py",
+      "repository_source_sha256": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a",
+      "installed_sha256": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "sela_live_tts/controls.py",
+      "repository_source_sha256": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+      "installed_sha256": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "sela_live_tts/source_pins.py",
+      "repository_source_sha256": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+      "installed_sha256": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "sela_live_tts/upstream-manifest.json",
+      "repository_source_sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+      "installed_sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+      "mode": 420,
+      "relocation_transform": "manifest_three_roots"
+    },
+    {
+      "path": "sela_live_tts/worker.py",
+      "repository_source_sha256": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+      "installed_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+      "mode": 420,
+      "relocation_transform": "worker_MANIFEST_SHA_literal"
+    },
+    {
+      "path": "vendor/SUPERTONIC-PROVENANCE.json",
+      "repository_source_sha256": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5",
+      "installed_sha256": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic-LICENSE.txt",
+      "repository_source_sha256": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03",
+      "installed_sha256": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/__init__.py",
+      "repository_source_sha256": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18",
+      "installed_sha256": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/cli.py",
+      "repository_source_sha256": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba",
+      "installed_sha256": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/config.py",
+      "repository_source_sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+      "installed_sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/core.py",
+      "repository_source_sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+      "installed_sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/loader.py",
+      "repository_source_sha256": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f",
+      "installed_sha256": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/pipeline.py",
+      "repository_source_sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd",
+      "installed_sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/server/__init__.py",
+      "repository_source_sha256": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b",
+      "installed_sha256": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/server/app.py",
+      "repository_source_sha256": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0",
+      "installed_sha256": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/server/audio.py",
+      "repository_source_sha256": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b",
+      "installed_sha256": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/server/routes.py",
+      "repository_source_sha256": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720",
+      "installed_sha256": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/server/schemas.py",
+      "repository_source_sha256": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db",
+      "installed_sha256": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/server/styles_store.py",
+      "repository_source_sha256": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e",
+      "installed_sha256": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "vendor/supertonic/utils.py",
+      "repository_source_sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3",
+      "installed_sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "voice_app/sela_live_bridge.py",
+      "repository_source_sha256": "880731409d5165bbc99a13644786265e8c1aa3c73c949657ab9673c31ff49a88",
+      "installed_sha256": "880731409d5165bbc99a13644786265e8c1aa3c73c949657ab9673c31ff49a88",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "voice_app/speech.py",
+      "repository_source_sha256": "f91ce2cac04e2a8d6a3ee7b4b5dc19b44d2b31cdb9cd8d190872679bb8cee519",
+      "installed_sha256": "f91ce2cac04e2a8d6a3ee7b4b5dc19b44d2b31cdb9cd8d190872679bb8cee519",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "voice_app/approved_conditioning.py",
+      "repository_source_sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+      "installed_sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "voice_app/automatic_conditioning.py",
+      "repository_source_sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+      "installed_sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+      "mode": 420,
+      "relocation_transform": null
+    },
+    {
+      "path": "voice_app/supertonic3_worker.py",
+      "repository_source_sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+      "installed_sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+      "mode": 420,
+      "relocation_transform": null
+    }
+  ],
+  "preserved_historical_manifests": {
+    "docs/PRODUCTION-SOURCE-MANIFEST.json": "0542113cf1c32e143f2481c0dc10a108535c2b8c098216e3569235de37c8f05e",
+    "docs/CONTINUITY-DELTA-MANIFEST.json": "4060e3a01cde88f83eaba23416ad0de5a525a8bcfc7ff9dd94a934b412eaecc4",
+    "tests/move-inventory.json": "47a3053cf9386cea862f33612d84914b767589ea384042e6a4dd177dacf0a0f7"
+  },
+  "accepted_sample_sha256": "622c1ba2ebf2fcc0e63c5e2acf224f46971420423ba022210901b958116b94ad",
+  "installer_sha256": "359aa970f9303c3022b7b8db5b9eceb8d4f91ece6b09857bacb371482caff5a6",
+  "installer_testsource_sha256": "4f7927efc04124229cee5ea29c177b446f31dcbaf96bf39b0a9f7d8cd5c33779",
+  "frozen_baseline_sha256": "5fd63f2c5e00cfd918c758184c60fc0708b14d7bb61297f79073c477ce4ac800",
+  "runtime_review_sha256": "245905c92fe9dc5ca9c93157a55e78f5eaab3877a8ded20427694191e4b5a250",
+  "installer_repair_review_sha256": "21a248a5fdd08f1e487573a4deed6eeba628f863258fb5ae8a3a31ea862e65c7",
+  "approved_plan_sha256": "1676070ab3ddad36aa6318c631cb4590d653772120a79fd1550d05b538558b2f",
+  "snapshot": "/root/sela-live-install-snapshots/9d7509a6587142c69e3cc11518189589",
+  "note": "Native source only differs by reviewed relocation. Mutable status/publication docs deliberately not source-hashed in this manifest; physical listening/production account login are not automated proof."
+}

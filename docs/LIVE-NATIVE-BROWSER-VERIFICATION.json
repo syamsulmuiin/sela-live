@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "native_calls": 4,
+  "native_profiles": [
+    "conditioning_b_active_medium",
+    "conditioning_b",
+    "conditioning_b_active_medium",
+    "conditioning_b"
+  ],
+  "all_steps12": true,
+  "protocol_turns": 2,
+  "protocol_history_counts": [
+    2,
+    4
+  ],
+  "browser_turns": 2,
+  "browser_errors": [],
+  "browser_layout": {
+    "viewport": 390,
+    "documentWidth": 390
+  },
+  "server_and_children_stopped": true,
+  "disposable_auth_deleted": true,
+  "production_account_unchanged": true,
+  "physical_microphone_verified": false,
+  "physical_speaker_verified": false,
+  "private_receipts": [
+    "/root/sela-live-releases/live-release-4kkkhooe/verification/network-receipt.json",
+    "/root/sela-live-releases/live-release-4kkkhooe/verification/browser-readback.json"
+  ],
+  "source_sha256": {
+    "voice_app/speech.py": "f91ce2cac04e2a8d6a3ee7b4b5dc19b44d2b31cdb9cd8d190872679bb8cee519",
+    "voice_app/sela_live_bridge.py": "880731409d5165bbc99a13644786265e8c1aa3c73c949657ab9673c31ff49a88",
+    "voice_app/server.py": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5",
+    "web/app.js": "0803b5774c0e9f2e23332150276cc5d3fd5970b844423d94c2b544e0371222ef",
+    "sela_live_tts/admission.py": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1"
+  },
+  "receipt_sha256": {
+    "network-receipt.json": "807da37d4b219333637f5ad4bfe7f810bfd6133cf0b743debaedaff833b55291",
+    "browser-readback.json": "87449f08edab36fcc2a677db74cadb2cd76bb95b1c8f27e2bd76aff57d7f7dbc"
+  }
+}

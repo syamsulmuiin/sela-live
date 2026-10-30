@@ -1,0 +1,2009 @@
+{
+  "schema_version": 1,
+  "title": "Upstream TTS limits audit — Sela Live TTS-first",
+  "provenance": {
+    "checked_at_utc": "2026-10-30T15:26:15.093457+00:00",
+    "sdk_commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+    "native_commit": "1e9799e964ea4c0dad7cde993b65c3c813a7b373",
+    "sdk_remote_main": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+    "native_remote_main": "1e9799e964ea4c0dad7cde993b65c3c813a7b373"
+  },
+  "scope": {
+    "mode": "read-only source audit plus extracted pure text/guard/formula checks; parent synthetic control-flow receipt integrated",
+    "native_inference_run": false,
+    "acoustic_fix_verified": false,
+    "written_paths": [
+      "/root/sela-live/docs/UPSTREAM-TTS-LIMITS-AUDIT.md",
+      "/root/sela-live/docs/UPSTREAM-TTS-LIMITS-AUDIT.json"
+    ],
+    "source_files_read_completely": [
+      "supertonic/config.py",
+      "supertonic/pipeline.py",
+      "supertonic/core.py",
+      "supertonic/utils.py",
+      "supertonic/loader.py",
+      "py/helper.py",
+      "py/example_onnx.py",
+      "py/example_pypi.py",
+      "py/README.md"
+    ],
+    "no_assets_downloaded_or_modified": true,
+    "no_production_source_service_or_git_push_changes": true
+  },
+  "source_hashmap": [
+    {
+      "repo": "supertone-oss-archive/supertonic-py",
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+      "path": "supertonic/config.py",
+      "git_blob_sha1": "93392680799acbaac026e95888dafda83a9bf673",
+      "sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+      "bytes": 8064,
+      "lines": 247,
+      "url": "https://github.com/supertone-oss-archive/supertonic-py/blob/df0f9686dac7fbbde391b759e2ee5286a3737622/supertonic/config.py",
+      "local_matches_remote": true,
+      "key": "supertonic/config.py",
+      "source_id": 1
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic-py",
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+      "path": "supertonic/pipeline.py",
+      "git_blob_sha1": "3427c1379091aae019b09be2eb15387322f2cff8",
+      "sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd",
+      "bytes": 16733,
+      "lines": 415,
+      "url": "https://github.com/supertone-oss-archive/supertonic-py/blob/df0f9686dac7fbbde391b759e2ee5286a3737622/supertonic/pipeline.py",
+      "local_matches_remote": true,
+      "key": "supertonic/pipeline.py",
+      "source_id": 2
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic-py",
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+      "path": "supertonic/core.py",
+      "git_blob_sha1": "6a054877769eec1491271fdfab23488b56edc72d",
+      "sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+      "bytes": 20003,
+      "lines": 529,
+      "url": "https://github.com/supertone-oss-archive/supertonic-py/blob/df0f9686dac7fbbde391b759e2ee5286a3737622/supertonic/core.py",
+      "local_matches_remote": true,
+      "key": "supertonic/core.py",
+      "source_id": 3
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic-py",
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+      "path": "supertonic/utils.py",
+      "git_blob_sha1": "319ca8620516ebca7052c529936313f98ea6ebb3",
+      "sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3",
+      "bytes": 5727,
+      "lines": 217,
+      "url": "https://github.com/supertone-oss-archive/supertonic-py/blob/df0f9686dac7fbbde391b759e2ee5286a3737622/supertonic/utils.py",
+      "local_matches_remote": true,
+      "key": "supertonic/utils.py",
+      "source_id": 4
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic-py",
+      "commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+      "path": "supertonic/loader.py",
+      "git_blob_sha1": "d229343a873321b87180b4e3b3c34038c021f6aa",
+      "sha256": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f",
+      "bytes": 16774,
+      "lines": 462,
+      "url": "https://github.com/supertone-oss-archive/supertonic-py/blob/df0f9686dac7fbbde391b759e2ee5286a3737622/supertonic/loader.py",
+      "local_matches_remote": true,
+      "key": "supertonic/loader.py",
+      "source_id": 5
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic",
+      "commit": "1e9799e964ea4c0dad7cde993b65c3c813a7b373",
+      "path": "py/helper.py",
+      "git_blob_sha1": "ff9e4dac3158a332e3179e268c7cadb095c1a59e",
+      "sha256": "b14b1da8a018aa4db6ca8cbb927c32590bfc889b49116ea344c56e8351d94279",
+      "bytes": 15027,
+      "lines": 429,
+      "url": "https://github.com/supertone-oss-archive/supertonic/blob/1e9799e964ea4c0dad7cde993b65c3c813a7b373/py/helper.py",
+      "key": "py/helper.py",
+      "source_id": 6
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic",
+      "commit": "1e9799e964ea4c0dad7cde993b65c3c813a7b373",
+      "path": "py/example_onnx.py",
+      "git_blob_sha1": "0c09720c54950e531ef1e480eae6855ed3c18e36",
+      "sha256": "2ef5371dc02b9425b130ecc480abeb4714781fabe2059e4f9c68dd5e546dec49",
+      "bytes": 3559,
+      "lines": 116,
+      "url": "https://github.com/supertone-oss-archive/supertonic/blob/1e9799e964ea4c0dad7cde993b65c3c813a7b373/py/example_onnx.py",
+      "key": "py/example_onnx.py",
+      "source_id": 7
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic",
+      "commit": "1e9799e964ea4c0dad7cde993b65c3c813a7b373",
+      "path": "py/example_pypi.py",
+      "git_blob_sha1": "3ff7b961d2e9745db03817f26d7662cf70faefc5",
+      "sha256": "edadd0110ddc564f9903d8609404e5389ac4f5f0b32d7d6e6622be815df27b04",
+      "bytes": 855,
+      "lines": 22,
+      "url": "https://github.com/supertone-oss-archive/supertonic/blob/1e9799e964ea4c0dad7cde993b65c3c813a7b373/py/example_pypi.py",
+      "key": "py/example_pypi.py",
+      "source_id": 8
+    },
+    {
+      "repo": "supertone-oss-archive/supertonic",
+      "commit": "1e9799e964ea4c0dad7cde993b65c3c813a7b373",
+      "path": "py/README.md",
+      "git_blob_sha1": "4cd709a94b984dd25dcb144534450dc9ab308af1",
+      "sha256": "799e439ca614506c9d76ba2043ec28f3be6bf09ecffa98d88a3e0267ede1a770",
+      "bytes": 7545,
+      "lines": 157,
+      "url": "https://github.com/supertone-oss-archive/supertonic/blob/1e9799e964ea4c0dad7cde993b65c3c813a7b373/py/README.md",
+      "key": "py/README.md",
+      "source_id": 9
+    },
+    {
+      "path": "/root/voice-lab/autonomous/expressive-tts/assets/onnx/tts.json",
+      "scope": "installed local configuration; not asserted identical to upstream model",
+      "sha256": "42078d3aef1cd43ab43021f3c54f47d2d75ceb4e75f627f118890128b06a0d09",
+      "bytes": 8253,
+      "lines": 311,
+      "key": "installed/onnx/tts.json",
+      "source_id": 10
+    },
+    {
+      "path": "/root/sela-live/docs/UPSTREAM-CONTENT-VERIFICATION.json",
+      "scope": "local evidence read only",
+      "sha256": "1061079bdad591ac53326ea3ab7a5b910103ed7da09d66cced95da4648d89fed",
+      "bytes": 1316,
+      "lines": 34,
+      "key": "evidence/upstream-content-verification",
+      "source_id": 11
+    },
+    {
+      "path": "/root/sela-live/docs/NATIVE-CONTROL-FLOW-PROBE.json",
+      "scope": "local evidence read only",
+      "sha256": "d512323baf17a9fceecc974940ac3f0d8b319bfaf9c483ce40b13cbdae55f6bf",
+      "bytes": 1398,
+      "lines": 39,
+      "key": "evidence/control-flow-probe",
+      "source_id": 12
+    },
+    {
+      "path": "/root/sela-live/tools/audit_native_controls.py",
+      "scope": "local evidence read only",
+      "sha256": "9a2bc6ec41ca918af63bcffe0a39d1dafbe38be74ad7de759c76c7c4bcce8082",
+      "bytes": 4127,
+      "lines": 53,
+      "key": "evidence/probe-script",
+      "source_id": 13
+    },
+    {
+      "path": "/root/sela-live/docs/REPOSITORY-SCOPE.md",
+      "scope": "local evidence read only",
+      "sha256": "85c365b0fea055e3f5d2f5904f0b1206b61f2b5007fd58e752ef79dfc9960127",
+      "bytes": 2157,
+      "lines": 19,
+      "key": "scope",
+      "source_id": 14
+    }
+  ],
+  "findings": [
+    {
+      "id": "text-call-limit",
+      "category": "hard_failure",
+      "title": "Batas teks satu panggilan SDK",
+      "default": "MAX_TEXT_LENGTH=100_000",
+      "bounds": "len(raw text) > 100000 → ValueError; 100000 lolos guard ini",
+      "code_effect": "Diperiksa sebelum chunking/normalisasi. Empty atau whitespace-only ditolak. Core langsung dan native helper tidak punya guard ini. Bukan batas detik atau per kata.",
+      "refs": [
+        "supertonic/config.py:242-243",
+        "supertonic/pipeline.py:204-206",
+        "supertonic/pipeline.py:235-239",
+        "py/helper.py:177-254"
+      ],
+      "static_observation": "Guard length bukan pemotongan/truncation; lolos guard bukan jaminan model/resource mampu.",
+      "test_ids": [
+        "text_limit_comparison"
+      ],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 242,
+          "end_line": 243
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 204,
+          "end_line": 206
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 235,
+          "end_line": 239
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 177,
+          "end_line": 254
+        }
+      ]
+    },
+    {
+      "id": "chunk-target",
+      "category": "content_modifier",
+      "title": "Target chunk bukan hard maximum",
+      "default": "SDK: 300; ko:120; max_chunk_length=None memilih otomatis. Native: ko/ja:120, lainnya:300",
+      "bounds": "SDK max_len >=10; tanpa upper bound eksplisit atau integer/finite check. Native chunk_text tidak punya minimum",
+      "code_effect": "Split paragraf dua newline atau lebih; split kalimat .!? diikuti whitespace dengan pengecualian singkatan; pack kalimat utuh. Kalimat terlalu panjang tetap utuh, tidak split kata atau paksa potong karakter. Klausa koma tidak dipecah. +1 pada packing juga dihitung saat chunk kosong.",
+      "refs": [
+        "supertonic/config.py:203-204",
+        "supertonic/pipeline.py:261-268",
+        "supertonic/utils.py:17-40",
+        "supertonic/utils.py:154-217",
+        "py/helper.py:229-230",
+        "py/helper.py:388-429"
+      ],
+      "static_observation": "SDK dan native benar-benar mengembalikan satu chunk 301 karakter pada target300; penurunan target tidak memecah kalimat tunggal. Default Japanese berbeda antara SDK dan native.",
+      "test_ids": [
+        "sdk_oversize_sentence",
+        "native_oversize_sentence",
+        "sdk_min_chunk_9",
+        "sdk_min_chunk_10",
+        "native_no_chunk_min",
+        "sdk_comma_not_boundary",
+        "native_comma_not_boundary",
+        "sdk_sentence_packing",
+        "native_sentence_packing"
+      ],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 203,
+          "end_line": 204
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 261,
+          "end_line": 268
+        },
+        {
+          "source_id": 4,
+          "path": "supertonic/utils.py",
+          "start_line": 17,
+          "end_line": 40
+        },
+        {
+          "source_id": 4,
+          "path": "supertonic/utils.py",
+          "start_line": 154,
+          "end_line": 217
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 229,
+          "end_line": 230
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 388,
+          "end_line": 429
+        }
+      ]
+    },
+    {
+      "id": "chunk-boundary",
+      "category": "content_modifier",
+      "title": "Boundary paragraf dan preprocessing per chunk",
+      "default": "Selalu aktif",
+      "bounds": "Tidak ada toggle preserve-whitespace pada API ini",
+      "code_effect": "Paragraf tidak digabung walau target panjang cukup. Semua chunk disintesis independen; text processor menormalkan masing-masing chunk dan menambah titik jika perlu. Memperbesar target tetap tidak menghapus boundary paragraf.",
+      "refs": [
+        "supertonic/utils.py:183-215",
+        "supertonic/pipeline.py:284-291",
+        "supertonic/core.py:215-219",
+        "supertonic/core.py:344-345",
+        "py/helper.py:233-234",
+        "py/helper.py:401-429"
+      ],
+      "static_observation": "Dua paragraf Satu./Dua. tetap dua chunk pada target300; newline tunggal dalam satu chunk menjadi spasi. Ini bukan state prosodi kontinu antarchunk.",
+      "test_ids": [
+        "sdk_paragraph_boundary",
+        "native_paragraph_boundary",
+        "sdk_newlines_collapse",
+        "native_newlines_collapse"
+      ],
+      "evidence": [
+        {
+          "source_id": 4,
+          "path": "supertonic/utils.py",
+          "start_line": 183,
+          "end_line": 215
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 284,
+          "end_line": 291
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 215,
+          "end_line": 219
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 344,
+          "end_line": 345
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 233,
+          "end_line": 234
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 401,
+          "end_line": 429
+        }
+      ]
+    },
+    {
+      "id": "speed",
+      "category": "hard_failure_and_modeled_timing",
+      "title": "Speed: guard vs durasi model",
+      "default": "1.05 (SDK high/low, native)",
+      "bounds": "SDK core menerima inklusif [0.7,2.0], di luar → ValueError; native tanpa range guard. NaN lolos perbandingan SDK; bukan input valid untuk eksperimen",
+      "code_effect": "duration_predictor menghasilkan dur_onnx, lalu dur_onnx / speed sebelum ukuran latent dan masking. Tidak resample/time-stretch WAV yang sudah jadi.",
+      "refs": [
+        "supertonic/config.py:201-211",
+        "supertonic/core.py:467-468",
+        "supertonic/core.py:495-512",
+        "py/helper.py:177-198",
+        "py/example_onnx.py:29-34"
+      ],
+      "static_observation": "speed memperbesar/memperkecil target total durasi, bukan maximum pause per kata. Tidak dapat disimpulkan pitch konstan atau prosodi membaik.",
+      "test_ids": [
+        "speed_guard_nan",
+        "speed_guard_endpoints"
+      ],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 201,
+          "end_line": 211
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 467,
+          "end_line": 468
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 495,
+          "end_line": 512
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 177,
+          "end_line": 198
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 29,
+          "end_line": 34
+        }
+      ]
+    },
+    {
+      "id": "steps",
+      "category": "hard_failure_and_compute",
+      "title": "total_steps / total_step",
+      "default": "SDK TTS=8; SDK core langsung=5; native CLI=8; native helper wajib arg total_step",
+      "bounds": "SDK high-level [1,100]; tidak memeriksa isinstance int (1.5/True lolos guard). Core langsung/native tidak membatasi min/max",
+      "code_effect": "range(total_step) memanggil vector estimator berulang; current_step dan total_step float32 dikirim ke ONNX. Tidak menentukan target durasi: DP terjadi sebelum loop.",
+      "refs": [
+        "supertonic/config.py:201-211",
+        "supertonic/pipeline.py:247-251",
+        "supertonic/core.py:467",
+        "supertonic/core.py:504-528",
+        "py/helper.py:182-214",
+        "py/example_onnx.py:26-28"
+      ],
+      "static_observation": "Float1.5 kemudian gagal range; direct0/negatif berarti loop kosong menurut Python, bukan mode yang tervalidasi. Klaim kualitas lebih baik dari komentar bukan hasil akustik audit.",
+      "test_ids": [
+        "step_guard_types",
+        "noninteger_steps_range"
+      ],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 201,
+          "end_line": 211
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 247,
+          "end_line": 251
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 467,
+          "end_line": 467
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 504,
+          "end_line": 528
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 182,
+          "end_line": 214
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 26,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "silence",
+      "category": "hard_failure_and_postprocess",
+      "title": "silence_duration adalah zero gap antarchunk",
+      "default": "0.3 detik",
+      "bounds": "SDK hanya <0 ditolak; tidak ada upper/finite guard. Native tanpa guard eksplisit. NaN/Infinity akhirnya bermasalah pada int; nilai sangat besar berisiko alokasi",
+      "code_effect": "SDK membentuk zeros((1,int(silence_duration*sample_rate)),float32), disisipkan hanya antara chunk; tidak sesudah terakhir. Bahkan satu chunk SDK tetap mengalokasikan silence sementara walau tidak dipakai. Native mengalokasikan hanya saat join berikutnya.",
+      "refs": [
+        "supertonic/config.py:205",
+        "supertonic/pipeline.py:253-254",
+        "supertonic/pipeline.py:306-320",
+        "py/helper.py:224",
+        "py/helper.py:233-244"
+      ],
+      "static_observation": "Jika satu chunk, silence_duration tidak mengubah waveform join (namun alokasi SDK tetap terjadi). Tidak menyentuh jeda internal model.",
+      "test_ids": [
+        "silence_guard"
+      ],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 205,
+          "end_line": 205
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 253,
+          "end_line": 254
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 306,
+          "end_line": 320
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 224,
+          "end_line": 224
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 233,
+          "end_line": 244
+        }
+      ]
+    },
+    {
+      "id": "predicted-duration",
+      "category": "modeled_prosody",
+      "title": "Duration predictor dan style_dp",
+      "default": "Output ONNX; bukan angka default Python",
+      "bounds": "Tidak ada duration min/max/clip/isfinite/nonnegative guard di wrapper yang dibaca",
+      "code_effect": "DP input text_ids/style_dp/text_mask → dur_onnx; dibagi speed; dipakai menyiapkan latent. Tidak ada target duration API per kalimat/per kata.",
+      "refs": [
+        "supertonic/core.py:502-512",
+        "py/helper.py:188-198"
+      ],
+      "static_observation": "Wrapper tidak menunjukkan explicit limiter 23/69 detik atau durasi kata. Validitas/batas internal graph DP belum diperiksa. Mencabut guard bukan solusi yang ditunjukkan source.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 502,
+          "end_line": 512
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 188,
+          "end_line": 198
+        }
+      ]
+    },
+    {
+      "id": "latent-length",
+      "category": "length_quantization",
+      "title": "Length allocation / integer quantization",
+      "default": "R=cfg.ae.sample_rate; B=cfg.ae.base_chunk_size; C=cfg.ttl.chunk_compress_factor; D=cfg.ttl.latent_dim",
+      "bounds": "Tidak ada max/min allocation length eksplisit; casts int64/int32 membawa batas representasi, bukan guard keselamatan",
+      "code_effect": "wav_lengths=int64(duration*R); Q=B*C; latent_len=int32((duration.max()*R+Q-1)/Q); channel=D*C. Ini ceil-style expression berbasis float, bukan jaminan mathematical ceil untuk semua fractional sample.",
+      "refs": [
+        "supertonic/core.py:434-438",
+        "supertonic/core.py:451-460",
+        "py/helper.py:156-175"
+      ],
+      "static_observation": "Nilai negatif/tidak finite/overflow tidak disanitasi. Tidak menjalankan alokasi model; formula saja diverifikasi statik.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 434,
+          "end_line": 438
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 451,
+          "end_line": 460
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 156,
+          "end_line": 175
+        }
+      ]
+    },
+    {
+      "id": "mask",
+      "category": "length_mask",
+      "title": "Text/latent masks bukan pemotong kata",
+      "default": "length_to_mask max_len=None → lengths.max(); max_len=0 juga fallback karena or",
+      "bounds": "Mask ids < lengths; tidak ada duration cap",
+      "code_effect": "latent_lengths=(wav_lengths+Q-1)//Q. Noisy latent dikali latent_mask sekali; mask juga input VE. Text IDs di-zero-pad sampai panjang teks terpanjang yang sudah dinormalisasi.",
+      "refs": [
+        "supertonic/core.py:81-105",
+        "supertonic/core.py:344-353",
+        "supertonic/core.py:451-460",
+        "supertonic/core.py:519-525",
+        "py/helper.py:257-280"
+      ],
+      "static_observation": "Zero di noise luar mask bukan bukti WAV tail dipaksa nol. Tidak ada final WAV multiply-mask/tail-zero di return core.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 81,
+          "end_line": 105
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 344,
+          "end_line": 353
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 451,
+          "end_line": 460
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 519,
+          "end_line": 525
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 257,
+          "end_line": 280
+        }
+      ]
+    },
+    {
+      "id": "seed-noise",
+      "category": "stochastic_conditioning",
+      "title": "Seed dan noise",
+      "default": "np.random.randn(...) standard normal, cast float32; tidak seed di wrapper",
+      "bounds": "Tidak ada seed/temperature/noise_scale API pada signature yang dibaca",
+      "code_effect": "Memakai NumPy global RNG; pengulangan panggilan mengonsumsi state baru. Noise dibentuk sesuai latent_len, lalu masking. Native --n-test=4 hanya repeat, bukan seed fixed.",
+      "refs": [
+        "supertonic/core.py:451-460",
+        "supertonic/core.py:463-470",
+        "supertonic/pipeline.py:158-168",
+        "py/helper.py:161-175",
+        "py/example_onnx.py:35-37",
+        "py/example_onnx.py:98-108"
+      ],
+      "static_observation": "Kontrol seed masa depan harus eksplisit pada isolated harness. Seed yang sama pada chunk layout/shape berbeda tidak menjamin noise identik per segmen atau reproducibility backend penuh.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 451,
+          "end_line": 460
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 463,
+          "end_line": 470
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 158,
+          "end_line": 168
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 161,
+          "end_line": 175
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 35,
+          "end_line": 37
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 98,
+          "end_line": 108
+        }
+      ]
+    },
+    {
+      "id": "style",
+      "category": "modeled_prosody",
+      "title": "style_ttl dan style_dp bukan slider emosi",
+      "default": "Wajib Style dari speaker terpilih; tidak ada default voice pada synthesize",
+      "bounds": "SDK Style hanya ndarray type-check; tidak clip/norm/bound angka. Core memeriksa jumlah teks vs ttl batch, tidak memverifikasi dp shape penuh",
+      "code_effect": "style_dp hanya ke DP; style_ttl ke text encoder dan vector estimator. Loader JSON dims/data → float32 reshape, bukan normalisasi vektor. Native sama routingnya.",
+      "refs": [
+        "supertonic/core.py:356-379",
+        "supertonic/core.py:489-505",
+        "supertonic/core.py:508-525",
+        "supertonic/loader.py:398-425",
+        "supertonic/utils.py:133-151",
+        "py/helper.py:134-137",
+        "py/helper.py:190-211",
+        "py/helper.py:339-367"
+      ],
+      "static_observation": "Dapat mengondisikan timing/karakter suara tetapi tidak ada arti sumbu atau rentang emosi yang didokumentasikan oleh code ini. Ganti/interpolasi dp/ttl bukan kontrol pause yang tervalidasi dan berisiko mengubah identitas speaker.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 356,
+          "end_line": 379
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 489,
+          "end_line": 505
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 508,
+          "end_line": 525
+        },
+        {
+          "source_id": 5,
+          "path": "supertonic/loader.py",
+          "start_line": 398,
+          "end_line": 425
+        },
+        {
+          "source_id": 4,
+          "path": "supertonic/utils.py",
+          "start_line": 133,
+          "end_line": 151
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 134,
+          "end_line": 137
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 190,
+          "end_line": 211
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 339,
+          "end_line": 367
+        }
+      ]
+    },
+    {
+      "id": "normalization",
+      "category": "content_modifier",
+      "title": "Normalisasi teks dan tanda baca",
+      "default": "Selalu NFKD + rangkaian cleanup",
+      "bounds": "Tidak ada opsi raw bypass pada API public ini",
+      "code_effect": "Hapus emoji/dekoratif; dash→-; underscore/bracket/slash/hash/arrows→spasi; quotes→ASCII; @→ at ; e.g.,→for example, ; i.e.,→that is, ; whitespace collapse/strip; spacing punctuation fix; duplicate quotes collapse; append period bila akhir tidak di set punctuation/quotes/closing brackets; language tags setelah cleanup. SDK tambahan macron→spasi yang native tidak punya.",
+      "refs": [
+        "supertonic/core.py:25-78",
+        "supertonic/core.py:169-285",
+        "py/helper.py:21-105"
+      ],
+      "static_observation": "Mengubah model input/potensi prosodi, bukan explicit duration clamp. Chunking dilakukan sebelum normalisasi, sehingga normalized length/tags dapat melebihi target chunk.",
+      "test_ids": [
+        "sdk_newlines_collapse",
+        "native_newlines_collapse",
+        "sdk_abbreviation_expansion",
+        "native_abbreviation_expansion"
+      ],
+      "evidence": [
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 25,
+          "end_line": 78
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 169,
+          "end_line": 285
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 21,
+          "end_line": 105
+        }
+      ]
+    },
+    {
+      "id": "language",
+      "category": "content_conditioning_and_validation",
+      "title": "Language token / default",
+      "default": "SDK multilingual lang=None→na; v1→en lalu effective_lang=None. Native caller wajib lang; CLI default en",
+      "bounds": "SDK membership AVAILABLE_LANGUAGES (31+na), bukan kemampuan per model; invalid → ValueError",
+      "code_effect": "id menghasilkan <id>...</id>; na berbeda conditioning. SDK Korean target120; native Japanese juga120. v1 mengabaikan non-en parameter.",
+      "refs": [
+        "supertonic/config.py:156-198",
+        "supertonic/pipeline.py:208-226",
+        "supertonic/core.py:221-238",
+        "py/helper.py:13",
+        "py/helper.py:102-104",
+        "py/example_onnx.py:59-65"
+      ],
+      "static_observation": "Bahasa adalah kontrol eksperimen relevan tetapi pertahankan baseline sebenarnya, jangan diam-diam default na/en atau mengganti id.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 156,
+          "end_line": 198
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 208,
+          "end_line": 226
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 221,
+          "end_line": 238
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 102,
+          "end_line": 104
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 59,
+          "end_line": 65
+        }
+      ]
+    },
+    {
+      "id": "validation",
+      "category": "hard_failure",
+      "title": "Unsupported text / Unicode indexer",
+      "default": "SDK validate_text selalu dipanggil, bukan hanya verbose meski komentar menyebut verbose",
+      "bounds": "Unsupported character setelah individual-character preprocess → ValueError high-level; core/native langsung tidak punya validasi set ini",
+      "code_effect": "SDK preprocessing per karakter menentukan supported chars; transform actual chunk dilakukan lagi pada core. Unicode values di uint16, indexing bukan token duration.",
+      "refs": [
+        "supertonic/pipeline.py:256-259",
+        "supertonic/core.py:154-163",
+        "supertonic/core.py:291-321",
+        "supertonic/core.py:344-353",
+        "py/helper.py:111-131"
+      ],
+      "static_observation": "Guard ini bukan limiter jeda. Non-BMP/unsupported behavior tidak diuji terhadap indexer asli; tidak mengakses model/indexer.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 256,
+          "end_line": 259
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 154,
+          "end_line": 163
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 291,
+          "end_line": 321
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 344,
+          "end_line": 353
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 111,
+          "end_line": 131
+        }
+      ]
+    },
+    {
+      "id": "wav-joins",
+      "category": "postprocess",
+      "title": "Concatenate tanpa per-chunk trim/crossfade",
+      "default": "Seluruh WAV tiap chunk + zero gap",
+      "bounds": "SDK memastikan wav.shape[0]==1; tidak ada shape time cap",
+      "code_effect": "SDK concatenate sekali, native concatenate bertahap. Tidak ada fade, overlap, crossfade, VAD trim, loudness normalization, limiter amplitudo, np.clip, atau pemaksaan tail WAV nol pada jalur return yang dibaca.",
+      "refs": [
+        "supertonic/pipeline.py:296-320",
+        "supertonic/core.py:528-529",
+        "py/helper.py:214-244"
+      ],
+      "static_observation": "Padding/codec tail jika ada ikut di-concat; tidak ada perbaikan join akustik yang dapat dibuktikan dari source ini.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 296,
+          "end_line": 320
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 528,
+          "end_line": 529
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 214,
+          "end_line": 244
+        }
+      ]
+    },
+    {
+      "id": "duration-accounting",
+      "category": "measurement_semantics",
+      "title": "Returned duration bukan selalu samples/sample_rate",
+      "default": "sum(DP/speed) + silence_duration*(n-1)",
+      "bounds": "Gap aktual int(silence_duration*R), metadata memakai float detik penuh",
+      "code_effect": "SDK/native menjumlah prediksi durasi dan silence, bukan mengukur panjang WAV. Vocoder dapat mengeluarkan panjang quantized; wrapper tidak memaksa persamaan samplecount.",
+      "refs": [
+        "supertonic/pipeline.py:307-320",
+        "supertonic/utils.py:105-116",
+        "py/helper.py:239-244"
+      ],
+      "static_observation": "Ukur terpisah wall inference, metadata predicted duration, actual WAV seconds dan pause internal. Gap fractional sample menimbulkan rounding <1 sample per join; perbedaan padding model belum diukur.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 307,
+          "end_line": 320
+        },
+        {
+          "source_id": 4,
+          "path": "supertonic/utils.py",
+          "start_line": 105,
+          "end_line": 116
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 239,
+          "end_line": 244
+        }
+      ]
+    },
+    {
+      "id": "native-final-trim",
+      "category": "postprocess_length",
+      "title": "Native example melakukan satu final trim; SDK save tidak",
+      "default": "Native w=wav[b,:int(R*duration[b].item())]; SDK sf.write(wav.squeeze(),R)",
+      "bounds": "Python slice hanya memotong bila bound < panjang; tidak padding bila bound lebih panjang",
+      "code_effect": "Native CLI membatasi akhir keseluruhan WAV ke sum predicted duration; tidak tiap chunk sebelum join. SDK save_audio tidak melakukan trim berdasarkan dur.",
+      "refs": [
+        "py/example_onnx.py:111-114",
+        "supertonic/pipeline.py:331-362",
+        "py/example_pypi.py:14-21"
+      ],
+      "static_observation": "Inferred risk: bila chunk awal mengandung extra padded samples yang tetap dijoin, final trim dapat menghapus equivalent samples dari ujung last chunk. Bukan bukti kata terpotong pada rekaman pengguna; belum ukur WAV. Tailzero tidak eksplisit.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 111,
+          "end_line": 114
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 331,
+          "end_line": 362
+        },
+        {
+          "source_id": 8,
+          "path": "py/example_pypi.py",
+          "start_line": 14,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "save-normalize",
+      "category": "postprocess_io",
+      "title": "Save normalization / clipping",
+      "default": "sf.write tanpa subtype eksplisit pada dua path",
+      "bounds": "Tidak ada peak/RMS/LUFS normalization atau amplitude clip eksplisit di wrapper",
+      "code_effect": "Soundfile menerima float waveform; format/subtype/konversi PCM mengikuti library dan target ekstensi, bukan knob prosodi di sini.",
+      "refs": [
+        "supertonic/pipeline.py:342-361",
+        "py/example_onnx.py:113-114"
+      ],
+      "static_observation": "Efek clipping/quantization actual IO belum diuji dan tidak boleh disamakan dengan explicit np.clip di code. Tidak menulis audio pada audit.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 342,
+          "end_line": 361
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 113,
+          "end_line": 114
+        }
+      ]
+    },
+    {
+      "id": "batch",
+      "category": "execution_path",
+      "title": "Native batch bypass chunking/join",
+      "default": "CLI --batch=False; native batch speed=1.05, total_step wajib",
+      "bounds": "Helper batch hanya meneruskan _infer; lang_list memakai zip tanpa validasi panjang eksplisit. CLI memeriksa voice count=text count",
+      "code_effect": "Batch native tidak menerapkan chunk target/silence sama sekali. SDK public synthesize selalu list satu chunk per call, bukan native batch.",
+      "refs": [
+        "py/helper.py:117-123",
+        "py/helper.py:185-189",
+        "py/helper.py:246-254",
+        "py/example_onnx.py:86-108",
+        "supertonic/pipeline.py:284-291"
+      ],
+      "static_observation": "Batch vs nonbatch bukan perbandingan satu variabel bila chunk layout berbeda; batas resource/mask batch perlu terpisah.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 117,
+          "end_line": 123
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 185,
+          "end_line": 189
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 246,
+          "end_line": 254
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 86,
+          "end_line": 108
+        },
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 284,
+          "end_line": 291
+        }
+      ]
+    },
+    {
+      "id": "time-tools",
+      "category": "measurement_only",
+      "title": "timer/format_duration/sanitize filename",
+      "default": "SDK timer verbose=True; filename max_len=50; native example prefix20",
+      "bounds": "Format <60 detik/<3600 detik hanya formatting; filename slice bukan text synthesis slice",
+      "code_effect": "timer time.time sebelum/sesudah yield; tidak timeout/cancel/deadline. get_audio_duration=samplecount/sample_rate. Tidak ada wall time stop di empat SDK files atau native helper.",
+      "refs": [
+        "supertonic/utils.py:43-116",
+        "py/helper.py:370-385",
+        "py/example_onnx.py:112"
+      ],
+      "static_observation": "Nama file 20/50 karakter dan format 60/3600 bukan limiter ujaran. Guard produksi/deadline eksternal tidak diaudit ulang dan tetap dipertahankan.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 4,
+          "path": "supertonic/utils.py",
+          "start_line": 43,
+          "end_line": 116
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 370,
+          "end_line": 385
+        },
+        {
+          "source_id": 7,
+          "path": "py/example_onnx.py",
+          "start_line": 112,
+          "end_line": 112
+        }
+      ]
+    },
+    {
+      "id": "runtime",
+      "category": "compute_only",
+      "title": "Thread/provider controls bukan prosody limiter",
+      "default": "CPUExecutionProvider; intra/inter threads=None atau env SUPERTONIC_INTRA_OP_THREADS/INTER_OP_THREADS",
+      "bounds": "Env invalid int→fallback default; tidak ada min/max lokal. Native use_gpu→NotImplementedError",
+      "code_effect": "SDK loader sequential + ORT_ENABLE_ALL dan thread selection. Ini memengaruhi eksekusi/latency, bukan explicit durasi kata. SUPERTONIC_ONNX_PROVIDERS masih TODO.",
+      "refs": [
+        "supertonic/config.py:213-240",
+        "supertonic/loader.py:228-260",
+        "py/helper.py:322-335"
+      ],
+      "static_observation": "Tidak menjalankan thread/session/model. Jangan menghapus resource guards aplikasi hanya karena source wrapper tidak memiliki deadline.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 213,
+          "end_line": 240
+        },
+        {
+          "source_id": 5,
+          "path": "supertonic/loader.py",
+          "start_line": 228,
+          "end_line": 260
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 322,
+          "end_line": 335
+        }
+      ]
+    },
+    {
+      "id": "model-provenance",
+      "category": "provenance_not_prosody",
+      "title": "Model selection/revision",
+      "default": "SDK DEFAULT_MODEL=supertonic-3; revision=724fb5abbf5502583fb520898d45929e62f02c0b",
+      "bounds": "SUPERTONIC_MODEL_REVISION override disnapshot saat import; konfigurasi model v1/v2 punya pin berbeda",
+      "code_effect": "Repo configured Supertone/supertonic-3; native README justru merujuk archive model revision aafc6e32416a594460b32413efc49d7fe4ce6d46. Kedua pin tidak dinyatakan sama. Existing assets tidak diverifikasi ulang ke kedua remote pin pada audit ini.",
+      "refs": [
+        "supertonic/config.py:14-57",
+        "supertonic/config.py:114-129",
+        "supertonic/loader.py:108-125",
+        "py/README.md:3-6"
+      ],
+      "static_observation": "Commit source SDK sama remote main bukan jaminan assets installed sama release default. Tidak download/replace model, tidak menjalankan auto_download.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 14,
+          "end_line": 57
+        },
+        {
+          "source_id": 1,
+          "path": "supertonic/config.py",
+          "start_line": 114,
+          "end_line": 129
+        },
+        {
+          "source_id": 5,
+          "path": "supertonic/loader.py",
+          "start_line": 108,
+          "end_line": 125
+        },
+        {
+          "source_id": 9,
+          "path": "py/README.md",
+          "start_line": 3,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "installed-config",
+      "category": "model_metadata",
+      "title": "Config aset installed dibaca saja",
+      "default": "sample_rate=44100; base_chunk_size=512; ttl.chunk_compress_factor=6; ttl.latent_dim=24",
+      "bounds": "Q=3072 samples; latent channels=144. Nilai ini local metadata, bukan default universal semua model",
+      "code_effect": "Wrapper hanya mengambil empat cfg keys untuk dimensi di core. JSON juga memuat ae.n_delay=0, ttl.normalizer.scale=0.25, dp.normalizer.scale=1.0, ttl.flow_matching.sig_min=1e-8; tidak dibaca sebagai knob oleh wrapper yang diaudit.",
+      "refs": [
+        "installed/onnx/tts.json:4-12",
+        "installed/onnx/tts.json:45-46",
+        "installed/onnx/tts.json:174-179",
+        "installed/onnx/tts.json:238-243",
+        "supertonic/core.py:434-438",
+        "py/helper.py:156-159"
+      ],
+      "static_observation": "Jangan mengedit normalizer/sig_min/n_delay/model JSON untuk mengklaim prosodi berubah: exported ONNX internal tidak dianalisis. Quantization nominal Q/R dihitung pada checks, bukan durasi pause.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 10,
+          "path": "/root/voice-lab/autonomous/expressive-tts/assets/onnx/tts.json",
+          "start_line": 4,
+          "end_line": 12
+        },
+        {
+          "source_id": 10,
+          "path": "/root/voice-lab/autonomous/expressive-tts/assets/onnx/tts.json",
+          "start_line": 45,
+          "end_line": 46
+        },
+        {
+          "source_id": 10,
+          "path": "/root/voice-lab/autonomous/expressive-tts/assets/onnx/tts.json",
+          "start_line": 174,
+          "end_line": 179
+        },
+        {
+          "source_id": 10,
+          "path": "/root/voice-lab/autonomous/expressive-tts/assets/onnx/tts.json",
+          "start_line": 238,
+          "end_line": 243
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 434,
+          "end_line": 438
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 156,
+          "end_line": 159
+        }
+      ]
+    },
+    {
+      "id": "absent-prosody-api",
+      "category": "absence_in_audited_scope",
+      "title": "Tidak ada per-word pause/emotion/pitch/SSML knob eksplisit",
+      "default": "Tidak ada di signature SDK synthesize/core atau native TextToSpeech",
+      "bounds": "Tidak ada pause duration clamp per kata, emotion enum/intensity, pitch/f0 shift, SSML parser, phoneme/word duration override, global max_audio_seconds di wrapper yang dibaca",
+      "code_effect": "Punctuation dan text/language/style masuk model; modeled pauses/intonation tidak sama dengan explicit control. <break time=\"1s\"/> dinormalisasi menjadi literal rusak <break time=\"1s\" >. lalu tag id; tidak dijadwalkan menjadi 1 detik silence.",
+      "refs": [
+        "supertonic/pipeline.py:158-168",
+        "supertonic/core.py:240-285",
+        "supertonic/core.py:463-529",
+        "py/helper.py:177-254"
+      ],
+      "static_observation": "Kesimpulan absence hanya Python wrapper/reference di scope ini, bukan semua graph/model/komponen produksi. Akustik model dan internal ONNX belum diperiksa.",
+      "test_ids": [
+        "sdk_not_ssml",
+        "native_not_ssml"
+      ],
+      "evidence": [
+        {
+          "source_id": 2,
+          "path": "supertonic/pipeline.py",
+          "start_line": 158,
+          "end_line": 168
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 240,
+          "end_line": 285
+        },
+        {
+          "source_id": 3,
+          "path": "supertonic/core.py",
+          "start_line": 463,
+          "end_line": 529
+        },
+        {
+          "source_id": 6,
+          "path": "py/helper.py",
+          "start_line": 177,
+          "end_line": 254
+        }
+      ]
+    },
+    {
+      "id": "fixture-evidence",
+      "category": "controlled_synthetic_evidence",
+      "title": "Bukti source control flow dari parent, bukan suara model",
+      "default": "Probe synthetic sessions; source hash persis cocok",
+      "bounds": "Tidak ada native model inference/listening; receipt dan script hanya dibaca, tidak dijalankan ulang",
+      "code_effect": "Synthetic fixture: 2 SDK chunks gap0.3=13230 zeros pada44100Hz; single chunk identik saat silence0.3 vs0; VE loop8 vs12 dan DP durasi/shape tetap pada speed tetap; core speed0.6/2.1 dan high-level steps0/101 ditolak.",
+      "refs": [
+        "evidence/control-flow-probe:1-38",
+        "evidence/probe-script:11-51",
+        "evidence/upstream-content-verification:1-34"
+      ],
+      "static_observation": "PipelineFixture mengembalikan ones100; Session DP=2.1 dan vocoder zeros synthetic. Semua nilai ini fixture eksplisit, bukan hasil model atau teks pengguna. Shape tetap hanya terjamin pada fixture tersebut.",
+      "test_ids": [],
+      "evidence": [
+        {
+          "source_id": 12,
+          "path": "/root/sela-live/docs/NATIVE-CONTROL-FLOW-PROBE.json",
+          "start_line": 1,
+          "end_line": 38
+        },
+        {
+          "source_id": 13,
+          "path": "/root/sela-live/tools/audit_native_controls.py",
+          "start_line": 11,
+          "end_line": 51
+        },
+        {
+          "source_id": 11,
+          "path": "/root/sela-live/docs/UPSTREAM-CONTENT-VERIFICATION.json",
+          "start_line": 1,
+          "end_line": 34
+        }
+      ]
+    }
+  ],
+  "pure_static_checks": [
+    {
+      "id": "sdk_oversize_sentence",
+      "input": {
+        "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "max_len": 300
+      },
+      "actual": [
+        301
+      ],
+      "expected": [
+        301
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "supertonic/utils.py"
+      ]
+    },
+    {
+      "id": "sdk_paragraph_boundary",
+      "input": {
+        "text": "Satu.\n\nDua.",
+        "max_len": 300
+      },
+      "actual": [
+        "Satu.",
+        "Dua."
+      ],
+      "expected": [
+        "Satu.",
+        "Dua."
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "supertonic/utils.py:154-217"
+      ]
+    },
+    {
+      "id": "sdk_comma_not_boundary",
+      "input": {
+        "text": "satu, dua, tiga",
+        "max_len": 10
+      },
+      "actual": [
+        "satu, dua, tiga"
+      ],
+      "expected": [
+        "satu, dua, tiga"
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "supertonic/utils.py:154-217"
+      ]
+    },
+    {
+      "id": "sdk_sentence_packing",
+      "input": {
+        "text": "Satu. Dua. Tiga.",
+        "max_len": 11
+      },
+      "actual": [
+        "Satu. Dua.",
+        "Tiga."
+      ],
+      "expected": [
+        "Satu. Dua.",
+        "Tiga."
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "supertonic/utils.py:154-217"
+      ]
+    },
+    {
+      "id": "sdk_newlines_collapse",
+      "input": {
+        "text": "satu\n  dua",
+        "lang": "id"
+      },
+      "actual": "<id>satu dua.</id>",
+      "expected": "<id>satu dua.</id>",
+      "passed": true,
+      "method": "execute extracted pure normalization",
+      "refs": [
+        "supertonic/core.py:169-285"
+      ]
+    },
+    {
+      "id": "sdk_not_ssml",
+      "input": {
+        "text": "<break time=\"1s\"/>",
+        "lang": "id"
+      },
+      "actual": "<id><break time=\"1s\" >.</id>",
+      "expected": "<id><break time=\"1s\" >.</id>",
+      "passed": true,
+      "method": "execute extracted pure normalization",
+      "refs": [
+        "supertonic/core.py:169-285"
+      ]
+    },
+    {
+      "id": "sdk_abbreviation_expansion",
+      "input": {
+        "text": "e.g., @ rumah",
+        "lang": "id"
+      },
+      "actual": "<id>for example, at rumah.</id>",
+      "expected": "<id>for example, at rumah.</id>",
+      "passed": true,
+      "method": "execute extracted pure normalization",
+      "refs": [
+        "supertonic/core.py:169-285"
+      ]
+    },
+    {
+      "id": "native_oversize_sentence",
+      "input": {
+        "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "max_len": 300
+      },
+      "actual": [
+        301
+      ],
+      "expected": [
+        301
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "py/helper.py"
+      ]
+    },
+    {
+      "id": "native_paragraph_boundary",
+      "input": {
+        "text": "Satu.\n\nDua.",
+        "max_len": 300
+      },
+      "actual": [
+        "Satu.",
+        "Dua."
+      ],
+      "expected": [
+        "Satu.",
+        "Dua."
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "py/helper.py:388-429"
+      ]
+    },
+    {
+      "id": "native_comma_not_boundary",
+      "input": {
+        "text": "satu, dua, tiga",
+        "max_len": 10
+      },
+      "actual": [
+        "satu, dua, tiga"
+      ],
+      "expected": [
+        "satu, dua, tiga"
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "py/helper.py:388-429"
+      ]
+    },
+    {
+      "id": "native_sentence_packing",
+      "input": {
+        "text": "Satu. Dua. Tiga.",
+        "max_len": 11
+      },
+      "actual": [
+        "Satu. Dua.",
+        "Tiga."
+      ],
+      "expected": [
+        "Satu. Dua.",
+        "Tiga."
+      ],
+      "passed": true,
+      "method": "execute extracted pure chunk_text",
+      "refs": [
+        "py/helper.py:388-429"
+      ]
+    },
+    {
+      "id": "native_newlines_collapse",
+      "input": {
+        "text": "satu\n  dua",
+        "lang": "id"
+      },
+      "actual": "<id>satu dua.</id>",
+      "expected": "<id>satu dua.</id>",
+      "passed": true,
+      "method": "execute extracted pure normalization",
+      "refs": [
+        "py/helper.py:21-105"
+      ]
+    },
+    {
+      "id": "native_not_ssml",
+      "input": {
+        "text": "<break time=\"1s\"/>",
+        "lang": "id"
+      },
+      "actual": "<id><break time=\"1s\" >.</id>",
+      "expected": "<id><break time=\"1s\" >.</id>",
+      "passed": true,
+      "method": "execute extracted pure normalization",
+      "refs": [
+        "py/helper.py:21-105"
+      ]
+    },
+    {
+      "id": "native_abbreviation_expansion",
+      "input": {
+        "text": "e.g., @ rumah",
+        "lang": "id"
+      },
+      "actual": "<id>for example, at rumah.</id>",
+      "expected": "<id>for example, at rumah.</id>",
+      "passed": true,
+      "method": "execute extracted pure normalization",
+      "refs": [
+        "py/helper.py:21-105"
+      ]
+    },
+    {
+      "id": "sdk_min_chunk_9",
+      "input": {
+        "max_len": 9
+      },
+      "actual": "max_len must be at least 10, got 9. Very small chunks may produce poor quality speech.",
+      "expected": "max_len must be at least 10, got 9. Very small chunks may produce poor quality speech.",
+      "passed": true,
+      "method": "extracted pure chunk_text raises",
+      "refs": [
+        "supertonic/utils.py:154-217"
+      ]
+    },
+    {
+      "id": "sdk_min_chunk_10",
+      "input": {
+        "max_len": 10
+      },
+      "actual": [
+        "satu"
+      ],
+      "expected": [
+        "satu"
+      ],
+      "passed": true,
+      "method": "extracted pure chunk_text",
+      "refs": [
+        "supertonic/utils.py:154-217"
+      ]
+    },
+    {
+      "id": "native_no_chunk_min",
+      "input": {
+        "max_len": 1
+      },
+      "actual": [
+        "satu"
+      ],
+      "expected": [
+        "satu"
+      ],
+      "passed": true,
+      "method": "extracted pure chunk_text",
+      "refs": [
+        "py/helper.py:388-429"
+      ]
+    },
+    {
+      "id": "speed_guard_nan",
+      "input": {
+        "speed": "NaN"
+      },
+      "actual": false,
+      "expected": false,
+      "passed": true,
+      "method": "evaluate exact guard expression (not synthesis)",
+      "refs": [
+        "supertonic/core.py:495-500"
+      ]
+    },
+    {
+      "id": "speed_guard_endpoints",
+      "input": {
+        "speed": [
+          0.6999,
+          0.7,
+          2.0,
+          2.0001
+        ]
+      },
+      "actual": [
+        true,
+        false,
+        false,
+        true
+      ],
+      "expected": [
+        true,
+        false,
+        false,
+        true
+      ],
+      "passed": true,
+      "method": "evaluate exact guard expression",
+      "refs": [
+        "supertonic/core.py:495-500"
+      ]
+    },
+    {
+      "id": "step_guard_types",
+      "input": {
+        "steps": [
+          "0",
+          "1",
+          "100",
+          "101",
+          "1.5",
+          "True",
+          "NaN"
+        ]
+      },
+      "actual": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "expected": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "passed": true,
+      "method": "evaluate exact guard expression; range(1.5) separately raises TypeError",
+      "refs": [
+        "supertonic/pipeline.py:247-251",
+        "supertonic/core.py:514"
+      ]
+    },
+    {
+      "id": "noninteger_steps_range",
+      "input": {
+        "steps": 1.5
+      },
+      "actual": "TypeError",
+      "expected": "TypeError",
+      "passed": true,
+      "method": "builtin range only",
+      "refs": [
+        "supertonic/core.py:514"
+      ]
+    },
+    {
+      "id": "text_limit_comparison",
+      "input": {
+        "raw_lengths": [
+          100000,
+          100001
+        ]
+      },
+      "actual": [
+        false,
+        true
+      ],
+      "expected": [
+        false,
+        true
+      ],
+      "passed": true,
+      "method": "evaluate exact comparison",
+      "refs": [
+        "supertonic/pipeline.py:235-239"
+      ]
+    },
+    {
+      "id": "silence_guard",
+      "input": {
+        "silence_duration": [
+          "-0.1",
+          "0",
+          "1e12",
+          "NaN",
+          "Infinity"
+        ]
+      },
+      "actual": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "expected": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "passed": true,
+      "method": "evaluate exact comparison only; no allocation",
+      "refs": [
+        "supertonic/pipeline.py:253-254"
+      ]
+    },
+    {
+      "id": "installed_latent_geometry",
+      "input": {
+        "B": 512,
+        "C": 6,
+        "D": 24,
+        "R": 44100
+      },
+      "actual": {
+        "Q": 3072,
+        "channels": 144
+      },
+      "expected": {
+        "Q": 3072,
+        "channels": 144
+      },
+      "passed": true,
+      "method": "integer formula only",
+      "refs": [
+        "supertonic/core.py:455-457",
+        "installed/onnx/tts.json"
+      ]
+    },
+    {
+      "id": "duration_speed_formula",
+      "input": {
+        "predicted_duration_seconds": 10,
+        "speeds": [
+          0.7,
+          1.05,
+          2.0
+        ]
+      },
+      "actual": [
+        14.285714286,
+        9.523809524,
+        5.0
+      ],
+      "expected": [
+        14.285714286,
+        9.523809524,
+        5.0
+      ],
+      "passed": true,
+      "method": "illustrative formula only; not actual DP output",
+      "refs": [
+        "supertonic/core.py:507"
+      ]
+    },
+    {
+      "id": "zero_gap_one_chunk",
+      "input": {
+        "chunks": 1,
+        "silence_duration": 0.3
+      },
+      "actual": 0.0,
+      "expected": 0.0,
+      "passed": true,
+      "method": "duration bookkeeping formula only",
+      "refs": [
+        "supertonic/pipeline.py:319"
+      ]
+    }
+  ],
+  "check_summary": {
+    "count": 26,
+    "passed": 26,
+    "inference_checks": 0
+  },
+  "parent_control_flow_probe": {
+    "scope": "cloned Python source behavior with explicitly synthetic ORT/session fixtures; no native model inference or listening claim",
+    "sdk_commit": "df0f9686dac7fbbde391b759e2ee5286a3737622",
+    "sdk_defaults": {
+      "speed": 1.05,
+      "steps": 8,
+      "max_chunk_length": 300,
+      "silence_duration": 0.3,
+      "max_text_length": 100000
+    },
+    "silence_two_sdk_chunks": {
+      "inserted_samples_at44100": 13230,
+      "seconds": 0.3
+    },
+    "silence_control_changes_single_sdk_chunk": false,
+    "steps_loop_counts": [
+      8,
+      12
+    ],
+    "same_predictor_duration_when_only_steps_change": true,
+    "predictor_duration_after_speed_division": [
+      2.0
+    ],
+    "invalid_steps_rejected": [
+      0,
+      101
+    ],
+    "invalid_speeds_rejected": [
+      0.6,
+      2.1
+    ],
+    "tts_signature": "(self, text: 'str', voice_style: 'Style', total_steps: 'int' = 8, speed: 'float' = 1.05, max_chunk_length: 'Optional[int]' = None, silence_duration: 'float' = 0.3, lang: 'Optional[str]' = None, verbose: 'bool' = False) -> 'tuple[np.ndarray, np.ndarray]'",
+    "source_sha256": {
+      "pipeline.py": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd",
+      "core.py": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+      "config.py": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+      "utils.py": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3"
+    }
+  },
+  "parent_probe_sha256": "d512323baf17a9fceecc974940ac3f0d8b319bfaf9c483ce40b13cbdae55f6bf",
+  "experiment_controls_not_executed": [
+    {
+      "id": "baseline",
+      "variable": "none",
+      "values": [
+        "baseline aktual tanpa perubahan"
+      ],
+      "fixed": [
+        "Full paragraf asli byte-for-byte, punctuation/newlines/order sama",
+        "speaker identity dan byte hash style_ttl/style_dp tetap",
+        "model assets+tts.json+indexer hashes tetap",
+        "SDK/core call path dan lang aktual tetap",
+        "RNG seed/state dan software/provider/thread config dicatat",
+        "seluruh guard CPU/RSS/deadline/outputsize tetap"
+      ],
+      "measure": [
+        "raw and normalized text per actual SDK chunk",
+        "SDK chunk count + application chunk mapping",
+        "DP pre-speed duration and post-speed duration",
+        "waveform sample count/R per chunk and final join",
+        "word-internal pause locations/durations separately from join gaps",
+        "wall and CPU time separately from WAV seconds"
+      ],
+      "note": "Belum dijalankan; fixture strings bukan pengganti teks asli."
+    },
+    {
+      "id": "gap",
+      "variable": "silence_duration",
+      "values": [
+        0.3,
+        0.0
+      ],
+      "fixed": [
+        "baseline speaker/text/speed/steps/lang/RNG dan chunk layout"
+      ],
+      "expected_static": "Satu SDK chunk: tidak ada join gap untuk dihapus. Multi SDK chunks: hilangkan tepat int(0.3*R) zero samples setiap join; tidak mengubah internal pause model.",
+      "not_claimed": "Tidak menjanjikan gap bangku…depan/pucuk…jambu berkurang."
+    },
+    {
+      "id": "steps",
+      "variable": "total_steps",
+      "values": [
+        8,
+        12
+      ],
+      "fixed": [
+        "baseline speaker/text/speed=baseline, lang, chunk layout dan seed/state"
+      ],
+      "expected_static": "Loop count berbeda, DP dievaluasi sebelum loop sehingga tidak dipengaruhi total_steps pada input identik.",
+      "not_claimed": "Output VE aktual/waveform/prosodi dan biaya CPU belum diukur. Default core langsung5 harus eksplisit, jangan tak sengaja banding5 vs8."
+    },
+    {
+      "id": "speed",
+      "variable": "speed",
+      "values": [
+        1.05,
+        0.95,
+        1.15
+      ],
+      "fixed": [
+        "baseline speaker, full text, total_steps, lang, chunk layout, seed/state"
+      ],
+      "expected_static": "Contoh sweep hanya jika baseline memang1.05; selalu dalam SDK[0.7,2.0]. DP output dibagi speed; target total durasi berubah.",
+      "not_claimed": "Tidak ada selective per-word pause control; evaluasi rasio pause vs speech, bukan panjang total saja."
+    },
+    {
+      "id": "seed",
+      "variable": "NumPy global RNG seed in isolated harness only",
+      "values": [
+        "baseline recorded seed/state",
+        "same fixed seed repeated",
+        "predeclared paired alternative seeds"
+      ],
+      "fixed": [
+        "speaker dan kedua style arrays byte-exact, full original text, all inference args"
+      ],
+      "expected_static": "Source upstream tidak menyediakan seed parameter; set/restore global RNG hanya dalam harness terisolasi. Klarifikasi parent dari source aplikasi voice_app/supertonic3_worker.py:187 SHA256 eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625: produksi secara eksplisit memakai np.random.seed(20261026) sebelum synthesis. Angka ini bukan hanya milik fixture; pertahankan seed aplikasi saat membandingkan kandidat.",
+      "not_claimed": "Seed sama tidak memastikan pairing noise identik jika shape/chunk layout berubah atau backend nondeterministik."
+    },
+    {
+      "id": "chunk",
+      "variable": "max_chunk_length",
+      "values": [
+        "baseline target",
+        "higher target only if needed and within unchanged resource guards"
+      ],
+      "fixed": [
+        "speaker and full original text unchanged; do not insert/delete punctuation/newlines"
+      ],
+      "expected_static": "Jalankan chunk_text murni dahulu dan simpan daftar chunk/normalized inputs. Bila tetap satu SDK chunk, target berbeda bukan intervensi relevan. Oversize sentence tetap utuh, paragraf tetap boundary.",
+      "not_claimed": "Ini bukan izin full-context trial yang sudah ditolak; tidak dijalankan tanpa persetujuan baru."
+    },
+    {
+      "id": "tail-analysis",
+      "variable": "measurement-only comparison of SDK return vs native example final trim",
+      "values": [
+        "full returned arrays",
+        "non-destructive sample-count accounting against int(R*predicted_duration)"
+      ],
+      "fixed": [
+        "same generated recording if already authorized, speaker/text unchanged"
+      ],
+      "expected_static": "Hitung padding/join positions dan calon final-trim range tanpa menghapus sampel/merilis audio baru.",
+      "not_claimed": "Jangan force tail-zero/VAD-trim/pause compression atau mengklaim akhir kata terpotong tanpa waveform evidence."
+    },
+    {
+      "id": "conditioning",
+      "variable": "none by default",
+      "values": [
+        "preserve actual lang and style_ttl/style_dp"
+      ],
+      "fixed": [
+        "speaker identity and source text remain exact"
+      ],
+      "expected_static": "Jangan mengganti speaker atau campur/interpolasi arrays. Perubahan language tagging atau bypass normalization adalah eksperimen terpisah dan membutuhkan persetujuan; bukan parameter emotion/SSML yang sudah tersedia.",
+      "not_claimed": "Tidak ada safe documented style_dp multiplier/pitch slider/emotion preset untuk direkomendasikan."
+    }
+  ],
+  "unknowns": [
+    "Internal ONNX DP/vector estimator/vocoder graph belum dibaca/diinstrumentasi: learned duration range, hidden clipping, duration normalization, F0/emotion/attention behavior tidak diketahui.",
+    "Tidak menjalankan inference atau listening. Audit tidak menentukan penyebab jeda di bangku…depan atau pucuk…jambu dan tidak membuktikan perbaikan akustik.",
+    "Observasi historis 69 detik/7 application chunks dan23 detik/full sentence berasal konteks pengguna/parent, bukan pengukuran ulang audit. Keduanya dilaporkan terjadi di dalam satu native SDK chunk dengan input SDK utuh. Jangan menyamakan application chunk, SDK chunk, dan word boundary.",
+    "Context trial sebelumnya ditolak pengguna; tidak ada bukti bahwa memperpanjang kalimat/context menyelesaikan prosodi.",
+    "Lengkap paragraf asli, baseline speaker identifier/hash, RNG state/version, runtime provider dan nilai production aktual harus disalin dari receipt baseline sebelum eksperimen; jangan mengisi dari contoh M1/M4 atau fixture teks.",
+    "Parent menyatakan SDK installed core/pipeline/config/utils identik clone. Audit ini mengonfirmasi clone vs GitHub bytes dan hash receipt; tidak menemukan/membaca ulang path installed SDK secara independen.",
+    "Model installed seluruh assets dan manifest tidak dihash ulang; hanya tts.json dibaca/di-hash. Kesetaraan ke pinned HF model default SDK atau archive README tidak dibuktikan.",
+    "Konversi soundfile/subtype/PCM clipping serta pengaruh final trim/padding terhadap rekaman asli belum diuji.",
+    "Angka guard aplikasi berikut diterima sebagai klarifikasi parent, bukan source-app audit di pekerjaan ini: TTS_TIMEOUT45 hanya EDGE; Supertonic _local_request90; native wall75/CPU60/65; output-duration guard30 detik terpisah. Tidak boleh menyamakan request/CPU/wall deadlines dengan panjang WAV. Semua guard tetap utuh.",
+    "Tidak menyatakan seluruh repository/server/CLI SDK atau sistem produksi bebas limiter: cakupan executable dibaca penuh terbatas empat file SDK wajib + loader dan tiga file Python reference native; native README sebagai provenance model."
+  ]
+}

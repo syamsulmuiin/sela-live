@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "status": "offline_builder_ready_for_parent_final_candidate_review",
+  "language": "id",
+  "scope": {
+    "created_only": [
+      "tools/build_live_runtime.py",
+      "tests/setup/test_live_runtime_package.py",
+      "docs/LIVE-RUNTIME-PACKAGE-HANDOFF.json"
+    ],
+    "production_or_service_written": false,
+    "runtime_source_or_existing_tests_modified": false,
+    "inventory_modified": false,
+    "inference_download_commit_push_performed": false
+  },
+  "api": {
+    "call": "build_runtime(source_app_root, target_app_root, output_root, *, write=False, expected_worker_sha256=None)",
+    "default": "Plan JSON read-only; tidak membuat output ataupun target.",
+    "write": "Hanya membuat NEW output_root sebagai payload relatif terhadap future target_app_root; bukan installer.",
+    "requirements": [
+      "Ketiga root absolut, tanpa traversal dan tanpa symlink termasuk ancestors, serta pairwise disjoint.",
+      "Source harus ada; parent output harus sudah ada; output existing selalu ditolak termasuk pada plan.",
+      "Target boleh future temporary root atau production canonical root; tidak pernah dibuat atau ditulis.",
+      "Native manifest source guard_root dan live_root harus sama dengan staging source, bukan redirect ke path lama.",
+      "Vendor provenance lokal harus match native SDK repository, commit, inventory dan SHA256 semua .py; missing/corrupt/extra ditolak.",
+      "License diverifikasi dan disalin byte-exact; source guard/live pins dan PIN_HELPER_SHA diverifikasi tanpa mengeksekusi runtime/helper.",
+      "Semua .py sela_live_tts disalin; preserved guards tepat tiga; SDK hanya inventory .py yang telah diverifikasi.",
+      "Manifest hasil hanya mengubah tiga root secara semantik; worker hasil hanya mengganti 64-byte digest dalam tepat satu MANIFEST_SHA literal.",
+      "Gunakan expected_worker_sha256 dari review independen untuk menolak perubahan body worker yang belum disetujui."
+    ]
+  },
+  "cli": {
+    "plan_example": "python -B tools/build_live_runtime.py --source-app-root /root/sela-live --target-app-root /root/voice-lab --output-root /root/.hermes/cache/scratch/live-runtime-final-reviewed --expected-worker-sha256 <REVIEWED_FINAL_WORKER_SHA256>",
+    "materialize": "Tambahkan --write setelah review kandidat final dan pilih output baru yang belum ada.",
+    "failure": "Validasi gagal menghasilkan JSON error pada stderr dan exit 2; validasi selesai sebelum membuat output.",
+    "report": "LIVE-RUNTIME-PACKAGE.json di staging berisi source_files, files, transform source/output hashes, manifest_sha256 dan worker_sha256 untuk konfigurasi bridge. Report mengecualikan hash dirinya sendiri agar tidak cyclic."
+  },
+  "verification": {
+    "interpreter": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+    "vertical_tdd_command": "python -m unittest discover -s tests/setup -p test_live_runtime_package.py -v",
+    "red_green_slices": [
+      {"behavior": "default exact-hash plan tanpa mutasi", "red": "FAIL builder missing", "green": "1 test OK"},
+      {"behavior": "write relocation dan byte-exact worker transform", "red": "FileNotFoundError karena payload belum dibuat", "green": "2 tests OK"},
+      {"behavior": "vendor inventory/hash/license/provenance validation", "red": "missing vendor tidak ditolak", "green": "3 tests OK"},
+      {"behavior": "unsafe root, collision, traversal dan source symlink refusal", "red": "unsafe roots dan symlink diterima", "green": "5 tests OK"},
+      {"behavior": "native guard/live pins dan unique current worker bindings", "red": "source drift dan stale/duplicate bindings diterima", "green": "8 tests OK"},
+      {"behavior": "external reviewed worker SHA binding", "red": "TypeError API belum mendukung expected_worker_sha256", "green": "9 tests OK"},
+      {"behavior": "CLI default plan, explicit write dan collision JSON", "red": "JSONDecodeError karena CLI belum mengeluarkan plan", "green": "10 tests OK"}
+    ],
+    "final_new_tests_command": "PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest discover -s tests/setup -p test_live_runtime_package.py -v",
+    "final_new_tests_result": {"run": 10, "passed": 10, "failed": 0, "skipped": 0},
+    "legacy_setup_command": "PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest discover -s tests/setup -p test_setup.py -v",
+    "legacy_setup_result": {"run": 19, "passed": 19, "failed": 0, "skipped": 0},
+    "all_setup_command": "PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest discover -s tests/setup -p 'test_*.py' -v",
+    "all_setup_result": {
+      "run": 32,
+      "passed": 31,
+      "failed": 1,
+      "failure": "test_layout.TestLayout.test_exact_inventory_and_preserved_test_source",
+      "reason": "Inventory belum memuat tests/setup/test_live_runtime_package.py dan sibling tests/python/test_sela_live_integration.py; tidak diubah karena scope parent."
+    },
+    "real_source_plan": {
+      "command": "python -B tools/build_live_runtime.py --source-app-root /root/sela-live --target-app-root /root/voice-lab --output-root /root/.hermes/cache/scratch/live-runtime-parent-review-plan",
+      "exit_code": 0,
+      "mode": "plan",
+      "output_exists_after": false,
+      "candidate_source_worker_sha256": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+      "candidate_source_manifest_sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+      "candidate_target_manifest_sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+      "candidate_target_worker_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+      "note": "Bukan release pin final; sibling masih memiliki worker. Parent harus generate ulang dari kandidat final exact."
+    }
+  },
+  "owned_file_sha256": {
+    "tools/build_live_runtime.py": "8fe11522339d6ccba3b06bf00880845f7d4607faa4e578a1453cddb2e93dc0f6",
+    "tests/setup/test_live_runtime_package.py": "892b471a65f284e2bdd9090764c5f972eeba89f7b8e2039b97b4c02fd6713bcf"
+  },
+  "limitations_and_parent_actions": [
+    "Source provenance dan native pins merupakan trust anchor hasil review lokal, bukan verifikasi signature/remote upstream; builder sepenuhnya offline.",
+    "Tidak menjalankan helper/runtime, native worker check, inference ataupun download; genuine relocated worker check tetap tugas parent.",
+    "Tidak menyalin model, venv, profile/data/auth assets atau seluruh aplikasi; dependency/asset provisioning dan bridge configuration tetap tugas parent.",
+    "Builder bukan installer dan tidak mengubah service/unit. Parent bertanggung jawab review, materialisasi/deployment terpisah dan browser check.",
+    "Worker SHA review opsional pada API; gunakan --expected-worker-sha256 untuk kandidat final agar perubahan body di luar relokasi digest ditolak.",
+    "Root output harus baru dengan parent existing. Jika I/O terputus saat --write, partial staging dapat tersisa; tidak ada report completion yang dijamin dan output tetap tidak akan ditimpa oleh rerun.",
+    "Pemeriksaan symlink dilakukan terhadap filesystem yang stabil, bukan sandbox terhadap mutasi filesystem adversarial bersamaan; review/build dari staging tepercaya yang tidak sedang diedit.",
+    "Parent memperbarui inventory setelah review; jangan menganggap all-setup suite hijau sebelum rekonsiliasi dua test file baru."
+  ]
+}

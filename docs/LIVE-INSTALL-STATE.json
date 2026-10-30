@@ -1,0 +1,342 @@
+{
+  "phase": "installed_and_verified_github_publication_pending",
+  "production_switched": true,
+  "accepted_sample_sha256": "622c1ba2ebf2fcc0e63c5e2acf224f46971420423ba022210901b958116b94ad",
+  "github_repo": "syamsulmuiin/sela-live",
+  "github_private_verified": true,
+  "github_code_pushed": false,
+  "active_jobs": false,
+  "production_before": {
+    "pid": 750,
+    "observed_nonsecret_environment": {
+      "VOICE_PUBLIC_ORIGIN": "https://voice.kasirdigital.web.id",
+      "VOICE_MODEL": "gpt-6.1-sol",
+      "VOICE_STT_BACKEND": "local",
+      "VOICE_TTS_BACKEND": "supertonic3",
+      "VOICE_SUPERTONIC3_STYLE_PROFILE": "conditioning_b",
+      "VOICE_AUTOMATIC_CONDITIONING": "1",
+      "VOICE_ZIPFORMER_STATEFUL": "1",
+      "VOICE_LOCAL_ASR_ENGINE": "zipformer_id_int8"
+    },
+    "source_and_assets": {
+      "voice_app/stateful_asr.py": {
+        "sha256": "221d88e009d036c4adb1881c09b3a367dc8b50cc19396e9112fe8ef81a208d5e",
+        "mode": 420
+      },
+      "voice_app/local_audio_worker.py": {
+        "sha256": "cfa6a2a543ebbef3fe2b51a212a2200f11ac1db427bfa8a26ec3f75fef57eebf",
+        "mode": 420
+      },
+      "voice_app/automatic_conditioning_rules.json": {
+        "sha256": "2b097ea9b3c6dbe22d4df37891e9ccad040d068aba84367a9fdcd4fa73c06b7b",
+        "mode": 420
+      },
+      "voice_app/speech.py": {
+        "sha256": "d7fcd0083c3adeb8dec4b50475f1e6ac8f9643b787e13a792f80f62f6fd91d92",
+        "mode": 420
+      },
+      "voice_app/zipformer_state.py": {
+        "sha256": "3b89f2a6ee1f22fcce35026150699d540630e35547e366de79b1ed450613919c",
+        "mode": 420
+      },
+      "voice_app/delivery_registry.json": {
+        "sha256": "a0b67b0a3b9959ce7269acc48538fa8d8fb27ec41f57a81020ebc4b3b00a15b6",
+        "mode": 420
+      },
+      "voice_app/providers.py": {
+        "sha256": "80105da43ea721e213e47822f91298e6cd2ae8a167bb7503f1e97767d0451f96",
+        "mode": 420
+      },
+      "voice_app/pronunciation-id.json": {
+        "sha256": "1854d1e60ad2bd985d2deea0aeae9f6aa3b5eee04b45c60939d5782ed8c3e6c1",
+        "mode": 420
+      },
+      "voice_app/audio.py": {
+        "sha256": "b1cb6a934eac739cea174ae020ca93408c7f86a45de3a86d318db3264ab67f9b",
+        "mode": 420
+      },
+      "voice_app/server.py": {
+        "sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5",
+        "mode": 420
+      },
+      "voice_app/prosody.py": {
+        "sha256": "54d3168aa216cdc62e53f9b610eb1892f3441444d7b0de6d0fe543b3d4e1c2a6",
+        "mode": 420
+      },
+      "voice_app/session_core.py": {
+        "sha256": "14063a463652cde2d784151ed9f1a369723729bc7f432ca14096c0c4de4da06a",
+        "mode": 420
+      },
+      "voice_app/audio_continuity.py": {
+        "sha256": "e4ed467895bebf58769832e9ec9426b7ea0e98b83050771f3b69759c3cad775b",
+        "mode": 420
+      },
+      "voice_app/supertonic3_worker.py": {
+        "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+        "mode": 420
+      },
+      "voice_app/zipformer_worker.py": {
+        "sha256": "dd34189a5e8bc29a7cf61a2f760b778c6f42fc638e83a92fe6e5c57ac8c392fb",
+        "mode": 420
+      },
+      "voice_app/__init__.py": {
+        "sha256": "b265d4215b2f147abf8bc059b37e8f6f7adb13f157eeb08abf0cedcd4f9fd60e",
+        "mode": 420
+      },
+      "voice_app/delivery.py": {
+        "sha256": "959f55d248983239f2027d269fa3dc4ef26b78167e6a27572b0215a9c06d7b69",
+        "mode": 420
+      },
+      "voice_app/approved_conditioning.py": {
+        "sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+        "mode": 420
+      },
+      "voice_app/automatic_conditioning.py": {
+        "sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+        "mode": 420
+      },
+      "voice_app/auth.py": {
+        "sha256": "0c02b44b02e60ff1b56d4029d47ea7c0920daa27c63de4a5747e9cf78d0fbb1b",
+        "mode": 420
+      },
+      "voice_app/zipformer_stateful_worker.py": {
+        "sha256": "26e9f6c14967ce0378b8be45866b64fd89f08b036a35257d0c282d55497a879a",
+        "mode": 420
+      },
+      "voice_app/stream_asr.py": {
+        "sha256": "d8d5e854dcb05114158bb049d1bf2abd8d4c77ae4bdc222bf8feb65e24385a8e",
+        "mode": 420
+      },
+      "voice_app/tts_chunks.py": {
+        "sha256": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26",
+        "mode": 420
+      },
+      "web/pcm-worklet.js": {
+        "sha256": "df5382aacd0659d132357c5bd5658c98b41c55cab62b2a4d6441244c23b19eb2",
+        "mode": 420
+      },
+      "web/styles.css": {
+        "sha256": "9f4b01937e19f7197f2f12f513f108f242a4c3dbfb6ada8b736fd131d27e6f11",
+        "mode": 420
+      },
+      "web/auth.css": {
+        "sha256": "5e69bfbf7bad2a42dd7e5eae5768470d32ee51f09762ba8316c893454fe8e362",
+        "mode": 420
+      },
+      "web/auth.html": {
+        "sha256": "19cf4c165ccee5c6bba97d4696eb182260d597d9cfdf73514dfd67fc6d9668fa",
+        "mode": 420
+      },
+      "web/auth.js": {
+        "sha256": "727cabb2746038e8c72f8793ddf8438f81ad5192ec23c3757305037a4c84956f",
+        "mode": 420
+      },
+      "web/index.html": {
+        "sha256": "867a68494d1c27598903b2d56ede571d1fe39d61f78f19d02789bfab5d6cc426",
+        "mode": 420
+      },
+      "web/client.test.cjs": {
+        "sha256": "bb38ff96bb85232d2c9580a8cb012cb9abc01f449cc19a6df6ad49e3e34eef0f",
+        "mode": 420
+      },
+      "web/auth.test.cjs": {
+        "sha256": "e58e71b3cc2cb70501e9fba0856e5d7e95a41ffdc7d2e921853976beb85128a7",
+        "mode": 420
+      },
+      "web/audio.test.cjs": {
+        "sha256": "f79897b31e8e9de09465ea6bb20a9df6b8d054a29f397e824cf32a29480b34da",
+        "mode": 420
+      },
+      "web/app.js": {
+        "sha256": "0803b5774c0e9f2e23332150276cc5d3fd5970b844423d94c2b544e0371222ef",
+        "mode": 420
+      },
+      "web/audio-core.js": {
+        "sha256": "bf0f82e423fdc9b302b60a1aca92f1f00ffee71da54e94b4ea1ada363995c21b",
+        "mode": 420
+      },
+      "web/supertonic3-LICENSE.txt": {
+        "sha256": "0d944a9110fed9a9602d60e0423a272903e7bd21ab060490774efc77c2275e9f",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/conditioning_b_active_low.json": {
+        "sha256": "f948e966e00dba822e19da9d0207a5f5f0254618e652a624810a5c89985e1a56",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/conditioning_b_active_medium.json": {
+        "sha256": "294c2d705bf8f5fd3388725e28bac3850b39a8f479b5c23afc40cced3bae17b6",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/conditioning_b_calm_medium.json": {
+        "sha256": "64fa0c071863db434a22ca080228eb93ae4f954553226ea4f4f267f4150b5618",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/conditioning_b_calm_low.json": {
+        "sha256": "f89348574a02a68771e47bb9fd23e33dbada5fc9ca0b876c29fdc6da049ce832",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/conditioning_b_active_high.json": {
+        "sha256": "4575171ea1b5ffbd96a1b03a92704262a2c338d190dc969e137656904097b95a",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/conditioning_b.json": {
+        "sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/manifest.json": {
+        "sha256": "ba9257f9c745accddcbc64c017c4638d39f5c1255f6923f5f499acc099aaf403",
+        "mode": 420
+      },
+      "voice_assets/automatic-conditioning/conditioning_b_calm_high.json": {
+        "sha256": "d90e418153d8b3d0e7234a92541fcfb4d1f054efba60adf08f327dad001f4bc4",
+        "mode": 420
+      },
+      "voice_assets/conditioning-b/profile.json": {
+        "sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828",
+        "mode": 420
+      },
+      "voice_assets/conditioning-b/manifest.json": {
+        "sha256": "08a34381da17292b652d384b1316365218f1c4d9fc0ae22405fe8909bcb55cfc",
+        "mode": 420
+      }
+    },
+    "units": {
+      "/etc/systemd/system/voice-lab.service": {
+        "sha256": "66032cf28c666ae67df02fce4a8b288a9525e535d9f1125fe1d0aacc1c97504b",
+        "mode": 420
+      },
+      "/etc/systemd/system/voice-lab.service.d/50-automatic-conditioning.conf": {
+        "sha256": "d95b2db8bf1f0828f0ff1e5fbb4aa0a5db23a87be4aa3e7fdad21451cc028297",
+        "mode": 420
+      },
+      "/etc/systemd/system/voice-lab.service.d/zipformer.conf": {
+        "sha256": "1229b43b8b180394c26bb33f786c5f5f1851e9ccffc48d3fd371ba30966e0618",
+        "mode": 420
+      },
+      "/etc/systemd/system/voice-lab.service.d/40-approved-conditioning-b.conf": {
+        "sha256": "df194b84b305f8d9724b82dcbdd171dd6cb0cccf74f206f8a3f3e9b32888041d",
+        "mode": 420
+      },
+      "/etc/systemd/system/voice-lab.service.d/stateful-stt.conf": {
+        "sha256": "f47a5d1607edecacb8bb76fc3f3d7e1e8a7811e8a22972b479ef148ac8133751",
+        "mode": 420
+      },
+      "/etc/systemd/system/voice-lab.service.d/supertonic3.conf": {
+        "sha256": "164c54e7d82b619baa08b3bff77bb9dd113d4383af703c6515bfe9e957adedf7",
+        "mode": 420
+      },
+      "/etc/systemd/system/voice-lab.service.d/browser-choice.conf": {
+        "sha256": "f824c458eed7d390025e3cd360899814b80b861835118c507a70d8c59e5f31f2",
+        "mode": 420
+      }
+    }
+  },
+  "installation_allowed_only_after": [
+    "actual integration/packaging tests",
+    "exact-hash runtime and installer review",
+    "relocated native preflight with existing isolation/resource rules",
+    "fresh baseline match and rollback snapshot",
+    "post-install runtime/health/authentication/loopback checks"
+  ],
+  "public_authenticated_browser_session": "not_available; login wall and vault has no saved login. Do not reset user account or invent authenticated-production test success.",
+  "runtime_packaging": {
+    "status": "unit_tests_and_parent_source_review_passed",
+    "parent_verification": "docs/LIVE-RUNTIME-PACKAGE-PARENT-VERIFICATION.json",
+    "final_payload_and_native_relocation_pending": false,
+    "relocated_native_check_passed": true,
+    "relocated_check_receipt": "/root/.hermes/cache/scratch/live-install-preflight-5wpfmoz6/relocated-check.json",
+    "final_payload_paths": "docs/LIVE-FINAL-PAYLOAD-PATHS.json",
+    "review_install_and_post_install_verification_pending": false
+  },
+  "user_delivery_requirement": "Update private syamsulmuiin/sela-live and verify remote SHA, install accepted quality12 TTS, notify user only when installed and ready for test; explicitly report blocker if stopped.",
+  "runtime_review": "docs/reviews/LIVE-INTEGRATION-RUNTIME-REVIEW.json",
+  "native_and_browser_verification": "docs/LIVE-NATIVE-BROWSER-VERIFICATION.json",
+  "setup_tests_parent_verified": 66,
+  "browser_tests_parent_verified": 121,
+  "installer_parent_fix": "Observed RED for cold startup after5s; finite120s monotonic startup allowance now covers seven guarded profile preflights; no inference/resource guard loosened.",
+  "deployment_unsigned_plan": "/root/sela-live-releases/live-release-4kkkhooe/unsigned-plan-durable.json",
+  "installer_rejected_review": "docs/reviews/LIVE-INSTALLER-APPROVAL.json",
+  "installer_repair_tdd": {
+    "new_failing_cases": 3,
+    "normal_tests_passed": 34,
+    "optimized_tests_passed": 34,
+    "scope": "suppress restore after stop failure; suppress restart after restore/preverification failure"
+  },
+  "release_root": "/root/sela-live-releases/live-release-4kkkhooe",
+  "application_suite_parent_verified": {
+    "ran": 296,
+    "skipped": 4,
+    "passed_without_failures": true,
+    "includes_existing_native_piper_asr_fixture": true
+  },
+  "clean_export_tests": {
+    "setup": 66,
+    "focused_runtime": 122,
+    "existing_native_dependencies": true,
+    "fresh_host_verified": false
+  },
+  "installer_final_review": "docs/reviews/LIVE-INSTALLER-REPAIR-REVIEW.json",
+  "approved_plan": "/root/sela-live-releases/live-release-4kkkhooe/approved-plan.json",
+  "production_after": {
+    "installed": true,
+    "main_pid": 95188,
+    "healthy": true,
+    "selectors": {
+      "VOICE_PUBLIC_ORIGIN": "https://voice.kasirdigital.web.id",
+      "VOICE_MODEL": "gpt-6.1-sol",
+      "VOICE_STT_BACKEND": "local",
+      "VOICE_TTS_BACKEND": "supertonic3",
+      "VOICE_SUPERTONIC3_STYLE_PROFILE": "conditioning_b",
+      "VOICE_AUTOMATIC_CONDITIONING": "1",
+      "VOICE_SELA_LIVE_LOCK": "/root/voice-lab/.runtime/live-tts.lock",
+      "VOICE_SELA_LIVE_PYTHON": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+      "VOICE_SELA_LIVE_TTS": "1",
+      "VOICE_SELA_LIVE_WORKER": "/root/voice-lab/sela_live_tts/worker.py",
+      "VOICE_SELA_LIVE_WORKER_SHA256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+      "VOICE_ZIPFORMER_STATEFUL": "1",
+      "VOICE_SUPERTONIC3_PYTHON": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+      "VOICE_SUPERTONIC3_MODEL_PATH": "/root/voice-lab/autonomous/expressive-tts/assets",
+      "VOICE_SUPERTONIC3_MANIFEST": "/root/voice-lab/autonomous/expressive-tts/assets-manifest.json",
+      "VOICE_LOCAL_ASR_ENGINE": "zipformer_id_int8"
+    },
+    "all_payload_bytes_modes_verified": true,
+    "preserved_source_assets_units_verified": true,
+    "snapshot": "/root/sela-live-install-snapshots/9d7509a6587142c69e3cc11518189589",
+    "public_authenticated_account_flow": "not tested; no saved production credentials",
+    "production_account_unchanged": true
+  },
+  "installed_native": {
+    "status": "passed",
+    "scope": "fresh installed-source native synthesis, not authenticated production account",
+    "native_calls": 1,
+    "tts_identity": {
+      "backend": "supertonic3",
+      "voice": "M1",
+      "language": "id",
+      "rate": "default",
+      "pitch": "default",
+      "format": "wav",
+      "sample_rate": 44100,
+      "channels": 1,
+      "sample_width": 2,
+      "voice_style_profile": "conditioning_b",
+      "style_label": "Conditioning B (+0.4)",
+      "adapter": "sela_live",
+      "total_steps": 12
+    },
+    "seconds": 3.8312925170068026,
+    "sha256": "afcc3ebde2f220fc2c659b8e7d2f1a9a27998c4b9901431e5a6db8424e66f00b",
+    "worker": "/root/voice-lab/sela_live_tts/worker.py",
+    "worker_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+    "service_pid": 95188,
+    "production_account_unchanged": true
+  },
+  "public_guards": {
+    "/health": 200,
+    "/api/config": 401,
+    "/": 303,
+    "/ws": 403
+  },
+  "pending": "GitHub source publication/readback; user physical microphone/listening test after ready notice",
+  "canonical_status": true
+}

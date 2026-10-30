@@ -1,0 +1,90 @@
+{
+  "application": {
+    "ran": 296,
+    "skipped": 4,
+    "failures": 0
+  },
+  "setup": {
+    "ran": 66,
+    "failures": 0
+  },
+  "javascript": {
+    "ran": 121,
+    "failures": 0
+  },
+  "clean_source_export": {
+    "setup": 66,
+    "runtime": 122,
+    "existing_dependencies": true,
+    "full_application": {
+      "ran": 296,
+      "skipped": 4,
+      "failures": 0,
+      "documented_fixture_path_and_package_discovery_verified": true
+    }
+  },
+  "publication_preflight": "No tracked/untracked publishable credential-patterns, binary models, databases or recordings found. Recheck actual index before push.",
+  "production_switched": true,
+  "native_browser_evidence": "docs/LIVE-NATIVE-BROWSER-VERIFICATION.json",
+  "installed_readback": {
+    "installed": true,
+    "main_pid": 95188,
+    "healthy": true,
+    "selectors": {
+      "VOICE_PUBLIC_ORIGIN": "https://voice.kasirdigital.web.id",
+      "VOICE_MODEL": "gpt-6.1-sol",
+      "VOICE_STT_BACKEND": "local",
+      "VOICE_TTS_BACKEND": "supertonic3",
+      "VOICE_SUPERTONIC3_STYLE_PROFILE": "conditioning_b",
+      "VOICE_AUTOMATIC_CONDITIONING": "1",
+      "VOICE_SELA_LIVE_LOCK": "/root/voice-lab/.runtime/live-tts.lock",
+      "VOICE_SELA_LIVE_PYTHON": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+      "VOICE_SELA_LIVE_TTS": "1",
+      "VOICE_SELA_LIVE_WORKER": "/root/voice-lab/sela_live_tts/worker.py",
+      "VOICE_SELA_LIVE_WORKER_SHA256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+      "VOICE_ZIPFORMER_STATEFUL": "1",
+      "VOICE_SUPERTONIC3_PYTHON": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+      "VOICE_SUPERTONIC3_MODEL_PATH": "/root/voice-lab/autonomous/expressive-tts/assets",
+      "VOICE_SUPERTONIC3_MANIFEST": "/root/voice-lab/autonomous/expressive-tts/assets-manifest.json",
+      "VOICE_LOCAL_ASR_ENGINE": "zipformer_id_int8"
+    },
+    "all_payload_bytes_modes_verified": true,
+    "preserved_source_assets_units_verified": true,
+    "snapshot": "/root/sela-live-install-snapshots/9d7509a6587142c69e3cc11518189589",
+    "public_authenticated_account_flow": "not tested; no saved production credentials",
+    "production_account_unchanged": true
+  },
+  "installed_native": {
+    "status": "passed",
+    "scope": "fresh installed-source native synthesis, not authenticated production account",
+    "native_calls": 1,
+    "tts_identity": {
+      "backend": "supertonic3",
+      "voice": "M1",
+      "language": "id",
+      "rate": "default",
+      "pitch": "default",
+      "format": "wav",
+      "sample_rate": 44100,
+      "channels": 1,
+      "sample_width": 2,
+      "voice_style_profile": "conditioning_b",
+      "style_label": "Conditioning B (+0.4)",
+      "adapter": "sela_live",
+      "total_steps": 12
+    },
+    "seconds": 3.8312925170068026,
+    "sha256": "afcc3ebde2f220fc2c659b8e7d2f1a9a27998c4b9901431e5a6db8424e66f00b",
+    "worker": "/root/voice-lab/sela_live_tts/worker.py",
+    "worker_sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+    "service_pid": 95188,
+    "production_account_unchanged": true
+  },
+  "public_guards": {
+    "/health": 200,
+    "/api/config": 401,
+    "/": 303,
+    "/ws": 403
+  },
+  "source_to_installed_manifest": "docs/LIVE-TTS-DELTA-MANIFEST.json"
+}

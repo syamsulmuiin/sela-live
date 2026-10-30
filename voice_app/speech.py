@@ -213,6 +213,15 @@ class Speech:
         self._automatic_conditioning_enabled = automatic_choice == '1'
         if self._automatic_conditioning_enabled and (self._backend != 'supertonic3' or self._style_profile != 'conditioning_b'):
             raise ValueError('VOICE_AUTOMATIC_CONDITIONING requires Supertonic3 conditioning_b')
+        self._live_tts = None
+        live_choice = env.get('VOICE_SELA_LIVE_TTS', '0')
+        if type(live_choice) is not str or live_choice not in ('0', '1'):
+            raise ValueError('VOICE_SELA_LIVE_TTS requires 0 or 1')
+        if live_choice == '1':
+            if self._backend != 'supertonic3' or self._style_profile != 'conditioning_b':
+                raise ValueError('Sela Live requires Supertonic3 conditioning_b')
+            from .sela_live_bridge import SelaLiveBridge
+            self._live_tts = SelaLiveBridge(env)
         self._conditioning_router = None
         if self._automatic_conditioning_enabled:
             from .automatic_conditioning import load_router
@@ -333,18 +342,25 @@ class Speech:
             if self._style_profile == 'conditioning_b':
                 self.tts_label += ' · gaya B (+0.4)'
                 self.tts_identity.update(voice_style_profile='conditioning_b', style_label='Conditioning B (+0.4)')
+            if self._live_tts is not None:
+                self.tts_label += ' · Sela Live quality12'
+                self.tts_identity.update(adapter='sela_live', total_steps=12)
             try:
-                check = subprocess.run((self._super_python, '-I',
-                    str(Path(__file__).with_name('supertonic3_worker.py')), 'check',
-                    self._super_assets, self._super_manifest) + self._style_args(), stdin=subprocess.DEVNULL,
+                check_args = (self._live_tts.args('check', self._super_assets, self._super_manifest, self._style_profile)
+                    if self._live_tts is not None else
+                    (self._super_python, '-I', str(Path(__file__).with_name('supertonic3_worker.py')),
+                     'check', self._super_assets, self._super_manifest) + self._style_args())
+                check = subprocess.run(check_args, stdin=subprocess.DEVNULL,
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=15, env=_offline_env())
                 self.tts_available = check.returncode == 0
                 if self.tts_available and self.automatic_conditioning_enabled:
                     from .automatic_conditioning import PROFILE_IDS
                     for profile_id in PROFILE_IDS[1:]:
-                        check = subprocess.run((self._super_python, '-I',
-                            str(Path(__file__).with_name('supertonic3_worker.py')), 'check',
-                            self._super_assets, self._super_manifest, profile_id), stdin=subprocess.DEVNULL,
+                        check_args = (self._live_tts.args('check', self._super_assets, self._super_manifest, profile_id)
+                            if self._live_tts is not None else
+                            (self._super_python, '-I', str(Path(__file__).with_name('supertonic3_worker.py')),
+                             'check', self._super_assets, self._super_manifest, profile_id))
+                        check = subprocess.run(check_args, stdin=subprocess.DEVNULL,
                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=15, env=_offline_env())
                         if check.returncode != 0:
                             self.tts_available = False
@@ -596,6 +612,11 @@ class Speech:
                         (self._python, '-I', str(LOCAL_WORKER), action,
                          str(self._stt_path if action == 'stt' else self._tts_path)))
                 if action == 'tts' and self._backend == 'supertonic3':
+                    if self._live_tts is not None:
+                        retained.enter_context(self._live_tts.claim())
+                        args = self._live_tts.args('tts', self._super_assets, self._super_manifest,
+                            profile_id or self._style_profile)
+                        return await self._live_tts.run(_bounded_process, args, payload, limit, env=_offline_env())
                     return await _bounded_process(args, payload, limit, env=_offline_env(), native_diagnostics=True)
                 return await _bounded_process(args, payload, limit, env=_offline_env())
         finally:

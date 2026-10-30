@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "verdict": "approved",
+  "reviewer": "independent-installer-repair-reviewer / Hermes subagent (gpt-6.1-sol)",
+  "scope": "Focused independent delta re-review solely of unsafe-recovery-order: Installer.apply exception/recovery block and three added regression tests. Other audit scope is referenced from the unchanged prior rejected report, not re-audited or newly approved here.",
+  "installer_sha256": "359aa970f9303c3022b7b8db5b9eceb8d4f91ece6b09857bacb371482caff5a6",
+  "testsource_sha256": "4f7927efc04124229cee5ea29c177b446f31dcbaf96bf39b0a9f7d8cd5c33779",
+  "artifacts": {
+    "tools/install_live_tts.py": {
+      "sha256": "359aa970f9303c3022b7b8db5b9eceb8d4f91ece6b09857bacb371482caff5a6",
+      "mode": 420,
+      "mode_octal": "0644"
+    },
+    "tests/setup/test_live_tts_install.py": {
+      "sha256": "4f7927efc04124229cee5ea29c177b446f31dcbaf96bf39b0a9f7d8cd5c33779",
+      "mode": 420,
+      "mode_octal": "0644"
+    }
+  },
+  "prior_review": {
+    "path": "/root/sela-live/docs/reviews/LIVE-INSTALLER-APPROVAL.json",
+    "sha256": "e749bf7991d2c8424e7ceb0260509b88844ced97769be79fca1b615d22683a88",
+    "mode": 420,
+    "mode_octal": "0644",
+    "verdict": "rejected",
+    "unchanged_verified": true,
+    "relationship": "Preserved unchanged. Its other audit checks remain the reference for their original scope; this repair review closes only its sole blocker for the exact installer/test artifacts recorded here."
+  },
+  "sole_original_blocker_closed": true,
+  "blocker_resolution": {
+    "id": "unsafe-recovery-order",
+    "status": "closed",
+    "location": "tools/install_live_tts.py:307-352",
+    "findings": [
+      "Recovery stop failure records stop:<exception> and leaves errors nonempty; restoration, pre-restart validation and recovery restart are all skipped. Terminal rollback_failed receipt is preserved.",
+      "Restoration errors are collected and suppress recovery restart. Existing restored files are hash/mode checked; absent baseline destinations are removed.",
+      "Before recovery restart, every baseline app/unit record is matched for exact hash/mode, every originally absent destination is checked absent, and complete protected baseline inventory is validated. Any validation failure records pre_restart:<exception> and suppresses restart.",
+      "Only successful quiescence, restoration and full pre-restart verification reach recovery restart. Baseline bytes/modes, inventory and baseline runtime selectors/health are rechecked after restart. SystemHooks.restart performs daemon-reload before restart; a reload exception prevents its restart command."
+    ]
+  },
+  "new_test_review": [
+    {
+      "name": "test_failed_recovery_stop_never_restores_or_restarts",
+      "lines": "666-686",
+      "assessment": "Injects rollback stop failure after candidate restart failure; asserts no speech.py restoration, only initial restart attempt, candidate bytes untouched, and rollback_failed."
+    },
+    {
+      "name": "test_failed_restoration_never_restarts_candidate_source",
+      "lines": "688-702",
+      "assessment": "Persistently fails speech.py restoration; restart source-byte log contains only the original candidate restart and receipt is rollback_failed."
+    },
+    {
+      "name": "test_baseline_inventory_is_verified_before_recovery_restart",
+      "lines": "704-720",
+      "assessment": "Introduces unreviewed source during restoration; baseline speech.py is restored but inventory validation blocks recovery restart, with only initial restart attempt and rollback_failed."
+    }
+  ],
+  "tests": [
+    {
+      "command": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest discover -s tests/setup -p test_live_tts_install.py -v",
+      "cwd": "/root/sela-live",
+      "ran": 34,
+      "seconds": 1.482,
+      "exit_code": 0,
+      "passed": 34,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "result": "OK"
+    },
+    {
+      "command": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -O -m unittest discover -s tests/setup -p test_live_tts_install.py -v",
+      "cwd": "/root/sela-live",
+      "ran": 34,
+      "seconds": 1.515,
+      "exit_code": 0,
+      "passed": 34,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "result": "OK"
+    }
+  ],
+  "blockers": [],
+  "artifact_stability": "Installer, test source and prior rejected report SHA256 and modes matched before and after both test runs and immediately before report creation.",
+  "mutations": {
+    "source_edits": false,
+    "production_writes": false,
+    "real_system_operations": false,
+    "real_systemd_hooks": false,
+    "model_inference": false,
+    "git": false,
+    "fixture_only_tests": true,
+    "review_file_created": "docs/reviews/LIVE-INSTALLER-REPAIR-REVIEW.json"
+  },
+  "deployment_boundary": "This is not an actual deployment-plan approval or deployment. Parent owns actual plan bindings, production deployment and GitHub."
+}

@@ -1,0 +1,36 @@
+{
+  "status": "passed_after_fixture_portability_repair",
+  "clean_export": "/root/.hermes/cache/scratch/natural-export-ld4dz5qt",
+  "not_fresh_host": true,
+  "existing_native_assets_and_sdk_used": true,
+  "sdk_cases": 335,
+  "sdk_skips": 4,
+  "sdk_failures": 0,
+  "native_dependency_fixture_cases": 42,
+  "native_dependency_fixture_failures": 0,
+  "setup_cases": 81,
+  "setup_failures": 0,
+  "installer_cases_normal": 45,
+  "installer_cases_optimized": 45,
+  "installer_failures": 0,
+  "private_probe_fixture_portability": {
+    "normal": 6,
+    "optimized": 6,
+    "failures": 0,
+    "changed_file": "tests/python/test_sela_live_natural_probe.py",
+    "sha256": "22bebe1958d6b639f45cefa69c3471035eb5fc99a2fe6814db86c0b109644863",
+    "qualification": "Only in-memory harmless fixture paths rebound to clean checkout; actual approval gate and runtime unchanged. Cancellation fixture has bounded wait and joins owned task."
+  },
+  "historical_failed_attempt": {
+    "status": "timed_out",
+    "cause": "Original-path fixture inventory caused KeyError before native entry and the cancellation fixture waited indefinitely; reproduced, corrected, and complete suite rerun successfully.",
+    "real_native_probe_retried": false
+  },
+  "installer_repair": {
+    "scope": "Final stop on recovery restart or post-restart verification error; failed final stop recorded without claiming stopped",
+    "source_sha256": "3de2501691eb34c566967e03816af81ca9ce7a045adc74f48e28de831efcc504",
+    "tests_sha256": "37683c68aacb6a4469a99779b6118f219ad59a2fd745ef8839c99252f138d832",
+    "original_rejection_preserved": true
+  },
+  "production_unchanged": true
+}

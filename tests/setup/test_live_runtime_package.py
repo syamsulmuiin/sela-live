@@ -64,6 +64,91 @@ class RuntimePackageTests(unittest.TestCase):
         spec.loader.exec_module(module)
         return module.build_runtime(self.source, self.target, self.output, **kwargs)
 
+    def natural_bundle(self):
+        for name in ('natural.py', 'utterance.py', 'duration.py', 'duration_worker.py'):
+            self.put('sela_live_tts/' + name, ('# ' + name + '\n').encode())
+        self.put('sela_live_tts/natural_worker.py', self.worker + b'# natural worker\n')
+
+    def test_natural_relocation_inventory_and_external_binding(self):
+        self.natural_bundle()
+        original = self.raw['sela_live_tts/natural_worker.py']
+        result = self.api(write=True, expected_natural_worker_sha256=sha(original))
+        manifest = 'sela_live_tts/natural-runtime-manifest.json'
+        inventory = json.loads((self.output / manifest).read_bytes())
+        expected = {p: h for p, h in result['files'].items()
+                    if p.endswith('.py') or p == 'sela_live_tts/upstream-manifest.json'}
+        self.assertEqual(inventory, {'schema_version': 1, 'files': expected})
+        self.assertNotIn(manifest, inventory['files'])
+        transformed = original.replace(sha(self.raw_original_manifest()).encode(),
+                                       result['manifest_sha256'].encode(), 1)
+        self.assertEqual((self.output / 'sela_live_tts/natural_worker.py').read_bytes(), transformed)
+        self.assertEqual(result['natural_worker_sha256'], sha(transformed))
+        self.assertEqual(result['runtime_manifest_sha256'], result['files'][manifest])
+        self.assertEqual(result['transforms']['natural_worker'], {
+            'kind': 'MANIFEST_SHA_literal_only', 'source_sha256': sha(original),
+            'output_sha256': sha(transformed)})
+        self.assertEqual(result['source_files']['sela_live_tts/natural_worker.py'], sha(original))
+        self.assertEqual((self.output / 'sela_live_tts/duration_worker.py').read_bytes(),
+                         self.raw['sela_live_tts/duration_worker.py'])
+        self.assertFalse(self.target.exists())
+
+    def test_natural_partial_bundle_and_missing_external_binding_target_refused(self):
+        self.natural_bundle()
+        for name in ('natural.py', 'utterance.py', 'duration.py', 'duration_worker.py', 'natural_worker.py'):
+            with self.subTest(missing=name):
+                path = self.source / 'sela_live_tts' / name
+                saved = path.read_bytes()
+                path.unlink()
+                with self.assertRaises(ValueError):
+                    self.api(write=True)
+                self.assertFalse(self.output.exists())
+                path.write_bytes(saved)
+        for name in ('natural.py', 'utterance.py', 'duration.py', 'duration_worker.py', 'natural_worker.py'):
+            (self.source / 'sela_live_tts' / name).unlink()
+        with self.assertRaises(ValueError):
+            self.api(expected_natural_worker_sha256='0' * 64)
+
+    def test_natural_hostile_pins_hash_drift_symlinks_and_cli_binding(self):
+        self.natural_bundle()
+        path = self.source / 'sela_live_tts/natural_worker.py'
+        original = path.read_bytes()
+        manifest_sha = sha(self.raw_original_manifest()).encode()
+        helper_sha = sha(self.raw['sela_live_tts/source_pins.py']).encode()
+        for raw in (original.replace(manifest_sha, b'0' * 64),
+                    original.replace(helper_sha, b'0' * 64),
+                    original.replace(b'PIN_HELPER_SHA=', b'OTHER='),
+                    original + b"MANIFEST_SHA='" + manifest_sha + b"'\n",
+                    original + b"PIN_HELPER_SHA='" + helper_sha + b"'\n",
+                    original + b'# unreviewed body\n'):
+            with self.subTest(raw=raw):
+                path.write_bytes(raw)
+                with self.assertRaises(ValueError):
+                    self.api(write=True, expected_natural_worker_sha256=sha(original))
+                self.assertFalse(self.output.exists())
+        path.write_bytes(original)
+        for name in ('natural_worker.py', 'natural.py', 'utterance.py', 'duration.py', 'duration_worker.py'):
+            link = self.source / 'sela_live_tts' / name
+            saved = link.read_bytes()
+            outside = self.base / 'outside'
+            outside.write_bytes(saved)
+            link.unlink()
+            link.symlink_to(outside)
+            with self.assertRaises(ValueError):
+                self.api(write=True)
+            self.assertFalse(self.output.exists())
+            link.unlink()
+            link.write_bytes(saved)
+        command = [sys.executable, '-B', str(BUILDER), '--source-app-root', str(self.source),
+                   '--target-app-root', str(self.target), '--output-root', str(self.output),
+                   '--expected-natural-worker-sha256', sha(original)]
+        result = subprocess.run(command, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout)['source_files']['sela_live_tts/natural_worker.py'], sha(original))
+        self.assertFalse(self.output.exists())
+        rejected = subprocess.run(command[:-1] + ['0' * 64, '--write'], capture_output=True, text=True)
+        self.assertEqual(rejected.returncode, 2)
+        self.assertFalse(self.output.exists())
+
     def test_default_plan_has_exact_hashes_without_mutation(self):
         before = dict(self.raw)
         result = self.api()

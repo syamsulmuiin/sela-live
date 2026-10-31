@@ -213,6 +213,14 @@ class Speech:
         self._automatic_conditioning_enabled = automatic_choice == '1'
         if self._automatic_conditioning_enabled and (self._backend != 'supertonic3' or self._style_profile != 'conditioning_b'):
             raise ValueError('VOICE_AUTOMATIC_CONDITIONING requires Supertonic3 conditioning_b')
+        self._natural_policy = 'VOICE_SELA_LIVE_POLICY' in env
+        if self._natural_policy and (
+                type(env['VOICE_SELA_LIVE_POLICY']) is not str
+                or env['VOICE_SELA_LIVE_POLICY'] != 'natural_v1'
+                or env.get('VOICE_SELA_LIVE_TTS') != '1'
+                or not self._automatic_conditioning_enabled
+                or env.get('VOICE_EXPERIMENTAL_DELIVERY_PROSODY', '0') != '0'):
+            raise ValueError('natural_v1 requires live automatic conditioning without numeric prosody; no fallback')
         self._live_tts = None
         live_choice = env.get('VOICE_SELA_LIVE_TTS', '0')
         if type(live_choice) is not str or live_choice not in ('0', '1'):
@@ -345,6 +353,8 @@ class Speech:
             if self._live_tts is not None:
                 self.tts_label += ' · Sela Live quality12'
                 self.tts_identity.update(adapter='sela_live', total_steps=12)
+                if self._natural_policy:
+                    self.tts_identity['policy'] = 'natural_v1'
             try:
                 check_args = (self._live_tts.args('check', self._super_assets, self._super_manifest, self._style_profile)
                     if self._live_tts is not None else
@@ -467,6 +477,13 @@ class Speech:
     async def synthesize_chunks(self, text, *, delivery=None):
         """Yield bounded waveforms and exact ACK source spans with one snapshot."""
         choice = self.conditioning_for(delivery)
+        if self._natural_policy:
+            stream=self._natural_chunks(text,delivery,choice)
+            try:
+                async for item in stream:yield item
+            finally:
+                await self._close_natural_stream(stream)
+            return
         profile_id = choice['profile_id'] if choice is not None else None
         controls = self._delivery_controls(delivery)
         if not self.tts_chunked:
@@ -486,6 +503,73 @@ class Speech:
                 audio = trim_boundary_silence(audio, first=index == 0,
                     last=index == len(parts) - 1, max_output_bytes=MAX_WAV_BYTES)
             yield part, audio, index == len(parts) - 1
+
+    @staticmethod
+    async def _close_natural_stream(stream):
+        task=asyncio.create_task(stream.aclose())
+        interrupted=False
+        while not task.done():
+            try:await asyncio.shield(task)
+            except asyncio.CancelledError:interrupted=True
+        task.result()
+        if interrupted:raise asyncio.CancelledError
+
+    async def _natural_chunks(self,text,delivery,choice):
+        bridge=self._live_tts
+        if bridge is None or not bridge.natural:raise ValueError('Natural runtime required')
+        bridge.verify_runtime()  # Validate all candidate source before imports.
+        from sela_live_tts.natural import NaturalTTS,RuntimePins
+        from sela_live_tts.utterance import SpeechRequest,ResolvedDelivery
+        from contextlib import contextmanager
+        selected=ResolvedDelivery(choice['profile_id'],choice['intended_emotion'],choice['intensity'])
+        if self._local_waiting or self._local_slot.locked():
+            raise LocalAudioBusy('Natural response active; zero queued waiters')
+        await self._local_slot.acquire()
+        keep_slot=False
+        try:
+            async with AsyncExitStack() as retained:
+                if self.local_preview:
+                    if self.asr_engine=='zipformer_id_int8':
+                        if self._stream_asr is not None:
+                            await retained.enter_async_context(self._stream_asr.quiesce(LOCAL_RETRY_WAIT))
+                    else:await self.close_preview()
+                retained.enter_context(bridge.claim())
+                class BorrowedCoordinator:
+                    # The actual persistent host lease is retained by Speech.
+                    # DP/render phases must not flock the same inode twice.
+                    poll_interval=.05
+                    active=True
+                    owned=0
+                    def check_production(self):
+                        if not self.active:raise LocalAudioBusy('Natural lease released')
+                    @contextmanager
+                    def claim(self):
+                        self.check_production()
+                        bridge.verify_runtime()
+                        self.owned+=1
+                        try:yield
+                        finally:self.owned-=1
+                coordinator=BorrowedCoordinator()
+                runtime=RuntimePins(bridge.python,self._super_assets,self._super_manifest,
+                    str(bridge.worker),bridge.duration_worker,bridge.digest,
+                    bridge.duration_digest,bridge.source_digest)
+                engine=NaturalTTS(runtime,native_call=_bounded_process,coordinator=coordinator,
+                                  resolve_delivery=lambda original:selected)
+                stream=engine.synthesize_chunks(SpeechRequest(text,delivery))
+                try:
+                    async for item in stream:yield item
+                finally:
+                    try:await self._close_natural_stream(stream)
+                    finally:
+                        coordinator.active=False
+                        if coordinator.owned:
+                            # Failed DurationSession cleanup deliberately kept
+                            # its phase lease. Retain the actual host lease and
+                            # ASR quiescence too: unreaped work is not capacity.
+                            self._natural_failed_lease=retained.pop_all()
+                            keep_slot=True
+        finally:
+            if not keep_slot:self._local_slot.release()
 
     async def synthesize(self, text, *, delivery=None):
         choice = self.conditioning_for(delivery)

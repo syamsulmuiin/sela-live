@@ -1,0 +1,116 @@
+{
+  "status": "real_native_codex_shipping_browser_verified",
+  "scope": "Isolated authenticated staging; unchanged actual provider and speech graphs, observational native/DP/browser probes. No physical microphone/speaker claim.",
+  "accepted_b_pcm_parity": {
+    "byte_exact": true,
+    "contexts": 3,
+    "wav_sha256": "f1905590111e8f62657fa87a8c0da346974ff212af475920ba4cf8f87cd34bc6"
+  },
+  "identity": {
+    "backend": "supertonic3",
+    "voice": "M1",
+    "language": "id",
+    "rate": "default",
+    "pitch": "default",
+    "format": "wav",
+    "sample_rate": 44100,
+    "channels": 1,
+    "sample_width": 2,
+    "voice_style_profile": "conditioning_b",
+    "style_label": "Conditioning B (+0.4)",
+    "adapter": "sela_live",
+    "total_steps": 12,
+    "policy": "natural_v1"
+  },
+  "native_tts_calls": 7,
+  "native_profiles": [
+    "conditioning_b",
+    "conditioning_b",
+    "conditioning_b",
+    "conditioning_b_active_medium",
+    "conditioning_b_active_low",
+    "conditioning_b_calm_low",
+    "conditioning_b_active_medium"
+  ],
+  "actual_dp_queries": 7,
+  "api_turns": [
+    {
+      "reply_sha256": "c80401de5c27e5a704aa20197022d53b2474c4c62940eb90c0d23eeeaf1bae95",
+      "reply_characters": 49,
+      "audio_parts": 1,
+      "choice": {
+        "profile_id": "conditioning_b_active_medium",
+        "activation": "active",
+        "intended_emotion": "joy",
+        "intensity": "medium",
+        "supported": true
+      },
+      "full_source_ack": true,
+      "history_count": 2
+    },
+    {
+      "reply_sha256": "f7083430de27e32a8aa8268ef558a922a827b8cc3ffd66e670766f59d361175c",
+      "reply_characters": 324,
+      "audio_parts": 1,
+      "choice": {
+        "profile_id": "conditioning_b_active_low",
+        "activation": "active",
+        "intended_emotion": "joy",
+        "intensity": "low",
+        "supported": true
+      },
+      "full_source_ack": true,
+      "history_count": 4
+    }
+  ],
+  "browser": {
+    "turns": 2,
+    "same_session": true,
+    "history_count": 4,
+    "full_source_ack": true,
+    "playback_ended": 2,
+    "choices": [
+      {
+        "profile_id": "conditioning_b_calm_low",
+        "activation": "calm",
+        "intended_emotion": "sadness",
+        "intensity": "low",
+        "supported": true
+      },
+      {
+        "profile_id": "conditioning_b_active_medium",
+        "activation": "active",
+        "intended_emotion": "joy",
+        "intensity": "medium",
+        "supported": true
+      }
+    ],
+    "mobile_layout": {
+      "viewport": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "mobileEmulation": true
+    },
+    "narrow_desktop_layout": {
+      "viewport": 390,
+      "scrollWidth": 377,
+      "clientWidth": 375
+    },
+    "narrow_desktop_note": "Legacy unchanged CSS has2px content overflow with traditional desktop scrollbars; Android mobile emulation390px has no overflow.",
+    "errors": [],
+    "instrumentation": "Native buffer-source start/ended listeners and passive websocket observations; no synthetic PCM or ACK. Listener order can place the observer after the shipping onended ACK handler."
+  },
+  "cleanup": {
+    "server_stopped": true,
+    "fixture_auth_removed": true,
+    "fixture_cookie_removed": true,
+    "dedicated_tab_closed": true
+  },
+  "private_evidence": {
+    "root": "/root/.hermes/cache/scratch/natural-network-oxxcoupq",
+    "network_receipt_sha256": "394421fe3de7678ce7c2fe7ada48f1db74d81f8baf06ecb033bed363339aec1d",
+    "browser_receipt_sha256": "f670c35059d0ce735ce3dc10ff2171b6374b1f691a47be2ee3aa460f1a86932c",
+    "driver_sha256": "3aef812417cc75660c3367db76a431bb202d972b5e031055d3e30b7c31766509"
+  },
+  "deployment_authorized_by_this_record": false
+}

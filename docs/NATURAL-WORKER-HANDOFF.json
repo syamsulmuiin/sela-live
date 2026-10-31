@@ -1,0 +1,67 @@
+{
+  "candidate": "natural_v1",
+  "status": "fixture-tested; native acceptance and relocation pending",
+  "files": {
+    "sela_live_tts/natural_worker.py": "8b30a3f30103907fbf0bca5a438beb7eea624a8b0a92ebec0b15458a3a4c2c09",
+    "tests/python/test_sela_live_natural_worker.py": "9b8fff794a311820fdbb2009031f105b68eab75197edd079a4ec6db49346e4ff"
+  },
+  "pins": {
+    "source_manifest_sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+    "pin_helper_sha256": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+    "native_guard_sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625",
+    "verification_order": [
+      "validate exact CLI and fixed profile enum",
+      "bounded regular non-symlink helper read and fixed helper hash before helper import",
+      "trusted helper verifies pinned manifest plus SDK inventory, native guard and existing live helpers",
+      "import original native guard only after complete pin verification",
+      "delegate to unchanged guard.main for versions, limits, isolation, assets, check path and TTS path"
+    ]
+  },
+  "protocol": {
+    "invocation": "python -I sela_live_tts/natural_worker.py check|tts ABS_ASSETS ABS_MODEL_MANIFEST ALLOWLISTED_PROFILE 12",
+    "profiles": ["conditioning_b", "conditioning_b_calm_low", "conditioning_b_calm_medium", "conditioning_b_calm_high", "conditioning_b_active_low", "conditioning_b_active_medium", "conditioning_b_active_high"],
+    "request": {"text": "normalized source text only"},
+    "public_controls": [],
+    "tags_allowed": false,
+    "raw_and_chunk_text_limits": {"characters": 800, "utf8_bytes": 3200},
+    "processed_token_limit": 512,
+    "predicted_seconds_max": 28,
+    "speed": 1.05,
+    "internal_total_steps": 12,
+    "internal_max_chunk_length": 800
+  },
+  "runtime_contract": [
+    "Subclass original guarded Runtime; intercept only engine.synthesize during original Runtime.synthesize.",
+    "Accept only the exact original guard call: same source text, same style identity, lang id, integer total_steps 8, verbose False and float speed 1.05; reject other keywords.",
+    "Run pinned SDK chunker with max800, require exactly one context with whitespace-only source correspondence, and process that exact context with engine.model.text_processor([chunk], id).",
+    "Validate int64 IDs shape (1,N), nonnegative IDs, float32 all-one mask shape (1,1,N), and 1<=N<=512 including SDK language-wrapper tokens.",
+    "Call the genuine selected engine.model.dp_ort.run(None, text_ids/style.dp/text_mask) and apply SDK array division by 1.05. Require a floating single-item duration array, finite positive scaled duration <=28 seconds, before original high-level synthesis.",
+    "Only after preflight call original high-level synthesis with internal quality12 and max_chunk_length800. SDK reprocesses the same pinned chunk and runs its native pipeline normally; preflight is an extra DP call, not planner-trusted metadata.",
+    "Restore exact existing engine instance override or remove temporary override in finally, including on preflight, synthesis and original PCM-validation errors.",
+    "Original request validator is retained behind narrower text-only validation before Runtime creation. Original guard.main and Runtime.synthesize source are not edited.",
+    "Original seed20261026, PCM conversion, clipping, sample duration30s, output, CPU/RSS/network/alarm and asset/profile guards remain active. No audio trimming, cutting or internal pause replacement."
+  ],
+  "verification": {
+    "native_or_onnx_inference_run": false,
+    "native_audio_claims": false,
+    "test_fixtures": "Tiny EngineFixture, ProcessorFixture, DPFixture and small NumPy PCM/shape fixtures; duration values are fixture inputs, never represented as native results.",
+    "tdd": "Observed missing-worker RED then GREEN; quality12/preflight tracer RED then GREEN; rejection/canonical-args RED then GREEN; CLI/pin/check-delegation missing-feature RED then GREEN. Added boundary, source-drift, seed, PCM and isolated-import regressions.",
+    "normal": {"tests": 15, "failures": 0, "errors": 0, "result": "OK", "seconds": 0.372},
+    "optimized": {"tests": 15, "failures": 0, "errors": 0, "result": "OK", "seconds": 0.858},
+    "interpreter": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+    "python_version": "3.12.3",
+    "numpy_version": "2.2.6",
+    "normal_command": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python -B -m unittest discover -s /root/sela-live/tests/python -p test_sela_live_natural_worker.py -v",
+    "optimized_command": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python -O -B -m unittest discover -s /root/sela-live/tests/python -p test_sela_live_natural_worker.py -v",
+    "provided_interpreter_issue": "The provided Hermes Python3.14 interpreter has no NumPy; its test import failed with ModuleNotFoundError. No dependencies installed or altered. Used existing Python3.12 / NumPy2.2.6 read-only instead.",
+    "isolated_checks": "Tests spawn -I worker with invalid CLI and -I source-verification probe; the latter confirms no supertonic, numpy or onnxruntime imports after source verification. Real guard.main check and real native synthesis were not invoked."
+  },
+  "parent_required": [
+    "Wire natural renderer NativeTTS invocation explicitly to this new worker; legacy worker.py remains unchanged.",
+    "Perform authorized real native acceptance under original full guard with pinned runtime versions and assets, all fixed profiles, duration/token boundary refusals, WAV validity, deterministic repetition, safety/resource limits, and full renderer integration.",
+    "Validate preprocessing and genuine DP agreement with planner estimates and actual synthesis on real assets; fixture tests cannot establish native audio quality or acceptance.",
+    "For relocation regenerate/review absolute-root source manifest and update this worker's fixed MANIFEST_SHA to its reviewed literal hash. Do not accept an untrusted request-provided source hash.",
+    "Pin this new worker and sibling natural files in the release/source inventory and parent integrity checks; the unchanged existing manifest does not inventory the new candidate files. Recompute handoff hashes after any edits.",
+    "No production deployment or service changes performed; production quality12 remains untouched."
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "phase": "installed_verified_natural_v1",
+  "base_installed_release_commit": "fa0f9b0f1f952e192cc9844ca73b3d453d08704c",
+  "production_live_quality12_unchanged": false,
+  "user_contract": "One automatic Sela Live speech policy/request; not manual per-story or per-emotion numeric knob tuning.",
+  "candidate_api": "NaturalTTS.synthesize_chunks(SpeechRequest(text, delivery))",
+  "internal_policy": "natural_v1",
+  "mechanism": "Prefer maximum complete textual context using real Supertonic duration-predictor estimates, then safe sentence/clause groups. Avoid arbitrary180-character inference boundaries while retaining native limits.",
+  "limits_retained": {
+    "raw_and_normalized_characters": 800,
+    "utf8_bytes": 3200,
+    "actual_native_audio_cap_seconds": 30,
+    "policy_duration_margin_seconds": 28,
+    "policy_processed_model_tokens": 512,
+    "prediction_queries_per_request": 64
+  },
+  "voice_controls": "Existing validated B profiles, quality12, seed20261026 and speed1.05 remain; no new spoken tags or claimed trained emotions.",
+  "emotion_boundary": "Preserve AI-selected delivery metadata. Exact B sample accepted; independently trained emotional rendering and all-text naturalness remain unproven.",
+  "historical_initial_parent_fixture_checkpoint": {
+    "passed_fixture_tests": 4,
+    "combined_candidate_tests": 62,
+    "normal_and_optimized_passed": true,
+    "red_observed_for_missing_api": true,
+    "red_observed_for_worker_drift": true,
+    "red_observed_for_unbounded_request_admission": true,
+    "red_observed_for_profile_binding": true,
+    "native_inference_executed_at_that_checkpoint": false
+  },
+  "profile_snapshot": "Planner resolves delivery once; first prediction lazily starts DP session with the same fixed profile later used by every native render. AsyncExitStack reaps DP before rendering.",
+  "resolved_renderer_work": [
+    "Source-only whitespace ownership",
+    "Truthful over-token refusal and continued session for splitting",
+    "Exact pinned SDK paragraph contexts",
+    "Independent runtime repair review and parent bounded-driver verification"
+  ],
+  "verified_candidate_tests": {
+    "normal": 76,
+    "optimized": 76,
+    "failures": 0,
+    "skips": 0
+  },
+  "native_same_text_evidence": {
+    "directory": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4",
+    "native_tts_calls": 12,
+    "prediction_queries": 3,
+    "baseline_contexts": 9,
+    "candidate_contexts": 3,
+    "baseline_seconds": 90.74562358276644,
+    "candidate_seconds": 79.99374149659864,
+    "full_source_retained": true,
+    "production_app_unchanged": true,
+    "cleanup_complete": true,
+    "human_accepted": true
+  },
+  "listener_feedback": {
+    "verbatim": "B ok",
+    "receipt": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4/listener-feedback.json",
+    "scope": "Exact B full-story sample accepted; not all future text or independently trained emotional expression"
+  },
+  "application_integration": {
+    "speech_route_connected": true,
+    "candidate_fixture_tests": 81,
+    "sdk_application_cases": 335,
+    "sdk_skips": 4,
+    "setup_cases": 81,
+    "node_cases": 121,
+    "runtime_independent_normal": 123,
+    "runtime_independent_optimized": 123,
+    "installer_normal": 45,
+    "installer_optimized": 45,
+    "staging_accepted_B_PCM_parity": true,
+    "prepared_release": "/root/sela-live-releases/natural-release-17wdj1hq"
+  },
+  "remaining_renderer_work": [],
+  "parallel_handoffs": {
+    "planner_and_duration_batch": "deleg_9f4965f0",
+    "planner": "sa-0-64d2ba05",
+    "duration": "sa-1-972afd14",
+    "single_context_worker_batch": "deleg_46b454d7",
+    "single_context_worker": "sa-0-f75de93b",
+    "note": "Dispatched identifiers are provenance, not proof of current liveness; reconcile delivered results before resuming."
+  },
+  "controlled_case": {
+    "text_path": "/root/sela-live-releases/live-release-4kkkhooe/prosody-arga/source.txt",
+    "text_sha256": "c55979e940a0489016bb158eb0443bbb4a435d18697559dd8501b3022deda94a",
+    "legacy_source_parts": 9,
+    "comparisons_require_full_original_text": true
+  },
+  "acceptance": "Exact B accepted; relocated and actual installed Speech paths reproduce B PCM byte-exact. Two actual dynamic Codex and two shipping-browser turns passed in isolated staging. natural_v1 installed with exact reviewed bytes/selectors and public guards; no claim of trained emotional acting or all future text naturalness.",
+  "current_live_policy": "natural_v1",
+  "installed_state": "docs/NATURAL-INSTALL-STATE.json",
+  "completed_release_gates": [
+    "final_independent_release_review",
+    "real_read_only_cli_preflight",
+    "real_apply_and_recovery_snapshot",
+    "installed_full_byte_mode_inventory_selector_readback",
+    "installed_same_B_native_PCM_parity",
+    "public_health_API_and_WebSocket_auth_guards"
+  ]
+}

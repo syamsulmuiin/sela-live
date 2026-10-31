@@ -9,6 +9,19 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class TestLayout(unittest.TestCase):
+    def test_private_natural_inference_tree_excluded_from_git(self):
+        import subprocess,tempfile
+        # Also works in a clean source export without the source repository's .git.
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(['git','init','--quiet',directory],check=True,capture_output=True)
+            (Path(directory)/'.gitignore').write_bytes((ROOT/'.gitignore').read_bytes())
+            for path in ('autonomous/tts-natural-same-text/example/receipt.json',
+                         'autonomous/tts-natural-same-text/example/listener-feedback.json',
+                         'autonomous/tts-natural-same-text/example/speech.wav'):
+                result=subprocess.run(['git','check-ignore','--no-index','--',path],
+                    cwd=directory,capture_output=True,text=True)
+                self.assertEqual(result.returncode,0,path)
+
     def test_only_structured_test_locations(self):
         self.assertEqual(list(ROOT.glob('test_*.py')), [])
         self.assertEqual(list((ROOT / 'web').glob('*.test.cjs')), [])
@@ -42,11 +55,28 @@ class TestLayout(unittest.TestCase):
             {'path': 'tests/setup/test_live_tts_install.py',
              'sha256': '4f7927efc04124229cee5ea29c177b446f31dcbaf96bf39b0a9f7d8cd5c33779'},
         ])
-        for row in additions:
+        current = {row['path']: row for row in additions}
+        phase=json.loads((ROOT/'tests/natural-additions-inventory.json').read_text())
+        self.assertEqual(phase['schema_version'],1)
+        self.assertEqual(phase['baseline_commit'],'fa0f9b0f1f952e192cc9844ca73b3d453d08704c')
+        paths=[row['path'] for row in phase['files']]
+        self.assertEqual(len(paths),len(set(paths)))
+        for row in phase['files']:
+            path=ROOT/row['path']
+            self.assertTrue(row['path'].startswith(('tests/python/test_','tests/setup/test_')))
+            self.assertNotIn('..',Path(row['path']).parts)
+            prior=current.get(row['path'])
+            self.assertEqual(row['previous_sha256'],prior['sha256'] if prior else None)
+            functions=sorted(node.name for node in ast.walk(ast.parse(path.read_bytes()))
+                if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name.startswith('test_'))
+            self.assertEqual(functions,row['test_functions'])
+            self.assertTrue(set(row['preserved_test_functions']).issubset(functions))
+            current[row['path']]=row
+        for row in current.values():
             path = ROOT / row['path']
             self.assertFalse(path.is_symlink())
             self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), row['sha256'])
-        expected = {row['destination'] for row in inventory} | {row['path'] for row in additions}
+        expected = {row['destination'] for row in inventory} | set(current)
         actual = {str(p.relative_to(ROOT)) for directory, pattern in
                   (('python', 'test_*.py'), ('web', '*.test.cjs'), ('setup', '*.py'))
                   for p in (ROOT / 'tests' / directory).glob(pattern)

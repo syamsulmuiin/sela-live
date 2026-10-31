@@ -107,6 +107,362 @@ class InstallerTests(unittest.TestCase):
                          'payload_sha256': self.m.sha(self.m.canonical({'files': p['files'], 'preserved': p['preserved'], 'live_env': p['live_env']})),
                          'plan_sha256': self.m.sha(self.m.canonical(p))}
 
+    def natural_fixture(self):
+        installer = self.fixture()
+        names = ('backend.py', 'admission.py', 'controls.py', 'source_pins.py',
+                 'natural.py', 'utterance.py', 'duration.py', 'natural_worker.py', 'duration_worker.py')
+        for name in names:
+            relative = 'sela_live_tts/' + name
+            self.plan['files'][relative] = self.write(self.payload, relative, ('# ' + name).encode())
+        (self.payload / 'vendor/supertonic/sdk.py').unlink()
+        del self.plan['files']['vendor/supertonic/sdk.py']
+        for name in ('__init__.py', 'cli.py', 'config.py', 'core.py', 'loader.py', 'pipeline.py', 'utils.py',
+                     'server/__init__.py', 'server/app.py', 'server/audio.py', 'server/routes.py',
+                     'server/schemas.py', 'server/styles_store.py'):
+            relative = 'vendor/supertonic/' + name
+            self.plan['files'][relative] = self.write(self.payload, relative, ('# ' + name).encode())
+        source = 'sela_live_tts/upstream-manifest.json'
+        self.plan['files'][source] = self.write(self.payload, source, self.m.canonical({
+            'live_root': str(self.root / 'sela_live_tts'), 'guard_root': str(self.root / 'voice_app'),
+            'sdk_root': str(self.root / 'vendor/supertonic')}))
+        self.refresh_natural_inventory()
+        env = self.plan['live_env']
+        env.update({'VOICE_SELA_LIVE_POLICY': 'natural_v1',
+                    'VOICE_SELA_LIVE_WORKER': str(self.root / 'sela_live_tts/natural_worker.py'),
+                    'VOICE_SELA_LIVE_WORKER_SHA256': self.plan['files']['sela_live_tts/natural_worker.py']['sha256'],
+                    'VOICE_SELA_LIVE_DURATION_WORKER': str(self.root / 'sela_live_tts/duration_worker.py'),
+                    'VOICE_SELA_LIVE_DURATION_WORKER_SHA256': self.plan['files']['sela_live_tts/duration_worker.py']['sha256'],
+                    'VOICE_SELA_LIVE_SOURCE_MANIFEST_SHA256': self.plan['files'][source]['sha256'],
+                    'VOICE_SELA_LIVE_RUNTIME_MANIFEST': str(self.root / 'sela_live_tts/natural-runtime-manifest.json'),
+                    'VOICE_SELA_LIVE_RUNTIME_MANIFEST_SHA256': self.plan['files']['sela_live_tts/natural-runtime-manifest.json']['sha256']})
+        baseline = json.loads(self.baseline.read_bytes())
+        baseline['selectors']['VOICE_EXPERIMENTAL_DELIVERY_PROSODY'] = '0'
+        baseline['selectors'].update({k: v for k, v in self.plan['live_env'].items()
+                                      if k in ('VOICE_SELA_LIVE_TTS', 'VOICE_SELA_LIVE_PYTHON',
+                                               'VOICE_SELA_LIVE_LOCK')})
+        old_worker = self.write(self.root, 'sela_live_tts/worker.py', b'old quality12 worker')
+        baseline['app']['sela_live_tts/worker.py'] = old_worker
+        baseline['selectors'].update({
+            'VOICE_SELA_LIVE_WORKER': str(self.root / 'sela_live_tts/worker.py'),
+            'VOICE_SELA_LIVE_WORKER_SHA256': old_worker['sha256']})
+        baseline['units'][self.m.DROPIN] = self.write(self.units, self.m.DROPIN, b'[Service]\n# quality12\n')
+        self.baseline.write_text(json.dumps(baseline))
+        self.hooks.selectors = dict(baseline['selectors'])
+        self.plan['baseline_sha256'] = self.m.sha(self.baseline.read_bytes())
+        self.approve()
+        installer.plan = self.plan
+        return installer
+
+    def refresh_natural_inventory(self, value=None):
+        records = {**self.plan['files'], **self.plan['preserved']}
+        expected = {n: r['sha256'] for n, r in records.items()
+                    if n in self.m.GUARDS or n == 'sela_live_tts/upstream-manifest.json'
+                    or n.endswith('.py') and n.startswith(('sela_live_tts/', 'vendor/supertonic/'))}
+        raw = self.m.canonical({'schema_version': 1, 'files': expected} if value is None else value)
+        self.plan['files']['sela_live_tts/natural-runtime-manifest.json'] = self.write(
+            self.payload, 'sela_live_tts/natural-runtime-manifest.json', raw)
+
+    def test_natural_exact_plan_is_read_only_and_preserves_legacy_migration(self):
+        installer = self.natural_fixture()
+        self.assertEqual(installer.run(), {'status': 'ready', 'applied': False})
+        self.assertEqual(self.hooks.events, ['observe'])
+        self.assertFalse((self.base / 'snapshots').exists())
+        self.assertEqual((self.root / 'voice_app/speech.py').read_bytes(), b'old')
+
+    def test_natural_manifest_requires_exact_inventory_before_archive(self):
+        import shutil
+        cases = ('missing', 'extra', 'traversal', 'absolute', 'duplicate', 'top_duplicate',
+                 'schema', 'boolean_schema', 'extra_field', 'wrong_digest', 'invalid_digest',
+                 'symlink', 'tamper', 'missing_payload', 'extra_payload')
+        for case in cases:
+            with self.subTest(case=case):
+                installer = self.natural_fixture()
+                name = 'sela_live_tts/natural-runtime-manifest.json'
+                data = json.loads((self.payload / name).read_bytes())
+                key = 'sela_live_tts/natural.py'
+                if case in ('missing', 'traversal', 'absolute'):
+                    value = data['files'].pop(key)
+                    if case != 'missing':
+                        data['files']['../natural.py' if case == 'traversal' else '/natural.py'] = value
+                elif case == 'extra':
+                    data['files']['sela_live_tts/extra.py'] = 'a' * 64
+                elif case == 'schema':
+                    data['schema_version'] = 2
+                elif case == 'boolean_schema':
+                    data['schema_version'] = True
+                elif case == 'extra_field':
+                    data['other'] = 1
+                elif case in ('wrong_digest', 'invalid_digest'):
+                    data['files'][key] = 'a' * 64 if case == 'wrong_digest' else True
+                elif case == 'missing_payload':
+                    del self.plan['files'][key]
+                    (self.payload / key).unlink()
+                    data['files'].pop(key)
+                elif case == 'extra_payload':
+                    extra = 'sela_live_tts/extra.py'
+                    self.plan['files'][extra] = self.write(self.payload, extra, b'extra')
+                    data['files'][extra] = self.plan['files'][extra]['sha256']
+                raw = self.m.canonical(data)
+                if case == 'duplicate':
+                    raw = raw.replace(b'"files":{', b'"files":{"sela_live_tts/natural.py":"' + data['files'][key].encode() + b'",', 1)
+                elif case == 'top_duplicate':
+                    raw = b'{"schema_version":1,' + raw[1:]
+                self.plan['files'][name] = self.write(self.payload, name, raw)
+                self.plan['live_env']['VOICE_SELA_LIVE_RUNTIME_MANIFEST_SHA256'] = self.m.sha(raw)
+                self.approve()
+                installer.plan = self.plan
+                if case in ('symlink', 'tamper'):
+                    path = self.payload / key
+                    if case == 'symlink':
+                        path.unlink()
+                        path.symlink_to(self.payload / 'sela_live_tts/worker.py')
+                    else:
+                        path.write_bytes(b'tampered')
+                with self.assertRaises((ValueError, OSError, KeyError)):
+                    installer.run(apply=True)
+                self.assertEqual(self.hooks.events, [])
+                self.assertFalse((self.base / 'snapshots').exists())
+                for path in (self.root, self.units, self.payload):
+                    shutil.rmtree(path)
+                    path.mkdir()
+
+    def test_natural_process_observation_includes_policy_pins_and_legacy_selectors(self):
+        from unittest.mock import patch
+        import os
+        installer = self.natural_fixture()
+        procroot = self.base / 'proc'
+        proc = procroot / '123'
+        (proc / 'net').mkdir(parents=True)
+        (proc / 'fd').mkdir()
+        expected = {**self.hooks.selectors, **self.plan['live_env']}
+        (proc / 'environ').write_bytes(b'API_KEY=not-a-secret\0' + b''.join(
+            (k + '=' + v).encode() + b'\0' for k, v in expected.items()))
+        os.symlink('socket:[456]', proc / 'fd/7')
+        os.symlink('/root/voice-lab', proc / 'cwd')
+        (proc / 'net/tcp').write_text('header\n0: 0100007F:' + format(8091, '04X') + ' 00000000:0000 0A 0 0 0 0 0 456\n')
+        (proc / 'net/tcp6').write_text('header\n')
+        with patch.object(self.m, 'Path', lambda value: procroot if value == '/proc' else Path(value)):
+            actual, guarded = self.m.SystemHooks.process(123)
+        self.assertTrue(guarded)
+        self.assertEqual(actual, expected)
+
+    def test_natural_payload_cannot_be_promoted_without_explicit_policy(self):
+        installer = self.natural_fixture()
+        self.plan['live_env'] = {k: v for k, v in self.hooks.selectors.items()
+                                 if k in ('VOICE_SELA_LIVE_TTS', 'VOICE_SELA_LIVE_PYTHON',
+                                          'VOICE_SELA_LIVE_WORKER', 'VOICE_SELA_LIVE_WORKER_SHA256',
+                                          'VOICE_SELA_LIVE_LOCK')}
+        self.plan['live_env']['VOICE_SELA_LIVE_WORKER_SHA256'] = self.plan['files']['sela_live_tts/worker.py']['sha256']
+        self.approve()
+        installer.plan = self.plan
+        with self.assertRaises(ValueError):
+            installer.run(apply=True)
+        self.assertEqual(self.hooks.events, [])
+        self.assertFalse((self.base / 'snapshots').exists())
+
+    def test_natural_requires_nonexperimental_baseline_and_exact_independent_pins(self):
+        for key in ('VOICE_SELA_LIVE_POLICY', 'VOICE_SELA_LIVE_WORKER',
+                    'VOICE_SELA_LIVE_WORKER_SHA256', 'VOICE_SELA_LIVE_DURATION_WORKER',
+                    'VOICE_SELA_LIVE_DURATION_WORKER_SHA256', 'VOICE_SELA_LIVE_SOURCE_MANIFEST_SHA256',
+                    'VOICE_SELA_LIVE_RUNTIME_MANIFEST', 'VOICE_SELA_LIVE_RUNTIME_MANIFEST_SHA256',
+                    'VOICE_SELA_LIVE_LOCK', 'VOICE_SELA_LIVE_PYTHON', 'baseline_prosody'):
+            with self.subTest(key=key):
+                installer = self.natural_fixture()
+                if key == 'baseline_prosody':
+                    baseline = json.loads(self.baseline.read_bytes())
+                    baseline['selectors']['VOICE_EXPERIMENTAL_DELIVERY_PROSODY'] = '1'
+                    self.baseline.write_bytes(self.m.canonical(baseline))
+                    self.plan['baseline_sha256'] = self.m.sha(self.baseline.read_bytes())
+                    self.hooks.selectors = baseline['selectors']
+                else:
+                    self.plan['live_env'][key] = 'wrong'
+                self.approve()
+                installer.plan = self.plan
+                with self.assertRaises(ValueError):
+                    installer.run(apply=True)
+                self.assertEqual(self.hooks.events, [])
+                self.assertFalse((self.base / 'snapshots').exists())
+
+    def natural_installing_fixture(self):
+        installer = self.natural_fixture()
+        original = self.hooks.restart
+        def restart():
+            original()
+            path = self.units / self.m.DROPIN
+            self.hooks.selectors = dict(installer.baseline['selectors'])
+            if path.exists() and path.read_bytes() == installer.dropin():
+                self.hooks.selectors.update(installer.plan['live_env'])
+        self.hooks.restart = restart
+        return installer
+
+    def invoke_real_cli(self, installer, *, apply=False):
+        from unittest.mock import patch
+        import contextlib
+        import io
+        path = self.base / 'plan.json'
+        path.write_bytes(self.m.canonical(self.plan))
+        path.chmod(0o644)
+        actual_class = self.m.Installer
+        def construct(plan, **fixed):
+            self.assertEqual(fixed['root'], Path('/root/voice-lab'))
+            installer.plan = plan
+            self.assertIsInstance(installer, actual_class)
+            return installer
+        output = io.StringIO()
+        with patch.object(self.m, 'Installer', construct), contextlib.redirect_stdout(output):
+            code = self.m.main(['--plan', str(path)] + (['--apply'] if apply else []))
+        return code, json.loads(output.getvalue())
+
+    def test_recovery_post_restart_error_stops_unverified_service(self):
+        for point in ('restart','observe','inventory'):
+            with self.subTest(point=point):
+                self.setUp()
+                installer=self.natural_installing_fixture()
+                hooks=self.hooks;hooks.active=True;starts=[]
+                original_start=hooks.restart;original_stop=hooks.stop
+                original_observe=hooks.observe;original_inventory=installer.check_inventory
+                baseline=json.loads(self.baseline.read_bytes())['selectors']
+                def start():
+                    original_start();starts.append(True);hooks.active=True
+                    if len(starts)==1:raise OSError('candidate restart failed after starting')
+                    hooks.selectors=dict(baseline)
+                    if point=='restart':raise OSError('recovery restart failed after starting')
+                def stop():original_stop();hooks.active=False
+                def observe():
+                    result=original_observe()
+                    if len(starts)==2 and point=='observe':raise ValueError('recovery observation failed')
+                    return result
+                def inventory(*args,**kwargs):
+                    if len(starts)==2 and point=='inventory':raise ValueError('recovery inventory failed')
+                    return original_inventory(*args,**kwargs)
+                hooks.restart=start;hooks.stop=stop;hooks.observe=observe;installer.check_inventory=inventory
+                receipt=installer.run(apply=True)
+                self.assertEqual(receipt['status'],'rollback_failed')
+                self.assertFalse(hooks.active,'Unverified recovered service must be stopped')
+                self.assertEqual(hooks.events.count('restart'),2)
+                self.assertEqual(hooks.events.count('stop'),3)
+                self.assertEqual(hooks.events[-1],'stop')
+                self.assertTrue(receipt['recovery_final_stop_succeeded'])
+
+    def test_failed_final_recovery_stop_never_claims_stopped(self):
+        installer=self.natural_installing_fixture();hooks=self.hooks;hooks.active=True;starts=[];stops=[]
+        original_start=hooks.restart;original_stop=hooks.stop;original_observe=hooks.observe
+        baseline=json.loads(self.baseline.read_bytes())['selectors']
+        def start():
+            original_start();starts.append(True);hooks.active=True
+            if len(starts)==1:raise OSError('candidate partial restart')
+            hooks.selectors=dict(baseline)
+        def stop():
+            original_stop();stops.append(True)
+            if len(stops)==3:raise OSError('final stop failed')
+            hooks.active=False
+        def observe():
+            result=original_observe()
+            if len(starts)==2:raise ValueError('recovery observation failed')
+            return result
+        hooks.restart=start;hooks.stop=stop;hooks.observe=observe
+        receipt=installer.run(apply=True)
+        self.assertEqual(receipt['status'],'rollback_failed')
+        self.assertTrue(hooks.active)
+        self.assertFalse(receipt['recovery_final_stop_succeeded'])
+        self.assertIn('final_stop:OSError',receipt['cleanup_errors'])
+        self.assertEqual(len(starts),2)
+
+    def test_natural_real_cli_preflight_apply_and_exact_readback(self):
+        installer = self.natural_installing_fixture()
+        self.assertEqual(self.invoke_real_cli(installer), (0, {'status': 'ready', 'applied': False}))
+        self.assertFalse((self.base / 'snapshots').exists())
+        runtime = self.root / '.runtime'
+        runtime.mkdir(mode=0o700)
+        lock = runtime / 'live-tts.lock'
+        lock.write_bytes(b'')
+        lock.chmod(0o600)
+        inode = lock.stat().st_ino
+        code, receipt = self.invoke_real_cli(installer, apply=True)
+        self.assertEqual(code, 0)
+        self.assertEqual(receipt['status'], 'installed')
+        self.assertTrue(receipt['applied'])
+        self.assertEqual(self.hooks.events, ['observe', 'observe', 'stop', 'restart', 'observe'])
+        installer.readback()
+        self.assertEqual(lock.stat().st_ino, inode)
+        for key, value in installer.baseline['selectors'].items():
+            if key not in installer.plan['live_env']:
+                self.assertEqual(self.hooks.selectors[key], value)
+        saved = json.loads((Path(receipt['snapshot']) / 'snapshot.json').read_bytes())
+        self.assertTrue(saved['app']['sela_live_tts/worker.py']['exists'])
+        self.assertFalse(saved['app']['sela_live_tts/natural_worker.py']['exists'])
+
+    def test_natural_real_cli_failure_restores_quality12_before_recovery_restart(self):
+        import shutil
+        for failure in ('write', 'restart', 'readback', 'selectors'):
+            with self.subTest(failure=failure):
+                installer = self.natural_installing_fixture()
+                runtime = self.root / '.runtime'
+                runtime.mkdir(mode=0o700)
+                lock = runtime / 'live-tts.lock'
+                lock.write_bytes(b'')
+                lock.chmod(0o600)
+                inode = lock.stat().st_ino
+                original = installer.atomic
+                fired = []
+                def atomic(path, raw, mode):
+                    if failure == 'write' and path == self.root / 'sela_live_tts/natural_worker.py' and not fired:
+                        fired.append(True)
+                        raise OSError('fixture partial write')
+                    original(path, raw, mode)
+                installer.atomic = atomic
+                restart = self.hooks.restart
+                def checked_restart():
+                    if not fired and failure != 'write':
+                        fired.append(True)
+                        if failure == 'restart':
+                            raise OSError('fixture cold boot failure')
+                        restart()
+                        if failure == 'readback':
+                            (self.root / 'sela_live_tts/natural_worker.py').write_bytes(b'corrupt')
+                        else:
+                            self.hooks.selectors['VOICE_SELA_LIVE_POLICY'] = 'wrong'
+                    else:
+                        # Recovery must not restart a mixed tree.
+                        for group, root in (('app', self.root), ('units', self.units)):
+                            for name, record in installer.baseline[group].items():
+                                installer.match(root / name, record)
+                        installer.check_inventory()
+                        restart()
+                self.hooks.restart = checked_restart
+                code, receipt = self.invoke_real_cli(installer, apply=True)
+                self.assertEqual(code, 1)
+                self.assertEqual(receipt['status'], 'rolled_back')
+                self.assertEqual(receipt['cleanup_errors'], [])
+                self.assertFalse(receipt['applied'])
+                self.assertEqual(lock.stat().st_ino, inode)
+                self.assertEqual(self.hooks.selectors, installer.baseline['selectors'])
+                self.assertFalse((self.root / 'sela_live_tts/natural_worker.py').exists())
+                self.assertEqual(json.loads((self.base / 'snapshots' / (Path(receipt['snapshot']).name + '.receipt.json')).read_bytes()), receipt)
+                for path in (self.root, self.units, self.payload, self.base / 'snapshots'):
+                    shutil.rmtree(path)
+                    if path.name != 'snapshots':
+                        path.mkdir()
+
+    def test_legacy_real_cli_preflight_and_apply_use_real_installer(self):
+        installer = self.installing_fixture()
+        self.assertEqual(self.invoke_real_cli(installer), (0, {'status': 'ready', 'applied': False}))
+        code, receipt = self.invoke_real_cli(installer, apply=True)
+        self.assertEqual(code, 0)
+        self.assertEqual(receipt['status'], 'installed')
+        installer.readback()
+
+    def test_natural_exact_review_bindings_remain_mandatory(self):
+        for key in ('installer_sha256', 'testsource_sha256', 'baseline_sha256',
+                    'runtime_review_sha256', 'payload_sha256', 'plan_sha256', 'artifact_modes', 'reviewer'):
+            with self.subTest(key=key):
+                installer = self.natural_fixture()
+                installer.plan['approval'][key] = ''
+                with self.assertRaises(ValueError):
+                    installer.run(apply=True)
+                self.assertEqual(self.hooks.events, [])
+                self.assertFalse((self.base / 'snapshots').exists())
+
     def test_preflight_valid_exact_plan_does_not_mutate(self):
         installer = self.fixture()
         self.assertEqual(installer.run()['status'], 'ready')

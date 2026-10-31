@@ -1,0 +1,38 @@
+{
+  "scope": "parent-owned planner/renderer repairs; original rejection review retained",
+  "changes": [
+    "Respect exact pinned SDK paragraph separator without rewriting source or flattening paragraphs",
+    "Accept a truthful None duration only for over-token refusal; split instead of fabricating a duration",
+    "Attach source-only whitespace to adjacent spoken ACK; never synthesize empty text"
+  ],
+  "tdd": [
+    "Actual paragraph regression RED then GREEN",
+    "Unicode blank-line parity regression RED then GREEN",
+    "Prediction(None,608) planner regression RED then GREEN",
+    "Whitespace native text_limit RED then GREEN"
+  ],
+  "historical_test_semantics_change": "Retained test_whole_request_context_including_paragraphs_is_tried_first identity but replaced incompatible whole-paragraph assumption with exact paragraph source slices and expected predictor contexts. All coverage assertions retained.",
+  "tests": {
+    "parent_planner_renderer_worker_normal": 42,
+    "parent_plus_real_protocol_optimized": 43,
+    "real_protocol_normal": 1,
+    "legacy_app_cases": 296,
+    "legacy_app_skipped": 4,
+    "legacy_app_failures": 0
+  },
+  "protocol_case": "Actual pinned UnicodeProcessor -> real DurationSession child pipes -> actual duration worker serve/Predictor -> planner -> fixture audio. 608 tokens refused without DP, subsequent bounded contexts complete exact source coverage; duration arrays and PCM are explicitly harmless fixtures, not native inference.",
+  "candidate_native_inference": false,
+  "deployment_changed": false,
+  "remaining": [
+    "Duration subagent final handoff and exact-source reread",
+    "Combined full fixtures and independent exact-hash repair review",
+    "Bounded actual native same-text proof/listening before deployment"
+  ],
+  "sha256": {
+    "sela_live_tts/utterance.py": "36a3e116b33e342644ecf852829e2264108db793037eced1c3a834a6bd58d813",
+    "sela_live_tts/natural.py": "f57de784d8bf48672648d10ddb4f692f4e09d94341151bcf32c10f8ea8e31c26",
+    "tests/python/test_sela_live_utterance.py": "572fec6c998e57630a38528c8b4d94539ea0c5093af8692745faa901dc2df4b8",
+    "tests/python/test_sela_live_natural.py": "9b40ddb241110e1e06dfb2c51b8a7ba028220bcffab4a0896af381d6a88cd4a2",
+    "tests/python/test_sela_live_natural_protocol.py": "92bbffd6fe0844b8027067107efcfce40d6b3d963d938cf81777f59624c53e7e"
+  }
+}

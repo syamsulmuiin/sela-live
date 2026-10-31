@@ -1,0 +1,45 @@
+{
+  "status": "staged_integration_fixture_regression_passed_not_deployed",
+  "sdk_runtime": {
+    "cases": 335,
+    "skips": 4,
+    "failures": 0,
+    "errors": 0,
+    "interpreter": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+    "excluded_modules_executed_separately": [
+      "test_sela_live_duration",
+      "test_sela_live_natural_worker"
+    ]
+  },
+  "native_dependency_fixture_runtime": {
+    "candidate_cases_including_sdk_overlap": 81,
+    "failures": 0,
+    "actual_candidate_onnx_inference": false,
+    "interpreter": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python"
+  },
+  "setup": {
+    "cases": 79,
+    "failures": 0
+  },
+  "installer": {
+    "normal": 43,
+    "optimized": 43,
+    "failures": 0,
+    "sha256": "47e4f7cfd3e40270b3f5ba530d1c67a37a9dd94a0a9c139643cdf0d869bd82b7"
+  },
+  "source_acceptance": {
+    "user_feedback": "B ok",
+    "artifact_receipt": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4/listener-feedback.json",
+    "not_all_future_emotions_or_texts": true
+  },
+  "pending": [
+    "independent_runtime_review",
+    "independent_installer_review",
+    "relocated_accepted_B_PCM_parity",
+    "actual_Codex_and_shipping_browser_acceptance",
+    "final_bound_plan_install_and_GitHub"
+  ],
+  "fixture_root": "/root/.hermes/cache/scratch/natural-network-oxxcoupq",
+  "prepared_release": "/root/sela-live-releases/natural-release-17wdj1hq",
+  "production_unchanged": true
+}

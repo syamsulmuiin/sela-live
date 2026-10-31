@@ -1,0 +1,26 @@
+{
+  "status": "parent_verified_driver_for_one_private_attempt",
+  "runtime_review_sha256": "acc054922de637dff514cd058ad62e0e0ea314608b13548d65d10150b68c4294",
+  "driver_fixture_normal": 6,
+  "driver_fixture_optimized": 6,
+  "fixture_scenarios": [
+    "actual main finite native_call budget prevents call25",
+    "900-second wrapper enforced using accelerated timer fixture",
+    "repeated cancellation waits delayed owned cleanup",
+    "complete and failed/cancelled terminal receipt readback",
+    "unapproved/incomplete review rejected before adapters",
+    "same full source retained and joined WAV decoded"
+  ],
+  "limits": {
+    "tts_calls": 24,
+    "wall_seconds": 900,
+    "retries": 0
+  },
+  "qualification": "Parent-owned driver verification, not independent driver security approval or deployment/quality acceptance. Runtime independent review excludes driver.",
+  "discovered_and_fixed": "Full happy-path fixture exposed dataclass tuple versus JSON list receipt readback mismatch; serialize plan to JSON-compatible types before atomic receipt.",
+  "files": {
+    "/root/sela-live/tools/tts_natural_same_text_probe.py": "1c49b0e17755fb5d1bf0b75cb8d386e4bcbac42f2274036a2dff7c3715d30eb5",
+    "/root/sela-live/tests/python/test_sela_live_natural_probe.py": "f8206ae0b95efcf95a090da7a8b269b9eb6b7a861b838d0643d3918e31db8df1",
+    "/root/sela-live/docs/reviews/NATURAL-PRIVATE-PROBE-REPAIR-REVIEW.json": "acc054922de637dff514cd058ad62e0e0ea314608b13548d65d10150b68c4294"
+  }
+}

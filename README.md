@@ -1,17 +1,21 @@
 # Sela Live — tahap pertama TTS untuk Sela
 
-**Status: TTS Live quality12 sudah dipasang pada Sela; pengembangan aplikasi Live penuh tetap bertahap.**
+**Status: TTS Live quality12 dengan kebijakan otomatis `natural_v1` sudah terpasang dan diverifikasi pada Sela; pengembangan aplikasi Live penuh tetap bertahap.**
 
 Komponen TTS memakai source SDK Supertonic yang diclone dan dipin; ini bukan model baru atau hasil training ulang. STT Zipformer stateful, LLM remote API/Codex, UI, autentikasi, anchor conditioning B dan pemilihan conditioning otomatis yang sudah ada dipertahankan. Kontrol native diubah dari8 menjadi12 langkah setelah pengguna memilih hasil paragraf identik yang lebih bagus; preferensi satu sampel bukan jaminan setiap intonasi/emosi sudah benar.
 
 - Source native: `sela_live_tts/` dan `vendor/supertonic/`, commit upstream `df0f9686dac7fbbde391b759e2ee5286a3737622`, dengan lisensi/provenance dan hash sumber. Worker terpasang berada di root aplikasi produksi, tidak bergantung pada clone/scratch.
 - Adapter aktif ditandai `tts_identity.adapter=sela_live`, `total_steps=12`, backend dasar tetap `supertonic3`. Tidak ada penggantian LLM dengan model lokal atau fallback TTS diam-diam.
 - Pemasangan memakai allowlist, snapshot/rollback, sumber terikat review/hash/mode dan lock host persisten. Guard CPU/RSS/network/deadline tidak dihapus. Baca [kontrak dan pemasangan TTS Live](docs/SELA-LIVE-TTS-INSTALL.md).
-- Verifikasi:296 tes aplikasi tanpa kegagalan (4 opt-in skip),66 setup/layout,121 tes Node; suite runtime122 juga lulus normal/optimized dan dari ekspor source bersih dengan dependensi yang sudah terpasang. Full suite mencakup fixture native ASR/Piper yang sudah ada; tidak diklaim inference-free atau fresh-host.
-- Empat sintesis12-langkah pada jalur Codex/API dan browser terisolasi lulus, dua turn per jalur dengan playback selesai, ACK dan riwayat sesuai. Sintesis baru dari source terpasang serta health/auth/Host/loopback terpasang diperiksa lagi. Akun produksi tidak diubah; login produksi dan mikrofon/speaker fisik tetap pengujian pengguna.
-- Status transaksi dan publikasi: `docs/LIVE-INSTALL-STATE.json`; hasil pengujian: `docs/LIVE-RELEASE-VERIFICATION.json`. `syamsulmuiin/sela-voice` tetap snapshot baseline, sedangkan `syamsulmuiin/sela-live` memuat source proyek Live penuh bertahap ini.
+- Verifikasi natural_v1 dari ekspor source bersih:335 kasus aplikasi SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan121 Node, tanpa kegagalan. Installer45 juga lulus normal/optimized. Full suite mencakup fixture native ASR/Piper; ini bukan klaim inference-free atau fresh-host.
+- Staging natural_v1 menyelesaikan dua giliran Codex/API dan dua giliran shipping browser, playback/ACK/riwayat sesuai. Setelah pemasangan, tiga sintesis native melalui root produksi mereproduksi WAV B byte-exact; health/auth/Host/loopback/inventory diperiksa lagi. Akun produksi tidak diubah; login produksi dan mikrofon/speaker fisik tetap pengujian pengguna.
+- Status produksi terkini: `docs/NATURAL-INSTALL-STATE.json` dan `docs/NATURAL-POLICY-STATE.json`; `docs/LIVE-INSTALL-STATE.json` dan `docs/LIVE-RELEASE-VERIFICATION.json` dipertahankan sebagai bukti pemasangan quality12 sebelumnya. `syamsulmuiin/sela-voice` tetap snapshot baseline, sedangkan `syamsulmuiin/sela-live` memuat source proyek Live penuh bertahap ini.
 
-Jangan menjalankan fresh-install baseline di bawah pada host produksi yang sudah berisi Sela. Jalur quality12 saat ini adalah upgrade terverifikasi pada host dengan dependensi speech terpasang; instalasi Sela Live lengkap pada host kosong belum diklaim teruji. Source/receipt eksperimen lama tetap provenance historis, bukan status pemasangan terbaru.
+Jangan menjalankan fresh-install baseline di bawah pada host produksi yang sudah berisi Sela. quality12/natural_v1 dipasang sebagai upgrade terverifikasi pada host dengan dependensi speech terpasang; instalasi Sela Live lengkap pada host kosong belum diklaim teruji. Source/receipt eksperimen lama tetap provenance historis, bukan status pemasangan terbaru.
+
+## Kebijakan konteks otomatis natural_v1
+
+natural_v1 sudah terpasang setelah pengguna menerima sampel B, review akhir disetujui dan jalur Speech native terpasang mereproduksi PCM B byte-exact. Dua giliran Codex nyata dan dua giliran browser dinamis juga lulus pada staging terisolasi. Baca [kontrak natural_v1](docs/NATURAL-V1.md). Ini satu kebijakan otomatis bagi teks dinamis, bukan setelan numerik per cerita atau pemutaran rekaman; profil suara, quality12, speed1.05 dan guard native tetap. Penerimaan sampel B bukan bukti semua teks masa depan atau emosi independen telah sempurna.
 
 ## Dokumentasi baseline snapshot (historis)
 
@@ -117,7 +121,21 @@ PYTHONDONTWRITEBYTECODE=1 python3.12 -B -m unittest discover -s tests/setup -t .
 node --test tests/web/*.test.cjs
 ```
 
-Full aplikasi: `PYTHONPATH=tests/python python -B -m unittest discover -s tests/python -t . -v` (interpreter dengan SDK Hermes; path fixture diperlukan oleh tes continuity byte-exact). Memerlukan environment pengembangan, SDK Hermes dan dependency native/legacy; sebagian tes menjalankan inference native. Tes korupsi aset yang diaudit memakai salinan sementara, bukan aset produksi. Jalankan suite pada checkout pengembangan terisolasi, bukan server aktif. Snapshot historis sebelumnya mencatat225 run/221 pass/4 skip dan22 setup/layout. Release TTS Live kini telah menjalankan296 tes aplikasi (4 opt-in skip, tanpa kegagalan),66 setup/layout dan121 Node; lihat `docs/LIVE-RELEASE-VERIFICATION.json`. Pengujian memakai dependensi host yang sudah tersedia, bukan klaim fresh-host.
+Pengujian aplikasi memakai **dua interpreter** agar dependency SDK Hermes tidak dicampur dengan wheel NumPy speech. Set `SDK_PYTHON` ke interpreter web/Hermes yang benar dan `NATIVE_PYTHON` ke interpreter speech yang sudah memiliki NumPy terpin; keduanya adalah input operator, bukan dependency yang diunduh oleh perintah ini.
+
+```bash
+# Dari root checkout pengembangan; placeholder wajib diganti
+SDK_PYTHON=/PATH/TO/HERMES/venv/bin/python
+NATIVE_PYTHON=/PATH/TO/SPEECH/venv/bin/python
+
+# Suite aplikasi SDK: semua modul kecuali dua fixture yang memerlukan NumPy
+PYTHONPATH=tests/python "$SDK_PYTHON" -B -c "import unittest,pathlib,sys; excluded={'test_sela_live_duration','test_sela_live_natural_worker'}; names=[p.stem for p in sorted(pathlib.Path('tests/python').glob('test*.py')) if p.stem not in excluded]; suite=unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromName(n) for n in names); r=unittest.TextTestRunner(verbosity=1).run(suite); sys.exit(not r.wasSuccessful())"
+
+# Dua modul sisanya; tidak memuat graph ONNX dalam fixture ini
+PYTHONPATH=tests/python "$NATIVE_PYTHON" -B -m unittest test_sela_live_duration test_sela_live_natural_worker -v
+```
+
+Hasil host pengembangan saat integrasi natural_v1:335 kasus SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan121 Node; review runtime123 kasus juga lulus normal/`-O`. Beberapa regresi lama memuat model ASR/Piper nyata yang sudah tersedia, sedangkan fixture DP baru menggunakan tensor/sesi tiruan yang diberi label jelas. Tes korupsi aset memakai salinan sementara, bukan aset produksi. Jalankan pada checkout terisolasi, bukan service aktif. Bukti fresh-host tidak diklaim; sebagian fixture privat bersifat opt-in/skip bila runtime/aset acuan tidak tersedia. Lihat `docs/NATURAL-INTEGRATION-REGRESSION.json` dan bukti release terkait. Receipt migrasi dan release quality12 lama tetap provenance historis.
 
 ## Batas reproduksi dan keamanan
 

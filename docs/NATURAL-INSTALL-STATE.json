@@ -1,0 +1,86 @@
+{
+  "status": "installed_verified",
+  "verified_at_utc": "2026-10-31T23:49:18.663735+00:00",
+  "policy": "natural_v1",
+  "release_root": "/root/sela-live-releases/natural-release-17wdj1hq",
+  "installed_root": "/root/voice-lab",
+  "service": "voice-lab.service",
+  "main_pid": 384647,
+  "public_origin": "https://voice.kasirdigital.web.id",
+  "snapshot": "/root/sela-live-install-snapshots/2e79660384a94d4a9c5830217a2ea4b1",
+  "installer_receipt": {
+    "sha256": "e277b126fc8e60612eeef25fb71d581922217e54dfe45af7743cf1b4e9407f00",
+    "status": "installed",
+    "applied": true
+  },
+  "approved_plan_sha256": "2e780d85bc2b3a68c582bcad521c9f3d6c6055a8f8d27553ebbf1aef593c9ade",
+  "final_review": {
+    "path": "docs/reviews/NATURAL-FINAL-RELEASE-REVIEW.json",
+    "sha256": "f9c90f6f1b1b89f816a9a730d2cdc568f9b67a27a78c133b2a0475fab1962a7c"
+  },
+  "post_install_native": {
+    "status": "passed",
+    "main_pid": 384647,
+    "scope": "Actual installed Speech/native path, same full accepted-B source; not physical microphone or speaker proof",
+    "native_budget": 3,
+    "native_calls": [
+      {
+        "profile": "conditioning_b",
+        "steps": "12",
+        "completed": true
+      },
+      {
+        "profile": "conditioning_b",
+        "steps": "12",
+        "completed": true
+      },
+      {
+        "profile": "conditioning_b",
+        "steps": "12",
+        "completed": true
+      }
+    ],
+    "installed_byte_mode_inventory_selector_health_auth_readback": true,
+    "identity": {
+      "backend": "supertonic3",
+      "voice": "M1",
+      "language": "id",
+      "rate": "default",
+      "pitch": "default",
+      "format": "wav",
+      "sample_rate": 44100,
+      "channels": 1,
+      "sample_width": 2,
+      "voice_style_profile": "conditioning_b",
+      "style_label": "Conditioning B (+0.4)",
+      "adapter": "sela_live",
+      "total_steps": 12,
+      "policy": "natural_v1"
+    },
+    "accepted_b_byte_exact": true,
+    "contexts": 3,
+    "wav_sha256": "f1905590111e8f62657fa87a8c0da346974ff212af475920ba4cf8f87cd34bc6",
+    "source_sha256": "c55979e940a0489016bb158eb0443bbb4a435d18697559dd8501b3022deda94a",
+    "canonical_admission_reacquired_then_released": true,
+    "post_native_installed_readback": true
+  },
+  "public_unauthenticated_checks": {
+    "/health": {
+      "status": 200,
+      "content_type": "application/json"
+    },
+    "/api/config": {
+      "status": 401,
+      "content_type": "application/json"
+    },
+    "/ws": {
+      "status": 403,
+      "content_type": "text/plain"
+    }
+  },
+  "github_publication_receipt": "/root/sela-live-releases/natural-release-17wdj1hq/publication-readback.json",
+  "publication_qualification": "Record remote SHA only after successful push/readback in external receipt, avoiding commit/self-hash cycles.",
+  "previous_quality12_state": "docs/LIVE-INSTALL-STATE.json",
+  "acceptance_scope": "Exact sample B accepted and reproduced through installed source. New responses remain dynamic. No claim of all-text human naturalness, independently trained emotions or physical microphone/speaker verification.",
+  "credentials_or_production_account_changes": false
+}

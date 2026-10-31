@@ -1,0 +1,30 @@
+{
+  "status": "combined_fixtures_passed_native_not_run",
+  "sources_sha256": {
+    "sela_live_tts/utterance.py": "2e72d67aeecab628fb86ba4660d5a57115f3a05afaa95da88926b0fc36e23810",
+    "tests/python/test_sela_live_utterance.py": "c2988e40e42bf1485ff784e1b8b2acfe17e2f6161a68529aaaaa0abe8435f17b",
+    "sela_live_tts/duration.py": "745bd9312b40dd21290c741ad0a8f2fdd57e3861ae65b0d4f2be097f7da4886c",
+    "sela_live_tts/duration_worker.py": "27d42de8eb457fcaeb65529f352c28c2fb3517cebba39a2051dfa4b7720436bc",
+    "tests/python/test_sela_live_duration.py": "9874dd7e5e7ca1eb39c9346c9315d671dee68e43af3c29be2779502da5724488",
+    "sela_live_tts/natural_worker.py": "8b30a3f30103907fbf0bca5a438beb7eea624a8b0a92ebec0b15458a3a4c2c09",
+    "tests/python/test_sela_live_natural_worker.py": "9b8fff794a311820fdbb2009031f105b68eab75197edd079a4ec6db49346e4ff",
+    "sela_live_tts/natural.py": "47b65f33baae5d39846bc7f1fd8f17ec78a6db69f420cfa5247292ae29144f02",
+    "tests/python/test_sela_live_natural.py": "9c35d67339c467da7a821b934e50f3fb036aa1ca952b07afd4b97430eedde18e"
+  },
+  "tests": {
+    "normal": 62,
+    "optimized_resource_warnings_as_errors": 62,
+    "failures": 0,
+    "skips": 0,
+    "interpreter": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python"
+  },
+  "profile_binding": "Observed mismatch RED; lazy fixed-profile DP session GREEN; identical resolved profile passed to rendering",
+  "production_changed": false,
+  "remaining": [
+    "independent private-probe review",
+    "DP oversized-token context fallback",
+    "whitespace-only source spans",
+    "real native/DP and same-text listening proof",
+    "reviewed integration/deployment/GitHub"
+  ]
+}

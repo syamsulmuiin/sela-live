@@ -1,0 +1,84 @@
+{
+  "status": "staging implementation and harmless-fixture verification complete; native integration remains parent-owned",
+  "scope": [
+    "sela_live_tts/duration.py",
+    "sela_live_tts/duration_worker.py",
+    "tests/python/test_sela_live_duration.py",
+    "docs/NATURAL-DURATION-HANDOFF.json"
+  ],
+  "sha256": {
+    "sela_live_tts/duration.py": "745bd9312b40dd21290c741ad0a8f2fdd57e3861ae65b0d4f2be097f7da4886c",
+    "sela_live_tts/duration_worker.py": "27d42de8eb457fcaeb65529f352c28c2fb3517cebba39a2051dfa4b7720436bc",
+    "tests/python/test_sela_live_duration.py": "9874dd7e5e7ca1eb39c9346c9315d671dee68e43af3c29be2779502da5724488",
+    "unchanged_source_manifest": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+    "unchanged_source_pin_helper": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+    "unchanged_guard_source": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+  },
+  "api": {
+    "constructor": "DurationSession(worker_sha256=REVIEWED_WORKER_SHA, source_manifest_sha256=REVIEWED_MANIFEST_SHA, worker=ABSOLUTE_WORKER, python=TRUSTED_INTERPRETER, assets=ABSOLUTE_ASSETS, model_manifest=ABSOLUTE_MODEL_MANIFEST, profile_id=FIXED_ENUM, coordinator=TRUSTED_ADMISSION)",
+    "usage": "async with session: prediction = await session.predict(normalized_text)",
+    "result": {"seconds": "positive finite model-duration prediction", "tokens": "exact single-item core preprocessed input width, including language framing"},
+    "semantic_limit": "Predictions only, not generated speech, PCM duration, audible quality, or proof of continuity. No character/WPM duration estimate.",
+    "profiles": "conditioning_b plus conditioning_b_{calm,active}_{low,medium,high}; fixed for the session; no vectors, paths, speed, or arbitrary prefixes in request JSON",
+    "selection_policy": "Parent planner must admit only candidates with prediction.seconds <= 28 and tokens <= 512, preserving full lexical coverage. Worker rejects preprocessed token widths outside 1..512 before invoking DP, terminating that failed session; keep candidates bounded or open a new reviewed session after rejection. Predictions above 28 are deliberately returned so planner can split; unchanged actual synthesis worker still enforces 30-second PCM cap.",
+    "task_ownership": "Single-use context, zero queued concurrent predict calls, shared lease acquired before verification/spawn, fresh child process group, cancellation-shielded terminal cleanup. Repeated cancellation cannot release lease while spawn is unresolved or child/pipes/tasks remain live. Unexpected cleanup failures retain lease fail-closed.",
+    "diagnostics": "Only allowlisted failure_reason and signed returncode retained. Raw native stdout/stderr and text are not logged or included in parser error messages."
+  },
+  "worker_protocol": {
+    "cli": "python -I ABSOLUTE_DURATION_WORKER serve ABSOLUTE_ASSETS ABSOLUTE_MODEL_MANIFEST FIXED_PROFILE EXPECTED_SOURCE_MANIFEST_SHA256",
+    "ready": {"type":"ready", "protocol":1, "max_queries":64, "native_network_denied":true},
+    "request": {"id":"exact sequential integer 1..64, never bool", "text":"nonempty validated text, <=800 characters and <=3200 UTF-8 bytes"},
+    "response": {"id":"matching integer", "seconds":"finite number", "tokens":"integer 1..512"},
+    "framing": "One strict UTF-8 JSON object plus newline per frame. Exact object fields; duplicate keys, nonfinite values, malformed IDs, unsupported tags, oversized/unterminated lines fail closed. Worker exits after result 64; parent handles that result/EOF race.",
+    "limits": {"line_bytes":4096, "parent_stdout_bytes":32768, "parent_stderr_bytes":8192, "queries":64, "query_seconds_max":10, "session_seconds_max":70},
+    "native_limits": {"cpu_seconds":[60,65], "address_space_bytes":3221225472, "file_size_bytes":4000000, "open_files":128, "alarm_seconds":75, "intra_threads":2, "inter_threads":1, "execution":"sequential CPU"},
+    "runtime": "Source verification before guard/SDK import; fixed offline environment and native syscall isolation before runtime/model allocation; unchanged full asset/profile validation and native memory-headroom/RSS monitor. Only duration_predictor.onnx is opened as an ONNX session. UnicodeProcessor([text], 'id'), selected immutable style_dp, and array division by speed 1.05 match the native core path. No guard.Runtime, TTS, text encoder, denoiser/vector estimator, vocoder, or PCM synthesis."
+  },
+  "relocated_manifest_integration_contract": [
+    "Both parent DurationSession and worker resolve upstream-manifest.json beside the selected duration_worker.py. Worker also resolves the fixed-hash source_pins.py beside itself. There is no source-manifest CLI path or environment override.",
+    "The current unchanged manifest still names sdk_root=/root/supertonic-live-fix/supertonic. It does not automatically select /root/sela-live/vendor/supertonic.",
+    "For canonical/installed roots, parent must explicitly create/review a relocated manifest with sdk_root, guard_root, and live_root pointing to the intended absolute symlink-free trees, preserving the reviewed per-file hashes/inventory. Copy any guard-relative voice_assets required by selected_profile_path unchanged and keep their pinned manifests valid. This subtask did not edit upstream-manifest.json or source pins.",
+    "Hash the final relocated manifest bytes and independently review that exact digest; pass it explicitly as source_manifest_sha256. Do not replace the expectation with a hash learned from unreviewed installed bytes. The worker accepts this explicit reviewed digest instead of hardcoding the staging manifest hash.",
+    "Bind the exact final duration_worker.py source SHA256 separately in worker_sha256. DurationSession checks the worker digest and all source pins on every spawn; the isolated child repeats helper/manifest/source verification before guard/SDK imports. Worker relocation alone does not require source rewriting.",
+    "The interpreter intentionally allows trusted venv symlinks, matching the legacy bridge. Worker/assets/model-manifest/source-pin paths do not allow symlinks in any component. Raw request data never chooses any of these paths.",
+    "Evaluation defaults to AdmissionCoordinator and respects production priority. Production integration must first own/quiesce Speech/ASR resources and inject ProductionAdmissionCoordinator using the existing shared persistent inode. Never instantiate a second independent production workload slot."
+  ],
+  "verification": {
+    "method": "Vertical RED/GREEN slices with actual harmless Python children and injected tensor/session/guard fixtures. No actual ONNX graph allocation, native inference, speech synthesis, downloads, service operations, git changes, or production edits.",
+    "interpreter": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+    "normal_command": "python -W error::ResourceWarning -m unittest tests.python.test_sela_live_duration -v",
+    "optimized_command": "python -O -W error::ResourceWarning -m unittest tests.python.test_sela_live_duration -v",
+    "normal": {"tests":23, "failures":0, "errors":0, "skips":0},
+    "optimized": {"tests":23, "failures":0, "errors":0, "skips":0},
+    "coverage": [
+      "serial session and captured fixed profile",
+      "64 predictions and rejection of query 65; deterministic last-result/EOF race",
+      "real-child timeout, EOF, malformed JSON, duplicate key, NaN, mismatched ID, stdout line/flood and stderr overflow",
+      "BOM rejection and strict worker request field/ID/prefix/input validation",
+      "repeated query cancellation and repeated cancellation during unresolved real-child spawn",
+      "reap-before-release, overflowed pipe transport closure, retain lease on cleanup failure",
+      "production priority and idle session deadline",
+      "fixed environment observed in real child; credential/proxy/loader/Python variable exclusion",
+      "interpreter symlink allowed, protected path symlink rejected, worker/source-manifest drift before spawn",
+      "safe failure markers and signed child return code without raw native text retention",
+      "relocated manifest with explicit digest; pin-helper corruption; guard import blocked on manifest failure",
+      "injected main startup/isolation ordering, one DP-only graph session, exact core IDs/mask/style and speed division",
+      "native resource limits preserved via harmless injected resource module; bounded 64-query worker serve loop"
+    ],
+    "static_forbidden_runtime_calls": []
+  },
+  "issues_encountered_and_resolved": [
+    "Interrupted session inherited credentials/proxies: replaced with a fixed allowlist in parent and child.",
+    "Generic protected-path check rejected usual venv interpreter symlinks: allowed only at trusted interpreter seam.",
+    "Failed stdout readers left paused pipe transports open despite child exit: kill owned group, cancel/join readers, bounded discard-to-EOF, then await reaping before lease release.",
+    "Result 64 could race worker EOF: terminal budget EOF explicitly handled after its framed result.",
+    "SDK-capable test interpreter did not have numpy installed: no installation attempted; model behavior seam is exercised with harmless injected tensor fixtures instead."
+  ],
+  "remaining_parent_checks": [
+    "Review final exact sources and relocated manifest digest; wire planner/session/native rendering seam without changing production.",
+    "Under the intended app-owned native interpreter and real service sandbox, verify native syscall denial, resource/headroom behavior, all seven profile paths and DP-only session RSS/startup; none of those native runs was authorized for this subtask.",
+    "Compare actual DP text_ids/text_mask/style_dp and predictions against the unchanged full native core at speed 1.05 for representative text, Unicode/punctuation/tags and policy-boundary candidates.",
+    "Verify actual SDK synthesis partitioning does not change the planned single-utterance preprocessing; ensure <=28-second prediction margin and <=512 tokens for every admitted segment, preserving full source coverage and unchanged 30-second actual PCM cap.",
+    "Measure actual generated PCM duration, browser ACK/delivery/continuity and listener quality separately. Harmless fixtures and model predictions are not speech acceptance."
+  ]
+}

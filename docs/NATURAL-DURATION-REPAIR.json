@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "DURATION_PROTOCOL_FIX_VERIFIED_WITH_HARMLESS_FIXTURES",
+  "scope": "B1 duration Predictor -> serve -> DurationSession only. Parent owns planner/natural integration and B2 SDK paragraph repair.",
+  "private_native_probe_authorized": false,
+  "deployment_authorized": false,
+  "native_inference_executed": false,
+  "original_review": {
+    "path": "docs/reviews/NATURAL-PRIVATE-PROBE-REVIEW.json",
+    "sha256": "fd1c30e0d4df7c96fcc2448ebdb1c37dbe8012c6ec1a1d3dd58e0b0ade452e5f",
+    "preserved_unmodified": true,
+    "blocker": "B1: 599 source characters preprocess to 608 tokens; previous Predictor raises text_limit and session closes before planner can split."
+  },
+  "protocol": {
+    "normal_wire_fields": ["id", "seconds", "tokens"],
+    "normal_seconds": "Exact int/float, finite, strictly positive, <=3600; returned as float",
+    "normal_tokens": "Exact int 1..512; no refusal field",
+    "refusal_wire_fields": ["id", "seconds", "tokens", "refusal"],
+    "refusal_seconds": null,
+    "refusal_reason": "model_token_limit",
+    "refusal_tokens": "Exact int 513..32768 from actual processor ids.shape[-1] before any DP call",
+    "refusal_result": {"seconds": null, "tokens": 608, "refusal": "model_token_limit"},
+    "id": "Exact int matching current query; preserved on wire, omitted from public result as for normal predictions",
+    "lifecycle": "A valid refusal consumes one query, retains active session and admission lease, and permits subsequent bounded prediction. Any malformed result closes and reaps before lease release.",
+    "extreme_preprocessing_width": "Widths outside 1..32768 fail closed; DP never runs above 512."
+  },
+  "tdd": [
+    {
+      "test": "WorkerValidationTests.test_preprocessed_overlimit_refuses_without_dp_then_bounded_dp_runs",
+      "red": "Before production edit: text_limit errors for injected NumPy widths 513, 608, 32768",
+      "green": "All refusals truthful; DP mock untouched for refusals, called exactly once with same preprocessor ids at width512; 10.5 float32 / SPEED returns10.0"
+    },
+    {
+      "test": "DurationTests.test_real_serve_predictor_refusal_then_valid_same_child",
+      "red": "After Predictor fix, before session fix: Invalid duration result closes session",
+      "green": "Real isolated harmless child loads actual Predictor and serve with injected stdlib tensors/preprocessor/DP sentinel; refusals608 and513 followed by normal14-token result in same child; query IDs/count3 validated; child reaped on exit",
+      "qualification": "The child processor is injected and deliberately maps source length to width; this is not a new actual SDK tokenization measurement or native inference."
+    }
+  ],
+  "additional_regressions": [
+    "22 malformed refusal subcases: fake finite/bool duration, low/zero/high/bool/float/string tokens, wrong/null/bool reason, extra/missing fields, wrong/bool/float id, null without refusal, normal result with refusal, numeric overlimit; verify immediate inactive/reaped/released state and subsequent query rejected",
+    "Upper refusal boundary32768 remains nonfatal across two queries",
+    "Original test_result_token_limit_is_model_input_limit still rejects numeric seconds paired with513 tokens",
+    "Existing predictor invalid-width regression now checks0 and32769; dedicated truthful-refusal regression covers513"
+  ],
+  "verification": {
+    "interpreter": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+    "command_template": "TMPDIR=/root/.hermes/cache/scratch PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=tests/python /root/voice-lab/autonomous/expressive-tts/venv/bin/python [-O] -W error::ResourceWarning -m unittest test_sela_live_duration -v",
+    "cwd": "/root/sela-live",
+    "normal": {"tests": 27, "failures": 0, "errors": 0, "skipped": 0, "seconds": 2.896, "exit_code": 0},
+    "optimized": {"tests": 27, "failures": 0, "errors": 0, "skipped": 0, "seconds": 3.243, "exit_code": 0},
+    "native_venv_modified": false,
+    "models_loaded": false,
+    "numpy_usage": "Injected arrays only in unit test; no model/runtime load",
+    "preserved_guards": "Source pins, isolation/offline env, bounded readiness/query/session/native deadlines,64-query budget, resource limits, admission/production priority and owned group reaping unchanged; <=512 DP/synthesis limit not loosened"
+  },
+  "sha256_inventory": [
+    {"path": "sela_live_tts/duration.py", "bytes": 15598, "sha256": "1afbdc45010d0ce6731a6c39d9e12401b7dd4d276d96f25e72e3f33c5b8eb93d"},
+    {"path": "sela_live_tts/duration_worker.py", "bytes": 11212, "sha256": "b12907df6f3e5283e9633385151cc813473d91eda3ff9ead7069cd76842f868d"},
+    {"path": "tests/python/test_sela_live_duration.py", "bytes": 31365, "sha256": "1f080b313769501cf2556b44a6c5d1a55b57489facf2e8bf7e61c2609ada2844"},
+    {"path": "sela_live_tts/upstream-manifest.json", "bytes": 2067, "sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74"}
+  ],
+  "remaining": [
+    "Parent adapts refusal to Prediction(None,tokens) and verifies full real planner-session-worker decomposition seam",
+    "Parent completes SDK paragraph context/source-only whitespace fixes",
+    "Exact-hash independent rereview remains required; this handoff does not supersede original review or authorize native/private probe or deployment"
+  ],
+  "issues": [
+    "Editor Pyright uses a different environment and reports unresolved NumPy plus fixture optional/dynamic-attribute typing diagnostics; native-venv runtime tests pass in both modes."
+  ]
+}

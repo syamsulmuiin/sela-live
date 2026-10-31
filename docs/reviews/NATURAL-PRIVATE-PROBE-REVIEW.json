@@ -1,0 +1,369 @@
+{
+  "schema_version": 1,
+  "reviewer": "independent-natural-private-probe-review",
+  "verdict": "BLOCKED_PENDING_VERTICAL_FIX_AND_EXACT_HASH_REREVIEW",
+  "private_native_probe_authorized": false,
+  "deployment_authorized": false,
+  "baseline_commit": "fa0f9b0f1f952e192cc9844ca73b3d453d08704c",
+  "tracked_staging_diff": [],
+  "scope": "One bounded private same-text natural_v1 DP/native probe only; no deployment, native inference, downloads, service changes, source/test edits performed by reviewer.",
+  "fixture_results": [
+    {
+      "optimization": "normal",
+      "tests": 62,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.251
+    },
+    {
+      "optimization": "-O",
+      "tests": 62,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.483
+    }
+  ],
+  "fixture_command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=tests/python /root/voice-lab/autonomous/expressive-tts/venv/bin/python [-O] -m unittest test_sela_live_natural test_sela_live_utterance test_sela_live_duration test_sela_live_natural_worker -v",
+  "blockers": [
+    {
+      "id": "B1",
+      "severity": "blocking integration correctness",
+      "locations": [
+        "sela_live_tts/duration_worker.py:113-116",
+        "sela_live_tts/duration.py:256-265",
+        "sela_live_tts/utterance.py:229-234"
+      ],
+      "finding": "Planner expects a valid Prediction with tokens >512 to trigger decomposition. Predictor instead raises text_limit before DP and exits the serve loop; even if worker returned oversized tokens, DurationSession rejects the result and closes. NaturalTTS propagates this error instead of splitting. This is safe rejection, not functional dynamic-input fallback.",
+      "executed_reproduction": {
+        "input_expression": "('Halo. '*100).strip()",
+        "raw_characters": 599,
+        "actual_pinned_sdk_token_count": 608,
+        "planner_outcome": "ValueError:text_limit",
+        "native_inference_executed": false,
+        "method": "Verified source manifest, used actual SDK UnicodeProcessor and a DP sentinel that must never execute; called real planner with real Predictor."
+      },
+      "required_fix": "Introduce a bounded structured over-token rejection/count response without executing DP above 512; preserve session and let planner decompose. Test the real planner-session-worker protocol seam, both normal and -O, not a mock Prediction alone. Keep tokens512 native admission guard unchanged."
+    },
+    {
+      "id": "B2",
+      "severity": "blocking integration correctness",
+      "locations": [
+        "sela_live_tts/utterance.py:225-237",
+        "sela_live_tts/natural_worker.py:90-95",
+        "/root/supertonic-live-fix/supertonic/utils.py:183-215"
+      ],
+      "finding": "DP predicts the full text including blank-line paragraphs as one context; planner accepts it when within DP limits. SDK chunker always emits separate paragraphs even under max_chunk_length=800. Native preflight correctly rejects multiple SDK chunks, so valid paragraph-containing replies fail after planning.",
+      "executed_reproduction": {
+        "source": "Halo.\n\nDunia!",
+        "planner_groups": [
+          "Halo.\n\nDunia!"
+        ],
+        "actual_pinned_sdk_chunks": [
+          "Halo.",
+          "Dunia!"
+        ],
+        "native_inference_executed": false,
+        "method": "Real planner with harmless bounded Prediction, actual pinned SDK chunk_text; existing native-worker fixture independently verifies rejection before synthesis."
+      },
+      "required_fix": "Align planner/DP context with exact SDK paragraph behavior, or explicitly use a reviewed one-context SDK path without lexical changes. Preserve exact original source spans, fixed delivery, per-native bounds; add vertical paragraph regression."
+    }
+  ],
+  "verified_findings": {
+    "cli_and_api": "Backend supplies tts assets manifest profile 12; natural worker validates five arguments, delegates unchanged guard argv without quality parameter, and wraps the original total_steps8 call into total_steps12,max_chunk_length800. Pinned SDK exposes synthesize(max_chunk_length), model.text_processor, model.dp_ort, Style.dp; DP signature and dtype-preserving speed division match core.",
+    "profile_binding": "Lazy AsyncExitStack creates the fixed-profile duration session only upon first planner prediction, with resolved profile; fixture explicitly covers non-anchor profile binding.",
+    "pin_order": "Duration parent verifies worker and full source manifest before spawn. Each child verifies pinned source_pins and source manifest/all SDK .py files and guard/helper sources before guard/native imports. Natural parent rechecks worker/duration-worker/manifest digests before planning and every renderer spawn. Manifest guard_root is staging /root/sela-live/voice_app, not production; staging guard is byte-identical to /root/voice-lab/voice_app/supertonic3_worker.py.",
+    "coverage_caveat": "Runtime upstream manifest intentionally does not include new natural/planner/duration/backend/admission source or all voice_app utilities/data. This review inventory binds those source bytes externally; it is not a claim runtime manifest covers them. Revalidate exact outer inventory before any authorized probe.",
+    "native_guards": "Original guard seed20261026, speed1.05, id language, asset/profile verification, seccomp socket denial, threads2/1, CPU60/65, AS3GiB, FSIZE4MB, NOFILE128, alarm75, headroom1100MiB, RSS720MiB/memory500MiB guards and PCM/clipping/30-second/output-size guards preserved. Candidate adds <=28s genuine selected-style DP preflight, <=512 model tokens and raw/native <=800 chars/3200 UTF8 bytes before original synthesis; no source-only/overbudget planner fallback bypasses native validation.",
+    "lifecycle": "DP session <=64 requests, readiness<=15s, per-query<=10s (default5), session<=70s; fixed credential/proxy-free offline environment, production-priority shared fail-fast flock, owned process-group SIGKILL/reaping before lease release including repeated cancellation. DP closes before TTS graph allocation. Renderer retains offline allowlist and 90s parent deadline, original75s native alarm, bounded output, termination/reaping and lease ownership. Harmless process fixtures passed normal/-O.",
+    "source_coverage": "Planner groups retain contiguous source slices with normalization confined to native copy; lexical coverage fixtures pass. This does not establish successful complete native audio coverage: B1/B2 prevent it for ordinary accepted input classes."
+  },
+  "future_probe_conditions_not_authorization": [
+    "Fix B1/B2 with vertical fixture coverage and exact-hash rereview; no Arga-only exception.",
+    "Parent owns exactly one private finite same-text comparison, with immutable source text/delivery hashes and accepted quality12 baseline untouched; no production selector/service/git changes.",
+    "Bind all candidate/support/SDK/guard bytes to reviewed inventory, retain immutable runtime worker/source manifest pins; no concurrent writer.",
+    "Use native venv, approved local verified assets/profiles only; no downloads/cloud fallback. Keep evaluation coordinator with canonical persistent lock and production priority; no test admission seams.",
+    "Apply outer finite request/group/native-call and wall-clock budgets, no automatic retries; keep64 DP/session,28s/512tokens/800char limits and existing native CPU/RSS/network/output guards.",
+    "Reap DP before TTS, retain leases until actual cleanup; on error abort with terminal receipt and no deployment.",
+    "Receipt must retain exact source spans, actual SDK contexts/token counts/selected profile/DP predictions, settings12/1.05/seed20261026, WAV hashes/metrics and cleanup outcome. Human listening and additional independent dynamic replies remain separate later acceptance gates."
+  ],
+  "inventory_scope": "SHA256/size inventory is a broad supporting-source superset: all staging sela_live_tts and voice_app Python, voice_app top-level JSON, all pinned SDK Python, source manifest, approved production guard, model manifest and four fixture modules. Hash inventory is not a claim every supporting file received line-by-line review. Model weight contents were not rehashed or loaded; unchanged guard enforces asset manifest at native execution.",
+  "sha256_inventory": [
+    {
+      "path": "/root/sela-live/sela_live_tts/__init__.py",
+      "bytes": 70,
+      "sha256": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/admission.py",
+      "bytes": 5290,
+      "sha256": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/backend.py",
+      "bytes": 5418,
+      "sha256": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/controls.py",
+      "bytes": 837,
+      "sha256": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/duration.py",
+      "bytes": 15027,
+      "sha256": "745bd9312b40dd21290c741ad0a8f2fdd57e3861ae65b0d4f2be097f7da4886c"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/duration_worker.py",
+      "bytes": 11098,
+      "sha256": "27d42de8eb457fcaeb65529f352c28c2fb3517cebba39a2051dfa4b7720436bc"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/natural.py",
+      "bytes": 4673,
+      "sha256": "47b65f33baae5d39846bc7f1fd8f17ec78a6db69f420cfa5247292ae29144f02"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/natural_worker.py",
+      "bytes": 7015,
+      "sha256": "8b30a3f30103907fbf0bca5a438beb7eea624a8b0a92ebec0b15458a3a4c2c09"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/source_pins.py",
+      "bytes": 1597,
+      "sha256": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/upstream-manifest.json",
+      "bytes": 2067,
+      "sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/utterance.py",
+      "bytes": 13064,
+      "sha256": "2e72d67aeecab628fb86ba4660d5a57115f3a05afaa95da88926b0fc36e23810"
+    },
+    {
+      "path": "/root/sela-live/sela_live_tts/worker.py",
+      "bytes": 2240,
+      "sha256": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066"
+    },
+    {
+      "path": "/root/sela-live/tests/python/test_sela_live_duration.py",
+      "bytes": 25387,
+      "sha256": "9874dd7e5e7ca1eb39c9346c9315d671dee68e43af3c29be2779502da5724488"
+    },
+    {
+      "path": "/root/sela-live/tests/python/test_sela_live_natural.py",
+      "bytes": 9339,
+      "sha256": "9c35d67339c467da7a821b934e50f3fb036aa1ca952b07afd4b97430eedde18e"
+    },
+    {
+      "path": "/root/sela-live/tests/python/test_sela_live_natural_worker.py",
+      "bytes": 15061,
+      "sha256": "9b8fff794a311820fdbb2009031f105b68eab75197edd079a4ec6db49346e4ff"
+    },
+    {
+      "path": "/root/sela-live/tests/python/test_sela_live_utterance.py",
+      "bytes": 17279,
+      "sha256": "c2988e40e42bf1485ff784e1b8b2acfe17e2f6161a68529aaaaa0abe8435f17b"
+    },
+    {
+      "path": "/root/sela-live/voice_app/__init__.py",
+      "bytes": 67,
+      "sha256": "b265d4215b2f147abf8bc059b37e8f6f7adb13f157eeb08abf0cedcd4f9fd60e"
+    },
+    {
+      "path": "/root/sela-live/voice_app/approved_conditioning.py",
+      "bytes": 3336,
+      "sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca"
+    },
+    {
+      "path": "/root/sela-live/voice_app/audio.py",
+      "bytes": 621,
+      "sha256": "b1cb6a934eac739cea174ae020ca93408c7f86a45de3a86d318db3264ab67f9b"
+    },
+    {
+      "path": "/root/sela-live/voice_app/audio_continuity.py",
+      "bytes": 3163,
+      "sha256": "e4ed467895bebf58769832e9ec9426b7ea0e98b83050771f3b69759c3cad775b"
+    },
+    {
+      "path": "/root/sela-live/voice_app/auth.py",
+      "bytes": 6809,
+      "sha256": "0c02b44b02e60ff1b56d4029d47ea7c0920daa27c63de4a5747e9cf78d0fbb1b"
+    },
+    {
+      "path": "/root/sela-live/voice_app/automatic_conditioning.py",
+      "bytes": 6107,
+      "sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c"
+    },
+    {
+      "path": "/root/sela-live/voice_app/automatic_conditioning_rules.json",
+      "bytes": 249,
+      "sha256": "2b097ea9b3c6dbe22d4df37891e9ccad040d068aba84367a9fdcd4fa73c06b7b"
+    },
+    {
+      "path": "/root/sela-live/voice_app/delivery.py",
+      "bytes": 6150,
+      "sha256": "959f55d248983239f2027d269fa3dc4ef26b78167e6a27572b0215a9c06d7b69"
+    },
+    {
+      "path": "/root/sela-live/voice_app/delivery_registry.json",
+      "bytes": 968,
+      "sha256": "a0b67b0a3b9959ce7269acc48538fa8d8fb27ec41f57a81020ebc4b3b00a15b6"
+    },
+    {
+      "path": "/root/sela-live/voice_app/local_audio_worker.py",
+      "bytes": 8192,
+      "sha256": "cfa6a2a543ebbef3fe2b51a212a2200f11ac1db427bfa8a26ec3f75fef57eebf"
+    },
+    {
+      "path": "/root/sela-live/voice_app/pronunciation-id.json",
+      "bytes": 43,
+      "sha256": "1854d1e60ad2bd985d2deea0aeae9f6aa3b5eee04b45c60939d5782ed8c3e6c1"
+    },
+    {
+      "path": "/root/sela-live/voice_app/prosody.py",
+      "bytes": 2147,
+      "sha256": "54d3168aa216cdc62e53f9b610eb1892f3441444d7b0de6d0fe543b3d4e1c2a6"
+    },
+    {
+      "path": "/root/sela-live/voice_app/providers.py",
+      "bytes": 4517,
+      "sha256": "80105da43ea721e213e47822f91298e6cd2ae8a167bb7503f1e97767d0451f96"
+    },
+    {
+      "path": "/root/sela-live/voice_app/sela_live_bridge.py",
+      "bytes": 3266,
+      "sha256": "880731409d5165bbc99a13644786265e8c1aa3c73c949657ab9673c31ff49a88"
+    },
+    {
+      "path": "/root/sela-live/voice_app/server.py",
+      "bytes": 42761,
+      "sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5"
+    },
+    {
+      "path": "/root/sela-live/voice_app/session_core.py",
+      "bytes": 7204,
+      "sha256": "14063a463652cde2d784151ed9f1a369723729bc7f432ca14096c0c4de4da06a"
+    },
+    {
+      "path": "/root/sela-live/voice_app/speech.py",
+      "bytes": 39345,
+      "sha256": "f91ce2cac04e2a8d6a3ee7b4b5dc19b44d2b31cdb9cd8d190872679bb8cee519"
+    },
+    {
+      "path": "/root/sela-live/voice_app/stateful_asr.py",
+      "bytes": 3342,
+      "sha256": "221d88e009d036c4adb1881c09b3a367dc8b50cc19396e9112fe8ef81a208d5e"
+    },
+    {
+      "path": "/root/sela-live/voice_app/stream_asr.py",
+      "bytes": 7692,
+      "sha256": "d8d5e854dcb05114158bb049d1bf2abd8d4c77ae4bdc222bf8feb65e24385a8e"
+    },
+    {
+      "path": "/root/sela-live/voice_app/supertonic3_worker.py",
+      "bytes": 14002,
+      "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+    },
+    {
+      "path": "/root/sela-live/voice_app/tts_chunks.py",
+      "bytes": 3537,
+      "sha256": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26"
+    },
+    {
+      "path": "/root/sela-live/voice_app/zipformer_state.py",
+      "bytes": 2828,
+      "sha256": "3b89f2a6ee1f22fcce35026150699d540630e35547e366de79b1ed450613919c"
+    },
+    {
+      "path": "/root/sela-live/voice_app/zipformer_stateful_worker.py",
+      "bytes": 6008,
+      "sha256": "26e9f6c14967ce0378b8be45866b64fd89f08b036a35257d0c282d55497a879a"
+    },
+    {
+      "path": "/root/sela-live/voice_app/zipformer_worker.py",
+      "bytes": 4094,
+      "sha256": "dd34189a5e8bc29a7cf61a2f760b778c6f42fc638e83a92fe6e5c57ac8c392fb"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/__init__.py",
+      "bytes": 1840,
+      "sha256": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/cli.py",
+      "bytes": 18995,
+      "sha256": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/config.py",
+      "bytes": 8064,
+      "sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/core.py",
+      "bytes": 20003,
+      "sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/loader.py",
+      "bytes": 16774,
+      "sha256": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/pipeline.py",
+      "bytes": 16733,
+      "sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/server/__init__.py",
+      "bytes": 789,
+      "sha256": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/server/app.py",
+      "bytes": 8000,
+      "sha256": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/server/audio.py",
+      "bytes": 2814,
+      "sha256": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/server/routes.py",
+      "bytes": 16108,
+      "sha256": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/server/schemas.py",
+      "bytes": 4188,
+      "sha256": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/server/styles_store.py",
+      "bytes": 4921,
+      "sha256": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e"
+    },
+    {
+      "path": "/root/supertonic-live-fix/supertonic/utils.py",
+      "bytes": 5727,
+      "sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3"
+    },
+    {
+      "path": "/root/voice-lab/autonomous/expressive-tts/assets-manifest.json",
+      "bytes": 3868,
+      "sha256": "0fd578199ae89d38c94b57935ea1f92f7c5aab26ca918cd17e116276953cfe47"
+    },
+    {
+      "path": "/root/voice-lab/voice_app/supertonic3_worker.py",
+      "bytes": 14002,
+      "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+    }
+  ]
+}

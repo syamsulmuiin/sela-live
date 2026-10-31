@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "scope": "Read-only actual DP graph preflight in collected transient unit with copied current production service sandbox/resource/user properties; no production unit modification or TTS sample",
+  "unit": "sela-natural-sandbox-check-365287",
+  "service_properties": {
+    "MemoryHigh": "infinity",
+    "MemoryMax": "infinity",
+    "TasksMax": "9483",
+    "CapabilityBoundingSet": "cap_chown cap_dac_override cap_dac_read_search cap_fowner cap_fsetid cap_kill cap_setgid cap_setuid cap_setpcap cap_linux_immutable cap_net_bind_service cap_net_broadcast cap_net_admin cap_net_raw cap_ipc_lock cap_ipc_owner cap_sys_module cap_sys_rawio cap_sys_chroot cap_sys_ptrace cap_sys_pacct cap_sys_admin cap_sys_boot cap_sys_nice cap_sys_resource cap_sys_time cap_sys_tty_config cap_mknod cap_lease cap_audit_write cap_audit_control cap_setfcap cap_mac_override cap_mac_admin cap_syslog cap_wake_alarm cap_block_suspend cap_audit_read cap_perfmon cap_bpf cap_checkpoint_restore",
+    "AmbientCapabilities": "",
+    "User": "root",
+    "Group": "",
+    "PrivateTmp": "yes",
+    "PrivateDevices": "no",
+    "ProtectKernelTunables": "no",
+    "ProtectKernelModules": "no",
+    "ProtectControlGroups": "no",
+    "ProtectHome": "no",
+    "ProtectSystem": "full",
+    "NoNewPrivileges": "yes",
+    "SystemCallFilter": "~",
+    "LockPersonality": "no",
+    "RestrictAddressFamilies": "~",
+    "MemoryDenyWriteExecute": "no",
+    "RestrictSUIDSGID": "no",
+    "RestrictNamespaces": "no"
+  },
+  "ready": {
+    "type": "ready",
+    "protocol": 1,
+    "max_queries": 64,
+    "native_network_denied": true
+  },
+  "prediction": {
+    "id": 1,
+    "seconds": 3.0218276977539062,
+    "tokens": 46
+  },
+  "worker_sha256": "b12907df6f3e5283e9633385151cc813473d91eda3ff9ead7069cd76842f868d",
+  "source_manifest_sha256": "f3fd4dc8b69a173c349a52903006006e5ac983d8b02768941308a7fdf5c1a0fb",
+  "exit_code": 0,
+  "canonical_admission_used": true
+}

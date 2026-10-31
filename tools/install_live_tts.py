@@ -16,7 +16,8 @@ import uuid
 SELECTOR_KEYS = frozenset(('VOICE_PUBLIC_ORIGIN', 'VOICE_MODEL', 'VOICE_STT_BACKEND',
     'VOICE_TTS_BACKEND', 'VOICE_SUPERTONIC3_STYLE_PROFILE', 'VOICE_AUTOMATIC_CONDITIONING',
     'VOICE_ZIPFORMER_STATEFUL', 'VOICE_LOCAL_ASR_ENGINE', 'VOICE_SUPERTONIC3_PYTHON',
-    'VOICE_SUPERTONIC3_MODEL_PATH', 'VOICE_SUPERTONIC3_MANIFEST'))
+    'VOICE_SUPERTONIC3_MODEL_PATH', 'VOICE_SUPERTONIC3_MANIFEST',
+    'VOICE_EXPERIMENTAL_DELIVERY_PROSODY'))
 ANCHORS = {'VOICE_STT_BACKEND': 'local', 'VOICE_TTS_BACKEND': 'supertonic3',
            'VOICE_SUPERTONIC3_STYLE_PROFILE': 'conditioning_b', 'VOICE_AUTOMATIC_CONDITIONING': '1',
            'VOICE_ZIPFORMER_STATEFUL': '1', 'VOICE_LOCAL_ASR_ENGINE': 'zipformer_id_int8',
@@ -28,9 +29,33 @@ def sha(raw):
 
 
 GUARDS = frozenset('voice_app/' + n for n in ('approved_conditioning.py', 'automatic_conditioning.py', 'supertonic3_worker.py'))
-LIVE_KEYS = frozenset('VOICE_SELA_LIVE_' + n for n in ('TTS', 'PYTHON', 'WORKER', 'WORKER_SHA256', 'LOCK'))
+LIVE_KEYS = frozenset('VOICE_SELA_LIVE_' + n for n in (
+    'TTS', 'PYTHON', 'WORKER', 'WORKER_SHA256', 'LOCK', 'POLICY', 'DURATION_WORKER',
+    'DURATION_WORKER_SHA256', 'SOURCE_MANIFEST_SHA256', 'RUNTIME_MANIFEST', 'RUNTIME_MANIFEST_SHA256'))
 DROPIN = 'voice-lab.service.d/90-sela-live-tts.conf'
 TESTSOURCE = Path(__file__).resolve().parents[1] / 'tests/setup/test_live_tts_install.py'
+
+
+RUNTIME_MANIFEST = 'sela_live_tts/natural-runtime-manifest.json'
+# Kept explicit and stdlib-only: never import candidate runtime during promotion.
+NATURAL_RUNTIME_FILES = frozenset(
+    'sela_live_tts/' + name for name in (
+        '__init__.py', 'backend.py', 'admission.py', 'controls.py', 'source_pins.py',
+        'worker.py', 'natural.py', 'utterance.py', 'duration.py', 'natural_worker.py',
+        'duration_worker.py', 'upstream-manifest.json')) | GUARDS | frozenset(
+    'vendor/supertonic/' + name for name in (
+        '__init__.py', 'cli.py', 'config.py', 'core.py', 'loader.py', 'pipeline.py', 'utils.py',
+        'server/__init__.py', 'server/app.py', 'server/audio.py', 'server/routes.py',
+        'server/schemas.py', 'server/styles_store.py'))
+
+
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('Duplicate manifest key')
+        result[key] = value
+    return result
 
 
 def canonical(value):
@@ -68,7 +93,8 @@ def inventory(root):
 def allowed(name):
     relative(name)
     return (name in {'voice_app/speech.py', 'voice_app/sela_live_bridge.py',
-                     'sela_live_tts/upstream-manifest.json', 'vendor/supertonic-LICENSE.txt',
+                     'sela_live_tts/upstream-manifest.json', 'sela_live_tts/natural-runtime-manifest.json',
+                     'vendor/supertonic-LICENSE.txt',
                      'vendor/SUPERTONIC-PROVENANCE.json'} or
             (name.startswith('sela_live_tts/') and name.endswith('.py')) or
             (name.startswith('vendor/supertonic/') and name.endswith('.py')))
@@ -125,6 +151,24 @@ class Installer:
                     'vendor/supertonic-LICENSE.txt', 'vendor/SUPERTONIC-PROVENANCE.json'}
         if not required <= set(files) or set(preserved) != GUARDS or any(not allowed(n) for n in files):
             raise ValueError('Compiled payload allowlist mismatch')
+        if ({RUNTIME_MANIFEST, 'sela_live_tts/natural_worker.py', 'sela_live_tts/duration_worker.py'} & set(files)
+                and p['live_env'].get('VOICE_SELA_LIVE_POLICY') != 'natural_v1'):
+            raise ValueError('Natural payload requires explicit natural_v1 policy')
+        if 'VOICE_SELA_LIVE_POLICY' in p['live_env']:
+            natural_files = (NATURAL_RUNTIME_FILES - GUARDS) | {
+                'voice_app/speech.py', 'voice_app/sela_live_bridge.py', RUNTIME_MANIFEST,
+                'vendor/supertonic-LICENSE.txt', 'vendor/SUPERTONIC-PROVENANCE.json'}
+            if set(files) != natural_files:
+                raise ValueError('Natural payload inventory mismatch')
+            raw = self.match(Path(p['payload_root']) / RUNTIME_MANIFEST, files[RUNTIME_MANIFEST])
+            manifest = json.loads(raw, object_pairs_hook=unique_object)
+            expected_inventory = {n: {**files, **preserved}[n]['sha256'] for n in NATURAL_RUNTIME_FILES}
+            if (type(manifest) is not dict or set(manifest) != {'schema_version', 'files'}
+                    or type(manifest['schema_version']) is not int or manifest['schema_version'] != 1
+                    or type(manifest['files']) is not dict or manifest['files'] != expected_inventory
+                    or any(type(d) is not str or re.fullmatch('[0-9a-f]{64}', d) is None
+                           for d in manifest['files'].values())):
+                raise ValueError('Natural runtime manifest inventory/digest mismatch')
         if inventory(Path(p['payload_root'])) != set(files) | set(preserved):
             raise ValueError('Payload inventory mismatch')
         for group, root in (('app', self.root), ('units', self.units)):
@@ -144,6 +188,18 @@ class Installer:
                     'VOICE_SELA_LIVE_WORKER': str(self.root / 'sela_live_tts/worker.py'),
                     'VOICE_SELA_LIVE_WORKER_SHA256': files['sela_live_tts/worker.py']['sha256'],
                     'VOICE_SELA_LIVE_LOCK': str(self.root / '.runtime/live-tts.lock')}
+        if 'VOICE_SELA_LIVE_POLICY' in p['live_env']:
+            if selectors.get('VOICE_EXPERIMENTAL_DELIVERY_PROSODY', '0') != '0':
+                raise ValueError('Natural policy requires disabled experimental prosody')
+            expected.update({
+                'VOICE_SELA_LIVE_POLICY': 'natural_v1',
+                'VOICE_SELA_LIVE_WORKER': str(self.root / 'sela_live_tts/natural_worker.py'),
+                'VOICE_SELA_LIVE_WORKER_SHA256': files['sela_live_tts/natural_worker.py']['sha256'],
+                'VOICE_SELA_LIVE_DURATION_WORKER': str(self.root / 'sela_live_tts/duration_worker.py'),
+                'VOICE_SELA_LIVE_DURATION_WORKER_SHA256': files['sela_live_tts/duration_worker.py']['sha256'],
+                'VOICE_SELA_LIVE_SOURCE_MANIFEST_SHA256': files['sela_live_tts/upstream-manifest.json']['sha256'],
+                'VOICE_SELA_LIVE_RUNTIME_MANIFEST': str(self.root / 'sela_live_tts/natural-runtime-manifest.json'),
+                'VOICE_SELA_LIVE_RUNTIME_MANIFEST_SHA256': files['sela_live_tts/natural-runtime-manifest.json']['sha256']})
         if p['live_env'] != expected or any(type(v) is not str or not re.fullmatch(r'[A-Za-z0-9_./:-]+', v) for v in expected.values()):
             raise ValueError('Incorrect live selectors')
         python = Path(expected['VOICE_SELA_LIVE_PYTHON'])
@@ -349,6 +405,15 @@ class Installer:
                     self.observe(self.baseline['selectors'])
                 except BaseException as failure:
                     errors.append('recovery:' + type(failure).__name__)
+                    # Restart may have started a process before failing; a
+                    # post-restart validation error also leaves it unverified.
+                    # Stop once more and never report success if that stop fails.
+                    receipt['recovery_final_stop_succeeded'] = False
+                    try:
+                        self.hooks.stop()
+                        receipt['recovery_final_stop_succeeded'] = True
+                    except BaseException as final_failure:
+                        errors.append('final_stop:' + type(final_failure).__name__)
             receipt.update(status='rollback_failed' if errors else 'rolled_back', cleanup_errors=errors)
         try:
             self.atomic(receipt_path, canonical(receipt), 0o600)

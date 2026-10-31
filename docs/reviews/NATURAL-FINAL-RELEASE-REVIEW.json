@@ -1,0 +1,1389 @@
+{
+  "artifacts": {
+    "docs/NATURAL-NATIVE-BROWSER-VERIFICATION.json": {
+      "bytes": 3679,
+      "mode": 420,
+      "path": "/root/sela-live/docs/NATURAL-NATIVE-BROWSER-VERIFICATION.json",
+      "sha256": "fa99fb5efc8024bf32882059e3c3f6817bfa5f43091f5ddbd98ba9572d8dbdcd"
+    },
+    "docs/NATURAL-SERVICE-SANDBOX-VERIFICATION.json": {
+      "bytes": 1939,
+      "mode": 420,
+      "path": "/root/sela-live/docs/NATURAL-SERVICE-SANDBOX-VERIFICATION.json",
+      "sha256": "56f1097f02453318713fb169bb8477e8005f8391b17abab2ddfaad7c7da8f6a2"
+    },
+    "docs/reviews/NATURAL-INSTALLER-REVIEW.json": {
+      "bytes": 9499,
+      "mode": 420,
+      "path": "/root/sela-live/docs/reviews/NATURAL-INSTALLER-REVIEW.json",
+      "sha256": "2763f7a7ec977a3e71a13e4e15cd0f0ce569d3b4fd46d0aa4ba7a91e568ef493"
+    },
+    "docs/reviews/NATURAL-INTEGRATION-RUNTIME-REVIEW.json": {
+      "bytes": 31215,
+      "mode": 420,
+      "path": "/root/sela-live/docs/reviews/NATURAL-INTEGRATION-RUNTIME-REVIEW.json",
+      "sha256": "a51470cf71334fa6c1b0cbf0cb93c072b640195007b26f0aac3682dbc216307e"
+    },
+    "tests/setup/test_live_tts_install.py": {
+      "bytes": 56382,
+      "mode": 420,
+      "path": "/root/sela-live/tests/setup/test_live_tts_install.py",
+      "sha256": "37683c68aacb6a4469a99779b6118f219ad59a2fd745ef8839c99252f138d832"
+    },
+    "tools/build_live_runtime.py": {
+      "bytes": 11322,
+      "mode": 420,
+      "path": "/root/sela-live/tools/build_live_runtime.py",
+      "sha256": "8d3569edf5cdc234854f9685d997283a89ea1e9f6549c0cf5620feca9c24c84e"
+    },
+    "tools/install_live_tts.py": {
+      "bytes": 27821,
+      "mode": 420,
+      "path": "/root/sela-live/tools/install_live_tts.py",
+      "sha256": "3de2501691eb34c566967e03816af81ca9ce7a045adc74f48e28de831efcc504"
+    }
+  },
+  "baseline_and_production": {
+    "app_records": 68,
+    "authoritative_prior_release_check": "Current frozen app baseline exactly equals prior approved baseline overlaid with prior approved payload/preserved. Unchanged units equal prior baseline; existing90dropin exactly equals rendered prior approved live_env and0644. Baseline process selectors equal previous installed-state selectors and merged prior approved selectors. Not an adoption of arbitrary current bytes.",
+    "authoritative_prior_release_inputs": [
+      {
+        "bytes": 14654,
+        "mode": 420,
+        "path": "/root/sela-live/docs/LIVE-INSTALL-STATE.json",
+        "sha256": "8b0a7ddef28ee65f6b3d5e30f79a5c7b69ea6fcdd5ad2d70ec51280a38ef3b01"
+      },
+      {
+        "bytes": 5053,
+        "mode": 384,
+        "path": "/root/sela-live-releases/live-release-4kkkhooe/approved-plan.json",
+        "sha256": "1676070ab3ddad36aa6318c631cb4590d653772120a79fd1550d05b538558b2f"
+      },
+      {
+        "bytes": 7109,
+        "mode": 256,
+        "path": "/root/sela-live-releases/live-release-4kkkhooe/frozen-baseline.json",
+        "sha256": "5fd63f2c5e00cfd918c758184c60fc0708b14d7bb61297f79073c477ce4ac800"
+      },
+      {
+        "bytes": 117,
+        "mode": 384,
+        "path": "/root/sela-live-install-snapshots/9d7509a6587142c69e3cc11518189589.receipt.json",
+        "sha256": "f1a05774ac5d3148c51abd602890d99dcb161ab652f6d6aa5708011f488bc3fb"
+      }
+    ],
+    "binding_checks": "All68app/8unit actual bytes and modes match frozen baseline; complete protected source/dropin inventories exact; candidate destinations absent where not in baseline; preserved guard bytes/modes exact.",
+    "current_policy": "legacy quality12; natural_v1 not installed",
+    "frozen_baseline": {
+      "bytes": 12587,
+      "mode": 256,
+      "path": "/root/sela-live-releases/natural-release-17wdj1hq/frozen-baseline.json",
+      "sha256": "7300a2c1f004cdd01f6e119a49a31cc2d34cd675df5f13ff246e36bb8d40f0f9"
+    },
+    "guards": "Active/running fixed root and owned127.0.0.1:8091 listener; health200 exactok; API401, invalidHost400, unauthenticatedWS403. Full allowlisted process selectors exact; experimental prosody absent/default0.",
+    "main_pid": 95188,
+    "read_only_observation": {
+      "healthy": true,
+      "selectors": {
+        "VOICE_AUTOMATIC_CONDITIONING": "1",
+        "VOICE_LOCAL_ASR_ENGINE": "zipformer_id_int8",
+        "VOICE_MODEL": "gpt-6.1-sol",
+        "VOICE_PUBLIC_ORIGIN": "https://voice.kasirdigital.web.id",
+        "VOICE_SELA_LIVE_LOCK": "/root/voice-lab/.runtime/live-tts.lock",
+        "VOICE_SELA_LIVE_PYTHON": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+        "VOICE_SELA_LIVE_TTS": "1",
+        "VOICE_SELA_LIVE_WORKER": "/root/voice-lab/sela_live_tts/worker.py",
+        "VOICE_SELA_LIVE_WORKER_SHA256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142",
+        "VOICE_STT_BACKEND": "local",
+        "VOICE_SUPERTONIC3_MANIFEST": "/root/voice-lab/autonomous/expressive-tts/assets-manifest.json",
+        "VOICE_SUPERTONIC3_MODEL_PATH": "/root/voice-lab/autonomous/expressive-tts/assets",
+        "VOICE_SUPERTONIC3_PYTHON": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+        "VOICE_SUPERTONIC3_STYLE_PROFILE": "conditioning_b",
+        "VOICE_TTS_BACKEND": "supertonic3",
+        "VOICE_ZIPFORMER_STATEFUL": "1"
+      }
+    },
+    "real_read_only_preflight": "Actual Installer.preflight(observe=True) passed with fixed trusted roots/SystemHooks and an in-memory exact signed plan referring to prior approved runtime report. Never Installer.run/apply. Final-report-bound in-memory preflight will be checked immediately after issuance; parent separately owns final on-disk CLI preflight.",
+    "root": "/root/voice-lab",
+    "unit_records": 8
+  },
+  "blocking_findings": [],
+  "builder_sha256": "8d3569edf5cdc234854f9685d997283a89ea1e9f6549c0cf5620feca9c24c84e",
+  "candidate": "natural_v1",
+  "created_files": {
+    "repository": [
+      "docs/reviews/NATURAL-FINAL-RELEASE-REVIEW.json"
+    ],
+    "scratch_logs": [
+      "/root/.hermes/cache/scratch/natural-final-release-installer-normal.log",
+      "/root/.hermes/cache/scratch/natural-final-release-installer-optimized.log",
+      "/root/.hermes/cache/scratch/natural-final-release-reconstructed-red.log",
+      "/root/.hermes/cache/scratch/natural-final-release-probe-sela-live-normal.log",
+      "/root/.hermes/cache/scratch/natural-final-release-probe-sela-live-optimized.log",
+      "/root/.hermes/cache/scratch/natural-final-release-probe-natural-export-ld4dz5qt-normal.log",
+      "/root/.hermes/cache/scratch/natural-final-release-probe-natural-export-ld4dz5qt-optimized.log"
+    ]
+  },
+  "deployment_authorized": true,
+  "execution_restrictions": {
+    "downloads": false,
+    "fixture_only_tests": true,
+    "git_mutations": false,
+    "native_or_nn_inference": false,
+    "production_writes": false,
+    "real_SystemHooks_read_only": true,
+    "service_stop_restart_install": false,
+    "source_edits": false,
+    "test_edits": false
+  },
+  "fixture_cleanup": {
+    "access_file_absent": true,
+    "auth_directory_absent": true,
+    "browser_fixture_tab_absent": true,
+    "canonical_admission_flock_reacquired_then_released": true,
+    "loopback_sela_session_cookies_remaining": 0,
+    "native_duration_worker_and_fixture_driver_processes_remaining": 0,
+    "port45807_refused": true,
+    "verification": "Read-only filesystem/proc/socket/CDP checks plus nonblocking flock on existing canonical lock; no lock creation/replacement. Original native model/interpreter/voice roots retained as production dependencies."
+  },
+  "installer_blocker_repair": {
+    "closed_id": "recovery-post-restart-error-does-not-stop",
+    "exact_delta_verification": {
+      "current_methods": 45,
+      "legacy_ast_drift": [],
+      "original_legacy_test_methods": 34,
+      "remove_only_lines408_to416_yields_rejected_installer_sha256": "47e4f7cfd3e40270b3f5ba530d1c67a37a9dd94a0a9c139643cdf0d869bd82b7",
+      "remove_only_two_new_methods_and_separator_newlines_yields_rejected43test_sha256": "7db861a60fb4837d0a8738b4486a4c04258c576557cc3d9e8ec3918f59e52e75"
+    },
+    "finding": "Nine added lines cover BaseException from recovery restart and subsequent baseline-byte/mode/inventory/observation verification. Recovery error attempts one final stop and never restarts again. recovery_final_stop_succeeded starts false and becomes true only if stop returns. Failed final stop records final_stop:<exception type> and leaves false with rollback_failed/applied=false; it never claims confirmed stopped state when stop failed.",
+    "independent_in_memory_red": {
+      "errors": 1,
+      "log": {
+        "bytes": 3857,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-final-release-reconstructed-red.log",
+        "sha256": "b782fc7ae19f41e7b9ba5a44e1ddf1b379d603472dfaebb920bfc049c6cc2cc8"
+      },
+      "ran": 2,
+      "scope": "Only the nine new installer lines removed IN MEMORY; source/test files unchanged. The two added methods fail against the exact rejected installer bytes.",
+      "subcase_failures": 3
+    },
+    "inherited_safeguards": "Earlier no-restore-after-stop-failure and no-restart-after-restore/preverification-failure logic unchanged. Removing only nine new lines IN MEMORY reproduced exact earlier rejected installer hash and yielded3subcase failures/1error from new2tests. No source/test files changed.",
+    "prior_rejection_preserved": {
+      "bytes": 9499,
+      "mode": 420,
+      "path": "/root/sela-live/docs/reviews/NATURAL-INSTALLER-REVIEW.json",
+      "sha256": "2763f7a7ec977a3e71a13e4e15cd0f0ce569d3b4fd46d0aa4ba7a91e568ef493"
+    },
+    "regressions": [
+      {
+        "assertions": [
+          "inactive fixture service",
+          "exactly3stops/2restarts",
+          "last event stop",
+          "successful final-stop flag",
+          "terminal rollback_failed"
+        ],
+        "name": "test_recovery_post_restart_error_stops_unverified_service",
+        "subcases": [
+          "restart starts then raises",
+          "post-restart observation error",
+          "post-restart inventory error"
+        ]
+      },
+      {
+        "assertions": [
+          "fixture remains active",
+          "final-stop flag false",
+          "final_stop:OSError recorded",
+          "no third restart",
+          "terminal rollback_failed"
+        ],
+        "name": "test_failed_final_recovery_stop_never_claims_stopped"
+      }
+    ],
+    "reviewed_lines": "tools/install_live_tts.py:398-417"
+  },
+  "installer_sha256": "3de2501691eb34c566967e03816af81ca9ce7a045adc74f48e28de831efcc504",
+  "installer_test_runs": [
+    {
+      "command": [
+        "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.setup.test_live_tts_install",
+        "-v"
+      ],
+      "cwd": "/root/sela-live",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "log": {
+        "bytes": 8209,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-final-release-installer-normal.log",
+        "sha256": "6a63da1022c734d52adfe95988b1152206bc209bd274e69e5e143e71b2e87a4a"
+      },
+      "mode": "normal",
+      "passed": 45,
+      "ran": 45,
+      "seconds": 3.59,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+        "-B",
+        "-O",
+        "-m",
+        "unittest",
+        "tests.setup.test_live_tts_install",
+        "-v"
+      ],
+      "cwd": "/root/sela-live",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "log": {
+        "bytes": 8209,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-final-release-installer-optimized.log",
+        "sha256": "d82b83c83b88e908128842fb5d91f5350fcc49ba045ddd9c2c018688584ce6b0"
+      },
+      "mode": "optimized",
+      "passed": 45,
+      "ran": 45,
+      "seconds": 3.54,
+      "skipped": 0
+    }
+  ],
+  "issues_encountered": [
+    "Final stability check caught one test-only drift; paused issuance, accepted explicit parent steering, fully reviewed and independently verified the portable test fix at both roots normal/-O. All installer/runtime/tool/builder/payload inputs remained frozen.",
+    "No blocking findings. Original rejection preserved; historical evidence/desktop CSS qualifications remain explicit."
+  ],
+  "native_browser_evidence": {
+    "accepted_b": {
+      "byte_exact": true,
+      "contexts": 3,
+      "independent_check": "Relocated WAV bytes equal original accepted natural12.wav and listener receipt SHA256; exact full source reconstructed; chosen B MP3 digest also matches.",
+      "source_sha256": "c55979e940a0489016bb158eb0443bbb4a435d18697559dd8501b3022deda94a",
+      "wav_sha256": "f1905590111e8f62657fa87a8c0da346974ff212af475920ba4cf8f87cd34bc6"
+    },
+    "actual_dp_queries": 7,
+    "all_steps": 12,
+    "api": {
+      "full_source_ack": true,
+      "history_counts": [
+        2,
+        4
+      ],
+      "native_wav_pairings_match": true,
+      "reply_hashes_charcounts_and_profile_dp_pairings_match": true,
+      "turns": 2
+    },
+    "bindings": [
+      {
+        "bytes": 8602,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-network-oxxcoupq/network-receipt.json",
+        "sha256": "394421fe3de7678ce7c2fe7ada48f1db74d81f8baf06ecb033bed363339aec1d"
+      },
+      {
+        "bytes": 1694,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-network-oxxcoupq/browser-turn-1.json",
+        "sha256": "1760e25b83ead3ee20edce8487292f81e6b63906f39da35549981e5d2a2954d7"
+      },
+      {
+        "bytes": 3701,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-network-oxxcoupq/browser-turn-2.json",
+        "sha256": "f670c35059d0ce735ce3dc10ff2171b6374b1f691a47be2ee3aa460f1a86932c"
+      },
+      {
+        "bytes": 8719,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-network-oxxcoupq/fixture-layout.json",
+        "sha256": "6f66bfa5aef31d2397f5224f320da57babdb22cbc132c3aff0ea66f4af812db7"
+      },
+      {
+        "bytes": 12017,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/verify-natural-network.py",
+        "sha256": "3aef812417cc75660c3367db76a431bb202d972b5e031055d3e30b7c31766509"
+      },
+      {
+        "bytes": 7055492,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-network-oxxcoupq/accepted-b-relocated.wav",
+        "sha256": "f1905590111e8f62657fa87a8c0da346974ff212af475920ba4cf8f87cd34bc6"
+      },
+      {
+        "bytes": 2410,
+        "mode": 420,
+        "path": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4/listener-feedback.json",
+        "sha256": "40cb9e20b1b571e0831a5ae70303859a21258d9ab1224c7ab43e67856102282f"
+      },
+      {
+        "bytes": 24392,
+        "mode": 420,
+        "path": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4/receipt.json",
+        "sha256": "034ffeaec14868e0a6086ab7c5be1cd8c61697ac1bb9281941cae9a4922a945d"
+      },
+      {
+        "bytes": 7055492,
+        "mode": 420,
+        "path": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4/natural12.wav",
+        "sha256": "f1905590111e8f62657fa87a8c0da346974ff212af475920ba4cf8f87cd34bc6"
+      },
+      {
+        "bytes": 1108755,
+        "mode": 420,
+        "path": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4/B-natural-otomatis.mp3",
+        "sha256": "97c74046efc7782cd9bdc30b12ef48b3862d8b5bdaa62de76d7255e7be840ba6"
+      }
+    ],
+    "browser": {
+      "acks": 2,
+      "assistant_text_equals_heard_text": true,
+      "chunk_ids": [
+        1,
+        2
+      ],
+      "errors": [],
+      "generations": [
+        1,
+        2
+      ],
+      "history_count": 4,
+      "mobile390px_overflow": false,
+      "playback_ended": 2,
+      "profiles_and_dp_source_pairings_match": true,
+      "same_session": true,
+      "shipping_web_assets_equal_live_baseline": true,
+      "turns": 2
+    },
+    "completed_tts_calls": 7,
+    "graph_check": "Private driver inspected: wraps actual bounded subprocess and original DP session, not fake PCM/provider. Staged speech/bridge/server/providers/session bytes and package source inputs match approved source; browser uses unchanged shipping assets. Recorded evidence checked, not rerun.",
+    "limitations": [
+      "No physical microphone/speaker or authenticated production-account claim.",
+      "Listener acceptance covers this exact B sample, not all future voice quality or independent emotional acting.",
+      "Unchanged traditional-scrollbar narrow desktop CSS has2px overflow; Android390px mobile emulation does not."
+    ],
+    "profiles": [
+      "conditioning_b",
+      "conditioning_b",
+      "conditioning_b",
+      "conditioning_b_active_medium",
+      "conditioning_b_active_low",
+      "conditioning_b_calm_low",
+      "conditioning_b_active_medium"
+    ],
+    "record": {
+      "bytes": 3679,
+      "mode": 420,
+      "path": "/root/sela-live/docs/NATURAL-NATIVE-BROWSER-VERIFICATION.json",
+      "sha256": "fa99fb5efc8024bf32882059e3c3f6817bfa5f43091f5ddbd98ba9572d8dbdcd"
+    },
+    "status_qualification": "Raw network receipt retains pre-browser network_verified_browser_pending string but includes all7completed calls including2later browser outputs. Independently hash-bound cumulative browser-turn-2 receipt proves both completed browser turns and same-session history4."
+  },
+  "parent_conditions": [
+    "Set runtime_review_path to this report and bind actual reportSHA/mode, exact installer/testSHA/modes, frozen baseline, canonical final plan/payload, payload directory mode and actual plan_mode0600or0644; run actual read-only CLI preflight beforeapply.",
+    "Any further bound source/test/builder/runtime/evidence/payload/baseline/selector drift rejects or requires bounded delta review. This approves no unrelated feature expansion.",
+    "Parent must perform real post-install byte/mode/inventory/selector/health/auth/native checks and readback before success claims. This report is not a future outcome attestation.",
+    "Git publication/remote SHA verification remains separate and is not performed or attested here."
+  ],
+  "prepared_release": {
+    "artifacts": {
+      "frozen-baseline.json": {
+        "bytes": 12587,
+        "mode": 256,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/frozen-baseline.json",
+        "sha256": "7300a2c1f004cdd01f6e119a49a31cc2d34cd675df5f13ff246e36bb8d40f0f9"
+      },
+      "runtime-package.json": {
+        "bytes": 8030,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/runtime-package.json",
+        "sha256": "6a2058cfc75c080c97d075469c26e667f5400301400508e4973af35398528737"
+      },
+      "unsigned-plan.json": {
+        "bytes": 6206,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/unsigned-plan.json",
+        "sha256": "36f61136f9f84f319c26063949ebb0288c69b18c7c482c70dc556e21cdd07d4f"
+      }
+    },
+    "builder_validation": "Source-reviewed build_runtime(write=False) re-executed with reviewed worker pins and fixed/root/voice-lab target: all package fields exact except expected mode/output_root. Source inputs exactly match prior approved builder source_files. Separately reconstructed serialized three-root manifest, only MANIFEST_SHA literal replacements, exhaustive28file runtime manifest; every other payload file byte-exact, duration worker unchanged; speech/bridge exact source-reviewed bytes. No payload writes.",
+    "files": {
+      "sela_live_tts/__init__.py": {
+        "mode": 420,
+        "sha256": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e"
+      },
+      "sela_live_tts/admission.py": {
+        "mode": 420,
+        "sha256": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1"
+      },
+      "sela_live_tts/backend.py": {
+        "mode": 420,
+        "sha256": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a"
+      },
+      "sela_live_tts/controls.py": {
+        "mode": 420,
+        "sha256": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213"
+      },
+      "sela_live_tts/duration.py": {
+        "mode": 420,
+        "sha256": "1afbdc45010d0ce6731a6c39d9e12401b7dd4d276d96f25e72e3f33c5b8eb93d"
+      },
+      "sela_live_tts/duration_worker.py": {
+        "mode": 420,
+        "sha256": "b12907df6f3e5283e9633385151cc813473d91eda3ff9ead7069cd76842f868d"
+      },
+      "sela_live_tts/natural-runtime-manifest.json": {
+        "mode": 420,
+        "sha256": "34df920bfa6a79f086c7bede31a301bdef707bfeb14830cea2ad984a6969634e"
+      },
+      "sela_live_tts/natural.py": {
+        "mode": 420,
+        "sha256": "18387a1ed1dc60d1a28c29bc5cbe09ac8aee40ac3b81d164563a7b026ba1c658"
+      },
+      "sela_live_tts/natural_worker.py": {
+        "mode": 420,
+        "sha256": "50c456e0a910df1e9481a68e81ce496fbea3aeae46780497d5eb7da35ac7a2a3"
+      },
+      "sela_live_tts/source_pins.py": {
+        "mode": 420,
+        "sha256": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0"
+      },
+      "sela_live_tts/upstream-manifest.json": {
+        "mode": 420,
+        "sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00"
+      },
+      "sela_live_tts/utterance.py": {
+        "mode": 420,
+        "sha256": "36a3e116b33e342644ecf852829e2264108db793037eced1c3a834a6bd58d813"
+      },
+      "sela_live_tts/worker.py": {
+        "mode": 420,
+        "sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142"
+      },
+      "vendor/SUPERTONIC-PROVENANCE.json": {
+        "mode": 420,
+        "sha256": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5"
+      },
+      "vendor/supertonic-LICENSE.txt": {
+        "mode": 420,
+        "sha256": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03"
+      },
+      "vendor/supertonic/__init__.py": {
+        "mode": 420,
+        "sha256": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18"
+      },
+      "vendor/supertonic/cli.py": {
+        "mode": 420,
+        "sha256": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba"
+      },
+      "vendor/supertonic/config.py": {
+        "mode": 420,
+        "sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e"
+      },
+      "vendor/supertonic/core.py": {
+        "mode": 420,
+        "sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4"
+      },
+      "vendor/supertonic/loader.py": {
+        "mode": 420,
+        "sha256": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f"
+      },
+      "vendor/supertonic/pipeline.py": {
+        "mode": 420,
+        "sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd"
+      },
+      "vendor/supertonic/server/__init__.py": {
+        "mode": 420,
+        "sha256": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b"
+      },
+      "vendor/supertonic/server/app.py": {
+        "mode": 420,
+        "sha256": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0"
+      },
+      "vendor/supertonic/server/audio.py": {
+        "mode": 420,
+        "sha256": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b"
+      },
+      "vendor/supertonic/server/routes.py": {
+        "mode": 420,
+        "sha256": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720"
+      },
+      "vendor/supertonic/server/schemas.py": {
+        "mode": 420,
+        "sha256": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db"
+      },
+      "vendor/supertonic/server/styles_store.py": {
+        "mode": 420,
+        "sha256": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e"
+      },
+      "vendor/supertonic/utils.py": {
+        "mode": 420,
+        "sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3"
+      },
+      "voice_app/sela_live_bridge.py": {
+        "mode": 420,
+        "sha256": "0cba137eacc8bba624e26387dc8350ff190b6610a3c2b7cb30376af49f2baa75"
+      },
+      "voice_app/speech.py": {
+        "mode": 420,
+        "sha256": "1c764a3004e83fc565d8ebfabeee7c1d3040c3a3e31716a783ee5692a7558036"
+      }
+    },
+    "files_count": 30,
+    "live_env": {
+      "VOICE_SELA_LIVE_DURATION_WORKER": "/root/voice-lab/sela_live_tts/duration_worker.py",
+      "VOICE_SELA_LIVE_DURATION_WORKER_SHA256": "b12907df6f3e5283e9633385151cc813473d91eda3ff9ead7069cd76842f868d",
+      "VOICE_SELA_LIVE_LOCK": "/root/voice-lab/.runtime/live-tts.lock",
+      "VOICE_SELA_LIVE_POLICY": "natural_v1",
+      "VOICE_SELA_LIVE_PYTHON": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+      "VOICE_SELA_LIVE_RUNTIME_MANIFEST": "/root/voice-lab/sela_live_tts/natural-runtime-manifest.json",
+      "VOICE_SELA_LIVE_RUNTIME_MANIFEST_SHA256": "34df920bfa6a79f086c7bede31a301bdef707bfeb14830cea2ad984a6969634e",
+      "VOICE_SELA_LIVE_SOURCE_MANIFEST_SHA256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00",
+      "VOICE_SELA_LIVE_TTS": "1",
+      "VOICE_SELA_LIVE_WORKER": "/root/voice-lab/sela_live_tts/natural_worker.py",
+      "VOICE_SELA_LIVE_WORKER_SHA256": "50c456e0a910df1e9481a68e81ce496fbea3aeae46780497d5eb7da35ac7a2a3"
+    },
+    "payload_bindings": {
+      "sela_live_tts/__init__.py": {
+        "bytes": 70,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/__init__.py",
+        "sha256": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e"
+      },
+      "sela_live_tts/admission.py": {
+        "bytes": 5290,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/admission.py",
+        "sha256": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1"
+      },
+      "sela_live_tts/backend.py": {
+        "bytes": 5418,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/backend.py",
+        "sha256": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a"
+      },
+      "sela_live_tts/controls.py": {
+        "bytes": 837,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/controls.py",
+        "sha256": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213"
+      },
+      "sela_live_tts/duration.py": {
+        "bytes": 15598,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/duration.py",
+        "sha256": "1afbdc45010d0ce6731a6c39d9e12401b7dd4d276d96f25e72e3f33c5b8eb93d"
+      },
+      "sela_live_tts/duration_worker.py": {
+        "bytes": 11212,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/duration_worker.py",
+        "sha256": "b12907df6f3e5283e9633385151cc813473d91eda3ff9ead7069cd76842f868d"
+      },
+      "sela_live_tts/natural-runtime-manifest.json": {
+        "bytes": 2992,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/natural-runtime-manifest.json",
+        "sha256": "34df920bfa6a79f086c7bede31a301bdef707bfeb14830cea2ad984a6969634e"
+      },
+      "sela_live_tts/natural.py": {
+        "bytes": 5492,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/natural.py",
+        "sha256": "18387a1ed1dc60d1a28c29bc5cbe09ac8aee40ac3b81d164563a7b026ba1c658"
+      },
+      "sela_live_tts/natural_worker.py": {
+        "bytes": 7015,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/natural_worker.py",
+        "sha256": "50c456e0a910df1e9481a68e81ce496fbea3aeae46780497d5eb7da35ac7a2a3"
+      },
+      "sela_live_tts/source_pins.py": {
+        "bytes": 1597,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/source_pins.py",
+        "sha256": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0"
+      },
+      "sela_live_tts/upstream-manifest.json": {
+        "bytes": 2065,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/upstream-manifest.json",
+        "sha256": "76b382d4e8e44ea427a6e9394600cb2732d3ab54fdbd087cf5160ebb4cb21a00"
+      },
+      "sela_live_tts/utterance.py": {
+        "bytes": 13830,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/utterance.py",
+        "sha256": "36a3e116b33e342644ecf852829e2264108db793037eced1c3a834a6bd58d813"
+      },
+      "sela_live_tts/worker.py": {
+        "bytes": 2240,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/sela_live_tts/worker.py",
+        "sha256": "1bfe733bcfcd9cf71d3b2da9960fcae5179dc80684e19f3fc4df2f7a2ff18142"
+      },
+      "vendor/SUPERTONIC-PROVENANCE.json": {
+        "bytes": 1492,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/SUPERTONIC-PROVENANCE.json",
+        "sha256": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5"
+      },
+      "vendor/supertonic-LICENSE.txt": {
+        "bytes": 1071,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic-LICENSE.txt",
+        "sha256": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03"
+      },
+      "vendor/supertonic/__init__.py": {
+        "bytes": 1840,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/__init__.py",
+        "sha256": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18"
+      },
+      "vendor/supertonic/cli.py": {
+        "bytes": 18995,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/cli.py",
+        "sha256": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba"
+      },
+      "vendor/supertonic/config.py": {
+        "bytes": 8064,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/config.py",
+        "sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e"
+      },
+      "vendor/supertonic/core.py": {
+        "bytes": 20003,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/core.py",
+        "sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4"
+      },
+      "vendor/supertonic/loader.py": {
+        "bytes": 16774,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/loader.py",
+        "sha256": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f"
+      },
+      "vendor/supertonic/pipeline.py": {
+        "bytes": 16733,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/pipeline.py",
+        "sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd"
+      },
+      "vendor/supertonic/server/__init__.py": {
+        "bytes": 789,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/server/__init__.py",
+        "sha256": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b"
+      },
+      "vendor/supertonic/server/app.py": {
+        "bytes": 8000,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/server/app.py",
+        "sha256": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0"
+      },
+      "vendor/supertonic/server/audio.py": {
+        "bytes": 2814,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/server/audio.py",
+        "sha256": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b"
+      },
+      "vendor/supertonic/server/routes.py": {
+        "bytes": 16108,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/server/routes.py",
+        "sha256": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720"
+      },
+      "vendor/supertonic/server/schemas.py": {
+        "bytes": 4188,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/server/schemas.py",
+        "sha256": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db"
+      },
+      "vendor/supertonic/server/styles_store.py": {
+        "bytes": 4921,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/server/styles_store.py",
+        "sha256": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e"
+      },
+      "vendor/supertonic/utils.py": {
+        "bytes": 5727,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/vendor/supertonic/utils.py",
+        "sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3"
+      },
+      "voice_app/approved_conditioning.py": {
+        "bytes": 3336,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/voice_app/approved_conditioning.py",
+        "sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca"
+      },
+      "voice_app/automatic_conditioning.py": {
+        "bytes": 6107,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/voice_app/automatic_conditioning.py",
+        "sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c"
+      },
+      "voice_app/sela_live_bridge.py": {
+        "bytes": 7890,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/voice_app/sela_live_bridge.py",
+        "sha256": "0cba137eacc8bba624e26387dc8350ff190b6610a3c2b7cb30376af49f2baa75"
+      },
+      "voice_app/speech.py": {
+        "bytes": 43771,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/voice_app/speech.py",
+        "sha256": "1c764a3004e83fc565d8ebfabeee7c1d3040c3a3e31716a783ee5692a7558036"
+      },
+      "voice_app/supertonic3_worker.py": {
+        "bytes": 14002,
+        "mode": 420,
+        "path": "/root/sela-live-releases/natural-release-17wdj1hq/payload/voice_app/supertonic3_worker.py",
+        "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+      }
+    },
+    "payload_root": "/root/sela-live-releases/natural-release-17wdj1hq/payload",
+    "payload_root_mode": 493,
+    "payload_sha256": "d03ff96babb24c27b5f75bddf6e68910b2841defdbc69e131f73ad526fe8598d",
+    "permitted_final_plan_changes": "Add runtime_review_path exactly this final report and runtime_review_sha256 of this report, plus exact approval hashes/artifact modes/plan_mode. Do not alter baseline/payload/files/preserved/live_env. No self-SHA or future approved-plan SHA is bound by this report.",
+    "physical_payload_file_count": 33,
+    "preserved": {
+      "voice_app/approved_conditioning.py": {
+        "mode": 420,
+        "sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca"
+      },
+      "voice_app/automatic_conditioning.py": {
+        "mode": 420,
+        "sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c"
+      },
+      "voice_app/supertonic3_worker.py": {
+        "mode": 420,
+        "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+      }
+    },
+    "preserved_count": 3,
+    "root": "/root/sela-live-releases/natural-release-17wdj1hq",
+    "root_mode": 448,
+    "unsigned_prepared_plan_canonical_sha256": "0d8409bc5f88833660d1c788c1c0bc6ecce1a32c22afbca750fa5a7a5bd92732"
+  },
+  "reviewed_at_utc": "2026-10-31T23:33:58.356369+00:00",
+  "reviewer": "independent-natural-final-release-reviewer / Hermes subagent (gpt-6.1-sol)",
+  "runtime_and_builder": {
+    "only_changed_row": {
+      "current_binding": {
+        "bytes": 7990,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_natural_probe.py",
+        "sha256": "22bebe1958d6b639f45cefa69c3471035eb5fc99a2fe6814db86c0b109644863"
+      },
+      "independently_approved_test_only_exception": true,
+      "previous_sha256": "f4f75c935b3c29cfd566a943bae6460e483b9e9e0a47f4d14cea21392eb0e2bf",
+      "relative_path": "tests/python/test_sela_live_natural_probe.py"
+    },
+    "prior_logs": [
+      {
+        "bytes": 21670,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-runtime-review-normal.log",
+        "sha256": "629f850de1713371551f28a05a4edb4242cc564e486d99d216ec1e677ee1f6ad"
+      },
+      {
+        "bytes": 22580,
+        "mode": 420,
+        "path": "/root/.hermes/cache/scratch/natural-runtime-review-optimized.log",
+        "sha256": "3b4a1c9e8cf74036ae807c034d3519d370f7e86530735bfccaa9f517bcd2add7"
+      }
+    ],
+    "prior_review": {
+      "bytes": 31215,
+      "mode": 420,
+      "path": "/root/sela-live/docs/reviews/NATURAL-INTEGRATION-RUNTIME-REVIEW.json",
+      "sha256": "a51470cf71334fa6c1b0cbf0cb93c072b640195007b26f0aac3682dbc216307e"
+    },
+    "prior_review_inventory": 65,
+    "prior_test_runs": "123normal +123optimized fixture tests recorded and hash-bound prior logs verified; full123 suite not rerun in this narrow final review.",
+    "runtime_and_builder_code_drift": [],
+    "source_bindings": [
+      {
+        "bytes": 2410,
+        "mode": 420,
+        "path": "/root/sela-live/autonomous/tts-natural-same-text/attempt-01xwl_g4/listener-feedback.json",
+        "sha256": "40cb9e20b1b571e0831a5ae70303859a21258d9ab1224c7ab43e67856102282f"
+      },
+      {
+        "bytes": 70,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/__init__.py",
+        "sha256": "aa5bbdfc8bf13f9cab222388b15fec11a09de1e86e98415d391a5dce2c8ea03e"
+      },
+      {
+        "bytes": 5290,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/admission.py",
+        "sha256": "bf88e646387c6683c58b06aa9fc87ec4a0f497fccfa21398ba9e6aa7158bd7a1"
+      },
+      {
+        "bytes": 5418,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/backend.py",
+        "sha256": "cc872088b5b49fb201c7f180761db3b74bbe4a9b03736e3444473bda1bfcae4a"
+      },
+      {
+        "bytes": 837,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/controls.py",
+        "sha256": "1f28a47b04c54734532cc4f724feb0963dfc58baee64a74a6ff2a2585ff1f213"
+      },
+      {
+        "bytes": 15598,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/duration.py",
+        "sha256": "1afbdc45010d0ce6731a6c39d9e12401b7dd4d276d96f25e72e3f33c5b8eb93d"
+      },
+      {
+        "bytes": 11212,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/duration_worker.py",
+        "sha256": "b12907df6f3e5283e9633385151cc813473d91eda3ff9ead7069cd76842f868d"
+      },
+      {
+        "bytes": 5492,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/natural.py",
+        "sha256": "18387a1ed1dc60d1a28c29bc5cbe09ac8aee40ac3b81d164563a7b026ba1c658"
+      },
+      {
+        "bytes": 7015,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/natural_worker.py",
+        "sha256": "8b30a3f30103907fbf0bca5a438beb7eea624a8b0a92ebec0b15458a3a4c2c09"
+      },
+      {
+        "bytes": 1597,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/source_pins.py",
+        "sha256": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0"
+      },
+      {
+        "bytes": 2067,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/upstream-manifest.json",
+        "sha256": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74"
+      },
+      {
+        "bytes": 13830,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/utterance.py",
+        "sha256": "36a3e116b33e342644ecf852829e2264108db793037eced1c3a834a6bd58d813"
+      },
+      {
+        "bytes": 2240,
+        "mode": 420,
+        "path": "/root/sela-live/sela_live_tts/worker.py",
+        "sha256": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066"
+      },
+      {
+        "bytes": 15368,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_admission.py",
+        "sha256": "63c8e33847f97db1b21d8ed8c95e5038d785702af32110b06ce7b66f7a54a715"
+      },
+      {
+        "bytes": 31365,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_duration.py",
+        "sha256": "1f080b313769501cf2556b44a6c5d1a55b57489facf2e8bf7e61c2609ada2844"
+      },
+      {
+        "bytes": 19988,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_integration.py",
+        "sha256": "8a5782239ec29fdac3025bd4d8c0704f4325099ac0161d87eda5a6980b7b8724"
+      },
+      {
+        "bytes": 10819,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_natural.py",
+        "sha256": "9b40ddb241110e1e06dfb2c51b8a7ba028220bcffab4a0896af381d6a88cd4a2"
+      },
+      {
+        "bytes": 15490,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_natural_integration.py",
+        "sha256": "22bdb913632a47ef48ea7ab63de72cd2983617cf1a699b5c8ab578d7739ed321"
+      },
+      {
+        "bytes": 7990,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_natural_probe.py",
+        "sha256": "22bebe1958d6b639f45cefa69c3471035eb5fc99a2fe6814db86c0b109644863"
+      },
+      {
+        "bytes": 4766,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_natural_protocol.py",
+        "sha256": "92bbffd6fe0844b8027067107efcfce40d6b3d963d938cf81777f59624c53e7e"
+      },
+      {
+        "bytes": 15061,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_natural_worker.py",
+        "sha256": "9b8fff794a311820fdbb2009031f105b68eab75197edd079a4ec6db49346e4ff"
+      },
+      {
+        "bytes": 6035,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_tts.py",
+        "sha256": "16590f006f791d08554021f337f31d9d5b4c8659c9328e3d1acb38db69e4afaa"
+      },
+      {
+        "bytes": 19467,
+        "mode": 420,
+        "path": "/root/sela-live/tests/python/test_sela_live_utterance.py",
+        "sha256": "572fec6c998e57630a38528c8b4d94539ea0c5093af8692745faa901dc2df4b8"
+      },
+      {
+        "bytes": 19728,
+        "mode": 420,
+        "path": "/root/sela-live/tests/setup/test_live_runtime_package.py",
+        "sha256": "ccaa925b4bab16a8d20f791cff93a40318c5f510124468c2b43ed802c97f0349"
+      },
+      {
+        "bytes": 11322,
+        "mode": 420,
+        "path": "/root/sela-live/tools/build_live_runtime.py",
+        "sha256": "8d3569edf5cdc234854f9685d997283a89ea1e9f6549c0cf5620feca9c24c84e"
+      },
+      {
+        "bytes": 10190,
+        "mode": 420,
+        "path": "/root/sela-live/tools/tts_natural_same_text_probe.py",
+        "sha256": "1c49b0e17755fb5d1bf0b75cb8d386e4bcbac42f2274036a2dff7c3715d30eb5"
+      },
+      {
+        "bytes": 1492,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/SUPERTONIC-PROVENANCE.json",
+        "sha256": "f7cacb7ed14e671b3c8972265b4721826d7330acc15efb4f0fd0051b6ea9d2f5"
+      },
+      {
+        "bytes": 1071,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic-LICENSE.txt",
+        "sha256": "f41cb0ff617e2ed634215f3e62f7b33b3dc02b079c6379a2f1a9c7ce7bd84c03"
+      },
+      {
+        "bytes": 1840,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/__init__.py",
+        "sha256": "98bc280f4cb2c475d3f8a9c790cadddc0f5b6d6b04411180e867d3a7e6f3bc18"
+      },
+      {
+        "bytes": 18995,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/cli.py",
+        "sha256": "63fd5ea555a0a2388539c3cdadd3f9261e0515278539548cb8531297bd0c29ba"
+      },
+      {
+        "bytes": 8064,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/config.py",
+        "sha256": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e"
+      },
+      {
+        "bytes": 20003,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/core.py",
+        "sha256": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4"
+      },
+      {
+        "bytes": 16774,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/loader.py",
+        "sha256": "9478b085ccae88fd44849a87d8a55d0ddada03e4fbb7f47f1707f04ac06e621f"
+      },
+      {
+        "bytes": 16733,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/pipeline.py",
+        "sha256": "13b16fb8556632b5985f8ba1e961096ca1ad921d01aed171972dd106df51a7cd"
+      },
+      {
+        "bytes": 789,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/server/__init__.py",
+        "sha256": "62a87ccd3a32370d95285772420e23addeebf1d781333e0656b2de906f80020b"
+      },
+      {
+        "bytes": 8000,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/server/app.py",
+        "sha256": "11e9c7b9961922167d585c4e4f1ce3275f796f33d41ca2ebdc3da72094a324e0"
+      },
+      {
+        "bytes": 2814,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/server/audio.py",
+        "sha256": "142872efc3bfe8fcd910d18af5604a8457c764352e460293f98cfadf6878269b"
+      },
+      {
+        "bytes": 16108,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/server/routes.py",
+        "sha256": "6dceb93c9a7fb6766fded4b3ec4f0ad09c5ae655aab4a0f3d4c8755accc65720"
+      },
+      {
+        "bytes": 4188,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/server/schemas.py",
+        "sha256": "c678f17799777f08193212f66df8394e123789b01c1a5b22eb7898b46984c3db"
+      },
+      {
+        "bytes": 4921,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/server/styles_store.py",
+        "sha256": "51d7b6a41ae0f719b43841ae7d47740ccf6d6a427da1c39935257cb8ab03d78e"
+      },
+      {
+        "bytes": 5727,
+        "mode": 420,
+        "path": "/root/sela-live/vendor/supertonic/utils.py",
+        "sha256": "8bf2e0a14783de9266edba1135597e6b77b143907e445b08dcc45f694ff51ed3"
+      },
+      {
+        "bytes": 3336,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/approved_conditioning.py",
+        "sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca"
+      },
+      {
+        "bytes": 3163,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/audio_continuity.py",
+        "sha256": "e4ed467895bebf58769832e9ec9426b7ea0e98b83050771f3b69759c3cad775b"
+      },
+      {
+        "bytes": 6107,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/automatic_conditioning.py",
+        "sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c"
+      },
+      {
+        "bytes": 249,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/automatic_conditioning_rules.json",
+        "sha256": "2b097ea9b3c6dbe22d4df37891e9ccad040d068aba84367a9fdcd4fa73c06b7b"
+      },
+      {
+        "bytes": 6150,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/delivery.py",
+        "sha256": "959f55d248983239f2027d269fa3dc4ef26b78167e6a27572b0215a9c06d7b69"
+      },
+      {
+        "bytes": 968,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/delivery_registry.json",
+        "sha256": "a0b67b0a3b9959ce7269acc48538fa8d8fb27ec41f57a81020ebc4b3b00a15b6"
+      },
+      {
+        "bytes": 43,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/pronunciation-id.json",
+        "sha256": "1854d1e60ad2bd985d2deea0aeae9f6aa3b5eee04b45c60939d5782ed8c3e6c1"
+      },
+      {
+        "bytes": 4517,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/providers.py",
+        "sha256": "80105da43ea721e213e47822f91298e6cd2ae8a167bb7503f1e97767d0451f96"
+      },
+      {
+        "bytes": 7890,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/sela_live_bridge.py",
+        "sha256": "0cba137eacc8bba624e26387dc8350ff190b6610a3c2b7cb30376af49f2baa75"
+      },
+      {
+        "bytes": 42761,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/server.py",
+        "sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5"
+      },
+      {
+        "bytes": 7204,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/session_core.py",
+        "sha256": "14063a463652cde2d784151ed9f1a369723729bc7f432ca14096c0c4de4da06a"
+      },
+      {
+        "bytes": 43771,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/speech.py",
+        "sha256": "1c764a3004e83fc565d8ebfabeee7c1d3040c3a3e31716a783ee5692a7558036"
+      },
+      {
+        "bytes": 14002,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/supertonic3_worker.py",
+        "sha256": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+      },
+      {
+        "bytes": 3537,
+        "mode": 420,
+        "path": "/root/sela-live/voice_app/tts_chunks.py",
+        "sha256": "57a4b5d90e2b5096fe0cf7b561495c0592841115b06174e5a0bc9134b6490d26"
+      },
+      {
+        "bytes": 421903,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/conditioning_b.json",
+        "sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828"
+      },
+      {
+        "bytes": 421722,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/conditioning_b_active_high.json",
+        "sha256": "4575171ea1b5ffbd96a1b03a92704262a2c338d190dc969e137656904097b95a"
+      },
+      {
+        "bytes": 421839,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/conditioning_b_active_low.json",
+        "sha256": "f948e966e00dba822e19da9d0207a5f5f0254618e652a624810a5c89985e1a56"
+      },
+      {
+        "bytes": 421815,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/conditioning_b_active_medium.json",
+        "sha256": "294c2d705bf8f5fd3388725e28bac3850b39a8f479b5c23afc40cced3bae17b6"
+      },
+      {
+        "bytes": 422105,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/conditioning_b_calm_high.json",
+        "sha256": "d90e418153d8b3d0e7234a92541fcfb4d1f054efba60adf08f327dad001f4bc4"
+      },
+      {
+        "bytes": 422059,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/conditioning_b_calm_low.json",
+        "sha256": "f89348574a02a68771e47bb9fd23e33dbada5fc9ca0b876c29fdc6da049ce832"
+      },
+      {
+        "bytes": 422055,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/conditioning_b_calm_medium.json",
+        "sha256": "64fa0c071863db434a22ca080228eb93ae4f954553226ea4f4f267f4150b5618"
+      },
+      {
+        "bytes": 5547,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/automatic-conditioning/manifest.json",
+        "sha256": "ba9257f9c745accddcbc64c017c4638d39f5c1255f6923f5f499acc099aaf403"
+      },
+      {
+        "bytes": 2103,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/conditioning-b/manifest.json",
+        "sha256": "08a34381da17292b652d384b1316365218f1c4d9fc0ae22405fe8909bcb55cfc"
+      },
+      {
+        "bytes": 421903,
+        "mode": 420,
+        "path": "/root/sela-live/voice_assets/conditioning-b/profile.json",
+        "sha256": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828"
+      }
+    ],
+    "test_only_exception_review": "Entire current143line probe test file inspected. Only harmless in-memory fake-approval inventory is ROOT-rebased for exported source trees; original historical approval file is not rewritten. Cancellation fixture bounds native-entry wait to3seconds, propagates already-completed task failure and joins/cancels task in finally. Runtime/tool/real validation gate unchanged. Real rejection test still calls actual validate_review/main for unapproved/incomplete evidence. Six harmless tests pass at original root and relocated clean export in both normal and-O modes. No fake approval used for production or final release review.",
+    "test_only_exception_runs": [
+      {
+        "command": [
+          "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "test_sela_live_natural_probe",
+          "-v"
+        ],
+        "environment": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "tests/python"
+        },
+        "exit_code": 0,
+        "log": {
+          "bytes": 2167,
+          "mode": 420,
+          "path": "/root/.hermes/cache/scratch/natural-final-release-probe-sela-live-normal.log",
+          "sha256": "a72b42ce20109d99780293e8c8d486ba8d8fa52e005e1683e05831c51781bbbb"
+        },
+        "mode": "normal",
+        "passed": 6,
+        "ran": 6,
+        "root": "/root/sela-live",
+        "skipped": 0
+      },
+      {
+        "command": [
+          "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+          "-B",
+          "-O",
+          "-m",
+          "unittest",
+          "test_sela_live_natural_probe",
+          "-v"
+        ],
+        "environment": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "tests/python"
+        },
+        "exit_code": 0,
+        "log": {
+          "bytes": 2167,
+          "mode": 420,
+          "path": "/root/.hermes/cache/scratch/natural-final-release-probe-sela-live-optimized.log",
+          "sha256": "0ff4301aa79f22f94f37d9dfaa90635fafacd646ab4d14935165ecfcb7f42754"
+        },
+        "mode": "optimized",
+        "passed": 6,
+        "ran": 6,
+        "root": "/root/sela-live",
+        "skipped": 0
+      },
+      {
+        "command": [
+          "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "test_sela_live_natural_probe",
+          "-v"
+        ],
+        "environment": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "tests/python"
+        },
+        "exit_code": 0,
+        "log": {
+          "bytes": 2203,
+          "mode": 420,
+          "path": "/root/.hermes/cache/scratch/natural-final-release-probe-natural-export-ld4dz5qt-normal.log",
+          "sha256": "0b7c50770953de7f0201c10c19502d1007527ff5fdb95d1e113be6100a367a22"
+        },
+        "mode": "normal",
+        "passed": 6,
+        "ran": 6,
+        "root": "/root/.hermes/cache/scratch/natural-export-ld4dz5qt",
+        "skipped": 0
+      },
+      {
+        "command": [
+          "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+          "-B",
+          "-O",
+          "-m",
+          "unittest",
+          "test_sela_live_natural_probe",
+          "-v"
+        ],
+        "environment": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONPATH": "tests/python"
+        },
+        "exit_code": 0,
+        "log": {
+          "bytes": 2203,
+          "mode": 420,
+          "path": "/root/.hermes/cache/scratch/natural-final-release-probe-natural-export-ld4dz5qt-optimized.log",
+          "sha256": "38b94bd589c25ad409db44976964642fcdabe329bc990cc03ef2ca4793af653c"
+        },
+        "mode": "optimized",
+        "passed": 6,
+        "ran": 6,
+        "root": "/root/.hermes/cache/scratch/natural-export-ld4dz5qt",
+        "skipped": 0
+      }
+    ],
+    "trust_scope": "Prior approved ownership/cancellation/admission, source fidelity, native guard and bounds, import/pin/runtime graph and offline builder scope retained. Historical source review is not falsely represented as65unchanged files:64unchanged plus this reviewed test-only exception.",
+    "unchanged_hash_rows": 64
+  },
+  "sandbox_evidence": {
+    "checks": "Staged DP worker/source manifest hashes match record and reviewed builder output; duration worker equals prepared payload unchanged. Read-only journal confirms exact worker/manifest command and successful unit deactivation. Unit collected: LoadState=not-found/ActiveState=inactive/Result=success. All copied sandbox/resource/user properties exactly equal current production.",
+    "current_production_properties": {
+      "AmbientCapabilities": "",
+      "CapabilityBoundingSet": "cap_chown cap_dac_override cap_dac_read_search cap_fowner cap_fsetid cap_kill cap_setgid cap_setuid cap_setpcap cap_linux_immutable cap_net_bind_service cap_net_broadcast cap_net_admin cap_net_raw cap_ipc_lock cap_ipc_owner cap_sys_module cap_sys_rawio cap_sys_chroot cap_sys_ptrace cap_sys_pacct cap_sys_admin cap_sys_boot cap_sys_nice cap_sys_resource cap_sys_time cap_sys_tty_config cap_mknod cap_lease cap_audit_write cap_audit_control cap_setfcap cap_mac_override cap_mac_admin cap_syslog cap_wake_alarm cap_block_suspend cap_audit_read cap_perfmon cap_bpf cap_checkpoint_restore",
+      "Group": "",
+      "LockPersonality": "no",
+      "MemoryDenyWriteExecute": "no",
+      "MemoryHigh": "infinity",
+      "MemoryMax": "infinity",
+      "NoNewPrivileges": "yes",
+      "PrivateDevices": "no",
+      "PrivateTmp": "yes",
+      "ProtectControlGroups": "no",
+      "ProtectHome": "no",
+      "ProtectKernelModules": "no",
+      "ProtectKernelTunables": "no",
+      "ProtectSystem": "full",
+      "RestrictAddressFamilies": "~",
+      "RestrictNamespaces": "no",
+      "RestrictSUIDSGID": "no",
+      "SystemCallFilter": "~",
+      "TasksMax": "9483",
+      "User": "root"
+    },
+    "manifest_binding": {
+      "bytes": 2188,
+      "mode": 420,
+      "path": "/root/.hermes/cache/scratch/natural-network-oxxcoupq/app/sela_live_tts/upstream-manifest.json",
+      "sha256": "f3fd4dc8b69a173c349a52903006006e5ac983d8b02768941308a7fdf5c1a0fb"
+    },
+    "property_drift": {},
+    "qualification": "Ready/prediction are historical values in bound record, not independently rerun inference in this review.",
+    "record": {
+      "bytes": 1939,
+      "mode": 420,
+      "path": "/root/sela-live/docs/NATURAL-SERVICE-SANDBOX-VERIFICATION.json",
+      "sha256": "56f1097f02453318713fb169bb8477e8005f8391b17abab2ddfaad7c7da8f6a2"
+    },
+    "recorded_exit_code": 0,
+    "recorded_prediction": {
+      "id": 1,
+      "seconds": 3.0218276977539062,
+      "tokens": 46
+    },
+    "recorded_ready": {
+      "max_queries": 64,
+      "native_network_denied": true,
+      "protocol": 1,
+      "type": "ready"
+    },
+    "unit": "sela-natural-sandbox-check-365287",
+    "worker_binding": {
+      "bytes": 11212,
+      "mode": 420,
+      "path": "/root/.hermes/cache/scratch/natural-network-oxxcoupq/app/sela_live_tts/duration_worker.py",
+      "sha256": "b12907df6f3e5283e9633385151cc813473d91eda3ff9ead7069cd76842f868d"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Final runtime/deployment review of exact bound inputs: inherited recovery-post-restart blocker repair plus two regressions; previously approved runtime/builder scope unchanged except explicitly reviewed test-only probe portability fix; historical actual native/Codex/shipping-browser/sandbox evidence; prepared payload, selector environment and frozen baseline against current production. Parent may bind this report into approved plan and apply only these exact inputs after fresh read-only CLI preflight. No attestation of future post-install runtime/health/audio/rollback checks or Git commit/push/remote readback.",
+  "testsource_sha256": "37683c68aacb6a4469a99779b6118f219ad59a2fd745ef8839c99252f138d832",
+  "verdict": "approved"
+}

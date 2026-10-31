@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "verdict": "rejected",
+  "reviewer": "independent-natural-installer-reviewer / Hermes subagent (gpt-6.1-sol)",
+  "scope": "Independent narrow source-utility/test delta review of natural_v1, plus explicitly requested recovery invariants. Not a deployment, runtime-code approval, real-plan approval, or audio acceptance. No newly introduced natural-path blocker found; rejection is solely the explicitly requested stopped-on-any-recovery-error requirement, whose uncovered inherited gap is demonstrated below.",
+  "installer_sha256": "47e4f7cfd3e40270b3f5ba530d1c67a37a9dd94a0a9c139643cdf0d869bd82b7",
+  "testsource_sha256": "7db861a60fb4837d0a8738b4486a4c04258c576557cc3d9e8ec3918f59e52e75",
+  "artifacts": {
+    "tools/install_live_tts.py": {"sha256": "47e4f7cfd3e40270b3f5ba530d1c67a37a9dd94a0a9c139643cdf0d869bd82b7", "mode": 420},
+    "tests/setup/test_live_tts_install.py": {"sha256": "7db861a60fb4837d0a8738b4486a4c04258c576557cc3d9e8ec3918f59e52e75", "mode": 420},
+    "docs/NATURAL-INSTALLER-HANDOFF.json": {"sha256": "3b8811fc32e5c4a7c691f202e01bdc9be57c1839faf36fd367277e2490669a5a"},
+    "docs/reviews/LIVE-INSTALLER-REPAIR-REVIEW.json": {"sha256": "21a248a5fdd08f1e487573a4deed6eeba628f863258fb5ae8a3a31ea862e65c7"}
+  },
+  "legacy_identity": {
+    "comparison": "Read-only git show HEAD artifacts; their hashes equal the exact prior repaired installer/test hashes in LIVE-INSTALLER-REPAIR-REVIEW.json.",
+    "baseline_installer_sha256": "359aa970f9303c3022b7b8db5b9eceb8d4f91ece6b09857bacb371482caff5a6",
+    "baseline_testsource_sha256": "4f7927efc04124229cee5ea29c177b446f31dcbaf96bf39b0a9f7d8cd5c33779",
+    "legacy_test_definitions": 34,
+    "current_test_definitions": 43,
+    "legacy_ast_drift": [],
+    "method": "Compared every legacy test FunctionDef ast.dump(include_attributes=False) by name; all 34 identical. Nine added tests; no duplicate discovered test identities."
+  },
+  "tests": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest tests.setup.test_live_tts_install -v",
+      "cwd": "/root/sela-live", "ran": 43, "passed": 43, "failed": 0, "errors": 0, "skipped": 0, "seconds": 2.644, "exit_code": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -O -m unittest tests.setup.test_live_tts_install -v",
+      "cwd": "/root/sela-live", "ran": 43, "passed": 43, "failed": 0, "errors": 0, "skipped": 0, "seconds": 2.605, "exit_code": 0
+    }
+  ],
+  "test_output_note": "Two ValueError rejection JSON messages per run are expected CLI negative cases, not test errors.",
+  "checks": {
+    "actual_cli": "New invoke_real_cli exercises main() plan parsing/mode checks and actual Installer.run/preflight/apply/readback, replacing only construction with an existing real Installer using disposable roots/hooks. Natural and legacy success paths run; natural partial-write, restart, installed-readback and selector failures restore quality12 worker/dropin and absence inventory before recovery restart. No production hooks are invoked.",
+    "quality12_migration": "Natural fixture binds existing legacy worker SHA, existing prior dropin, old LIVE selector keys and experimental-prosody=0; process observation now includes old and new selectors. Baseline selectors are observed before archive; merged exact baseline/live selectors are required after install. Existing non-overridden selectors are retained. Real production baseline remains parent-owned and was not inspected by this review.",
+    "runtime_manifest": "Independent code inventory count is exactly 28 and sorted paths equal handoff inventory. Natural payload set must equal these dependencies minus three preserved guards plus speech.py, bridge.py, runtime manifest, license and provenance. Manifest files dictionary must exactly equal independent per-file lowercase SHA256 from files/preserved records. All payload/preserved bytes and modes are then matched. Duplicate manifest keys at every nesting level reject via object_pairs_hook. Missing/extra/traversal/absolute paths, bool schema, bool/invalid digest, extra fields, symlink and tampered/missing payload cases reject before observation/archive/stop.",
+    "pins_and_imports": "Natural worker and duration worker have separate fixed installed paths and SHA256 selectors, independently pinned source manifest and runtime manifest. Exact live_env equality rejects unknown keys and mismatched values; experimental prosody must be disabled. AST import inspection finds only stdlib imports in installer; candidate source is not imported/executed before pin verification. Installer does not itself establish acoustic/runtime behavior.",
+    "bindings": "Unchanged exact installer/testsource/baseline/runtime-review/payload/unsigned-plan hashes enforced. Payload hash includes files, preserved records/modes and live_env. Reviewer and approved verdict required. Artifact modes checked for installer/test/baseline/runtime-review/payload-root; CLI binds actual plan mode0600/0644. Natural binding-negative tests reject before archive. No unseen final plan is approved by this report.",
+    "locks": "Unchanged canonical root/.runtime/live-tts.lock, private owner0700 directory and owner0600 nlink1 regular lock, O_NOFOLLOW and nonblocking flock. Root-directory nonblocking flock serializes installer writers. Existing persistent lock inode remains on install/rollback; contention does not queue. Legacy contention/unsafe-lock cases and natural success/rollback inode cases pass.",
+    "install_order": "Observe -> revalidate/archive/readback -> stop -> atomic writes/dropin -> restart -> full installed hash/mode/inventory/selectors/guard readback. Restart retains 120s monotonic health allowance and max480 polls, each HTTP call timeout5s; last in-flight call can slightly exceed wall deadline. This is unchanged, not a new natural regression.",
+    "recovery_pre_restart": "Prior repaired safeguards preserved: rollback stop must succeed before any restoration, restore failure blocks restart, all baseline bytes/modes plus new-path absences and complete inventory verified before recovery restart. Existing three repair tests remain AST-identical and pass. Failures before recovery restart retain terminal failure and suppress restart. The stronger any-recovery-error stopped-state claim is not true, as blocker demonstrates."
+  },
+  "blockers": [
+    {
+      "id": "recovery-post-restart-error-does-not-stop",
+      "severity": "high",
+      "location": "tools/install_live_tts.py:398-408",
+      "introduced_by_natural_delta": false,
+      "finding": "After recovery restart succeeds, baseline bytes/inventory/observation may fail. The catch only appends recovery:<exception> and returns rollback_failed; it does not stop the now-running unverified service. Also a restart implementation may start then raise. Thus the explicitly requested stopped failure on any recovery error is not enforced. This is an inherited gap beyond the narrower stop/restore/pre-restart issue closed by the original repair review, not a regression in the new manifest/pin paths.",
+      "executed_evidence": {
+        "fixture": "Existing natural_installing_fixture; actual Installer.run(apply=True); harmless hooks track active state. First candidate restart starts then raises OSError; recovery restart succeeds; recovery observation raises ValueError.",
+        "events": ["observe", "stop", "restart", "stop", "restart"],
+        "receipt_status": "rollback_failed",
+        "receipt_applied": false,
+        "cleanup_errors": ["recovery:ValueError"],
+        "final_fixture_service_active": true,
+        "stop_count": 2,
+        "restart_count": 2
+      },
+      "required_change_if_stronger_requirement_is_retained": "On recovery restart/post-restart verification failure, attempt a final stop and preserve terminal rollback_failed; record final-stop failure explicitly and never claim confirmed stopped state when stop failed. Add a fixture regression for successful recovery restart followed by failed observation/inventory, asserting final stop and no further restart. Keep all original 34 test definitions intact. Re-review exact changed source/test hashes. Alternatively parent must explicitly narrow the requirement rather than treating current passing tests as proof of any-error stopped state."
+    }
+  ],
+  "conditions": [
+    "This report does not authorize promotion. Parent owns final baseline, plan/payload/mode bindings and independent runtime-review approval.",
+    "Final payload must use exact runtime-reviewed bytes, including relocated worker/helper/manifests and preserved guards; regenerate final exact bindings only after all reviews and evidence gates pass.",
+    "No new blocker found in natural inventory, manifest validation, pins, selector migration or actual CLI application paths; rejection must not be represented as a natural-path regression."
+  ],
+  "artifact_stability": "Installer/test hashes and0644 modes matched initial and final reads surrounding both test runs and independent probes.",
+  "mutations": {"source_edits": false, "test_edits": false, "production_operations": false, "service_operations": false, "git_mutations": false, "native_inference": false, "downloads": false, "fixture_only_execution": true, "review_file_created": "docs/reviews/NATURAL-INSTALLER-REVIEW.json"}
+}

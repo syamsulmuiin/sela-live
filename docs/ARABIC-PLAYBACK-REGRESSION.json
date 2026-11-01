@@ -1,0 +1,37 @@
+{
+  "scope": "Current source regression before promotion; existing host dependencies, not fresh-host proof",
+  "sdk_cases": 341,
+  "sdk_skips": 4,
+  "sdk_failures": 0,
+  "setup_cases": 81,
+  "native_dependency_fixture_cases": 42,
+  "node_cases": 125,
+  "node_failures": 0,
+  "node_files": [
+    "tests/web/audio.test.cjs",
+    "tests/web/auth.test.cjs",
+    "tests/web/client.test.cjs",
+    "tests/web/playback-error.test.cjs"
+  ],
+  "new_normalization_cases_normal": 6,
+  "new_normalization_cases_optimized": 6,
+  "new_client_real_red_cases": 4,
+  "new_client_green_cases": 4,
+  "clean_export": "/root/.hermes/cache/scratch/arabic-clean-export-qihyiahc",
+  "clean_export_python_normalization_plus_layout": 10,
+  "clean_export_all_node_exit": 0,
+  "actual_pinned_sdk_preprocessing_after_normalization": {
+    "full_supplied_text_valid": true,
+    "negative_ids": 0,
+    "onnx_inference": false
+  },
+  "production_changed": false,
+  "sources": {
+    "voice_app/speech.py": "0b51ce34f58c56ea85bc01d73e29ffe137cf8f5db953ede433802ef1375a2aab",
+    "web/app.js": "91b10623b97eaa52810dd60a0d160523022b237e8b0a466cbeff3644586c85da",
+    "tests/python/test_arabic_pronunciation.py": "65a2452c62c35d48dc10163578c115b4910afd6500c1d84726cf4a0bf0f9cb07",
+    "tests/web/playback-error.test.cjs": "19bcd6e3dc6ac309a2a4034c263707662b26446673496ca078cd5e1af035304a",
+    "tests/setup/test_layout.py": "a23c8c06024947f66ff6493d20e99d86ec7d0d2bded8758f0354f93f5e5366dc",
+    "tests/arabic-playback-additions-inventory.json": "452cf48d6b1303bcd33e7b0f92bf7fb6feabe8d42465d226b4cf99e83b91c393"
+  }
+}

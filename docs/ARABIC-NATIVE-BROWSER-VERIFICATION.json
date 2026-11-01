@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "scope": "Exact supplied text native plus shipping-browser replay and synthetic microphone; not human pronunciation/tajwid, physical microphone/speaker or new Codex test",
+  "original_source_sha256": "e513d0cd1778fc93cb048967648867596112a2c06fc424dfb708659739a4b139",
+  "native_tts_calls": 2,
+  "native_contexts": 2,
+  "native_elapsed_wall_seconds": 31.985509412013926,
+  "native_wav_sha256": "707c78fb015b29b40dad2ea7b6015c44e0f3a6c22794868e904893e7dbb323bc",
+  "native_full_original_source_coverage": true,
+  "voice": "conditioning_b",
+  "total_steps": 12,
+  "language_unchanged": "id",
+  "browser_full_original_display_history_heard_text": true,
+  "browser_ended": 2,
+  "browser_ACKs": [
+    1,
+    2
+  ],
+  "browser_microphone_inputs_during_injected_error_playback": 0,
+  "browser_capture_recovered_and_one_fresh_synthetic_input_admitted": true,
+  "fixture_cleanup": {
+    "servers_exited": true,
+    "listeners_absent": true,
+    "dedicated_tabs_closed": true,
+    "disposable_auth_deleted": true,
+    "canonical_admission_reacquired_then_released": true
+  },
+  "failed_zero_inference_attempt_preserved": true,
+  "production_changed": false
+}

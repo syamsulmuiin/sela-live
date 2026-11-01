@@ -163,6 +163,8 @@ def normalize_pronunciation(text):
     """Deliberate Indonesian reading hints, never a rewrite of chat/history text."""
     import re
     from datetime import date
+    # Speech copy only: Quran ornaments follow logical input order, not glyph names.
+    text = text.replace('\ufd3f', '(').replace('\ufd3e', ')')
     digits = ('nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas')
     def number(n):
         if n < 12:

@@ -7,7 +7,7 @@ Komponen TTS memakai source SDK Supertonic yang diclone dan dipin; ini bukan mod
 - Source native: `sela_live_tts/` dan `vendor/supertonic/`, commit upstream `df0f9686dac7fbbde391b759e2ee5286a3737622`, dengan lisensi/provenance dan hash sumber. Worker terpasang berada di root aplikasi produksi, tidak bergantung pada clone/scratch.
 - Adapter aktif ditandai `tts_identity.adapter=sela_live`, `total_steps=12`, backend dasar tetap `supertonic3`. Tidak ada penggantian LLM dengan model lokal atau fallback TTS diam-diam.
 - Pemasangan memakai allowlist, snapshot/rollback, sumber terikat review/hash/mode dan lock host persisten. Guard CPU/RSS/network/deadline tidak dihapus. Baca [kontrak dan pemasangan TTS Live](docs/SELA-LIVE-TTS-INSTALL.md).
-- Verifikasi natural_v1 dari ekspor source bersih:335 kasus aplikasi SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan121 Node, tanpa kegagalan. Installer45 juga lulus normal/optimized. Full suite mencakup fixture native ASR/Piper; ini bukan klaim inference-free atau fresh-host.
+- Verifikasi terbaru setelah perbaikan bacaan Arab:341 kasus aplikasi SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan125 Node, tanpa kegagalan. Perbaikan penanda ayat serta pemulihan mikrofon diuji terpisah, tanpa mengubah worker/model/parameter suara. Full suite mencakup fixture native ASR/Piper; ini bukan klaim inference-free atau fresh-host.
 - Staging natural_v1 menyelesaikan dua giliran Codex/API dan dua giliran shipping browser, playback/ACK/riwayat sesuai. Setelah pemasangan, tiga sintesis native melalui root produksi mereproduksi WAV B byte-exact; health/auth/Host/loopback/inventory diperiksa lagi. Akun produksi tidak diubah; login produksi dan mikrofon/speaker fisik tetap pengujian pengguna.
 - Status produksi terkini: `docs/NATURAL-INSTALL-STATE.json` dan `docs/NATURAL-POLICY-STATE.json`; `docs/LIVE-INSTALL-STATE.json` dan `docs/LIVE-RELEASE-VERIFICATION.json` dipertahankan sebagai bukti pemasangan quality12 sebelumnya. `syamsulmuiin/sela-voice` tetap snapshot baseline, sedangkan `syamsulmuiin/sela-live` memuat source proyek Live penuh bertahap ini.
 
@@ -16,6 +16,12 @@ Jangan menjalankan fresh-install baseline di bawah pada host produksi yang sudah
 ## Kebijakan konteks otomatis natural_v1
 
 natural_v1 sudah terpasang setelah pengguna menerima sampel B, review akhir disetujui dan jalur Speech native terpasang mereproduksi PCM B byte-exact. Dua giliran Codex nyata dan dua giliran browser dinamis juga lulus pada staging terisolasi. Baca [kontrak natural_v1](docs/NATURAL-V1.md). Ini satu kebijakan otomatis bagi teks dinamis, bukan setelan numerik per cerita atau pemutaran rekaman; profil suara, quality12, speed1.05 dan guard native tetap. Penerimaan sampel B bukan bukti semua teks masa depan atau emosi independen telah sempurna.
+
+## Perbaikan bacaan Arab dan pemulihan mikrofon
+
+Perbaikan dua file sudah terpasang: ornamen ayat `﴿`/`﴾` dipetakan menjadi kurung biasa **hanya pada salinan untuk TTS**, bukan pada teks tampilan/riwayat/ACK. Jalur error browser mempertahankan jeda mikrofon sampai audio yang sedang diputar, didekode atau mengantre benar-benar selesai. Teks lengkap laporan pengguna berhasil disintesis dalam dua konteks dan hasil dari root terpasang identik byte-exact dengan hasil staging; browser uji mempertahankan seluruh teks/ACK dan menerima input sintetis baru setelah playback.
+
+Status terbaru: `docs/ARABIC-PLAYBACK-INSTALL-STATE.json`. Suara B, quality12 dan bahasa native `id` tetap; ini bukan validasi ketepatan pelafalan Arab/tajwid. Pengujian browser memakai replay audio native dan mikrofon sintetis, bukan mikrofon fisik. `/app.js` produksi sengaja terlindung login: hash file dan route ASGI terpasang telah diperiksa, tetapi pengambilan asset melalui akun publik terautentikasi belum diverifikasi. Tidak ada akun atau pengaman autentikasi yang diubah.
 
 ## Dokumentasi baseline snapshot (historis)
 

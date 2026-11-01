@@ -72,6 +72,18 @@ class TestLayout(unittest.TestCase):
             self.assertEqual(functions,row['test_functions'])
             self.assertTrue(set(row['preserved_test_functions']).issubset(functions))
             current[row['path']]=row
+        repair=json.loads((ROOT/'tests/arabic-playback-additions-inventory.json').read_text())
+        self.assertEqual(repair['schema_version'],1)
+        self.assertEqual(repair['baseline_commit'],'322065f1ccb94d1fc64c84b6b982c2f0aca5f5bf')
+        self.assertEqual({row['path'] for row in repair['files']}, {
+            'tests/python/test_arabic_pronunciation.py',
+            'tests/web/playback-error.test.cjs'})
+        self.assertEqual(len(repair['files']),2)
+        for row in repair['files']:
+            self.assertNotIn(row['path'],current)
+            self.assertIsNone(row['previous_sha256'])
+            self.assertNotIn('..',Path(row['path']).parts)
+            current[row['path']]=row
         for row in current.values():
             path = ROOT / row['path']
             self.assertFalse(path.is_symlink())

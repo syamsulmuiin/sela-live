@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "reviewer": "Hermes independent arabic-playback narrow application reviewer",
+  "verdict": "approved",
+  "scope": "Exact working-tree application delta versus Git HEAD, plus two new regressions and additive layout/inventory changes; conditional probe and exact two-file promotion only. This is not installer, runtime-pins, service, acoustic-quality or deployment-execution approval.",
+  "baseline_commit": "322065f1ccb94d1fc64c84b6b982c2f0aca5f5bf",
+  "git_index_note": "Git cached diff is empty. Staged means proposed working-tree candidate here, not index-staged content.",
+  "security_concerns": [],
+  "logic_errors": [],
+  "source_inventory": [
+    {"path":"voice_app/speech.py","sha256":"0b51ce34f58c56ea85bc01d73e29ffe137cf8f5db953ede433802ef1375a2aab","mode":"0644","baseline_sha256":"1c764a3004e83fc565d8ebfabeee7c1d3040c3a3e31716a783ee5692a7558036"},
+    {"path":"web/app.js","sha256":"91b10623b97eaa52810dd60a0d160523022b237e8b0a466cbeff3644586c85da","mode":"0644","baseline_sha256":"0803b5774c0e9f2e23332150276cc5d3fd5970b844423d94c2b544e0371222ef"}
+  ],
+  "support_inventory": [
+    {"path":"tests/python/test_arabic_pronunciation.py","sha256":"65a2452c62c35d48dc10163578c115b4910afd6500c1d84726cf4a0bf0f9cb07","mode":"0644","baseline_sha256":null},
+    {"path":"tests/web/playback-error.test.cjs","sha256":"19bcd6e3dc6ac309a2a4034c263707662b26446673496ca078cd5e1af035304a","mode":"0644","baseline_sha256":null},
+    {"path":"tests/setup/test_layout.py","sha256":"a23c8c06024947f66ff6493d20e99d86ec7d0d2bded8758f0354f93f5e5366dc","mode":"0644","baseline_sha256":"dd63eec804a02cc1cc5c6a069c05710fffa07f104e059b85c241b47ae52ab753"},
+    {"path":"tests/arabic-playback-additions-inventory.json","sha256":"452cf48d6b1303bcd33e7b0f92bf7fb6feabe8d42465d226b4cf99e83b91c393","mode":"0644","baseline_sha256":null}
+  ],
+  "executed_checks": [
+    {"command":"PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest tests.python.test_arabic_pronunciation -v","passed":6,"failed":0,"skipped":0,"exit_code":0},
+    {"command":"PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -O -m unittest tests.python.test_arabic_pronunciation -v","passed":6,"failed":0,"skipped":0,"exit_code":0},
+    {"command":"node --test tests/web/playback-error.test.cjs","passed":4,"failed":0,"skipped":0,"exit_code":0},
+    {"command":"node --test --test-reporter=tap tests/web/*.test.cjs","passed":125,"failed":0,"skipped":0,"exit_code":0},
+    {"command":"PYTHONDONTWRITEBYTECODE=1 /root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python -B -m unittest tests.setup.test_layout -v","passed":4,"failed":0,"skipped":0,"exit_code":0},
+    {"command":"Read-only Node stdin harness using immutable client.test.cjs prelude and actual shipping app.js; configured stt_mode=api, accepted playback, response_done, TTS error, fresh PCM","result":"PASS: no paused label, exactly one audio submission and barge-in interrupt; remote API route remains full duplex","exit_code":0}
+  ],
+  "findings": [
+    "speech.py changes only two lines: logical-input U+FD3F maps to ASCII opening parenthesis and U+FD3E maps to closing parenthesis, before the existing Indonesian normalizer. No Arabic letter, vowel mark or numeral deletion, fallback, language/profile change or validation bypass is introduced.",
+    "NaturalTTS imports the same normalize_pronunciation for its planner; the narrow speech.py change reaches the natural route without worker or source-pin edits. Original SpeechRequest/source spans are separate from normalized native text. Existing synthesis input validation and returned original ACK spans remain untouched.",
+    "app.js error path retains waitingReply/speechPaused only when running local or explicitly consented browser capture has an active source, queued audio, or a current-epoch drain/decode. Existing drainAudio final completion clears capture buffers and resumes capture/recognition; four regressions demonstrate pause and eventual resume, with one or two actual playback ACKs as appropriate.",
+    "Remote API route is explicitly excluded from keepPaused; additional live-JS harness execution verifies capture and barge-in after error. ACK emission still occurs only in source.onended with existing epoch/source checks. Token matching, blocked sets, stale-start correlation, cancellation, input/output limits and authorization are unchanged.",
+    "All 61 tracked tests paths were compared byte-for-byte with HEAD. Only tests/setup/test_layout.py differs, by the additive 12-line exact-two-file inventory loader. Historical regression sources including tests/web/client.test.cjs and existing inventory receipts are unchanged; layout inventory test passes. New Node file reads only harness prelude and does not register historical tests twice.",
+    "Tracked voice_app paths differ only in speech.py; all 12 tracked sela_live_tts paths and all five tracked tools paths match HEAD. No installer utility, source_pins, runtime manifest, native worker or service change is included. Untracked docs/ARABIC-PLAYBACK-REPAIR-STATE.json is contextual and outside executable promotion scope."
+  ],
+  "probe_authorization": {
+    "authorized": true,
+    "scope": "One separate bounded staging full-supplied-text native probe; not executed by reviewer",
+    "max_tts_calls": 6,
+    "max_wall_seconds": 240,
+    "retries": 0,
+    "conditions": [
+      "Bind immutable exact complete user-supplied Arabic response UTF-8 hash and the six reviewed file hashes/modes before launch. Do not substitute a title, shortened body, altered text or synthetic payload. Record normalization separately from original source/ACK text.",
+      "Use only existing pinned interpreter, workers, verified SDK/assets/conditioning and current production-matching settings (including existing id language). No downloads, dependency installs, model allocation for preliminary diagnosis, parameter changes, alternative engine, tuning sweep or automatic retry. This narrow authorization permits native inference only in that separately gated staging probe.",
+      "Hard monotonic deadline <=240 seconds for the entire probe including prediction/planning and cleanup; <=6 native TTS invocations total including failed attempts. Keep existing stricter per-worker/DP/session budgets. Any refusal, error, cancellation, missing coverage or exhausted budget aborts without retry or guard relaxation; reap all children before releasing leases or claiming completion.",
+      "Use real evaluation AdmissionCoordinator with canonical persistent /root/voice-lab/.runtime/live-tts.lock, unchanged inode, production detection/priority and zero queued waiters. No fake admission, temporary lock, lock unlink/replacement, production coordinator bypass or concurrent owned native work. Admission refusal is terminal for this one probe.",
+      "Hash-bind and fixture-verify the finite probe driver and budget/cancellation/terminal-receipt handling before launch. Verify current worker/runtime manifests and resource/network/output guards. This review does not independently approve a new driver or reapprove installer/runtime changes.",
+      "Retain terminal receipt including exact original text/hash, source spans and full coverage, normalized native payloads, actual TTS count/timings, settings and runtime hashes, guard outcomes, WAV hashes/metrics and child cleanup. Preserve failed evidence. Native success is not human Arabic/tajwid quality acceptance."
+    ]
+  },
+  "promotion_authorization": {
+    "authorized_conditionally": true,
+    "authorized_now": false,
+    "exact_application_files": ["voice_app/speech.py","web/app.js"],
+    "conditions": [
+      "All full regression suites normal and optimized as applicable, including layout/inventory and 125 Node tests, must pass for the exact final candidate. Reviewer ran only the focused Python/layout and full Node checks listed here; no full Python claim is made.",
+      "The separately bounded full-supplied-text native probe must succeed with complete original source/ACK coverage and no original guard rejection. Browser verification must demonstrate accepted audio plays through, microphone/browser recognition remains paused across playing/decode/queue after error and resumes after final drain, and displayed/history/ACK Arabic remains original.",
+      "Use a newly reviewed bounded two-file application promotion plan, bound to this review and exact current installed originals' SHA256 and modes, not a historical release plan or assumed production state. Verify those current originals and effective production selector/runtime immediately before promotion. Archive exact baseline bytes/modes and fail closed on any drift.",
+      "Promote only the two application files with the candidate hashes/modes in source_inventory. No installer utility, sourcePinRuntime/source_pins, runtime manifest, worker, model, service unit, auth, settings, dependency or unrelated application/test changes are authorized by this review. Existing runtime verification must remain satisfied without rewriting pins to make it pass.",
+      "After promotion, read back exact installed files and public served app.js, verify candidate hashes and modes, effective runtime identity/selector, health, complete Arabic response/playback/ACK behavior and capture recovery. Claim success only after exact-target post-readback. On failure use the separately reviewed bounded exact-original rollback; do not broaden scope or force service changes under this approval.",
+      "Any candidate hash/mode drift or change to promotion tooling requires relevant re-review. This application approval cannot override installer/service rejection. Existing language id remains: no Arabic pronunciation/tajwid or human-listening acceptance is claimed."
+    ]
+  },
+  "reviewer_actions": {
+    "source_test_git_service_or_production_mutations": false,
+    "native_inference_or_downloads": false,
+    "historical_reviews_preserved": true,
+    "only_owned_write": "docs/reviews/ARABIC-PLAYBACK-REPAIR-REVIEW.json"
+  },
+  "limitations": [
+    "Tests execute actual application JavaScript with mocked browser/platform boundaries, not a real-device microphone or acoustic listening session.",
+    "No native inference, production inspection/promotion or full Python regression suite was performed by this reviewer; these remain explicit parent gates.",
+    "Baseline SHA256 values here are Git HEAD bytes, not assertions about current installed production bytes."
+  ]
+}

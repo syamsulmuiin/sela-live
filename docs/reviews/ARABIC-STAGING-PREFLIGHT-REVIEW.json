@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "reviewer": "Hermes independent Arabic staging fixture/preflight reviewer",
+  "verdict": "approved",
+  "scope": "Supplementary approval of the exact ten-file staging asset omission correction and preserved zero-inference first failure only. Not a model/audio failure review, source application re-review, driver approval, runtime modification or production promotion approval.",
+  "security_concerns": [],
+  "logic_errors": [],
+  "bindings": {
+    "repo": "/root/sela-live",
+    "base": "/root/.hermes/cache/scratch/arabic-playback-kzbjjowv",
+    "app": "/root/.hermes/cache/scratch/arabic-playback-kzbjjowv/app",
+    "layout_path": "/root/.hermes/cache/scratch/arabic-playback-kzbjjowv/layout.json",
+    "layout_sha256": "031e44ea1e6b2d96273f7334b86d0884c0a55a55ea5a6f0642d098ea4158d2ee",
+    "copy_proof_path": "/root/.hermes/cache/scratch/arabic-playback-kzbjjowv/voice-assets-copy.json",
+    "copy_proof_sha256": "01719846b12c0263ce0aa34a2fb4d264dde589c6543940bff7333a37b60315d0",
+    "source_application_review_path": "/root/sela-live/docs/reviews/ARABIC-PLAYBACK-REPAIR-REVIEW.json",
+    "source_application_review_sha256": "1a691154b7c9585ad8ce8a38fcc4dd1932192f42a9fcafee79955d6733769a1b",
+    "prior_production_manifest_path": "/root/sela-live/docs/PRODUCTION-SOURCE-MANIFEST.json",
+    "prior_production_manifest_sha256": "0542113cf1c32e143f2481c0dc10a108535c2b8c098216e3569235de37c8f05e",
+    "source_fixture_path": "/root/.hermes/cache/scratch/sela-arabic-reported.txt",
+    "source_fixture_sha256": "e513d0cd1778fc93cb048967648867596112a2c06fc424dfb708659739a4b139"
+  },
+  "assets": {
+    "voice_assets/automatic-conditioning/conditioning_b.json": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828",
+    "voice_assets/automatic-conditioning/conditioning_b_active_high.json": "4575171ea1b5ffbd96a1b03a92704262a2c338d190dc969e137656904097b95a",
+    "voice_assets/automatic-conditioning/conditioning_b_active_low.json": "f948e966e00dba822e19da9d0207a5f5f0254618e652a624810a5c89985e1a56",
+    "voice_assets/automatic-conditioning/conditioning_b_active_medium.json": "294c2d705bf8f5fd3388725e28bac3850b39a8f479b5c23afc40cced3bae17b6",
+    "voice_assets/automatic-conditioning/conditioning_b_calm_high.json": "d90e418153d8b3d0e7234a92541fcfb4d1f054efba60adf08f327dad001f4bc4",
+    "voice_assets/automatic-conditioning/conditioning_b_calm_low.json": "f89348574a02a68771e47bb9fd23e33dbada5fc9ca0b876c29fdc6da049ce832",
+    "voice_assets/automatic-conditioning/conditioning_b_calm_medium.json": "64fa0c071863db434a22ca080228eb93ae4f954553226ea4f4f267f4150b5618",
+    "voice_assets/automatic-conditioning/manifest.json": "ba9257f9c745accddcbc64c017c4638d39f5c1255f6923f5f499acc099aaf403",
+    "voice_assets/conditioning-b/manifest.json": "08a34381da17292b652d384b1316365218f1c4d9fc0ae22405fe8909bcb55cfc",
+    "voice_assets/conditioning-b/profile.json": "4f52698e957ae4d15d23c7208c26b298d56f70647083d61c9ff518c4d374d828"
+  },
+  "asset_verification": {
+    "count": 10,
+    "all_match_copy_proof_repo_worktree_git_HEAD_prior_production_manifest_and_current_production": true,
+    "all_checked_paths_regular_files_without_symlink_components": true,
+    "production_root_read_only_comparison": "/root/voice-lab",
+    "result": "Exact existing tracked application assets, not new models, alternative profiles, parameter edits or generated replacement tensors. Correcting only their missing staging copies preserves pinned validation."
+  },
+  "profile_loader_verification": {
+    "execution": "Read-only python -B stdlib import of the two pinned staging conditioning helpers, then approved_profile and profile_path; no Speech construction, worker startup, native imports, neural inference or downloads.",
+    "approved_helper_sha256": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+    "automatic_helper_sha256": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+    "approved_resolution": "/root/.hermes/cache/scratch/arabic-playback-kzbjjowv/app/voice_assets/conditioning-b/profile.json",
+    "automatic_profile_ids_verified": ["conditioning_b", "conditioning_b_calm_low", "conditioning_b_calm_medium", "conditioning_b_calm_high", "conditioning_b_active_low", "conditioning_b_active_medium", "conditioning_b_active_high"],
+    "all_automatic_paths_resolve_inside_stage_voice_assets": true,
+    "model_root_read_only": "/root/voice-lab/autonomous/expressive-tts/assets",
+    "model_manifest_path": "/root/voice-lab/autonomous/expressive-tts/assets-manifest.json",
+    "model_manifest_sha256": "0fd578199ae89d38c94b57935ea1f92f7c5aab26ca918cd17e116276953cfe47",
+    "base_M1_sha256": "e35604687f5d23694b8e91593a93eec0e4eca6c0b02bb8ed69139ab2ea6b0a5b",
+    "result": "approved_conditioning.py line 61 resolves assets beside its installed application, explaining the omitted-stage-assets refusal. Both manifest pins, base M1 pin, profile pins, tensor bounds and unchanged duration-style validation passed without bypasses."
+  },
+  "first_attempt": {
+    "preserved_path": "/root/.hermes/cache/scratch/arabic-playback-kzbjjowv/attempt-1-preflight-failure.json",
+    "preserved_sha256": "bc50cb4d109b6b72ca19b66911c5c1cb4c634044a6ebab754f8535a2ed69622b",
+    "status": "failed",
+    "error_type": "ValueError",
+    "recorded_calls": [],
+    "recorded_native_tts_calls": 0,
+    "classification": "Staging profile-readiness failure before inference, not model, audio, pronunciation or quality failure.",
+    "evidence_limit": "Classification is supported by preserved receipt, inspected driver ordering (Speech constructor before synthesis) and exact app-relative loader resolution. No original traceback was supplied in this receipt; no acoustic conclusion is inferred."
+  },
+  "unchanged_bindings": {
+    "six_original_review_source_and_test_hashes_and_modes_match_layout": true,
+    "all_30_layout_runtime_source_files_match_repo": true,
+    "all_31_layout_runtime_package_files_match_both_app_and_runtime_output": true,
+    "source_files_compared_equal_to_git_HEAD": {
+      "sela_live_tts/source_pins.py": "9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0",
+      "sela_live_tts/worker.py": "75cfae4bd5c297b42612a117efa9a0c7c90fd07fa8c9adfe045233ee7b4d2066",
+      "sela_live_tts/natural_worker.py": "8b30a3f30103907fbf0bca5a438beb7eea624a8b0a92ebec0b15458a3a4c2c09",
+      "sela_live_tts/upstream-manifest.json": "f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74",
+      "voice_app/approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
+      "voice_app/automatic_conditioning.py": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",
+      "voice_app/supertonic3_worker.py": "eb0e6c9cd8655ff1eb2cb5c64f5379945295f86b5c971a79d90ed3ccda03d625"
+    },
+    "staging_manifest_sha256": "256323df5ae88ddbe85e8f0729b3cebd6575a230ae4b4a04066c94ea8ed92fc3",
+    "staging_worker_sha256": "be4ba7b7877bc97d8719f9f155eb27e970465ed9b26d7a8d1bef93e203845c27",
+    "staging_natural_worker_sha256": "d3062ac27b0d318f9218a61be0d68c9d76b6351025b35635af716eac4da6e32e",
+    "staging_runtime_manifest_sha256": "4d1ec2ac0ac06bf6508a8c7f28bc5c60e06cdabbc8fb18acb55622d73fb6e527",
+    "note": "Existing staged relocation outputs match the prior layout byte hashes; this correction does not rewrite source-native workers, root manifests, runtime manifests or pins. This is not a new broad runtime audit."
+  },
+  "probe_authorization": {
+    "authorized": true,
+    "scope": "ONE NEW separate full-supplied-text staging probe after the preserved zero-inference first attempt; not executed by this reviewer.",
+    "max_new_probe_executions": 1,
+    "max_tts_calls": 6,
+    "max_wall_seconds": 240,
+    "retries": 0,
+    "parameter_changes": false,
+    "conditions": [
+      "Original application approval remains mandatory and unchanged. Hash-bind this supplementary review in the driver in addition to the original review, exact layout, copy proof, all ten asset hashes, full original text digest and original six reviewed source/test hashes and modes. Fail closed before inference on any mismatch.",
+      "Parent must finish additive supplementary gate, preserve helper bodies, rerun normal and optimized four-case driver fixtures and actual source/runtime gate, and record the exact FINAL driver and fixture hashes before launch. The pre-additive verification is not final-driver approval. This review does not approve unseen driver changes.",
+      "Use unchanged pinned interpreter, workers, model/assets and production-matching settings including language id. No downloads, installs, model substitutions, profile changes, altered input, parameter changes, tuning, native preliminary diagnosis or guard relaxation.",
+      "Use real EVALUATION AdmissionCoordinator on the persistent canonical /root/voice-lab/.runtime/live-tts.lock with unchanged device/inode and canonical production detection/priority before and during inference. No fake admission, alternate or replaced/unlinked lock, second-flock substitute, production-role bypass, concurrent owned native work or queued waiters. Any admission refusal is terminal.",
+      "Hard monotonic total budget at most 240 seconds INCLUDING setup, prediction/planning, inference and cleanup; at most six native TTS invocations INCLUDING failed calls. Retain any stricter worker, DP, session, network/resource/output limits. Any error, refusal, cancellation, incomplete coverage or exhausted budget terminates without retries.",
+      "Join/reap all owned children on success, failure and repeated cancellation before releasing evaluation leases. Confirm cleanup and canonical inode unchanged, service PID unchanged, and no production/service/settings mutation. Do not claim successful completion if cleanup or guards fail.",
+      "Keep the original attempt-1-preflight-failure.json bytes/hash intact. Retain a distinct terminal receipt for the new probe, including failures, original complete text/hash and ACK/source spans, normalized native payloads, full coverage, actual call counts/timings, settings/runtime digests, guard outcomes and WAV hashes/metrics. Native success is not human Arabic/tajwid listening acceptance."
+    ]
+  },
+  "parent_driver_verification_observed": {
+    "path": "/root/sela-live/docs/ARABIC-PROBE-DRIVER-VERIFICATION.json",
+    "sha256_at_review": "adfd5347fc4ea3dc85d844bd89574c3d0ff3c4119039485bfe325894240a82cc",
+    "pre_additive_driver_sha256": "d42c19de69216b460d1e4d6d71359b461e04e4519a1d850c58214a060303d1dd",
+    "parent_reported_fixture_cases_normal": 4,
+    "parent_reported_fixture_cases_optimized": 4,
+    "parent_reported_fixture_failures": 0,
+    "final_additive_gate_driver_reverification_required": true
+  },
+  "reviewer_actions": {
+    "native_inference_or_nn_execution": false,
+    "downloads": false,
+    "source_test_production_service_or_git_changes": false,
+    "original_failure_modified": false,
+    "only_write": "docs/reviews/ARABIC-STAGING-PREFLIGHT-REVIEW.json"
+  },
+  "limitations": [
+    "Focused correction review only; no full regression rerun or broad application/runtime re-review.",
+    "No new probe executed, no audio generated/listened to and no production promotion authorized here.",
+    "Final driver supplementary-gate implementation and refreshed hash/fixture verification remain parent prerequisites."
+  ]
+}

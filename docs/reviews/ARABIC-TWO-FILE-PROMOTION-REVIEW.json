@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "reviewer": "Hermes independent bounded two-file promotion reviewer (gpt-6.1-sol subagent)",
+  "verdict": "approved",
+  "scope": "Exact hash-bound two-file application transaction only, including exact-original rollback and existing fixed service stop/restart hooks; plus one separately bounded postinstall full-same-Arabic Native parity check. Not a general application/runtime re-review or permission to modify settings, units, workers, models, dependencies, guards, source pins or unrelated files. Parent owns actual apply, post-readback and Git.",
+  "tool_path": "/root/sela-live-releases/arabic-release-y7mzzm6m/promote-app-repair.py",
+  "tool_sha256": "d089ccab02cecd3cf65284e9cf446ba85b2ca3e6acd0d6d2c226630105b508e9",
+  "tool_mode": 420,
+  "plan_sha256": "9854dbcc88d85983c1d21f8ecf57293428957a41b368be3e80798a49a5012c43",
+  "plan_canonicalization": "sha256(json.dumps(unsigned_plan, sort_keys=True, separators=(',', ':')).encode()); exclude only promotion_review_path and promotion_review_sha256 from final plan",
+  "unsigned_plan_path": "/root/sela-live-releases/arabic-release-y7mzzm6m/unsigned-two-file-plan.json",
+  "unsigned_plan_file_sha256": "edad981e6d6536bbe9bc48023cd2f52a5df1e8482d3b5fcac08e3d8d24a1f31b",
+  "final_cli_plan_required_mode": 384,
+  "records": {
+    "voice_app/speech.py": {
+      "old": {"sha256": "1c764a3004e83fc565d8ebfabeee7c1d3040c3a3e31716a783ee5692a7558036", "mode": 420},
+      "new": {"sha256": "0b51ce34f58c56ea85bc01d73e29ffe137cf8f5db953ede433802ef1375a2aab", "mode": 420}
+    },
+    "web/app.js": {
+      "old": {"sha256": "0803b5774c0e9f2e23332150276cc5d3fd5970b844423d94c2b544e0371222ef", "mode": 420},
+      "new": {"sha256": "91b10623b97eaa52810dd60a0d160523022b237e8b0a466cbeff3644586c85da", "mode": 420}
+    }
+  },
+  "bindings": {
+    "application_review_sha256": "1a691154b7c9585ad8ce8a38fcc4dd1932192f42a9fcafee79955d6733769a1b",
+    "original_natural_plan_sha256": "2e780d85bc2b3a68c582bcad521c9f3d6c6055a8f8d27553ebbf1aef593c9ade",
+    "frozen_baseline_sha256": "7300a2c1f004cdd01f6e119a49a31cc2d34cd675df5f13ff246e36bb8d40f0f9",
+    "installer_observer_sha256": "3de2501691eb34c566967e03816af81ca9ce7a045adc74f48e28de831efcc504",
+    "fixture_test_sha256": "38bda6156275f07361b8bd603b9b22b0be6d54031ebe26a7a2de790dc4dc59b2",
+    "native_receipt_sha256": "382f313175c0e54578ef56250019a5baf86247d724ad686b8a71e0e756da2fc8",
+    "browser_receipt_sha256": "9d66f398820d2d648e11712000d54d990e173e48311f6a3652879bac577ca036",
+    "failed_zero_call_attempt_sha256": "bc50cb4d109b6b72ca19b66911c5c1cb4c634044a6ebab754f8535a2ed69622b",
+    "native_original_text_sha256": "e513d0cd1778fc93cb048967648867596112a2c06fc424dfb708659739a4b139",
+    "native_complete_wav_sha256": "707c78fb015b29b40dad2ea7b6015c44e0f3a6c22794868e904893e7dbb323bc"
+  },
+  "executed_checks": {
+    "normal": {"command": "PYTHONDONTWRITEBYTECODE=1 python -B /root/sela-live-releases/arabic-release-y7mzzm6m/test-promote-app-repair.py -v", "tests": 9, "failures": 0, "exit_code": 0},
+    "optimized": {"command": "PYTHONDONTWRITEBYTECODE=1 python -B -O /root/sela-live-releases/arabic-release-y7mzzm6m/test-promote-app-repair.py -v", "tests": 9, "failures": 0, "exit_code": 0},
+    "actual_main_subcases": "Both CLI default and --apply branches ran in each suite, with promotion mutation seam redirected to harmless temporary fixture roots and fixture hooks only. Upstream main tool/review/plan/evidence/original-plan/helper/baseline gates executed. Scratch import target was independently SHA256-equal to durable reviewed tool.",
+    "readonly_production": {"app_records_matched": 74, "unit_records_matched": 8, "full_protected_inventory": "passed", "health_auth_host_websocket_listener_cwd_guards": "passed", "effective_selectors_exact": true, "main_pid": 384647, "policy": "natural_v1", "current_originals_exact_hash_and_mode": true},
+    "source_payload_bindings": "Both payload files match current reviewed source and actual staging app files; all six source/support review hashes and modes verified. Actual original production hashes/modes match records.old.",
+    "native_evidence": "Passed receipt: complete 340-character original source/hash and concatenated ACK/source spans verified, two completed conditioning_b steps=12 calls, existing language id, 31.985509412013926 seconds. Full WAV and both chunk WAV bytes independently hashed against receipt. Durable receipts byte-identical to actual staging receipts. Receipt reports canonical admission reacquired/released and inode unchanged; unchanged production PID.",
+    "browser_evidence": "Passed receipt: actual shipping browser JS with replayed native captures, two ended playbacks and ACKs 1/2, complete original display/history/heardText, zero synthetic microphone submissions during injected error and playback, then one deliberate fresh input after drain. Zero new native calls. Earlier setup failures explicitly excluded.",
+    "failed_attempt_preserved": "Separate failed preflight receipt remains failed with calls=[]; not relabeled or counted as acceptance."
+  },
+  "ordering_findings": [
+    "Root directory exclusive nonblocking lock covers original/payload binding, full protected static inventory and runtime observation, archive, transaction and recovery. Default returns ready without archive, stop, restart or app writes.",
+    "Only the exact two names are accepted. Exact old bytes are archived and read back before initial stop; snapshot records retain exact original modes. Canonical existing host lock is acquired around writes and restores, never created, unlinked or replaced by this tool.",
+    "After successful stop and static verification, write both candidate files, verify complete protected static state, restart and verify full running and static state. Any failed recovery stop prevents restoration/restart. Any failed restoration/static check prevents recovery restart. Recovery restart/observation/static failure triggers final stop; explicit recovery_final_stop_succeeded remains false on failed final stop.",
+    "Original release plan is used only as hash-frozen observer input, never reapplied. The helper checks all protected app/unit bytes, modes and inventory and effective runtime selectors, health, auth, host, unauthenticated WebSocket, listener and working directory.",
+    "Preparation.json retains stale 8-case counts and earlier fixture hash; it is not an authorization input. Current durable test source, current 9-case verification and independently executed 9 normal plus 9 optimized cases are authoritative. No source/test correction was made."
+  ],
+  "promotion_conditions": [
+    "Parent must form final private mode-0600 plan by adding only this exact review path and SHA256 to the reviewed unsigned plan; preserve every other key/value and records exactly. Execute read-only CLI preflight first, then --apply only if ready. Any hash/mode, evidence, original or effective runtime drift fails closed and requires relevant re-review.",
+    "Authorize only these two application destinations under /root/voice-lab, exact old/new hashes and 0644 modes, exact-original snapshot/rollback and the utility's fixed existing service hooks. No settings/unit/auth/worker/model/dependency/source-pin changes, guard bypass, feature expansion, cosmetic edits, downloads or broad reinstall.",
+    "Immediately before application confirm trusted non-symlink paths and existing metadata: release root 0700 root-owned; app root and payload root 0755 root-owned; snapshot parent 0700 root-owned; canonical .runtime directory 0700 root-owned; canonical lock regular root-owned single-link 0600 inode 1311276. Preserve host lock inode and canonical guard semantics. Stop if admission/native work is active or ownership is ambiguous; no alternate locks or concurrent native work.",
+    "After installed receipt, parent must read back exact installed hashes/modes, public served app.js hash, full protected inventory and all original observer checks. Do not claim deployment success merely from fixtures or service restart. Treat rollback_failed/final_stop false as an explicit unresolved service-state failure, never stopped/safe success.",
+    "Preserve all successful and failed receipts, original text and full WAV. Parent owns postinstall verification and any authorized Git operations; this reviewer performs neither promotion nor Git mutation."
+  ],
+  "postinstall_native_authorization": {
+    "authorized": true,
+    "checks": 1,
+    "max_tts_calls": 2,
+    "max_wall_seconds": 120,
+    "retries": 0,
+    "full_original_text_sha256": "e513d0cd1778fc93cb048967648867596112a2c06fc424dfb708659739a4b139",
+    "reference_complete_wav_sha256": "707c78fb015b29b40dad2ea7b6015c44e0f3a6c22794868e904893e7dbb323bc",
+    "conditions": [
+      "Exactly one bounded postinstall Native parity check of the complete unchanged 340-character original Arabic response in the native receipt. No shortened/substituted text. Preserve complete original source and ACK spans separately from normalized native payloads.",
+      "Use only existing pinned native interpreter/workers/assets, conditioning_b steps=12, language id, natural_v1 and unchanged settings. All original native validation, resource/network/output/deadline guards and stricter worker/DP/session limits remain in force. No downloads, tuning, fallback or guard relaxation.",
+      "Use original real AdmissionCoordinator evaluation lease with canonical persistent host lock, unchanged inode, production detection/priority, zero queued waiters and no concurrent owned native inference. Admission refusal or error is terminal, not a retry opportunity.",
+      "Hard monotonic deadline <=120 seconds for entire check including cleanup; <=2 TTS invocations total including failed invocations. On rejection, timeout, failure, cancellation, coverage gap or exhausted budget abort without retry. Reap every child before releasing native/host leases.",
+      "Retain terminal exact-source/normalized-input/count/timing/coverage/guard/cleanup evidence and complete output WAV. Compare against reference complete WAV SHA256 707c78fb015b29b40dad2ea7b6015c44e0f3a6c22794868e904893e7dbb323bc if deterministic parity is possible; record actual hash and explain any mismatch without tuning or retry. Do not claim bitwise parity unless hashes match.",
+      "No physical microphone, human listening, Arabic pronunciation/tajwid, emotional quality or new Codex acceptance is authorized or established by this check."
+    ]
+  },
+  "security_concerns": [],
+  "logic_errors": [],
+  "limitations": [
+    "No actual production stop/restart/write or new native inference performed by reviewer. Production remained on original files with MainPID 384647 during read-only verification.",
+    "Browser/native acceptance is independently inspected hash-bound evidence, not a new reviewer browser session or inference. No broader regression suite was rerun in this bounded utility review.",
+    "CLI fixtures mock only the promotion seam and therefore do not execute live observer closures; the same full observer and protected static checks were separately executed read-only against current production."
+  ],
+  "reviewer_actions": {
+    "source_test_nn_download_prod_service_git_mutations": false,
+    "temporary_fixture_files_only_outside_report": true,
+    "only_durable_write": "docs/reviews/ARABIC-TWO-FILE-PROMOTION-REVIEW.json"
+  }
+}

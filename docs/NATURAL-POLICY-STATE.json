@@ -96,5 +96,6 @@
     "installed_full_byte_mode_inventory_selector_readback",
     "installed_same_B_native_PCM_parity",
     "public_health_API_and_WebSocket_auth_guards"
-  ]
+  ],
+  "latest_application_repair": "docs/ARABIC-PLAYBACK-INSTALL-STATE.json"
 }

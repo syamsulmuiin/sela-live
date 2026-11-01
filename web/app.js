@@ -388,9 +388,21 @@
         if (active && tokenKey(active) === tokenKey(data.token)) { sealed = true; renderHistory(); if (!currentSource && !queue.length && draining !== playbackEpoch) { status('Jawaban selesai. Silakan lanjutkan.'); if (localCapture()) clearRecording(); waitingReply = false; speechPaused = false; startRecognition(); controls(); } }
         break;
       case 'interrupted': if (localCapture()) clearRecording(); waitingReply = false; cancelPlayback(); server = data.state || server; renderHistory(); status('Jawaban dihentikan.'); controls(); break;
-      case 'error':
+      case 'error': {
         if (data.command === 'start' && data.start_id && data.start_id !== pendingStart) break;
-        if (pendingStart) releaseMedia(); if (localCapture()) clearRecording(); waitingReply = false; speechPaused = false; error(data.message || 'Terjadi kesalahan pada server.'); status('Periksa pesan di atas, lalu coba lagi.'); startRecognition(); break;
+        if (pendingStart) releaseMedia();
+        if (localCapture()) clearRecording();
+        // An error can arrive after response_done while accepted audio still
+        // plays, decodes, or waits in the bounded playback queue. Keep half-
+        // duplex capture paused until drainAudio's actual completion path.
+        const playbackPending = currentSource || queue.length || draining === playbackEpoch;
+        const keepPaused = Boolean(running && (localCapture() || browserSelected()) && playbackPending);
+        waitingReply = keepPaused; speechPaused = keepPaused;
+        error(data.message || 'Terjadi kesalahan pada server.');
+        status('Periksa pesan di atas, lalu coba lagi.');
+        if (!keepPaused) startRecognition();
+        controls(); break;
+      }
     }
   }
   async function connect() {

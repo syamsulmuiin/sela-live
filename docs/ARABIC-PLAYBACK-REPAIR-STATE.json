@@ -1,0 +1,64 @@
+{
+  "phase": "installed_verified_ready_for_user_trial",
+  "blocker": null,
+  "updated_at_utc": "2026-11-01T09:40:08.216844+00:00",
+  "baseline_commit": "322065f1ccb94d1fc64c84b6b982c2f0aca5f5bf",
+  "production_unchanged_by_this_repair": false,
+  "user_symptom": "Generated full Arabic response but heard_text only its title, followed by no_speech.",
+  "evidence_scope": "Exact supplied text preprocessing and deterministic client reproduction, not captured user microphone or original production websocket trace.",
+  "verified_trigger": {
+    "title_tokens": 30,
+    "title_negative_ids": 0,
+    "body_tokens": 331,
+    "body_negative_ids": 14,
+    "unsupported_codepoints": [
+      "U+FD3E",
+      "U+FD3F"
+    ],
+    "actual_sdk_rejects_unsupported_characters": true,
+    "native_inference_used_for_diagnosis": false
+  },
+  "client_reproduction": {
+    "real_red_tests": 4,
+    "cause": "Any error unconditionally released half-duplex capture while accepted assistant audio played/decoded/queued.",
+    "repair": "Retain pause until actual drain completion; microphone and browser recognition resume afterward.",
+    "all_web_tests_command": "node --test --test-reporter=dot tests/web/*.test.cjs",
+    "all_web_tests_exit_code": 0,
+    "legacy_client_test_source_unchanged": true
+  },
+  "proposed_scope": [
+    "voice_app/speech.py pronunciation-only ornament mapping",
+    "web/app.js error-path half-duplex gating"
+  ],
+  "preserved": [
+    "Original Arabic display/history/source ACK text",
+    "Arabic letters, vowel marks and verse numerals",
+    "Selected voice and conditioning",
+    "Native workers, model assets, limits and manifest",
+    "STT engine and remote LLM"
+  ],
+  "remaining_gates": [],
+  "language_qualification": "Existing installed native language remains id; this repair is not proof of Arabic pronunciation/tajwid quality or trained multilingual routing.",
+  "renewed_user_approval": true,
+  "first_native_attempt": {
+    "status": "failed_before_inference",
+    "native_tts_calls": 0,
+    "cause": "Disposable fixture omitted pinned app-owned voice_assets; required guard correctly refused.",
+    "preserved_failure": "/root/.hermes/cache/scratch/arabic-playback-kzbjjowv/attempt-1-preflight-failure.json"
+  },
+  "fixture_correction": {
+    "tracked_profile_files_copied": 10,
+    "readiness_profiles_passed": 7,
+    "parameter_changes": false,
+    "native_retry_executed": false
+  },
+  "regression_report": "docs/ARABIC-PLAYBACK-REGRESSION.json",
+  "native_browser_verification": "docs/ARABIC-NATIVE-BROWSER-VERIFICATION.json",
+  "prepared_release": "/root/sela-live-releases/arabic-release-y7mzzm6m",
+  "installed_state": "docs/ARABIC-PLAYBACK-INSTALL-STATE.json",
+  "public_verification_scope_note": "docs/reviews/ARABIC-PUBLIC-ASSET-VERIFICATION-NOTE.json",
+  "remaining_user_verification": [
+    "Existing public-account login and authenticated app.js delivery",
+    "Physical microphone/speaker and Arabic pronunciation/tajwid listening"
+  ]
+}

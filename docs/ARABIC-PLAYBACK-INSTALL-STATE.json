@@ -1,0 +1,67 @@
+{
+  "status": "installed_verified_ready_for_user_trial",
+  "verified_at_utc": "2026-11-01T09:34:54.894830+00:00",
+  "service": "voice-lab.service",
+  "main_pid": 501959,
+  "release": "/root/sela-live-releases/arabic-release-y7mzzm6m",
+  "snapshot": "/root/sela-live-install-snapshots/arabic-9d1772c6e01a4a2eb8773dfede8eb06c",
+  "exact_two_files": [
+    "voice_app/speech.py",
+    "web/app.js"
+  ],
+  "changes": [
+    "Speech-copy-only ornate-parenthesis normalization; original Arabic display/history/ACK unchanged",
+    "Retain half-duplex microphone pause during error until actual playback/decode/queue drains"
+  ],
+  "approved_plan_sha256": "bd4cc9c5967b14b2f0bcb35f1745379bb05101e979d1dc95cf496c9fc18bd828",
+  "promotion_review_sha256": "5142e939aaa033d4226e472b3ee92339a32ed593846646ec0d61608346fef193",
+  "postinstall_native": {
+    "status": "passed",
+    "tts_calls": 2,
+    "contexts": 2,
+    "full_original_source_coverage": true,
+    "staged_wav_byte_exact": true,
+    "wav_sha256": "707c78fb015b29b40dad2ea7b6015c44e0f3a6c22794868e904893e7dbb323bc",
+    "elapsed_seconds": 33.546743629995035,
+    "full_installed_byte_mode_inventory_selector_readback": true,
+    "canonical_evaluation_lease_released": true
+  },
+  "browser_verification": "docs/ARABIC-NATIVE-BROWSER-VERIFICATION.json",
+  "public_checks": {
+    "public_unauthenticated": {
+      "/health": {
+        "status": 200,
+        "location": null
+      },
+      "/api/config": {
+        "status": 401,
+        "location": null
+      },
+      "/ws": {
+        "status": 403,
+        "location": null
+      },
+      "/app.js": {
+        "status": 303,
+        "location": "/login"
+      }
+    },
+    "installed_ASGI_synthetic_auth_asset": {
+      "status": 200,
+      "sha256": "91b10623b97eaa52810dd60a0d160523022b237e8b0a466cbeff3644586c85da",
+      "scope": "Installed code authenticating via isolated read-only fake AuthStore; not live public account session"
+    },
+    "live_public_authenticated_asset_hash_verified": false,
+    "reason": "Asset deliberately protected; public GET redirects to/login. Vault list has no saved app login. No auth/account mutation or guard weakening performed."
+  },
+  "live_public_account_login_and_physical_mic_speaker_verified": false,
+  "qualification": "Protected live/public app.js requires an existing authenticated app session; no saved login is available. Actual installed ASGI asset hash and public authentication guards were verified separately; no claim of live-public authenticated asset readback. No Arabic pronunciation/tajwid listening acceptance.",
+  "auth_model_worker_settings_changes": false,
+  "publication_receipt": "/root/sela-live-releases/arabic-release-y7mzzm6m/publication-readback.json",
+  "scope_note": {
+    "path": "docs/reviews/ARABIC-PUBLIC-ASSET-VERIFICATION-NOTE.json",
+    "sha256": "f845751f0f0fca71775e2ada00484cb02a4784daf39b39b1b93b0532f149c289",
+    "technical_ready_for_user_trial": true,
+    "live_public_authenticated_asset_hash_unverified": true
+  }
+}

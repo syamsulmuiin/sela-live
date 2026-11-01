@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "322065f1ccb94d1fc64c84b6b982c2f0aca5f5bf",
+  "files": [
+    {
+      "path": "tests/python/test_arabic_pronunciation.py",
+      "sha256": "65a2452c62c35d48dc10163578c115b4910afd6500c1d84726cf4a0bf0f9cb07",
+      "previous_sha256": null,
+      "test_functions": [
+        "test_arabic_letters_vowel_marks_and_numerals_are_preserved",
+        "test_callers_original_input_is_unchanged",
+        "test_existing_indonesian_normalization_is_unchanged",
+        "test_ornaments_are_generic_and_do_not_require_arabic_content",
+        "test_ornaments_are_mapped_before_existing_normalization",
+        "test_quran_ornaments_follow_logical_input_order"
+      ]
+    },
+    {
+      "path": "tests/web/playback-error.test.cjs",
+      "sha256": "19bcd6e3dc6ac309a2a4034c263707662b26446673496ca078cd5e1af035304a",
+      "previous_sha256": null
+    }
+  ],
+  "historical_test_source_modified": false
+}

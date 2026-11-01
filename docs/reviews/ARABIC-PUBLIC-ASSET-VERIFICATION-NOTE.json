@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "reviewer": "Hermes independent bounded verification-scope reviewer (gpt-6.1-sol subagent)",
+  "verdict": "qualified",
+  "technicalRepairReadyForUserTrial": true,
+  "publicAuthenticatedAssetHashUnverified": true,
+  "scope": "Verification-scope amendment only to the public served app.js hash condition in ARABIC-TWO-FILE-PROMOTION-REVIEW.json. Existing installed/native/public evidence and installed auth/static routing were inspected read-only. This is not a new deployment approval, general review, or claim that the missing public authenticated check passed.",
+  "amends": {
+    "path": "docs/reviews/ARABIC-TWO-FILE-PROMOTION-REVIEW.json",
+    "sha256": "5142e939aaa033d4226e472b3ee92339a32ed593846646ec0d61608346fef193",
+    "condition": "promotion_conditions: public served app.js hash readback",
+    "disposition": "Deferred explicitly to live public authenticated user verification; not satisfied by an unauthenticated redirect or the isolated ASGI fixture. All other original restrictions remain in force."
+  },
+  "evidence": {
+    "postinstalled_native": {
+      "path": "/root/sela-live-releases/arabic-release-y7mzzm6m/post-install-native.json",
+      "sha256": "afacfbe64db2fbafa66a904f7ec258e4391ad1718bd4a24862b6aa01c5dc07cf",
+      "status": "passed",
+      "recorded_main_pid": 501959,
+      "completed_calls": 2,
+      "elapsed_seconds": 33.546743629995035,
+      "profile": "conditioning_b",
+      "steps": 12,
+      "policy": "natural_v1",
+      "full_original_source_coverage": true,
+      "source_sha256": "e513d0cd1778fc93cb048967648867596112a2c06fc424dfb708659739a4b139",
+      "complete_wav_sha256": "707c78fb015b29b40dad2ea7b6015c44e0f3a6c22794868e904893e7dbb323bc",
+      "source_and_complete_wav_hashes_independently_recomputed": true,
+      "staged_wav_byte_exact": true,
+      "installed_full_readback_recorded": true,
+      "canonical_evaluation_lease_released_recorded": true,
+      "canonical_inode_unchanged_recorded": true
+    },
+    "installed_files_readonly_hashes": {
+      "root": "/root/voice-lab",
+      "web/app.js": {"sha256": "91b10623b97eaa52810dd60a0d160523022b237e8b0a466cbeff3644586c85da", "mode": "0644"},
+      "voice_app/speech.py": {"sha256": "0b51ce34f58c56ea85bc01d73e29ffe137cf8f5db953ede433802ef1375a2aab", "mode": "0644"},
+      "voice_app/server.py": {"sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5", "mode": "0644"},
+      "voice_app/auth.py": {"sha256": "0c02b44b02e60ff1b56d4029d47ea7c0920daa27c63de4a5747e9cf78d0fbb1b", "mode": "0644"},
+      "approved_two_file_candidate_hashes_match": true,
+      "installed_server_and_auth_match_repository_bytes": true,
+      "unchanged_auth_basis": "Existing approved two-file transaction excludes server/auth changes; installed server/auth also match current repository bytes. The two-file rollback snapshot does not contain server/auth, so it is not represented as a fresh baseline comparison for those files."
+    },
+    "public_readback": {
+      "path": "/root/sela-live-releases/arabic-release-y7mzzm6m/public-readback.json",
+      "sha256": "f781611dd10f923ed8c4ec669bcd2e11f35f2fc27361c844a2a3c8c7d56acf20",
+      "unauthenticated_health_status": 200,
+      "unauthenticated_api_config_status": 401,
+      "unauthenticated_websocket_status": 403,
+      "unauthenticated_app_js_status": 303,
+      "unauthenticated_app_js_location": "/login",
+      "installed_ASGI_isolated_fake_AuthStore_fixture_status": 200,
+      "installed_ASGI_fixture_asset_sha256": "91b10623b97eaa52810dd60a0d160523022b237e8b0a466cbeff3644586c85da",
+      "fixture_is_live_public_authenticated_request": false,
+      "fixture_scope": "Existing installed-code ASGI evidence using isolated read-only fake AuthStore valid_session cookie fixture; no real production account session established."
+    },
+    "routing_inspection": {
+      "path": "/root/voice-lab/voice_app/server.py",
+      "authenticated": "Line 137 checks sela_session via auth.valid_session, apart from explicit local_test_auth handling.",
+      "http_guard": "Lines 226-238 enforce host/auth guards. /app.js is absent from public_paths; unauthenticated non-API requests redirect with 303 to /login when configured.",
+      "static_route": "Line 776 mounts StaticFiles at / using Path(__file__).resolve().parent.parent / web, resolving to /root/voice-lab/web in the installed layout.",
+      "conclusion": "Unauthenticated /app.js denial is expected protection, not evidence of code deployment drift. Following the redirect retrieves the login page, not the protected JavaScript; hashing that HTML cannot establish the asset hash."
+    }
+  },
+  "decision": "The technical repair may be handed off as ready for user trial, qualified by the explicitly outstanding live public authenticated asset and physical-device checks. Installed approved hashes, installed ASGI fixture asset equality, existing public auth-guard readback, and actual postinstalled native full-source/byte-exact parity provide a defensible bounded technical handoff. They do not establish complete public browser end-to-end acceptance.",
+  "remaining_user_verification": [
+    "Using the user's existing normal public account login, verify successful authenticated public /app.js delivery and its expected SHA256 91b10623b97eaa52810dd60a0d160523022b237e8b0a466cbeff3644586c85da; the reviewer has not performed this check.",
+    "Exercise the live public account/browser flow with a physical microphone and speaker, including input, playback, turn completion and subsequent input. Physical-device behavior and human listening, Arabic pronunciation/tajwid and subjective quality remain unverified."
+  ],
+  "security_disposition": {
+    "needToWeakenAuth": false,
+    "needForAccountMutation": false,
+    "reason": "No saved app login is available in the existing evidence. Preserve authentication; do not request a password in chat, mint a production session, reset an account, add a bypass, or disable guards to satisfy an evidence condition."
+  },
+  "reviewer_actions": {
+    "only_created_file": "docs/reviews/ARABIC-PUBLIC-ASSET-VERIFICATION-NOTE.json",
+    "new_native_inference": false,
+    "browser_login": false,
+    "source_or_test_changes": false,
+    "production_or_service_mutations": false,
+    "git_mutations": false,
+    "account_or_auth_mutations": false,
+    "broader_review_or_test_rerun": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "scope": "Parent finite-driver verification; isolated helper fixtures are not native audio proof",
+  "driver_sha256": "a055bb78b47da7e7c6ca8e74d2661864f5e8e99b969d777b4cb74abbf735dd30",
+  "fixture_test_sha256": "584fdfa09ab7617639902e1bf8c70b24306bfcdbe92da3a83a68ab321fa3c3fe",
+  "normal_fixture_cases": 4,
+  "optimized_fixture_cases": 4,
+  "fixture_failures": 0,
+  "fixtures_cover": [
+    "complete source/terminal receipt",
+    "six-call budget failure",
+    "repeated cancellation joins cleanup before releasing real temp evaluation lease",
+    "native error is failed, not completed"
+  ],
+  "actual_source_mode_runtime_gate_passed": true,
+  "altered_full_source_digest_rejected": true,
+  "full_source_sha256": "e513d0cd1778fc93cb048967648867596112a2c06fc424dfb708659739a4b139",
+  "layout_sha256": "031e44ea1e6b2d96273f7334b86d0884c0a55a55ea5a6f0642d098ea4158d2ee",
+  "source_review_sha256": "1a691154b7c9585ad8ce8a38fcc4dd1932192f42a9fcafee79955d6733769a1b",
+  "limits": {
+    "max_native_calls": 6,
+    "max_wall_seconds_including_setup_and_cleanup": 240,
+    "retries": 0
+  },
+  "real_admission": "Real Evaluation AdmissionCoordinator injected for private Speech host claim, on canonical existing inode; no second flock or fake admission. Canonical production worker checked before/during TTS.",
+  "not_independent_driver_review": true,
+  "renewed_user_execution_approval": true,
+  "prior_driver_sha256": "d42c19de69216b460d1e4d6d71359b461e04e4519a1d850c58214a060303d1dd",
+  "supplementary_review_gate_added": true,
+  "helper_fixtures_rerun_after_gate_normal": 4,
+  "helper_fixtures_rerun_after_gate_optimized": 4
+}

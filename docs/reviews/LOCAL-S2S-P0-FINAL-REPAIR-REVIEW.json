@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "reviewer": "Hermes independent bounded final postcheck-repair reviewer (gpt-6.1-sol subagent)",
+  "verdict": "approved",
+  "scope": "Qualified P0 approval of exact two-file transaction and one bounded installed-root parity attempt; narrow re-review of POSTCHECK-SIGALRM-DOUBLE-CANCEL and updated unsigned-plan bindings. Original rejection preserved.",
+  "plan_path": "/root/sela-live-releases/local-s2s-repair-owuypza6/unsigned-two-file-plan.json",
+  "plan_sha256": "80efdd3030609364cbe42534e61e895ad8886ee665d32166dfa73402461ad4b2",
+  "canonicalization": "SHA256 of UTF-8 json.dumps(plan excluding only promotion_review_path and promotion_review_sha256, sort_keys=True, separators=(',', ':'))",
+  "tool_sha256": "cd72b9fcdc2fef2d80ded2831a6074f6a737d5e6ad93baefdcdaa297b7bb9151",
+  "records": {
+    "voice_app/speech.py": {
+      "old": {
+        "sha256": "0b51ce34f58c56ea85bc01d73e29ffe137cf8f5db953ede433802ef1375a2aab",
+        "mode": 420
+      },
+      "new": {
+        "sha256": "217a6d19cd7c4b5b90329c85a914b3c2a9c6fcb7ab51ac338408dee02a0f5db1",
+        "mode": 420
+      }
+    },
+    "voice_app/server.py": {
+      "old": {
+        "sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5",
+        "mode": 420
+      },
+      "new": {
+        "sha256": "d43f1e3f8a51d875ad5f0708943200ac6366334ae1f8446fc28a7e2b6ad072fd",
+        "mode": 420
+      }
+    }
+  },
+  "post_install_check_sha256": "0a89854abb8f983bf9a9cc579d3045197acadf78dc0b86362e4421440128d71c",
+  "post_install_tests": {
+    "path": "/root/sela-live-releases/local-s2s-repair-owuypza6/tests/python/test_postcheck.py",
+    "sha256": "169f97ac0cf0194a9522426cbe7e323e826d8345c790ee072d05b0dcbcd9037b",
+    "normal_passed": 13,
+    "optimized_passed": 13,
+    "skipped": 0
+  },
+  "tests": {
+    "path": "/root/sela-live-releases/local-s2s-repair-owuypza6/tests/test_promotion.py",
+    "sha256": "f4b7bd82d490368d9b015447e4d7a0df441d7dfe803db7c734134fe0f83546c0",
+    "mode": 420
+  },
+  "application_review_sha256": "7ff85bd194365f2eae8d8bb16dcb799f3b6cbaa743830714dcca4d60f1721576",
+  "evidence": [
+    {
+      "kind": "native",
+      "path": "/root/sela-live-releases/local-s2s-repair-owuypza6/verification/native-receipt.json",
+      "sha256": "9d0a4a420270093ad62a7d617802ed284f3160029e0a4cfbcd09e94adc4bd294"
+    },
+    {
+      "kind": "browser",
+      "path": "/root/sela-live-releases/local-s2s-repair-owuypza6/verification/browser-receipt.json",
+      "sha256": "b65f24c2a539d7afbfb11f709c60038efd5349d3e9652c908fcd298fa05e0500"
+    }
+  ],
+  "original_rejection": {
+    "path": "/root/sela-live/docs/reviews/LOCAL-S2S-P0-FINAL-RELEASE-REVIEW.json",
+    "sha256": "da98a0fcd753dba894390a0b299a3737c8a60497522b416f5a18a2bad8d4e491",
+    "preserved": true
+  },
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "POSTCHECK-SIGALRM-DOUBLE-CANCEL",
+      "result": "resolved",
+      "evidence": [
+        "Read complete 223-line postcheck and 124-line tests. Constructor SIGALRM is disabled before loop work; cooperative asyncio timeout owns cancellation; cancellation requires both not done and not cancelling; shielded join retains ownership under repeated cancellation.",
+        "Independently ran 13/13 normal and 13/13 optimized tests, including owner plus owned-task cancellation, constructor alarm, work timeout, repeated cancellation, TERM-ignoring child/grandchild KILL/waitpid reaping and failed readback receipts.",
+        "Independent minimal exact run AST probe repeated three times with 10ms constructor alarm and harmless sleeping render: all three recorded owned_cleanup_started, owned_cleanup_completed, CancelledError; no interrupted cleanup.",
+        "Same-file supervisor uses Linux subreaper, rejects preexisting children, starts private session, reserves TERM/KILL/waitpid time before hard120 SIGALRM, verifies no owned descendants and publishes final failed status on cleanup/readback/error or elapsed violation.",
+        "Exclusive attempt-used marker is created after exact self/test/review/plan gates and before child spawn; no automatic retry. Private child receipt is not terminal publication. Native calls are reserved before invocation and bounded to two; unexpected bounded processes rejected.",
+        "Installed Speech borrows outer evaluation lease; counted native wrapper does not production_busy-poll its own worker; final readback requires same canonical inode, released lease and unchanged production PID."
+      ]
+    }
+  ],
+  "bindings_verified": {
+    "only_plan_changes_are_postcheck_and_postcheck_test_hashes": true,
+    "proof": "Substituting exactly the two old hashes reproduces original rejected canonical plan SHA256 3c43868b8502692ba566478e671d3b7a6d077b05276ad8b190bf4ffd19c3c9ee",
+    "promoter_promotion_tests_installer_source_payload_and_old_live_hashes": true,
+    "application_bundle_primary_reviews_prior_arabic_plan_and_both_evidence_hashes": true,
+    "original_natural_plan_and_frozen_baseline_hashes": true,
+    "inherited_previous_review": {
+      "source_payload_old_live_bytes_and_modes": true,
+      "source_test_and_application_bundle_before_observer_import": true,
+      "application_review_sha256": "7ff85bd194365f2eae8d8bb16dcb799f3b6cbaa743830714dcca4d60f1721576",
+      "primary_reviews": [
+        {
+          "path": "/root/sela-live/docs/reviews/LOCAL-S2S-HEARD-CONTEXT-REVIEW.json",
+          "sha256": "79843af5cea94119be1158a9c92f9b2f139ff53d0d28c35063235566e28a00c8"
+        },
+        {
+          "path": "/root/sela-live/docs/reviews/LOCAL-S2S-QURAN-MARKER-REVIEW.json",
+          "sha256": "019d801ab4a433adcf0fb0135b5964530a12c52452720c6003015eea8465f076"
+        },
+        {
+          "path": "/root/sela-live/docs/reviews/LOCAL-S2S-EXACT-PROBE-DRIVER-REVIEW.json",
+          "sha256": "dff417274eed300baa18069f3c8416be8f10a75891089f832d358a4b224371c9"
+        }
+      ],
+      "prior_arabic_plan_sha256": "bd4cc9c5967b14b2f0bcb35f1745379bb05101e979d1dc95cf496c9fc18bd828",
+      "prior_arabic_approval_canonical_plan_records_tool_and_both_evidence_bindings": true,
+      "original_natural_plan_sha256": "2e780d85bc2b3a68c582bcad521c9f3d6c6055a8f8d27553ebbf1aef593c9ade",
+      "installer_sha256": "3de2501691eb34c566967e03816af81ca9ce7a045adc74f48e28de831efcc504",
+      "frozen_baseline_hash": "verified against original natural plan",
+      "native_evidence_sha256": "9d0a4a420270093ad62a7d617802ed284f3160029e0a4cfbcd09e94adc4bd294",
+      "browser_evidence_sha256": "b65f24c2a539d7afbfb11f709c60038efd5349d3e9652c908fcd298fa05e0500",
+      "regression_evidence_sha256": "07d14c03812bf9c6388d22003ea127280ff63680ff548e8e7d3a58ebc6413f7d",
+      "fixture_sha256": "4b09b66c8bdb386f845db8aaa766ad5cbc12eb953038b4dbf050f60680f2d279"
+    }
+  },
+  "readonly_production_verification": {
+    "main_pid": 501959,
+    "protected_app_records_checked": 74,
+    "baseline_unit_records_checked": 8,
+    "generated_natural_dropin_checked_in_unit_count": true,
+    "effective_selected_fields_checked": 22,
+    "protected_bytes_modes_and_selected_environment": true,
+    "cwd_unchanged": true,
+    "readiness_or_inference_run": false,
+    "production_mutation_performed": false
+  },
+  "authorization": {
+    "exact_transaction_authorized": true,
+    "postinstalled_native_attempt_authorized": true,
+    "approved_plan_authored": false,
+    "apply_performed": false,
+    "postinstalled_attempt_performed": false
+  },
+  "conditions": [
+    "Authorize only the exact speech.py and server.py old/new records and bound promoter; attach this exact review hash to a separately authored approved plan before apply. Preserve existing rollback stopped-failure semantics.",
+    "At most ONE postinstalled attempt, at most TWO TTS calls, whole attempt <=120 seconds, no automatic retry; use this exact bound supervisor entry, never invoke --internal-postcheck directly. Preserve exclusive used marker even on failed attempt.",
+    "Existing API/code brain, B/12/id/natural_v1, local-only audio, units, auth, model assets and runtime selectors remain unchanged. No downloads, cloud audio, extra models or readiness/inference before authorized apply.",
+    "A passed native receipt requires exact full staged-source/WAV parity, protected final readback, released canonical lease, unchanged inode/PID and terminal/reaped owned native/duration descendants. Failure remains failure; do not expand attempt budget.",
+    "No human microphone/speaker/listening or pronunciation/tajwid acceptance, full S2S, native audio-to-audio, or automatic barge-in claim is authorized."
+  ],
+  "issues_encountered": [
+    "One combined terminal command was blocked by lifecycle scan-budget exhaustion; retried with direct interpreter commands successfully.",
+    "Initial unit comparison used obsolete baseline dropin; recomputed exact generated natural dropin from hash-bound prior plan, then all eight unit records passed. No files repaired or changed."
+  ],
+  "files_authored": [
+    "/root/sela-live/docs/reviews/LOCAL-S2S-P0-FINAL-REPAIR-REVIEW.json"
+  ]
+}

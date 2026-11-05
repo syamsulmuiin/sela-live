@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "source_fixture_and_narrow_review_passed_not_deployed",
+  "baseline_commit": "59335e629efa41cd5f41915a15f190b22c3cab55",
+  "change": "Preserve only playback-ACKed heard_text for interrupted assistant turns in the next reasoning context, without mutating original display/history.",
+  "files": {
+    "voice_app/server.py": {
+      "sha256": "d43f1e3f8a51d875ad5f0708943200ac6366334ae1f8446fc28a7e2b6ad072fd",
+      "mode": "0o644"
+    },
+    "tests/python/test_heard_context.py": {
+      "sha256": "da2a6f181647ba955022963946b873727d32cf9808e4741ca6c22aeb915262be",
+      "mode": "0o644"
+    }
+  },
+  "test_functions": [
+    "test_acknowledged_interrupted_prefix_reaches_next_reasoning_turn_exactly",
+    "test_completed_acknowledged_answer_retains_exact_original_context",
+    "test_unacknowledged_interrupted_answer_is_not_invented_as_heard_context"
+  ],
+  "red": {
+    "command": "PYTHONPATH=tests/python <SDK-python> -B -m unittest test_heard_context -v",
+    "result": "failed: expected acknowledged assistant prefix was absent from next-turn provider messages",
+    "tests": 1,
+    "failures": 1
+  },
+  "green": {
+    "combined_modules": [
+      "test_heard_context",
+      "test_server",
+      "test_automatic_conditioning_server"
+    ],
+    "normal_passed": 29,
+    "new_context_tests_normal_passed": 3,
+    "new_context_tests_optimized_passed": 3,
+    "resource_warnings_as_errors": true
+  },
+  "scope": {
+    "actual_asgi_websocket": true,
+    "actual_session_ack_and_interrupt": true,
+    "speech_and_provider": "harmless fixtures",
+    "native_inference": false,
+    "cloud_audio": false,
+    "real_llm_request": false,
+    "browser_audio_or_human_microphone": false,
+    "deployed": false
+  },
+  "limits": [
+    "Only complete acknowledged chunks are retained; not sample-accurate partial-chunk hearing.",
+    "Does not implement acoustic intent or voice barge-in.",
+    "Does not establish speech naturalness or full end-to-end product acceptance.",
+    "Full regression and clean-export inventory remain pending the parallel normalizer handoff."
+  ],
+  "independent_review": {
+    "path": "docs/reviews/LOCAL-S2S-HEARD-CONTEXT-REVIEW.json",
+    "bindings_match": true,
+    "review_sha256": "79843af5cea94119be1158a9c92f9b2f139ff53d0d28c35063235566e28a00c8",
+    "normal_passed": 29,
+    "optimized_passed": 29,
+    "unique_test_ids": 29,
+    "scope": "heard-context repair only; not production or whole S2S"
+  }
+}

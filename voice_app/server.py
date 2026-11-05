@@ -484,7 +484,13 @@ def create_app(provider=None, speech=None, *, data_dir=None, public_origin=None,
             )}]
             if delivery_protocol:
                 messages[0]['content'] += delivery_registry.instruction()
-            messages += [{'role':t.role,'content':t.text} for t in session.history[:-1] if t.text and t.status != 'interrupted']
+            for turn in session.history[:-1]:
+                content = turn.text
+                if turn.status == 'interrupted':
+                    # Preserve only playback-ACKed source spans, never the unheard tail.
+                    content = turn.heard_text if turn.role == 'assistant' else ''
+                if content:
+                    messages.append({'role': turn.role, 'content': content})
             cancel_response()
             job = asyncio.create_task(collect(messages, lambda: authenticated(ws)))
             remote_jobs.add(job)

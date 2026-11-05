@@ -1,0 +1,30 @@
+{
+  "verdict": "approved",
+  "scope": "Only interrupted heard-context prompt-history repair in voice_app/server.py versus baseline, new test_heard_context.py, and supporting unchanged Session invariants. Not deployment or whole-S2S approval.",
+  "baseline": "59335e629efa41cd5f41915a15f190b22c3cab55",
+  "sha256": {
+    "voice_app/server.py": "d43f1e3f8a51d875ad5f0708943200ac6366334ae1f8446fc28a7e2b6ad072fd",
+    "tests/python/test_heard_context.py": "da2a6f181647ba955022963946b873727d32cf9808e4741ca6c22aeb915262be",
+    "voice_app/session_core.py": "14063a463652cde2d784151ed9f1a369723729bc7f432ca14096c0c4de4da06a"
+  },
+  "findings": [],
+  "verification": {
+    "interpreter": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+    "modules": ["test_heard_context", "test_server", "test_automatic_conditioning_server"],
+    "normal": {"passed": 29, "failed": 0, "flags": "-B -W error::ResourceWarning"},
+    "optimized": {"passed": 29, "failed": 0, "flags": "-B -O -W error::ResourceWarning"},
+    "discovery": {"total": 29, "unique_test_ids": 29, "duplicates": []},
+    "session_core_identical_to_baseline": true,
+    "optimized_explicit_non_assert_invariant_probe": "passed: valid ACK accepted; stale ACK after interrupt and after next submit rejected; exact full original text and acknowledged prefix preserved",
+    "asgi_test_evidence": "Three new tests exercise actual ASGI WebSocket two-turn conversations: exact whitespace-bearing acknowledged prefix only; empty/unacknowledged interrupted assistant omitted; completed full original answer preserved. All retain latest user. State history retains full original assistant text independently of heard_text.",
+    "static_review": "Only server diff is history-loop replacement. It reads but does not mutate Turn/history/display state. Synchronous launch and Session mutation contain no await between interruption and prompt snapshot; interruption clears active token and inflight audio. No new race or wire-protocol change identified. No added external calls, cloud voice, model/provider selection or audio-processing changes in reviewed diff."
+  },
+  "evidence_limits": [
+    "Approval binds only listed hashes and narrow repair scope; unrelated parallel edits are not reviewed.",
+    "ASGI fixtures use zero PCM and fake provider/speech; not native audio, real inference, perceptual listening or human proof.",
+    "Chunk-level ACKs cannot recover the portion heard within an interrupted unacknowledged chunk; that entire chunk remains excluded.",
+    "ACK is client-reported playback completion, not independent proof of audible human reception.",
+    "Full history/display preservation is supported by unchanged write paths and exact ASGI state assertions, not browser rendering validation.",
+    "No deployment, whole-S2S, production/service/auth, model, download or neural-network approval."
+  ]
+}

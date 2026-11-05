@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "reviewer": "Hermes independent exact-driver reviewer (gpt-6.1-sol subagent)",
+  "review_type": "independent_static_lifecycle_and_executed_stdlib_tests",
+  "verdict": "approved",
+  "passed": true,
+  "scope": "local-s2s-quran-u06dd-exact-native-probe-v1",
+  "stage": "/root/.hermes/cache/scratch/local-s2s-probe-cv_4jfox",
+  "authorization": {
+    "attempts_max": 1,
+    "tts_calls_max": 4,
+    "wall_time_seconds_max": 180,
+    "automatic_retry": false,
+    "native_execution_performed_by_reviewer": false,
+    "readiness_execution_performed_by_reviewer": false,
+    "deployment_approval": false,
+    "purpose": "One exact staged-source local native source-compatibility attempt only; no audible quality, human evaluation, tajwid, full S2S, or deployment claim."
+  },
+  "bindings": {
+    "review_inventory_sha256": "8ffeba2bb43e959f95596229013406f799805ffe0f2300951fd20fa6bf07ca77",
+    "layout_sha256": "387affffc3823360f9596cc566319bd98e106f1eed077314d213166aa318ee16",
+    "probe_sha256": "32aafaada746abd91f685726d88393c3b9ea6b63d43d5ddbdbd4924eec57aabb",
+    "native_probe_sha256": "2c3d8151eb9c940cbd0308ca109588d52b8a86df5ffa711bf1357e32cefd11a1",
+    "supervisor_sha256": "279565068d161dc95e9578f6ad3ba975d500703b3a3771fb0a04ce6f2c83ea04",
+    "build_helper_sha256": "8d3569edf5cdc234854f9685d997283a89ea1e9f6549c0cf5620feca9c24c84e",
+    "pure_tests_sha256": "746208644459243d1c8169a4f91021e5df6b88415012e79b91af920575afbdf5",
+    "speech_sha256": "217a6d19cd7c4b5b90329c85a914b3c2a9c6fcb7ab51ac338408dee02a0f5db1",
+    "fixture_sha256": "4b09b66c8bdb386f845db8aaa766ad5cbc12eb953038b4dbf050f60680f2d279",
+    "normalizer_review": {
+      "path": "/root/sela-live/docs/reviews/LOCAL-S2S-QURAN-MARKER-REVIEW.json",
+      "sha256": "019d801ab4a433adcf0fb0135b5964530a12c52452720c6003015eea8465f076",
+      "verdict_preserved": "approved_with_bounded_future_evaluation_conditions"
+    }
+  },
+  "verification": {
+    "review_inventory_files_verified": 192,
+    "source_files_verified": 151,
+    "stage_app_files_verified": 152,
+    "production_readonly_dependencies_verified": 73,
+    "seven_profiles_present": true,
+    "normalizer_nonbaseline_bindings_verified": 8,
+    "qualified_conditions_verified": true,
+    "stage_check_no_app_or_onnx_imports": true,
+    "source_stage_differences": ["sela_live_tts/natural_worker.py", "sela_live_tts/upstream-manifest.json", "sela_live_tts/worker.py"],
+    "worker_transforms_exact_manifest_digest_literal_only": true,
+    "manifest_changed_keys_only": ["guard_root", "live_root", "sdk_root"],
+    "pure_tests_normal": {"passed": 15, "failed": 0, "returncode": 0},
+    "pure_tests_optimized": {"passed": 15, "failed": 0, "returncode": 0},
+    "production_pid_and_nonsecret_selectors_match_layout": true,
+    "production_pid": 501959,
+    "native_attempt_used_marker_absent_at_review": true
+  },
+  "lifecycle_findings": [
+    "Read complete probe.py, all three helper files, README gate schema and all 15 pure tests; inspected actual admission, Speech borrowed-lease, natural adapter, backend and duration cleanup integration.",
+    "Actual evaluation AdmissionCoordinator replaces the outer Speech bridge claim. Inner borrowed coordinators delegate evaluation production checks without another flock; canonical inode and nonblocking no-queue admission remain in use.",
+    "TTS rows are appended before asynchronous spawning, including failed spawn attempts; the fifth attempt is rejected. DP spawning is limited to one session and cannot retry.",
+    "The supervisor's 180-second deadline starts before production dependency preflight and all child construction; it reserves 15 seconds for termination/reaping/readback. The child receives the same deadline. Deadline overruns cannot pass final readback.",
+    "Cancellation joins owned tasks, closes the stream and preview resources, kills/waits owned native processes, and rejects a retained failed natural lease. Duration cleanup releases its borrowed lease only after terminal cleanup. The subreaper enumerates, terminates, kills and reaps owned descendants before final success; no second supervisor flock is taken.",
+    "Cleanup readiness is supported by actual waits, terminal process returncodes, retained-lease rejection and final descendant absence, not merely a claimed cleanupReady flag. These are statically reviewed controls, not an observed native cleanup result.",
+    "The clean child environment excludes provider credentials; private output directory is mode 0700, audio remains local, native stdout/stderr are bounded by existing adapters and native workers, and no browser, ASR model or API brain invocation is added.",
+    "Success requires exact full fixture source reconstruction, one terminal last flag, nonempty validated mono 16-bit 44100-Hz PCM WAVs, completed TTS attempts, unchanged production PID/selectors/dependency hashes, stage/source and persistent lock readback, descendant reaping, and successful final receipt publication."
+  ],
+  "blocking_findings": [],
+  "limitations": [
+    "No inference, ONNX session, readiness pass, gated probe or native process was run. Pure tests do not establish native compatibility or audible quality.",
+    "Production worker detection is polling-based and inherits the documented snapshot race; this is not an atomic production-preemption guarantee.",
+    "The 180-second success bound is enforced by deadlines and final elapsed checks; pathological kernel I/O or unkillable processes cannot be guaranteed to terminate within wall time and must not be reported passed.",
+    "Installed Python/runtime binaries are read-only external dependencies, not an exhaustive cryptographic inventory of the complete interpreter installation."
+  ],
+  "files_authored": [
+    "/root/sela-live/docs/reviews/LOCAL-S2S-EXACT-PROBE-DRIVER-REVIEW.json",
+    "/root/.hermes/cache/scratch/local-s2s-probe-cv_4jfox/driver-approved-gate.json"
+  ],
+  "issues_encountered": ["One combined read exceeded the output window; complete omitted helper sections were subsequently read directly."]
+}

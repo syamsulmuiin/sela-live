@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "reviewer": "Hermes independent final P0 release reviewer (gpt-6.1-sol subagent)",
+  "verdict": "rejected",
+  "scope": "Exact two-file P0 promotion plus installed-root postcheck; rejection is a postcheck lifecycle blocker, not rejection of the two application repairs or demand for broader product acceptance.",
+  "plan_sha256": "3c43868b8502692ba566478e671d3b7a6d077b05276ad8b190bf4ffd19c3c9ee",
+  "canonicalization": "SHA256 of UTF-8 json.dumps(plan excluding only promotion_review_path and promotion_review_sha256, sort_keys=True, separators=(',', ':'))",
+  "plan_path": "/root/sela-live-releases/local-s2s-repair-owuypza6/unsigned-two-file-plan.json",
+  "tool_sha256": "cd72b9fcdc2fef2d80ded2831a6074f6a737d5e6ad93baefdcdaa297b7bb9151",
+  "records": {
+    "voice_app/speech.py": {
+      "old": {"sha256": "0b51ce34f58c56ea85bc01d73e29ffe137cf8f5db953ede433802ef1375a2aab", "mode": 420},
+      "new": {"sha256": "217a6d19cd7c4b5b90329c85a914b3c2a9c6fcb7ab51ac338408dee02a0f5db1", "mode": 420}
+    },
+    "voice_app/server.py": {
+      "old": {"sha256": "a64b6cb76be7a92aab49fca98ce303ba1b79a110876f14542fec79a54ee279f5", "mode": 420},
+      "new": {"sha256": "d43f1e3f8a51d875ad5f0708943200ac6366334ae1f8446fc28a7e2b6ad072fd", "mode": 420}
+    }
+  },
+  "tests": {
+    "path": "/root/sela-live-releases/local-s2s-repair-owuypza6/tests/test_promotion.py",
+    "sha256": "f4b7bd82d490368d9b015447e4d7a0df441d7dfe803db7c734134fe0f83546c0",
+    "mode": 420,
+    "normal_passed": 12,
+    "optimized_passed": 12
+  },
+  "post_install_check_sha256": "6c07c545f01bfc34317b0e0404b235208c899972054d0a8c2e0db581668a7c60",
+  "post_install_tests": {
+    "path": "/root/sela-live-releases/local-s2s-repair-owuypza6/tests/python/test_postcheck.py",
+    "sha256": "57b63f719562309e2013c14bc194a5c1fca5378c910ed58c0c4a620d62e89c2b",
+    "mode": 420,
+    "normal_passed": 6,
+    "optimized_passed": 6,
+    "limitation": "These six tests cover pure gates, not constructor/alarm/task cancellation/reaping orchestration."
+  },
+  "bindings_verified": {
+    "source_payload_old_live_bytes_and_modes": true,
+    "source_test_and_application_bundle_before_observer_import": true,
+    "application_review_sha256": "7ff85bd194365f2eae8d8bb16dcb799f3b6cbaa743830714dcca4d60f1721576",
+    "primary_reviews": [
+      {"path": "/root/sela-live/docs/reviews/LOCAL-S2S-HEARD-CONTEXT-REVIEW.json", "sha256": "79843af5cea94119be1158a9c92f9b2f139ff53d0d28c35063235566e28a00c8"},
+      {"path": "/root/sela-live/docs/reviews/LOCAL-S2S-QURAN-MARKER-REVIEW.json", "sha256": "019d801ab4a433adcf0fb0135b5964530a12c52452720c6003015eea8465f076"},
+      {"path": "/root/sela-live/docs/reviews/LOCAL-S2S-EXACT-PROBE-DRIVER-REVIEW.json", "sha256": "dff417274eed300baa18069f3c8416be8f10a75891089f832d358a4b224371c9"}
+    ],
+    "prior_arabic_plan_sha256": "bd4cc9c5967b14b2f0bcb35f1745379bb05101e979d1dc95cf496c9fc18bd828",
+    "prior_arabic_approval_canonical_plan_records_tool_and_both_evidence_bindings": true,
+    "original_natural_plan_sha256": "2e780d85bc2b3a68c582bcad521c9f3d6c6055a8f8d27553ebbf1aef593c9ade",
+    "installer_sha256": "3de2501691eb34c566967e03816af81ca9ce7a045adc74f48e28de831efcc504",
+    "frozen_baseline_hash": "verified against original natural plan",
+    "native_evidence_sha256": "9d0a4a420270093ad62a7d617802ed284f3160029e0a4cfbcd09e94adc4bd294",
+    "browser_evidence_sha256": "b65f24c2a539d7afbfb11f709c60038efd5349d3e9652c908fcd298fa05e0500",
+    "regression_evidence_sha256": "07d14c03812bf9c6388d22003ea127280ff63680ff548e8e7d3a58ebc6413f7d",
+    "fixture_sha256": "4b09b66c8bdb386f845db8aaa766ad5cbc12eb953038b4dbf050f60680f2d279"
+  },
+  "readonly_production_verification": {
+    "main_pid": 501959,
+    "protected_app_records_checked": 74,
+    "baseline_unit_records_checked": 8,
+    "generated_natural_dropin_also_checked": true,
+    "inventory_bytes_modes_config_and_effective_selectors_passed": true,
+    "loopback_listener_cwd_health_auth_host_websocket_guards_passed": true,
+    "prior_arabic_layer_preserves_current_web_app_js": true,
+    "canonical_lock_device": 2049,
+    "canonical_lock_inode": 1311276,
+    "canonical_lock_mode": 384,
+    "application_startup_or_inference_run": false,
+    "production_mutation_performed": false
+  },
+  "promotion_findings": [
+    "Read all release promoter/postcheck executable code and both test files. Reviewed exact application diffs against baseline 59335e629efa41cd5f41915a15f190b22c3cab55 and checked primary repair-test hashes.",
+    "Actual main CLI branch is exercised with harmless mapped roots: default, success, partial mutation, restore failure, restart failure, final-stop failure and blank reviewer. Tests verify rollback, conservative stopped-state truth, preserved protected JS/profile and persistent lock inode.",
+    "Final reviewer must be nonblank and exact canonical plan/tool/records/evidence are bound before trusted observer import. Current prior Arabic layer overrides obsolete natural JS before exact two-file overrides. No promotion blocker found in this bounded review."
+  ],
+  "postcheck_findings": [
+    "Self/tests/review/proofs/source/payload/prior-chain gates precede application import; constructor is under the work alarm. TTS attempt rows are reserved before invocation and third attempts are rejected; normalized payload/args, source chunks and final WAV are compared to staged proof.",
+    "Installed Speech borrows one outer evaluation lease; its inner coordinator does not poll production_busy while its own installed native worker exists. The direct own-worker polling collision is avoided. Final readback checks protected inventory/selectors, PID, inode and re-acquisition of the same canonical lease.",
+    "The earlier native duration completed=false field is a nonterminal spawn-journal flag, not accepted here as DP-success evidence. Existing completed TTS and reaping evidence remain separately scoped."
+  ],
+  "blocking_findings": [
+    {
+      "id": "POSTCHECK-SIGALRM-DOUBLE-CANCEL",
+      "severity": "critical_lifecycle",
+      "locations": ["postcheck.py:30,37", "postcheck.py:117-124", "postcheck.py:128-144"],
+      "finding": "The 108-second handler raises TimeoutError through asyncio.run, initiating Runner shutdown cancellation of all outstanding tasks. run() then unconditionally calls task.cancel() even if Runner has already cancelled render. This second cancellation can interrupt render's owned cleanup finally before it completes. join_owned waits for terminal cancellation, not successful cleanup. A later stream.aclose() on an already-closed/cancelled generator cannot guarantee the interrupted finally is resumed. Final lease/worker checks may fail the receipt, but they do not terminate/reap a native child whose cleanup was interrupted. Thus the intended bounded attempt can leave owned native work unreaped despite fail-closed receipt status.",
+      "pure_reproduction": {
+        "method": "Executed the exact run, join_owned and alarm AST nodes from the bound postcheck, replacing render only with a harmless sleeping coroutine whose finally records cleanup-start, awaits 0.02 seconds, then records cleanup-complete. SIGALRM was shortened to 0.01 seconds. No application import, process spawn, readiness or inference.",
+        "runs": 3,
+        "observed_events": [
+          ["owned_cleanup_started", "TimeoutError"],
+          ["owned_cleanup_started", "owned_cleanup_completed", "TimeoutError"],
+          ["owned_cleanup_started", "TimeoutError"]
+        ],
+        "result": "Two of three executions returned from asyncio.run without completing the owned cleanup finally. The race is real, not inferred solely from missing tests."
+      },
+      "minimal_repair": [
+        "Do not raise the work SIGALRM asynchronously through the active event loop. Keep the constructor deadline protected, then transfer render work expiry to the existing cooperative asyncio timeout so one owner cancels/joins render before Runner shutdown. Use an external bounded supervisor if a hard whole-process 120-second deadline is required across cleanup and readback.",
+        "Guard cancellation with not task.cancelling() as well as not task.done(); preserve ownership through cleanup and explicitly verify terminal native/duration cleanup, not only lock availability or a failed receipt.",
+        "Add bounded pure orchestration tests for constructor alarm, work expiry, external/repeated cancellation, native/duration cleanup and final readback errors; the reproduced interrupted-finally case must fail before repair and pass afterward. Rebind changed postcheck/test/plan hashes and obtain final re-review before apply."
+      ]
+    }
+  ],
+  "authorization": {
+    "exact_transaction_authorized": false,
+    "postinstalled_native_attempt_authorized": false,
+    "approved_plan_authored": false,
+    "reason": "Repair and re-review the postcheck cancellation blocker first. Do not apply under this rejected verdict."
+  },
+  "conditions_for_future_qualified_p0_approval": [
+    "Authorize only the exact reviewed two-file transaction after repaired orchestration and updated exact bindings; preserve current code/API brain, local audio, B/12/natural_v1 and all units/config/auth/runtime selectors.",
+    "At most one postinstalled native attempt, at most two TTS invocations, whole attempt at most 120 seconds and no automatic retry; verify full protected final readback, released canonical lease and owned child reaping.",
+    "Promotion recovery must retain conservative stopped-failure semantics and never claim a stopped service when final stop failed."
+  ],
+  "open_broader_goals_not_p0_blockers": [
+    "Human physical microphone/speaker and listening acceptance",
+    "Arabic pronunciation and tajwid acceptance",
+    "Automatic spoken barge-in and acoustic intent understanding",
+    "Native audio-to-audio S2S/product-wide acceptance",
+    "Unknown public-login flow proof; no such proof demanded for this qualified P0 trial"
+  ],
+  "files_authored": ["/root/sela-live/docs/reviews/LOCAL-S2S-P0-FINAL-RELEASE-REVIEW.json"],
+  "issues_encountered": ["An exploratory read guessed natural_adapter.py, which does not exist; inspected the actual natural.py instead. No source/helper/plan/service changes made."]
+}

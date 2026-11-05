@@ -165,6 +165,9 @@ def normalize_pronunciation(text):
     from datetime import date
     # Speech copy only: Quran ornaments follow logical input order, not glyph names.
     text = text.replace('\ufd3f', '(').replace('\ufd3e', ')')
+    # End-of-ayah is a boundary, not a letter: use supported punctuation.
+    # The period also keeps adjacent verse digits out of number expansion.
+    text = text.replace('\u06dd', '.')
     digits = ('nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas')
     def number(n):
         if n < 12:

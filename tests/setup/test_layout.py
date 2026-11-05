@@ -84,6 +84,21 @@ class TestLayout(unittest.TestCase):
             self.assertIsNone(row['previous_sha256'])
             self.assertNotIn('..',Path(row['path']).parts)
             current[row['path']]=row
+        local=json.loads((ROOT/'tests/local-s2s-additions-inventory.json').read_text())
+        self.assertEqual(local['schema_version'],1)
+        self.assertEqual(local['baseline_commit'],'59335e629efa41cd5f41915a15f190b22c3cab55')
+        self.assertEqual({row['path'] for row in local['files']}, {
+            'tests/python/test_heard_context.py',
+            'tests/python/test_quran_end_marker.py'})
+        self.assertEqual(len(local['files']),2)
+        for row in local['files']:
+            self.assertNotIn(row['path'],current)
+            self.assertIsNone(row['previous_sha256'])
+            self.assertNotIn('..',Path(row['path']).parts)
+            functions=sorted(node.name for node in ast.walk(ast.parse((ROOT/row['path']).read_bytes()))
+                if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name.startswith('test_'))
+            self.assertEqual(functions,row['test_functions'])
+            current[row['path']]=row
         for row in current.values():
             path = ROOT / row['path']
             self.assertFalse(path.is_symlink())

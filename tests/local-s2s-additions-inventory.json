@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "59335e629efa41cd5f41915a15f190b22c3cab55",
+  "files": [
+    {
+      "path": "tests/python/test_heard_context.py",
+      "sha256": "da2a6f181647ba955022963946b873727d32cf9808e4741ca6c22aeb915262be",
+      "previous_sha256": null,
+      "test_functions": [
+        "test_acknowledged_interrupted_prefix_reaches_next_reasoning_turn_exactly",
+        "test_completed_acknowledged_answer_retains_exact_original_context",
+        "test_unacknowledged_interrupted_answer_is_not_invented_as_heard_context"
+      ]
+    },
+    {
+      "path": "tests/python/test_quran_end_marker.py",
+      "sha256": "fceaca7c7bf61484de9f534a3bfee6fd8bf107a85d1b81e7e97298861942f991",
+      "previous_sha256": null,
+      "test_functions": [
+        "test_arabic_letters_and_vowel_marks_are_unchanged",
+        "test_end_of_ayah_becomes_a_supported_sentence_boundary",
+        "test_existing_normalization_and_ornaments_are_retained",
+        "test_marker_mapping_is_generic_not_phrase_specific",
+        "test_normalization_is_idempotent",
+        "test_representative_speech_copy_has_no_incompatible_markers",
+        "test_source_bytes_are_not_mutated",
+        "test_verse_digits_keep_their_script_value_and_order"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "review_type": "independent_narrow_pure_python",
+  "verdict": "approved_with_bounded_future_evaluation_conditions",
+  "passed": true,
+  "baseline_commit": "59335e629efa41cd5f41915a15f190b22c3cab55",
+  "scope": {
+    "repository": "/root/sela-live",
+    "reviewed_paths": ["voice_app/speech.py", "tests/python/test_quran_end_marker.py"],
+    "change": "Exactly three added lines inside normalize_pronunciation: two comments and U+06DD replacement with period. Removing those exact lines reproduces baseline speech.py byte-for-byte, including all code outside the function.",
+    "excluded": ["independent server/history changes", "test layout and inventory changes", "other mutable parent documentation", "native inference", "deployment", "full S2S integration"],
+    "only_review_output_written": "docs/reviews/LOCAL-S2S-QURAN-MARKER-REVIEW.json"
+  },
+  "sha256_bindings": {
+    "voice_app/speech.py": "217a6d19cd7c4b5b90329c85a914b3c2a9c6fcb7ab51ac338408dee02a0f5db1",
+    "baseline:voice_app/speech.py": "0b51ce34f58c56ea85bc01d73e29ffe137cf8f5db953ede433802ef1375a2aab",
+    "tests/python/test_quran_end_marker.py": "fceaca7c7bf61484de9f534a3bfee6fd8bf107a85d1b81e7e97298861942f991",
+    "tests/python/test_arabic_pronunciation.py": "65a2452c62c35d48dc10163578c115b4910afd6500c1d84726cf4a0bf0f9cb07",
+    "voice_app/pronunciation-id.json": "1854d1e60ad2bd985d2deea0aeae9f6aa3b5eee04b45c60939d5782ed8c3e6c1",
+    "/root/.hermes/cache/scratch/sela-quran-u06dd-reported.txt": "4b09b66c8bdb386f845db8aaa766ad5cbc12eb953038b4dbf050f60680f2d279",
+    "/root/voice-lab/vendor/supertonic/core.py": "26664d490509edc1cc1feca2fc0f72b1ae067fd5c5b11d39c1daeba9c3e81ff4",
+    "/root/voice-lab/vendor/supertonic/config.py": "9684abef9023d305b87d8b511a5c955624f5b7a92c76b57aa8b3e06f8e18ce2e",
+    "/root/voice-lab/autonomous/expressive-tts/assets/onnx/unicode_indexer.json": "9bf7346e43883a81f8645c81224f786d43c5b57f3641f6e7671a7d6c493cb24f"
+  },
+  "evidence": {
+    "private_fixture": {
+      "full_text_used_without_public_reproduction": true,
+      "characters": 341,
+      "u06dd_count": 7,
+      "speech_equals_raw_with_only_marker_and_existing_ornament_mappings": true,
+      "letters_vowels_marks_and_digits_exact_sequence_preserved": true,
+      "fixture_bytes_unchanged_after_normalization": true,
+      "idempotent": true
+    },
+    "sdk_pure_execution": {
+      "interpreter": "/root/voice-lab/autonomous/expressive-tts/venv/bin/python",
+      "method": "Executed actual pinned core.py AST assignments, UnicodeProcessor class, and length_to_mask function; actual config language constants; real indexer. Called UnicodeProcessor([full_speech_copy], lang='ar'), including actual preprocessing and ID/mask construction. No SDK module import, ONNX runtime import or native session.",
+      "baseline_negative_ids": 7,
+      "baseline_negative_codepoints": ["U+06DD"],
+      "candidate_negative_ids": 0,
+      "candidate_negative_codepoints": []
+    },
+    "tests": {
+      "interpreter": "/root/.hermes/installs/8a4017c4cabfe15f/environments/d77216ce1ebf4492a2d13a24ac3765c4/venv/bin/python",
+      "normal": {"new_passed": 8, "existing_passed": 6, "total_passed": 14, "failed": 0},
+      "optimized_O": {"new_passed": 8, "existing_passed": 6, "total_passed": 14, "failed": 0},
+      "execution": "PYTHONDONTWRITEBYTECODE=1, -B; unittest discover -s /root/sela-live/tests/python, separately -p test_*pronunciation.py and -p test_quran_end_marker.py; both repeated with -O.",
+      "coverage": ["standalone/repeated/embedded markers", "ASCII, Arabic-Indic and Eastern Arabic-Indic verse digits including leading zeroes", "Arabic letters and vowels", "idempotence", "earlier logical-order ornaments", "unchanged unrelated ornaments", "Indonesian lexicon/currency/date/number rules", "paths and identifiers", "source immutability"]
+    },
+    "raw_display_history_ack": {
+      "repair_does_not_mutate_raw_input": true,
+      "basis": "Immutable str replacement returns a separate speech copy. Existing _synthesize call sites retain text and send only spoken in local TTS payload; all call-site code is byte-identical to baseline. No display/history/ACK code is changed by this repair. Read-only inspection also found server synthesis using text and ACK handling using token/chunk_id independently.",
+      "limitation": "Static isolation and immutable-input tests, not an end-to-end runtime assertion about independent current server/history changes; those require their separate review."
+    }
+  },
+  "security_concerns": [],
+  "logic_errors": [],
+  "regressions_found": [],
+  "future_native_evaluation": {
+    "conditional_authorization": true,
+    "attempts_max": 1,
+    "tts_calls_max": 4,
+    "wall_time_seconds_max": 180,
+    "automatic_retry": false,
+    "must_precede_execution": ["Separate independent approval of exact driver and gate bytes", "Dependency and preflight checks", "Revalidation of all relevant source/test/fixture/SDK/indexer hash bindings", "Evaluation-priority and canonical-host lease checks", "Verify production root PID and chosen B/natural_v1/quality12 pins unchanged"],
+    "invariants": ["Audio stays local; current API brain unchanged", "Evaluation priority and canonical-host lease preserved", "Production root PID remains unchanged throughout", "No production/service/source/test/Git/credentials/download mutation", "Fail closed on binding mismatch, failed checks or budget exhaustion"],
+    "executed_by_this_review": false,
+    "deployment_approval": false
+  },
+  "limitations": ["Zero negative token IDs proves this fixture clears the specific unsupported-marker blocker, not audible quality, tajwid correctness, or full S2S behavior.", "Idempotence evidence covers the reviewed marker and compatibility cases, not every possible input to the pre-existing general-purpose normalizer.", "No native/ONNX inference, deployment, service action or production change performed."],
+  "issues_encountered": ["Initial discovery assumed speech.py at repository root; corrected to voice_app/speech.py without writes.", "Pure AST harness initially omitted dependencies for config language constants and logger; corrected using actual config AST and logging namespace. Final actual SDK pure execution completed successfully."]
+}

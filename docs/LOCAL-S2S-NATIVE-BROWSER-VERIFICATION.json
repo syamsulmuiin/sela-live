@@ -1,0 +1,63 @@
+{
+  "native": {
+    "status": "passed",
+    "path": "/root/.hermes/cache/scratch/local-s2s-probe-cv_4jfox/run-wir7imv8/native-receipt.json",
+    "sha256": "9d0a4a420270093ad62a7d617802ed284f3160029e0a4cfbcd09e94adc4bd294",
+    "attempts": 2,
+    "source_sha256": "4b09b66c8bdb386f845db8aaa766ad5cbc12eb953038b4dbf050f60680f2d279",
+    "full_original_source_coverage": true,
+    "wav_sha256": "cc7bf4d1fcd32dbefd266e2d875bf3cb958f8fd19a6e522b5d3a751f491086a8",
+    "elapsed_wall_seconds": 35.284661227982724,
+    "all_owned_children_reaped": true,
+    "production_pid_assets_selector_unchanged": true,
+    "canonical_persistent_inode_unchanged": true,
+    "tts_completed": [
+      true,
+      true
+    ]
+  },
+  "browser": {
+    "path": "/root/.hermes/cache/scratch/local-s2s-probe-cv_4jfox/browser-verification/browser-receipt.json",
+    "sha256": "b65f24c2a539d7afbfb11f709c60038efd5349d3e9652c908fcd298fa05e0500",
+    "status": "passed",
+    "scope": "shipping candidate server/client + exact native WAV replay; fixture provider, synthetic mic, manual interruption",
+    "full_original_first_turn_heard": true,
+    "first_turn_native_chunks_acknowledged": 2,
+    "interrupted_second_turn_prefix_only_in_next_provider_context": true,
+    "history_preserved": true,
+    "total_fixture_turns": 3,
+    "matching_playback_acks": 4,
+    "audio_nodes_started": 5,
+    "one_node_manually_interrupted_unacknowledged": true,
+    "capture_inputs_during_injected_playback_error": 0,
+    "fresh_synthetic_inputs_after_drain": 1,
+    "mic_label_after_third": "MIKROFON AKTIF",
+    "mobile_layout": {
+      "viewport": 390,
+      "page": 390,
+      "overflow": false
+    },
+    "new_native_calls": 0,
+    "real_llm_calls": 0,
+    "human_microphone_or_listening_proof": false,
+    "automatic_voice_barge_in_proven": false,
+    "injected_expected_error_codes": [
+      "tts_failed",
+      "no_speech"
+    ]
+  },
+  "status": "staged_native_and_browser_passed_not_deployed",
+  "audio_processing": "local",
+  "fixture_server_stopped": true,
+  "disposable_auth_removed": true,
+  "dedicated_browser_tab_closed": true,
+  "real_llm_in_browser": false,
+  "scope_limits": [
+    "Two actual selected-TTS inferences on the exact supplied source; browser replays those immutable captures.",
+    "Browser provider and microphone were fixtures; no physical microphone, human hearing or tajwid acceptance.",
+    "Interruption was manual, not automatic spoken barge-in.",
+    "No new acoustic-intent understanding, native audio-to-audio model or full product acceptance established.",
+    "Native duration_attempts.completed is an initial spawn-journal flag left unset by the diagnostic, not a terminal DP-success assertion; child cleanup and the two completed TTS renders are separately verified.",
+    "Initial off-screen click and target-close setup errors were corrected; neither was counted as acceptance evidence."
+  ]
+}

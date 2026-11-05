@@ -7,7 +7,7 @@ Komponen TTS memakai source SDK Supertonic yang diclone dan dipin; ini bukan mod
 - Source native: `sela_live_tts/` dan `vendor/supertonic/`, commit upstream `df0f9686dac7fbbde391b759e2ee5286a3737622`, dengan lisensi/provenance dan hash sumber. Worker terpasang berada di root aplikasi produksi, tidak bergantung pada clone/scratch.
 - Adapter aktif ditandai `tts_identity.adapter=sela_live`, `total_steps=12`, backend dasar tetap `supertonic3`. Tidak ada penggantian LLM dengan model lokal atau fallback TTS diam-diam.
 - Pemasangan memakai allowlist, snapshot/rollback, sumber terikat review/hash/mode dan lock host persisten. Guard CPU/RSS/network/deadline tidak dihapus. Baca [kontrak dan pemasangan TTS Live](docs/SELA-LIVE-TTS-INSTALL.md).
-- Verifikasi terbaru setelah perbaikan bacaan Arab:341 kasus aplikasi SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan125 Node, tanpa kegagalan. Perbaikan penanda ayat serta pemulihan mikrofon diuji terpisah, tanpa mengubah worker/model/parameter suara. Full suite mencakup fixture native ASR/Piper; ini bukan klaim inference-free atau fresh-host.
+- Verifikasi regresi P0:352 kasus aplikasi SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan125 Node, tanpa kegagalan pada checkpoint sumber. Source export terpisah juga lulus352 kasus SDK (4 skip) dan81 setup, dengan interpreter/aset yang sudah terpasang—bukan host kosong. Full suite mencakup ASR/Piper nyata; ini bukan klaim inference-free. Baca `docs/LOCAL-S2S-REGRESSION-VERIFICATION.json` untuk cakupan dan waktu bukti.
 - Staging natural_v1 menyelesaikan dua giliran Codex/API dan dua giliran shipping browser, playback/ACK/riwayat sesuai. Setelah pemasangan, tiga sintesis native melalui root produksi mereproduksi WAV B byte-exact; health/auth/Host/loopback/inventory diperiksa lagi. Akun produksi tidak diubah; login produksi dan mikrofon/speaker fisik tetap pengujian pengguna.
 - Status produksi terkini: `docs/NATURAL-INSTALL-STATE.json` dan `docs/NATURAL-POLICY-STATE.json`; `docs/LIVE-INSTALL-STATE.json` dan `docs/LIVE-RELEASE-VERIFICATION.json` dipertahankan sebagai bukti pemasangan quality12 sebelumnya. `syamsulmuiin/sela-voice` tetap snapshot baseline, sedangkan `syamsulmuiin/sela-live` memuat source proyek Live penuh bertahap ini.
 
@@ -22,6 +22,17 @@ natural_v1 sudah terpasang setelah pengguna menerima sampel B, review akhir dise
 Perbaikan dua file sudah terpasang: ornamen ayat `﴿`/`﴾` dipetakan menjadi kurung biasa **hanya pada salinan untuk TTS**, bukan pada teks tampilan/riwayat/ACK. Jalur error browser mempertahankan jeda mikrofon sampai audio yang sedang diputar, didekode atau mengantre benar-benar selesai. Teks lengkap laporan pengguna berhasil disintesis dalam dua konteks dan hasil dari root terpasang identik byte-exact dengan hasil staging; browser uji mempertahankan seluruh teks/ACK dan menerima input sintetis baru setelah playback.
 
 Status terbaru: `docs/ARABIC-PLAYBACK-INSTALL-STATE.json`. Suara B, quality12 dan bahasa native `id` tetap; ini bukan validasi ketepatan pelafalan Arab/tajwid. Pengujian browser memakai replay audio native dan mikrofon sintetis, bukan mikrofon fisik. `/app.js` produksi sengaja terlindung login: hash file dan route ASGI terpasang telah diperiksa, tetapi pengambilan asset melalui akun publik terautentikasi belum diverifikasi. Tidak ada akun atau pengaman autentikasi yang diubah.
+
+## Perbaikan P0 percakapan lokal — terpasang 5 November 2026
+
+Dua perbaikan tambahan sudah dipasang dan dibaca balik dari root produksi:
+
+- Penanda ayat `۝` dipetakan ke titik **hanya pada salinan TTS**. Seluruh teks kasus yang dilaporkan selesai disintesis, bukan hanya pengantarnya; dua pemanggilan native terpasang mereproduksi WAV staging byte-exact dalam pemeriksaan33,50detik.
+- Giliran berikutnya mempertahankan bagian jawaban terinterupsi yang telah mendapat ACK playback, tanpa memasukkan ekor yang belum diakui. Teks lengkap tampilan/riwayat tetap disimpan. Batasnya masih per chunk: bagian yang terdengar di dalam chunk yang belum di-ACK tidak dapat direkonstruksi tepat per kata.
+
+Suara B/12/id, `natural_v1`, model/aset, autentikasi dan koneksi otak API/Codex tidak diganti. Pemrosesan audio tetap lokal-server; cloud audio dan LLM lokal baru tidak diaktifkan. Status pemasangan: `docs/LOCAL-S2S-P0-INSTALL-STATE.json`; bukti native/browser staging: `docs/LOCAL-S2S-NATIVE-BROWSER-VERIFICATION.json`. Review penolakan awal dipertahankan, lalu perbaikan lifecycle postcheck direview dan disetujui terpisah.
+
+**Ini belum menyelesaikan target percakapan suara natural penuh:** pemahaman intonasi lokal, interupsi suara otomatis, latency percakapan, mikrofon/speaker fisik, naturalness dan ketepatan pelafalan/tajwid masih memiliki gate tersendiri. Sistem saat ini modular, bukan model audio-to-audio native. Rancangan dan keputusan lokal-only: `docs/spikes/natural-s2s-feasibility/README.md`.
 
 ## Dokumentasi baseline snapshot (historis)
 

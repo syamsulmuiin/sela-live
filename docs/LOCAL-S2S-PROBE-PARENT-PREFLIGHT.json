@@ -1,0 +1,16 @@
+{
+  "status": "parent_preflight_passed_exact_driver_review_pending",
+  "production_main_pid": 501959,
+  "production_active": true,
+  "review_inventory_sha256": "8ffeba2bb43e959f95596229013406f799805ffe0f2300951fd20fa6bf07ca77",
+  "driver_sha256": "32aafaada746abd91f685726d88393c3b9ea6b63d43d5ddbdbd4924eec57aabb",
+  "private_tests_normal_passed": 15,
+  "private_tests_optimized_passed": 15,
+  "fresh_post_renewal_optimized_passed": 15,
+  "clean_export_root": "/root/.hermes/cache/scratch/local-s2s-driver-clean-ztr07v76",
+  "clean_export_optimized_passed": 15,
+  "bundle_and_stage_pure_validation": "passed without app import or native call",
+  "qualified_review": "Original verdict unchanged; exact future attempt/call/wall/retry/deployment conditions explicitly enforced.",
+  "native_probe_executed": false,
+  "deployed": false
+}

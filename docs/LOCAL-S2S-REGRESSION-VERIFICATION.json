@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "source_and_clean_export_regressions_passed_not_deployed",
+  "baseline_commit": "59335e629efa41cd5f41915a15f190b22c3cab55",
+  "sha256": {
+    "voice_app/speech.py": "217a6d19cd7c4b5b90329c85a914b3c2a9c6fcb7ab51ac338408dee02a0f5db1",
+    "voice_app/server.py": "d43f1e3f8a51d875ad5f0708943200ac6366334ae1f8446fc28a7e2b6ad072fd",
+    "tests/python/test_quran_end_marker.py": "fceaca7c7bf61484de9f534a3bfee6fd8bf107a85d1b81e7e97298861942f991",
+    "tests/python/test_heard_context.py": "da2a6f181647ba955022963946b873727d32cf9808e4741ca6c22aeb915262be",
+    "tests/setup/test_layout.py": "aee0670b80d856fc43c2365cbd6fac83b7200eda60ee3832181f09814b0a8273",
+    "tests/local-s2s-additions-inventory.json": "23ca07f9f6964f597646f01a4b3518a244310b6ff85a4d2397b2a667086a48da"
+  },
+  "workspace": {
+    "sdk_tests_run": 352,
+    "sdk_skipped": 4,
+    "sdk_seconds": 111.862,
+    "setup_tests_passed": 81,
+    "numpy_dependency_fixture_tests_passed": 42,
+    "node_tests_passed": 125
+  },
+  "clean_export": {
+    "root": "/root/.hermes/cache/scratch/local-s2s-clean-id018d39",
+    "files_at_copy": 251,
+    "sdk_tests_run": 352,
+    "sdk_skipped": 4,
+    "sdk_seconds": 108.09,
+    "setup_tests_passed": 81,
+    "existing_runtimes_and_model_assets_reused": true,
+    "fresh_host_installation_proven": false
+  },
+  "additional": {
+    "quran_plus_existing_arabic_normal_passed": 14,
+    "quran_plus_existing_arabic_optimized_passed": 14,
+    "context_optimized_passed": 3,
+    "layout_red": "Both new test files absent from additive inventory",
+    "layout_green": "New phase inventory added; predecessor inventories unchanged"
+  },
+  "inference_scope": "Full SDK suite includes existing local ASR/Piper tests and harmless worker/probe fixtures; it is NOT inference-free. No new exact-source Supertonic render or live LLM/browser acceptance was run by this regression checkpoint.",
+  "limits": [
+    "Token compatibility is not full audible delivery or pronunciation acceptance.",
+    "Local acoustic intent and spoken speakerphone interruption remain unimplemented/unvalidated.",
+    "Copy used the same installed interpreters/assets; not a fresh-host dependency installation.",
+    "Production installation and GitHub publication are pending separate gates."
+  ]
+}

@@ -24,7 +24,7 @@ class NaturalProtocolTests(unittest.IsolatedAsyncioTestCase):
         from sela_live_tts.utterance import SpeechRequest
         from sela_live_tts.source_pins import verify_sources
         manifest = ROOT/'sela_live_tts/upstream-manifest.json'
-        manifest_sha = 'f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74'
+        from sela_live_tts.natural_worker import MANIFEST_SHA as manifest_sha
         sdk_root = verify_sources(manifest, manifest_sha)['sdk_root']
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

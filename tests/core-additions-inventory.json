@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "49d3d1f439ca596d71613a1bd49ec675946deb56",
+  "files": [
+    {
+      "path": "tests/python/test_sela_live_core.py",
+      "sha256": "3d7ef3c602c6417b7f708ff841fe28a6f5ccc2259dc8ab309161643b4fc3da1a",
+      "previous_sha256": null,
+      "test_functions": [
+        "test_core_tamper_fails_before_guard_import_in_isolated_modes",
+        "test_isolated_legacy_import_uses_owned_class_without_native",
+        "test_native_compatibility_delegates_owned_policy",
+        "test_state_owned_by_core_and_legacy_identity",
+        "test_truthful_core_identity"
+      ]
+    },
+    {
+      "path": "tests/setup/test_core_integration.py",
+      "sha256": "44d559c081a3c9ee9d648009452a11ae579bc81e65498fcfbff477b869d306c3",
+      "previous_sha256": null,
+      "test_functions": [
+        "test_builder_relocates_core_and_preserves_source_manifest",
+        "test_core_installer_and_application_allowlists_match",
+        "test_new_core_absence_archived_and_rollback_restores_absence"
+      ]
+    },
+    {
+      "path": "tests/setup/test_live_tts_install.py",
+      "sha256": "9b3d5b36289685dbcbd7cbc2e47ea01c49f02dfe8a0b074e431df29b228d72e0",
+      "previous_sha256": "37683c68aacb6a4469a99779b6118f219ad59a2fd745ef8839c99252f138d832",
+      "test_functions": [
+        "test_apply_archives_writes_restarts_and_exact_readback",
+        "test_baseline_inventory_is_verified_before_recovery_restart",
+        "test_cleanup_failures_have_terminal_failure_receipt",
+        "test_cli_constructs_only_fixed_roots_and_explicit_apply",
+        "test_cli_plan_mode_drift_rejected_before_constructing_installer",
+        "test_default_cli_is_read_only",
+        "test_exact_review_digests_reject_before_archive",
+        "test_existing_unsafe_or_busy_shared_lock_is_never_replaced",
+        "test_failed_final_recovery_stop_never_claims_stopped",
+        "test_failed_recovery_stop_never_restores_or_restarts",
+        "test_failed_restart_restores_existing_and_missing_with_persistent_lock",
+        "test_failed_restoration_never_restarts_candidate_source",
+        "test_guard_health_and_every_baseline_anchor_rejected_before_archive",
+        "test_http_probe_valid_websocket_key_and_no_credentials",
+        "test_legacy_real_cli_preflight_and_apply_use_real_installer",
+        "test_live_environment_is_data_only_and_preserves_selectors",
+        "test_mode_binding_and_preserved_guard_drift_rejected",
+        "test_natural_exact_plan_is_read_only_and_preserves_legacy_migration",
+        "test_natural_exact_review_bindings_remain_mandatory",
+        "test_natural_manifest_requires_exact_inventory_before_archive",
+        "test_natural_payload_cannot_be_promoted_without_explicit_policy",
+        "test_natural_process_observation_includes_policy_pins_and_legacy_selectors",
+        "test_natural_real_cli_failure_restores_quality12_before_recovery_restart",
+        "test_natural_real_cli_preflight_apply_and_exact_readback",
+        "test_natural_requires_nonexperimental_baseline_and_exact_independent_pins",
+        "test_observe_time_source_drift_rejected_before_archive_or_stop",
+        "test_preflight_valid_exact_plan_does_not_mutate",
+        "test_prior_dropin_mode_and_persistent_lock_inode_survive_rollback",
+        "test_real_orchestration_order_archive_before_stop_before_write",
+        "test_recovery_inventory_drift_is_not_reported_as_rolled_back",
+        "test_recovery_post_restart_error_stops_unverified_service",
+        "test_rejects_non_allowlisted_or_unlisted_payload_before_snapshot",
+        "test_restart_allows_seven_profile_preflights_but_retains_wall_deadline",
+        "test_restart_waits_boundedly_for_health_without_inference",
+        "test_reviewed_input_bytes_and_modes_drift_rejected",
+        "test_rollback_after_partial_write_and_exact_postreadback_failure",
+        "test_safe_process_observation_filters_secrets_and_checks_owned_listener",
+        "test_snapshot_parent_must_be_private_before_stop",
+        "test_snapshot_readback_corruption_rejected_before_stop",
+        "test_system_hooks_use_fixed_safe_commands_and_guarded_observation",
+        "test_terminal_receipt_on_restore_and_receipt_write_failures",
+        "test_unbound_existing_destination_or_dropin_rejected_before_archive",
+        "test_unlisted_existing_runtime_source_and_unit_override_rejected",
+        "test_unsafe_lock_and_nonregular_source_rejected_before_archive",
+        "test_writer_serialization_rejects_before_observe_or_archive"
+      ]
+    },
+    {
+      "path": "tests/python/test_sela_live_natural_worker.py",
+      "sha256": "1fd0ec669f8993378e651b29fd48c3e0bad77b34f736e6ea85f25ab5e1c706a5",
+      "previous_sha256": "9b8fff794a311820fdbb2009031f105b68eab75197edd079a4ec6db49346e4ff",
+      "test_functions": [
+        "test_boundary_duration_and_tokens_are_accepted",
+        "test_canonical_guard_arguments_only",
+        "test_chunker_exactly_one_context_and_same_source",
+        "test_cli_exact_and_profiles",
+        "test_isolated_standalone_rejects_cli_without_native_import",
+        "test_main_delegates_check_to_unchanged_guard_main",
+        "test_one_context_quality12_inside_original_guard",
+        "test_original_guard_pcm_clipping_duration_empty_checks_still_active",
+        "test_pinned_sources_verified_before_guard_import",
+        "test_preflight_rejects_excess_or_invalid_arrays_before_synthesis",
+        "test_raw_input_limits_controls_tags_and_types",
+        "test_real_pinned_chunker_preprocessing_correspondence",
+        "test_restores_existing_override_on_engine_error",
+        "test_sdk_drift_fails_before_guard_import",
+        "test_text_only_request_before_original_runtime"
+      ]
+    },
+    {
+      "path": "tests/python/test_sela_live_natural_integration.py",
+      "sha256": "f9e9b71269f9d3afa8bff8c99bf4b4a3aee546eb9ef09267e979a58097fef54f",
+      "previous_sha256": "22bdb913632a47ef48ea7ab63de72cd2983617cf1a699b5c8ab578d7739ed321",
+      "test_functions": [
+        "test_actual_speech_uses_whole_context_and_retains_one_response_lease",
+        "test_failed_dp_cleanup_retains_real_host_lease_asr_and_local_slot",
+        "test_policy_is_server_owned_strict_and_requires_noncontradictory_flags",
+        "test_repeated_dp_cancellation_reaps_real_child_before_asr_and_host_release",
+        "test_runtime_inventory_rejected_before_any_natural_import_or_probe"
+      ]
+    },
+    {
+      "path": "tests/python/test_sela_live_natural_protocol.py",
+      "sha256": "023ed3d056b2d1b79242fc509c78402f8da9d098f75b6130430f2161eb12477a",
+      "previous_sha256": "92bbffd6fe0844b8027067107efcfce40d6b3d963d938cf81777f59624c53e7e",
+      "test_functions": [
+        "test_real_framing_token_refusal_reaches_planner_and_completes_coverage"
+      ]
+    }
+  ]
+}

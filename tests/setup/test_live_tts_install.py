@@ -125,6 +125,8 @@ class InstallerTests(unittest.TestCase):
         self.plan['files'][source] = self.write(self.payload, source, self.m.canonical({
             'live_root': str(self.root / 'sela_live_tts'), 'guard_root': str(self.root / 'voice_app'),
             'sdk_root': str(self.root / 'vendor/supertonic')}))
+        for relative in self.m.CORE_FILES:
+            self.plan['files'][relative] = self.write(self.payload, relative, ('# ' + relative).encode())
         self.refresh_natural_inventory()
         env = self.plan['live_env']
         env.update({'VOICE_SELA_LIVE_POLICY': 'natural_v1',
@@ -156,7 +158,7 @@ class InstallerTests(unittest.TestCase):
     def refresh_natural_inventory(self, value=None):
         records = {**self.plan['files'], **self.plan['preserved']}
         expected = {n: r['sha256'] for n, r in records.items()
-                    if n in self.m.GUARDS or n == 'sela_live_tts/upstream-manifest.json'
+                    if n in self.m.GUARDS or n in self.m.CORE_FILES or n == 'sela_live_tts/upstream-manifest.json'
                     or n.endswith('.py') and n.startswith(('sela_live_tts/', 'vendor/supertonic/'))}
         raw = self.m.canonical({'schema_version': 1, 'files': expected} if value is None else value)
         self.plan['files']['sela_live_tts/natural-runtime-manifest.json'] = self.write(

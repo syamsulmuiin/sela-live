@@ -30,7 +30,8 @@ def configured(**overrides):
             ('sela_live_tts', ('__init__.py', 'backend.py', 'admission.py', 'controls.py',
                               'source_pins.py', 'worker.py', 'natural.py', 'utterance.py',
                               'duration.py', 'natural_worker.py', 'duration_worker.py')),
-            ('voice_app', ('approved_conditioning.py', 'automatic_conditioning.py', 'supertonic3_worker.py')),
+            ('voice_app', ('approved_conditioning.py', 'automatic_conditioning.py', 'supertonic3_worker.py', 'zipformer_state.py')),
+            ('sela_live', ('__init__.py', 'audio/__init__.py', 'audio/stt.py', 'audio/tts.py')),
             ('vendor/supertonic', ('__init__.py', 'cli.py', 'config.py', 'core.py', 'loader.py',
                                    'pipeline.py', 'utils.py', 'server/__init__.py', 'server/app.py',
                                    'server/audio.py', 'server/routes.py', 'server/schemas.py', 'server/styles_store.py'))):

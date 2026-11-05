@@ -14,7 +14,9 @@ NATURAL_RUNTIME_FILES = frozenset(
     'vendor/supertonic/' + name for name in (
         '__init__.py', 'cli.py', 'config.py', 'core.py', 'loader.py', 'pipeline.py', 'utils.py',
         'server/__init__.py', 'server/app.py', 'server/audio.py', 'server/routes.py',
-        'server/schemas.py', 'server/styles_store.py'))
+        'server/schemas.py', 'server/styles_store.py')) | frozenset((
+    'sela_live/__init__.py', 'sela_live/audio/__init__.py', 'sela_live/audio/stt.py',
+    'sela_live/audio/tts.py', 'voice_app/zipformer_state.py'))
 
 
 def _pinned_source(path, digest):

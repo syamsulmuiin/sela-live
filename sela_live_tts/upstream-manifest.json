@@ -1,4 +1,12 @@
 {
+  "core_python_files": {
+    "sela_live/__init__.py": "67d53d5584ffbf06000ee75d3186ba18fb5e4001f8edb3fe88436993f0db9d11",
+    "sela_live/audio/__init__.py": "00ed9395059d9ba6a38847f1d77fe432f3fd24ea0aef27630a271c5840583906",
+    "sela_live/audio/stt.py": "3b89f2a6ee1f22fcce35026150699d540630e35547e366de79b1ed450613919c",
+    "sela_live/audio/tts.py": "297198811e37519e41b0be05168d7724967a9fa2d99d3b483254eeb72eeb7e21",
+    "voice_app/zipformer_state.py": "9a6d3c21a048fc8bf6a82ed0a8fafd62b7b1bde490f2341720222e2874f0e4e6"
+  },
+  "core_root": "/root/sela-live",
   "guard_python_files": {
     "approved_conditioning.py": "8e0c3ddc556206b4f71baaf2139346e7e12b9d9c967ed6cc1ba29276917974ca",
     "automatic_conditioning.py": "0058579c56aefd4cc3c02ba87b646493518c2af82e9dd020a90d74cde533e44c",

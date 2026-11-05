@@ -1,163 +1,83 @@
-# Sela Live — tahap pertama TTS untuk Sela
+# Sela Live
 
-**Status: TTS Live quality12 dengan kebijakan otomatis `natural_v1` sudah terpasang dan diverifikasi pada Sela; pengembangan aplikasi Live penuh tetap bertahap.**
+Satu aplikasi percakapan suara: mikrofon → STT lokal-server → otak remote API/Codex → TTS lokal-server → playback/ACK. Pengembangan berikutnya dilakukan di repository ini, bukan proyek sampel terpisah.
 
-Komponen TTS memakai source SDK Supertonic yang diclone dan dipin; ini bukan model baru atau hasil training ulang. STT Zipformer stateful, LLM remote API/Codex, UI, autentikasi, anchor conditioning B dan pemilihan conditioning otomatis yang sudah ada dipertahankan. Kontrol native diubah dari8 menjadi12 langkah setelah pengguna memilih hasil paragraf identik yang lebih bagus; preferensi satu sampel bukan jaminan setiap intonasi/emosi sudah benar.
+## Core yang dimiliki proyek
 
-- Source native: `sela_live_tts/` dan `vendor/supertonic/`, commit upstream `df0f9686dac7fbbde391b759e2ee5286a3737622`, dengan lisensi/provenance dan hash sumber. Worker terpasang berada di root aplikasi produksi, tidak bergantung pada clone/scratch.
-- Adapter aktif ditandai `tts_identity.adapter=sela_live`, `total_steps=12`, backend dasar tetap `supertonic3`. Tidak ada penggantian LLM dengan model lokal atau fallback TTS diam-diam.
-- Pemasangan memakai allowlist, snapshot/rollback, sumber terikat review/hash/mode dan lock host persisten. Guard CPU/RSS/network/deadline tidak dihapus. Baca [kontrak dan pemasangan TTS Live](docs/SELA-LIVE-TTS-INSTALL.md).
-- Verifikasi regresi P0:352 kasus aplikasi SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan125 Node, tanpa kegagalan pada checkpoint sumber. Source export terpisah juga lulus352 kasus SDK (4 skip) dan81 setup, dengan interpreter/aset yang sudah terpasang—bukan host kosong. Full suite mencakup ASR/Piper nyata; ini bukan klaim inference-free. Baca `docs/LOCAL-S2S-REGRESSION-VERIFICATION.json` untuk cakupan dan waktu bukti.
-- Staging natural_v1 menyelesaikan dua giliran Codex/API dan dua giliran shipping browser, playback/ACK/riwayat sesuai. Setelah pemasangan, tiga sintesis native melalui root produksi mereproduksi WAV B byte-exact; health/auth/Host/loopback/inventory diperiksa lagi. Akun produksi tidak diubah; login produksi dan mikrofon/speaker fisik tetap pengujian pengguna.
-- Status produksi terkini: `docs/NATURAL-INSTALL-STATE.json` dan `docs/NATURAL-POLICY-STATE.json`; `docs/LIVE-INSTALL-STATE.json` dan `docs/LIVE-RELEASE-VERIFICATION.json` dipertahankan sebagai bukti pemasangan quality12 sebelumnya. `syamsulmuiin/sela-voice` tetap snapshot baseline, sedangkan `syamsulmuiin/sela-live` memuat source proyek Live penuh bertahap ini.
+- `sela_live/audio/stt.py` memiliki implementasi stateful Zipformer: growing-prefix, deduplikasi, validasi prefix, finalisasi dan reset stream. `voice_app.zipformer_state` adalah compatibility import; worker native `-I` dan aplikasi memakai kelas yang sama.
+- `sela_live/audio/tts.py` memiliki kebijakan sintesis `natural_v1`: validasi teks/kontrol, satu konteks, batas token/mask, admission durasi DP berdasarkan style yang dipilih, dan pemanggilan SDK quality12. Worker native benar-benar memakai implementasi ini setelah verifikasi hash.
+- `voice_app/` tetap memiliki web/auth, transport, lifecycle, admission/quiescence, pembatalan/reap, riwayat dan playback ACK. Entry point service tetap `voice_app.server:create_app`.
+- `vendor/supertonic/` tetap source SDK dasar terpin dari `supertone-oss-archive/supertonic-py`, commit `df0f9686dac7fbbde391b759e2ee5286a3737622`, bukan diklaim karya/model baru. Lisensi dan provenance dipertahankan. Model STT tetap sherpa/Zipformer yang sudah dipasang, bukan model yang dilatih proyek ini.
 
-Jangan menjalankan fresh-install baseline di bawah pada host produksi yang sudah berisi Sela. quality12/natural_v1 dipasang sebagai upgrade terverifikasi pada host dengan dependensi speech terpasang; instalasi Sela Live lengkap pada host kosong belum diklaim teruji. Source/receipt eksperimen lama tetap provenance historis, bukan status pemasangan terbaru.
+Identitas core `0.1.0` berarti integrasi kepemilikan kode, **bukan peningkatan akustik yang sudah dibuktikan**. Anchor B, bahasa native `id`, speed1.05, quality12 dan `natural_v1` dipertahankan. Guard asli menerima baseline8 lalu kebijakan yang dipin memanggil SDK12; batas CPU/RSS/network/deadline dan `guard.main` tidak diubah. Tidak ada DSP/F1/singsong atau engine/model baru.
 
-## Kebijakan konteks otomatis natural_v1
+Belum ada klaim emotion terlatih, STT multilingual, tajwid, mikrofon/speaker fisik atau percakapan audio-to-audio native. Bahasa aplikasi/STT sekarang Indonesia. Otak tetap remote API/Codex, bukan LLM lokal. Audio diproses di server lokal, bukan API audio cloud.
 
-natural_v1 sudah terpasang setelah pengguna menerima sampel B, review akhir disetujui dan jalur Speech native terpasang mereproduksi PCM B byte-exact. Dua giliran Codex nyata dan dua giliran browser dinamis juga lulus pada staging terisolasi. Baca [kontrak natural_v1](docs/NATURAL-V1.md). Ini satu kebijakan otomatis bagi teks dinamis, bukan setelan numerik per cerita atau pemutaran rekaman; profil suara, quality12, speed1.05 dan guard native tetap. Penerimaan sampel B bukan bukti semua teks masa depan atau emosi independen telah sempurna.
-
-## Perbaikan bacaan Arab dan pemulihan mikrofon
-
-Perbaikan dua file sudah terpasang: ornamen ayat `﴿`/`﴾` dipetakan menjadi kurung biasa **hanya pada salinan untuk TTS**, bukan pada teks tampilan/riwayat/ACK. Jalur error browser mempertahankan jeda mikrofon sampai audio yang sedang diputar, didekode atau mengantre benar-benar selesai. Teks lengkap laporan pengguna berhasil disintesis dalam dua konteks dan hasil dari root terpasang identik byte-exact dengan hasil staging; browser uji mempertahankan seluruh teks/ACK dan menerima input sintetis baru setelah playback.
-
-Status terbaru: `docs/ARABIC-PLAYBACK-INSTALL-STATE.json`. Suara B, quality12 dan bahasa native `id` tetap; ini bukan validasi ketepatan pelafalan Arab/tajwid. Pengujian browser memakai replay audio native dan mikrofon sintetis, bukan mikrofon fisik. `/app.js` produksi sengaja terlindung login: hash file dan route ASGI terpasang telah diperiksa, tetapi pengambilan asset melalui akun publik terautentikasi belum diverifikasi. Tidak ada akun atau pengaman autentikasi yang diubah.
-
-## Perbaikan P0 percakapan lokal — terpasang 5 November 2026
-
-Dua perbaikan tambahan sudah dipasang dan dibaca balik dari root produksi:
-
-- Penanda ayat `۝` dipetakan ke titik **hanya pada salinan TTS**. Seluruh teks kasus yang dilaporkan selesai disintesis, bukan hanya pengantarnya; dua pemanggilan native terpasang mereproduksi WAV staging byte-exact dalam pemeriksaan33,50detik.
-- Giliran berikutnya mempertahankan bagian jawaban terinterupsi yang telah mendapat ACK playback, tanpa memasukkan ekor yang belum diakui. Teks lengkap tampilan/riwayat tetap disimpan. Batasnya masih per chunk: bagian yang terdengar di dalam chunk yang belum di-ACK tidak dapat direkonstruksi tepat per kata.
-
-Suara B/12/id, `natural_v1`, model/aset, autentikasi dan koneksi otak API/Codex tidak diganti. Pemrosesan audio tetap lokal-server; cloud audio dan LLM lokal baru tidak diaktifkan. Status pemasangan: `docs/LOCAL-S2S-P0-INSTALL-STATE.json`; bukti native/browser staging: `docs/LOCAL-S2S-NATIVE-BROWSER-VERIFICATION.json`. Review penolakan awal dipertahankan, lalu perbaikan lifecycle postcheck direview dan disetujui terpisah.
-
-**Ini belum menyelesaikan target percakapan suara natural penuh:** pemahaman intonasi lokal, interupsi suara otomatis, latency percakapan, mikrofon/speaker fisik, naturalness dan ketepatan pelafalan/tajwid masih memiliki gate tersendiri. Sistem saat ini modular, bukan model audio-to-audio native. Rancangan dan keputusan lokal-only: `docs/spikes/natural-s2s-feasibility/README.md`.
-
-## Dokumentasi baseline snapshot (historis)
-
-Bagian berikut dipertahankan dari snapshot `sela-voice` sebagai konteks rekonstruksi. Nama, status dan langkah instalasinya bukan pernyataan bahwa Sela Live sudah diluncurkan.
-
-
-Repository ini menyimpan **seluruh sistem yang sudah dibangun**: mikrofon → STT Indonesia → LLM remote API/Codex → Supertonic TTS → playback dan ACK, beserta antarmuka, autentikasi, lifecycle dan pengujiannya.
-
-**Bukan repository khusus TTS.** Pengembangan berikutnya bernama **Sela Live**, juga end-to-end dari STT sampai TTS, dan akan memakai repository terpisah. Baca [pembagian scope](docs/REPOSITORY-SCOPE.md).
-
-## Konfigurasi acuan
-
-- STT lokal-server: stateful Indonesian Zipformer int8, preview lokal aktif.
-- LLM: **pilih** Codex melalui instalasi Hermes sendiri, atau API remote kompatibel Chat Completions. Tidak memasang llama.cpp/LLM lokal.
-- TTS: Supertonic-3 M1/id, 44100Hz mono PCM16, conditioning B sebagai anchor netral.
-- Pemilihan conditioning otomatis aktif di sekitar B; numeric speed/pause experiments OFF. Ini belum emosi independen yang dilatih atau pembuktian identitas suara selalu sama.
-- Balasan panjang dikirim dalam bounded chunks dengan exact source ACK; tidak ada batas30detik untuk seluruh jawaban. Guard native tetap per piece.
-- [Audio continuity terpasang](docs/AUDIO-CONTINUITY.md): pangkas hanya boundary floor PCM `abs(sample) <= 1`, minimal250ms, simpan120ms, cap penghapusan750ms per tepi. Punctuation sudah dipakai sebelumnya; jeda internal dan ACK/transport floor tetap ada. Bukan voice baru atau klaim mendengar speaker fisik.
-- Backend dan audio berada di server; browser Android/desktop mengakses server yang sama. Aplikasi native Android/Windows belum disertakan.
-- Bahasa aplikasi sekarang Indonesia. Model TTS multibahasa tidak otomatis membuat STT/aplikasi sudah multilingual.
-
-## Mulai dari git clone
-
-**Target setup otomatis saat ini: host BARU Ubuntu24.04 Linux x86_64, Python3.12, root dengan kemampuan network-namespace.** Worker acuan memiliki path tetap `/root/voice-lab`; arbitrary install directory belum didukung. Jangan menjalankan fresh-install ini pada server produksi yang sudah berisi Sela.
+## Satu source, dua root
 
 ```bash
-# Pada host BARU, setelah akses repository private sudah diotorisasi
-sudo -i
-apt-get update
-apt-get install -y git python3.12 python3.12-venv nodejs ca-certificates
-
-git clone https://github.com/syamsulmuiin/sela-voice.git /root/voice-lab
-cd /root/voice-lab
-
-# Default offline/read-only; lihat syarat tanpa mengunduh/memulai layanan
-python3.12 scripts/bootstrap.py --check
-
-# Eksplisit: download artifact terpin+hash, buat tiga venv terisolasi
-python3.12 scripts/bootstrap.py --install
+# Checkout pengembangan (bukan root service)
+git clone https://github.com/syamsulmuiin/sela-live.git /root/sela-live
+cd /root/sela-live
 ```
 
-Repository private memerlukan autentikasi GitHub milik operator, misalnya GitHub CLI resmi. Jangan menaruh token pada URL clone. Model besar/venv tidak di-Git; bootstrap mengunduh dari manifest, memverifikasi SHA256, dan tidak menggunakan `latest` atau menurunkan guard.
+`/root/sela-live` adalah source/review/test. `/root/voice-lab` adalah root aplikasi terpasang; nama direktori legacy itu tidak berarti produk lain. Jangan menyalin `.env`, auth, data/rekaman, model atau venv ke Git. Jangan mengarahkan service ke checkout pengembangan.
 
-### Pilihan A — LLM API remote
+Upgrade terpasang menggunakan **satu jalur**: builder offline → review payload/digest → installer transaksional yang sudah ada. Tidak menjalankan fresh-bootstrap pada produksi.
 
 ```bash
-python3.12 scripts/configure.py \
-  --backend api \
-  --model MODEL_ID_DARI_PROVIDER \
-  --base-url https://ENDPOINT_PROVIDER/v1 \
-  --write
+# PLAN SAJA: tidak mengimpor native, tidak menyentuh target/service/lock.
+# Parent output harus ada; output payload harus BARU.
+python -B tools/build_live_runtime.py \
+  --source-app-root /root/sela-live \
+  --target-app-root /root/voice-lab \
+  --output-root /root/sela-research/sela-live-reviewed-payload
 ```
 
-Ganti dua placeholder dengan endpoint/model yang benar. Key diminta lewat **prompt tersembunyi**, bukan argumen command-line. Alternatif server automation: environment `VOICE_API_KEY`. Konfigurasi disimpan mode0600; tidak pernah dimasukkan ke Git.
-
-### Pilihan B — Codex melalui Hermes
-
-Pasang Hermes dari dokumentasi resminya pada host tersebut, autentikasi akun sendiri, dan tentukan interpreter yang benar-benar bisa mengimpor SDK Hermes dan dependency web.
+Setelah review sumber, operator menambahkan `--expected-worker-sha256 HASH_REVIEW` dan `--expected-natural-worker-sha256 HASH_REVIEW`; `--write` hanya membuat staging payload baru, bukan memasang. Payload builder adalah dependency native; rencana aplikasi juga harus menyertakan `voice_app/speech.py` dan `voice_app/sela_live_bridge.py`, sementara ketiga guard asli dipreservasi. Manifest runtime harus sesuai allowlist aplikasi/installer. Detail: [core dan relokasi](docs/SELA-LIVE-CORE.md), [kontrak pemasangan](docs/SELA-LIVE-TTS-INSTALL.md).
 
 ```bash
-hermes auth add openai-codex --type oauth
-
-python3.12 scripts/configure.py \
-  --backend hermes \
-  --model MODEL_CODEX_YANG_TERSEDIA_DI_AKUNMU \
-  --hermes-python /PATH/ABSOLUT/INTERPRETER/HERMES/bin/python \
-  --write
+# Memerlukan plan dengan baseline produksi beku dan approval exact-hash.
+# Jangan membuat approval sendiri atau memakai receipt review historis.
+python -B tools/install_live_tts.py --plan /PATH/TO/REVIEWED-PLAN.json
+# Pemasangan hanya oleh operator setelah review independen:
+# python -B tools/install_live_tts.py --plan /PATH/TO/REVIEWED-PLAN.json --apply
 ```
 
-`/PATH/...` adalah placeholder, bukan path yang sudah disediakan repository. Interpreter web khusus API berbeda dari interpreter Hermes. Jangan menyalin OAuth token ke repository, `.env` aplikasi atau browser. Baca [panduan LLM](docs/LLM-PROVIDERS.md).
+Core `0.1.0` **sudah dipasang pada 5 November 2026** melalui review independen dan upgrade transaksional dengan snapshot rollback. Readback payload/core, layanan aktif, dan guard publik sudah diverifikasi. Bukti native staging menunjukkan PCM B tetap identik dan jalur STT core berjalan pada fixture sintetis; itu bukan bukti akurasi ucapan manusia. Uji dua giliran pada core terpasang masih gate terpisah. Status dan batas verifikasi: [instalasi core](docs/SELA-LIVE-CORE-INSTALL-STATE.json).
 
-### Periksa lalu jalankan
+## Bootstrap/configure/run/doctor
 
-```bash
-python3.12 scripts/doctor.py
-python3.12 scripts/run.py --check
-python3.12 scripts/run.py
-```
+`scripts/bootstrap.py`, `configure.py`, `run.py`, dan `doctor.py` adalah tooling rekonstruksi baseline. Bootstrap menolak runtime/data/service yang sudah ada; configure tidak meng-upgrade konfigurasi privat yang sudah ada. Doctor baseline bukan pengganti verifikasi manifest natural_v1 atau installer/readback. Launcher tetap mengarah ke aplikasi kompatibel yang kini mengimpor core, tetapi konfigurasi natural_v1 terpasang berada pada environment service/drop-in, bukan otomatis dipindahkan ke `.env` oleh tooling baseline.
 
-Buka `http://127.0.0.1:8091` pada host lokal, atau gunakan SSH port-forward ke laptop. Daftarkan **akun aplikasi baru** melalui halaman setup dengan token privat di `data/bootstrap-token` pada host baru. Token berlaku30menit dan tidak boleh dibagikan. Akses mikrofon remote perlu HTTPS; penyiapan domain/TLS/tunnel tidak dilakukan otomatis.
+Jadi **jangan menjalankan bootstrap/configure/run untuk meng-upgrade produksi**, dan jangan menyalakan instance kedua di port8091. Gunakan jalur builder/installer di atas; service, auth dan konfigurasi otak dipertahankan. Setup Sela Live penuh pada host kosong belum diverifikasi dan belum menjadi perintah instalasi yang direkomendasikan. [INSTALL historis](docs/INSTALL.md) dan [LLM providers](docs/LLM-PROVIDERS.md) hanya referensi prasyarat; jangan mengganti source dengan snapshot lama.
 
-**Jangan `source .env`.** File yang dibuat tooling berformat `KEY=JSON-string`, dibaca sebagai data oleh launcher; bukan shell script dan bukan `systemd EnvironmentFile`.
+## Tes tanpa inference
 
-## Panduan lengkap
-
-- [Instalasi, service, domain, konfigurasi ulang dan troubleshooting](docs/INSTALL.md)
-- [Pilihan LLM dan autentikasi terpisah](docs/LLM-PROVIDERS.md)
-- [Arsitektur dan langkah mencapai konfigurasi sekarang](docs/ARCHITECTURE.md)
-- [Verifikasi, hasil acuan dan batas klaim](docs/VERIFICATION.md)
-- [Keamanan, privasi, lisensi dan batas backup](docs/SECURITY-AND-BACKUP.md)
-- [Pemisahan sistem sekarang vs Sela Live](docs/REPOSITORY-SCOPE.md)
-- [Handoff setup awal dan batas verifikasi](config/SETUP-HANDOFF.json) — catatan historis sebelum perbaikan review/relokasi tes; gunakan perintah terbaru di README ini
-
-Dokumen rollout historis di root menjelaskan keputusan komponen. Beberapa tautan path receipt merujuk host pengembangan; log/rekaman/akun produksi sengaja tidak ikut snapshot. README dan panduan setup baru adalah entrypoint reproduksi.
-
-## Pengujian
+Dari source root, interpreter dependency yang sudah tersedia merupakan input operator, bukan hasil bootstrap baru:
 
 ```bash
-# Self-contained setup tests: tidak memerlukan API key/model, tidak menjalankan bootstrap install
-PYTHONDONTWRITEBYTECODE=1 python3.12 -B -m unittest discover -s tests/setup -t . -v
+python -B -m unittest tests.setup.test_core_integration \
+  tests.setup.test_live_runtime_package tests.setup.test_live_tts_install -v
 
-# Unit/regresi shipping client; ini Node, bukan mikrofon/speaker fisik
+# NATIVE_PYTHON: interpreter speech terpasang dengan NumPy, fixture saja.
+PYTHONPATH=tests/python "$NATIVE_PYTHON" -B -m unittest \
+  test_sela_live_core test_sela_live_natural_worker test_sela_live_duration -v
+PYTHONPATH=tests/python "$NATIVE_PYTHON" -O -B -m unittest \
+  test_sela_live_core test_sela_live_natural_worker test_sela_live_duration -v
+
+# SDK_PYTHON: interpreter web/Hermes dengan dependency aplikasi.
+PYTHONPATH=tests/python "$SDK_PYTHON" -B -m unittest \
+  test_stateful_worker test_sela_live_natural_integration \
+  test_heard_context test_quran_end_marker -v
 node --test tests/web/*.test.cjs
 ```
 
-Pengujian aplikasi memakai **dua interpreter** agar dependency SDK Hermes tidak dicampur dengan wheel NumPy speech. Set `SDK_PYTHON` ke interpreter web/Hermes yang benar dan `NATIVE_PYTHON` ke interpreter speech yang sudah memiliki NumPy terpin; keduanya adalah input operator, bukan dependency yang diunduh oleh perintah ini.
+Tes state dan DP menggunakan recognizer/tensor fixture yang diberi label, bukan hasil inference. Suite lengkap historis dapat memuat ASR/Piper nyata: **jangan memakai full discover aplikasi untuk tugas zero-NN**. Inventory historis tetap immutable; delta core dicatat terpisah di `tests/core-additions-inventory.json`.
 
-```bash
-# Dari root checkout pengembangan; placeholder wajib diganti
-SDK_PYTHON=/PATH/TO/HERMES/venv/bin/python
-NATIVE_PYTHON=/PATH/TO/SPEECH/venv/bin/python
+## Bukti dan batas
 
-# Suite aplikasi SDK: semua modul kecuali dua fixture yang memerlukan NumPy
-PYTHONPATH=tests/python "$SDK_PYTHON" -B -c "import unittest,pathlib,sys; excluded={'test_sela_live_duration','test_sela_live_natural_worker'}; names=[p.stem for p in sorted(pathlib.Path('tests/python').glob('test*.py')) if p.stem not in excluded]; suite=unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromName(n) for n in names); r=unittest.TextTestRunner(verbosity=1).run(suite); sys.exit(not r.wasSuccessful())"
-
-# Dua modul sisanya; tidak memuat graph ONNX dalam fixture ini
-PYTHONPATH=tests/python "$NATIVE_PYTHON" -B -m unittest test_sela_live_duration test_sela_live_natural_worker -v
-```
-
-Hasil host pengembangan saat integrasi natural_v1:335 kasus SDK (4 opt-in skip),42 fixture dependency native,81 setup/layout dan121 Node; review runtime123 kasus juga lulus normal/`-O`. Beberapa regresi lama memuat model ASR/Piper nyata yang sudah tersedia, sedangkan fixture DP baru menggunakan tensor/sesi tiruan yang diberi label jelas. Tes korupsi aset memakai salinan sementara, bukan aset produksi. Jalankan pada checkout terisolasi, bukan service aktif. Bukti fresh-host tidak diklaim; sebagian fixture privat bersifat opt-in/skip bila runtime/aset acuan tidak tersedia. Lihat `docs/NATURAL-INTEGRATION-REGRESSION.json` dan bukti release terkait. Receipt migrasi dan release quality12 lama tetap provenance historis.
-
-## Batas reproduksi dan keamanan
-
-- Tool setup dan wheel environments telah diuji; **deployment penuh pada host Ubuntu kosong belum diverifikasi**. Pemeriksaan metadata/HEAD, install venv sementara dan hash existingdeps tidak sama dengan uji fresh-host end-to-end.
-- Bootstrap hanya untuk fresh-install; menolak `.env`, data, service, port8091 atau runtime yang sudah ada. Tidak ada upgrade/resume/cleanup otomatis, dan tidak memasang/memulai systemd.
-- Kredensial, akun/chat/rekaman, model besar, venv dan seluruh archive eksperimen tidak disimpan di Git. Clone tidak memulihkan akun/riwayat lama.
-- Supertonic model/profile turunan tetap mempunyai terms model asal; salinan terms di `web/supertonic3-LICENSE.txt`. Repository ini tidak memberi lisensi ulang menyeluruh untuk komponen pihak ketiga.
-- Referensi source baseline yang disalin: `docs/PRODUCTION-SOURCE-MANIFEST.json` (historis). Relokasi/path/import test tercatat terpisah di `tests/move-inventory.json`; manifest baseline tidak ditulis ulang. Perbaikan runtime berikutnya dicatat sebagai delta/release, bukan diklaim byte-identik dengan snapshot awal.
+- [natural_v1](docs/NATURAL-V1.md), [Arabic playback](docs/ARABIC-PLAYBACK-INSTALL-STATE.json), [P0 percakapan](docs/LOCAL-S2S-P0-INSTALL-STATE.json): checkpoint terpasang sebelumnya, bukan receipt core baru.
+- [Regresi terdahulu](docs/LOCAL-S2S-REGRESSION-VERIFICATION.json), [arsitektur](docs/ARCHITECTURE.md), [keamanan/lisensi](docs/SECURITY-AND-BACKUP.md).
+- Audio continuity dan pemetaan penanda ayat hanya pada salinan TTS dipertahankan; teks display/riwayat/ACK tidak diubah. Bagian interrupted yang sudah di-ACK tetap dipakai pada giliran berikutnya; ekor belum ACK tidak ditebak.
+- Tidak ada model/venv, akun, OAuth atau rekaman privat di source. Fresh-host end-to-end, naturalness semua teks, emosi independen, multilingual STT, interupsi otomatis dan perangkat fisik masih gate terpisah.

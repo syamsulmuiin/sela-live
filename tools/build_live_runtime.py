@@ -94,6 +94,14 @@ def build_runtime(source_app_root, target_app_root, output_root, *, write=False,
         if manifest[group + '_root'] != str(source / directory):
             raise ValueError('Native source root does not match staging source')
         verify_group(source / directory, manifest[group + '_python_files'], read)
+    if 'core_root' in manifest:
+        if manifest['core_root'] != str(source):
+            raise ValueError('Core source root mismatch')
+        required_core = {'sela_live/__init__.py', 'sela_live/audio/__init__.py',
+                         'sela_live/audio/stt.py', 'sela_live/audio/tts.py', 'voice_app/zipformer_state.py'}
+        if set(manifest.get('core_python_files', {})) != required_core:
+            raise ValueError('Core inventory mismatch')
+        verify_group(source, manifest['core_python_files'], read)
     if set(manifest['guard_python_files']) != {'approved_conditioning.py', 'automatic_conditioning.py', 'supertonic3_worker.py'}:
         raise ValueError('Preserved guard inventory mismatch')
     if not {'__init__.py', 'source_pins.py', 'controls.py'} <= set(manifest['live_python_files']) or 'worker.py' in manifest['live_python_files']:
@@ -115,6 +123,10 @@ def build_runtime(source_app_root, target_app_root, output_root, *, write=False,
         paths = ((source / directory / name) for name in manifest['guard_python_files']) if directory == 'voice_app' else (source / directory).rglob('*.py')
         for path in paths:
             payload[str(path.relative_to(source))] = read(path)
+    if 'core_root' in manifest:
+        for name in manifest['core_python_files']:
+            payload[name] = read(source / name)
+        manifest['core_root'] = str(target)
     present_natural = {name for name in NATURAL_FILES if 'sela_live_tts/' + name in payload}
     if present_natural and present_natural != NATURAL_FILES:
         raise ValueError('Incomplete natural runtime bundle')
@@ -150,7 +162,7 @@ def build_runtime(source_app_root, target_app_root, output_root, *, write=False,
               'source_app_root': str(source), 'source_files': source_files,
               'output_root': str(output), 'files': {p: digest(b) for p, b in sorted(payload.items())},
               'manifest_sha256': digest(manifest_raw), 'worker_sha256': digest(transformed),
-              'transforms': {'manifest': {'kind': 'three_roots_only', 'source_sha256': digest(original_manifest),
+              'transforms': {'manifest': {'kind': 'four_roots_only' if 'core_root' in manifest else 'three_roots_only', 'source_sha256': digest(original_manifest),
                                           'output_sha256': digest(manifest_raw)},
                              'worker': {'kind': 'MANIFEST_SHA_literal_only', 'source_sha256': digest(worker),
                                         'output_sha256': digest(transformed)}}}

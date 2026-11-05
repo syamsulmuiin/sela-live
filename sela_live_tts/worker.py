@@ -3,7 +3,7 @@ import sys,os,hashlib,importlib.util
 from pathlib import Path
 sys.dont_write_bytecode=True
 HERE=Path(__file__).absolute().parent
-MANIFEST_SHA='f91cc185c59c19cb0519977811762d30b635cfd609a8336083c5d8dd77055f74'
+MANIFEST_SHA='77308488f444ecf7a9e0f7b5cd71408a165e3acd0536cbc119b7c575ef4cebdc'
 PIN_HELPER_SHA='9436ec03105e5a7a787cdfc8cb87e4e77d10670a58656b1561fa3218a59dccc0'
 
 

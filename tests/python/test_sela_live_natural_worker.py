@@ -281,7 +281,7 @@ class NaturalWorkerTests(unittest.TestCase):
         guard.emit_failure = lambda reason: events.append(reason)
         guard.failure_reason = lambda exc: 'native_error'
         original_main = guard.main
-        with patch.object(worker, 'verify_native', return_value=({'sdk_root':'/fixture/sdk', 'guard_root':'/fixture/guard'}, guard)), patch.object(worker.sys, 'argv', ['worker','check','/assets','/manifest','conditioning_b','12']), patch.object(worker.sys, 'path', list(worker.sys.path)):
+        with patch.object(worker, 'verify_native', return_value=({'sdk_root':'/fixture/sdk', 'guard_root':'/fixture/guard', 'core_root':str(ROOT)}, guard)), patch.object(worker.sys, 'argv', ['worker','check','/assets','/manifest','conditioning_b','12']), patch.object(worker.sys, 'path', list(worker.sys.path)):
             worker.main()
         self.assertIs(guard.main, original_main)
         self.assertEqual(events, [('check','/assets','/manifest','conditioning_b')])

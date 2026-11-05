@@ -46,7 +46,10 @@ NATURAL_RUNTIME_FILES = frozenset(
     'vendor/supertonic/' + name for name in (
         '__init__.py', 'cli.py', 'config.py', 'core.py', 'loader.py', 'pipeline.py', 'utils.py',
         'server/__init__.py', 'server/app.py', 'server/audio.py', 'server/routes.py',
-        'server/schemas.py', 'server/styles_store.py'))
+        'server/schemas.py', 'server/styles_store.py')) | frozenset((
+    'sela_live/__init__.py', 'sela_live/audio/__init__.py', 'sela_live/audio/stt.py',
+    'sela_live/audio/tts.py', 'voice_app/zipformer_state.py'))
+CORE_FILES = frozenset(n for n in NATURAL_RUNTIME_FILES if n.startswith('sela_live/')) | {'voice_app/zipformer_state.py'}
 
 
 def unique_object(pairs):
@@ -92,7 +95,7 @@ def inventory(root):
 
 def allowed(name):
     relative(name)
-    return (name in {'voice_app/speech.py', 'voice_app/sela_live_bridge.py',
+    return (name in CORE_FILES or name in {'voice_app/speech.py', 'voice_app/sela_live_bridge.py',
                      'sela_live_tts/upstream-manifest.json', 'sela_live_tts/natural-runtime-manifest.json',
                      'vendor/supertonic-LICENSE.txt',
                      'vendor/SUPERTONIC-PROVENANCE.json'} or
@@ -221,7 +224,7 @@ class Installer:
             self.observe(selectors)
 
     def check_inventory(self, installed=False):
-        for group, root, trees in (('app', self.root, set(self.baseline.get('trees', [])) | {'voice_app', 'web', 'voice_assets', 'sela_live_tts', 'vendor/supertonic'}),
+        for group, root, trees in (('app', self.root, set(self.baseline.get('trees', [])) | {'voice_app', 'web', 'voice_assets', 'sela_live', 'sela_live_tts', 'vendor/supertonic'}),
                                    ('units', self.units, {'voice-lab.service.d'})):
             expected = set(self.baseline[group])
             if installed:

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "product": "Sela Live",
+  "core_version": "0.1.0",
+  "status": "installed_pending_two_turn_acceptance",
+  "installation_date_utc": "2026-11-05",
+  "core_modules": {"stt": "sela_live/audio/stt.py", "tts": "sela_live/audio/tts.py"},
+  "compatibility": "Existing voice_app transport and service entrypoints delegate to the owned core; legacy installation directory is not a separate product.",
+  "install_receipt": {"status": "installed", "applied": true, "snapshot": "11e87b74108a4503a02d4f4c959b45fc", "plan_sha256": "43db1484f30257707580d2bc98056a1c390aad2116caaff5e8105520a8ebc485"},
+  "independent_reviews": {"runtime_sha256": "4522d7a96da235e695991df76055f6f61d3f12ee5eabd582a7895af5f75db591", "installer_sha256": "c411c591a6dcaa0370c213e56e3454bfee2a50ca4736ef7e4fd85e7a7e32d067"},
+  "parent_readback": {"payload_and_guard_files_verified": 38, "untouched_baseline_preserved": true, "legacy_stt_class_is_owned_core_class": true, "service_active": true, "observed_pid": 563628},
+  "public_guards": {"health": 200, "unauthenticated_config": 401, "unauthenticated_http1_websocket_upgrade": 403, "loopback_untrusted_host": 400, "authenticated_public_session_tested": false},
+  "regressions": {"sdk": {"cases_run": 357, "skipped": 4, "exit": 0}, "native_dependency_cases": 42, "setup_cases": 84, "node_tests_exit": 0},
+  "staged_native_proof": {"real_tts_calls": 1, "dp_reservations": 2, "real_asr_calls": 1, "baseline_wav_sha256": "ec667233e91945c08ce612b1e9e00c6fb44588c0a3ba946f6697a9edd178ad1e", "baseline_pcm_equal": true, "all_owned_children_reaped": true, "synthetic_fixture_not_human_audio": true, "transcript_exact_match_diagnostic": false},
+  "preserved": {"tts_engine": "Supertonic 3", "default_profile": "conditioning_b", "quality_steps": 12, "policy": "natural_v1", "stt_engine": "stateful Zipformer Indonesian int8", "brain": "existing remote API/Codex", "audio_processing": "local_server"},
+  "not_enabled": ["rejected DSP candidates", "F1 selection", "singsong conditioning", "new model weights", "cloud audio", "local LLM"],
+  "pending": ["Real two-turn installed-core acceptance", "Human device microphone and speaker acceptance", "Requested expressive delivery", "Multilingual STT", "Automatic spoken interruption", "Fresh-host bootstrap"]
+}

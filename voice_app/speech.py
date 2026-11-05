@@ -359,7 +359,9 @@ class Speech:
                 self.tts_label += ' · Sela Live quality12'
                 self.tts_identity.update(adapter='sela_live', total_steps=12)
                 if self._natural_policy:
+                    from sela_live import CAPABILITIES
                     self.tts_identity['policy'] = 'natural_v1'
+                    self.tts_identity['speech_core'] = dict(CAPABILITIES)
             try:
                 check_args = (self._live_tts.args('check', self._super_assets, self._super_manifest, self._style_profile)
                     if self._live_tts is not None else

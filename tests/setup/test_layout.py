@@ -99,6 +99,16 @@ class TestLayout(unittest.TestCase):
                 if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name.startswith('test_'))
             self.assertEqual(functions,row['test_functions'])
             current[row['path']]=row
+        core=json.loads((ROOT/'tests/core-additions-inventory.json').read_text())
+        self.assertEqual(core['schema_version'],1)
+        self.assertEqual(core['baseline_commit'],'49d3d1f439ca596d71613a1bd49ec675946deb56')
+        for row in core['files']:
+            prior=current.get(row['path'])
+            self.assertEqual(row['previous_sha256'],prior['sha256'] if prior else None)
+            functions=sorted(node.name for node in ast.walk(ast.parse((ROOT/row['path']).read_bytes()))
+                if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name.startswith('test_'))
+            self.assertEqual(functions,row['test_functions'])
+            current[row['path']]=row
         for row in current.values():
             path = ROOT / row['path']
             self.assertFalse(path.is_symlink())

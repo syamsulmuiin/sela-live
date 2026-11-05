@@ -2,7 +2,7 @@
   "schema_version": 1,
   "product": "Sela Live",
   "core_version": "0.1.0",
-  "status": "installed_pending_two_turn_acceptance",
+  "status": "installed_two_turn_protocol_verified",
   "installation_date_utc": "2026-11-05",
   "core_modules": {"stt": "sela_live/audio/stt.py", "tts": "sela_live/audio/tts.py"},
   "compatibility": "Existing voice_app transport and service entrypoints delegate to the owned core; legacy installation directory is not a separate product.",
@@ -14,5 +14,7 @@
   "staged_native_proof": {"real_tts_calls": 1, "dp_reservations": 2, "real_asr_calls": 1, "baseline_wav_sha256": "ec667233e91945c08ce612b1e9e00c6fb44588c0a3ba946f6697a9edd178ad1e", "baseline_pcm_equal": true, "all_owned_children_reaped": true, "synthetic_fixture_not_human_audio": true, "transcript_exact_match_diagnostic": false},
   "preserved": {"tts_engine": "Supertonic 3", "default_profile": "conditioning_b", "quality_steps": 12, "policy": "natural_v1", "stt_engine": "stateful Zipformer Indonesian int8", "brain": "existing remote API/Codex", "audio_processing": "local_server"},
   "not_enabled": ["rejected DSP candidates", "F1 selection", "singsong conditioning", "new model weights", "cloud audio", "local LLM"],
-  "pending": ["Real two-turn installed-core acceptance", "Human device microphone and speaker acceptance", "Requested expressive delivery", "Multilingual STT", "Automatic spoken interruption", "Fresh-host bootstrap"]
+  "installed_two_turn_acceptance": {"status": "passed", "receipt": "SELA-LIVE-CORE-ACCEPTANCE.json", "scope": "real installed source and native workers in an isolated authenticated ASGI fixture; not production-account, browser or physical playback proof", "first_turn": "synthetic B PCM to real local ASR, remote API/Codex and native TTS", "second_turn": "typed context followup to real remote API/Codex and native TTS", "source_ack_history_exact": true, "all_observed_children_reaped": true, "elapsed_seconds": 43.35903125398909},
+  "clean_export": {"setup_cases": 84, "native_dependency_and_core_fixture_cases": 47, "all_passed": true, "root_relocation": "reviewed builder", "uses_existing_runtimes_and_models": true, "fresh_host_proof": false},
+  "pending": ["Human device microphone and speaker acceptance", "Requested expressive delivery", "Multilingual STT", "Automatic spoken interruption", "Fresh-host bootstrap"]
 }

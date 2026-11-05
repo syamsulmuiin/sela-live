@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "scope": "installed-core-ASGI-protocol-not-browser-or-physical-playback",
+  "synthetic_B_fixture": true,
+  "physical_speech_turns": 0,
+  "typed_second_turn": true,
+  "operational_budget_seconds": 300,
+  "cleanup_may_overrun": true,
+  "physical_HTTP_attempt_count": "unknown; SDK internal retries/refresh not instrumented",
+  "method_accounting": "delegated resolved-client chat.completions.create calls including provider 401 retry",
+  "dp_accounting": "delegated DurationSession.predict calls, not reservations",
+  "self_sha256": "933f715303028eb457d7513a54e89ffcef211532686754a66e1b11537c534183",
+  "pins_sha256": "8b010b639aa4d84460875d769dbe7e884446a29188c8bf553a017784099ef360",
+  "protocol_checks_passed": true,
+  "transcript_sha256": "6fb77c60916fca796d9cdd613c9f3b53b4f49ee2be447a61dedd1aa26031392a",
+  "reply_sha256": [
+    "65425565777a6ed8c8f3a14904e7fb33d5b1a23ddd5c1f10a5d9ab0b26392c88",
+    "552d3c9103efe03e5f4058dd719f46759a1ec697231535d3a51153bca2ed54ae"
+  ],
+  "source_ack_history_exact": true,
+  "all_observed_children_reaped": true,
+  "observed_child_count": 6,
+  "elapsed_seconds": 43.35903125398909,
+  "actual_delegated_operations": {"asr": 1, "tts": 2, "dp": 2, "streams": 2, "completion": 2}
+}

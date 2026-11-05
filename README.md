@@ -44,7 +44,7 @@ python -B tools/install_live_tts.py --plan /PATH/TO/REVIEWED-PLAN.json
 # python -B tools/install_live_tts.py --plan /PATH/TO/REVIEWED-PLAN.json --apply
 ```
 
-Core `0.1.0` **sudah dipasang pada 5 November 2026** melalui review independen dan upgrade transaksional dengan snapshot rollback. Readback payload/core, layanan aktif, dan guard publik sudah diverifikasi. Bukti native staging menunjukkan PCM B tetap identik dan jalur STT core berjalan pada fixture sintetis; itu bukan bukti akurasi ucapan manusia. Uji dua giliran pada core terpasang masih gate terpisah. Status dan batas verifikasi: [instalasi core](docs/SELA-LIVE-CORE-INSTALL-STATE.json).
+Core `0.1.0` **sudah dipasang pada 5 November 2026** melalui review independen dan upgrade transaksional dengan snapshot rollback. Readback payload/core, layanan aktif, dan guard publik sudah diverifikasi. Bukti native staging menunjukkan PCM B tetap identik dan jalur STT core berjalan pada fixture sintetis; itu bukan bukti akurasi ucapan manusia. Uji kode terpasang melalui akun fixture terisolasi juga lulus: audio sintetis → ASR lokal → API/Codex nyata → TTS, lalu giliran teks kedua dengan konteks, source-span, ACK dan riwayat tepat. Ini uji protokol ASGI, bukan bukti mikrofon atau playback fisik. Status: [instalasi core](docs/SELA-LIVE-CORE-INSTALL-STATE.json), [receipt dua giliran](docs/SELA-LIVE-CORE-ACCEPTANCE.json).
 
 ## Bootstrap/configure/run/doctor
 

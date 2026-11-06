@@ -23,9 +23,12 @@ Status: foundation branch only. Not deployed or enabled. Existing Indonesian pro
 - Added `sela_live/audio/voice_capabilities.py` for explicit multilingual STT / expressive TTS capability negotiation. Installed models remain Indonesian-only.
 - Added isolated unit tests for both modules. Tests not executed in target runtime.
 
-- Added `sela_live/audio/whisper_multilingual.py`: optional offline faster-whisper inference with a preinstalled local model, CPU int8, language detection and bounded PCM. Requires a separate model installation and environment; no automatic download.
-- Added `sela_live/audio/edge_multilingual.py`: optional network-backed neural TTS for seven explicit language/voice mappings and four bounded rate/pitch presets. These presets are **not native emotion conditioning**. Text leaves the server to the TTS service if explicitly enabled. Output is MP3 and cannot be sent as WAV without a validated transcoder.
-- Neither adapter is wired into the installed audio workers or main server. Streaming to playback still requires structured delivery envelope validation, backpressure and ACK integration.
+- Decision update: extend existing **local Zipformer** and **local Supertonic-3 natural_v1**, not replace them with faster-whisper or network TTS.
+- Removed the experimental replacement adapters `whisper_multilingual.py` and `edge_multilingual.py` from this branch. They were never wired to production.
+- Existing language/style capability contracts remain as future validation infrastructure, not proof of model support.
+- Multilingual recognition requires compatible local Zipformer acoustic/tokenizer model assets and a verified decoding pipeline; changing a language flag alone cannot make an Indonesian model multilingual.
+- Expressive synthesis requires checking the pinned Supertonic-3 model's supported languages, styles, and actual conditioning capabilities. Preserve reviewed natural_v1 native controls and worker hashes until a separately tested upgrade is approved.
+- Streaming provider-to-playback remains pending and must retain delivery-envelope validation and source-span ACK.
 
 ## Next isolated milestones
 1. STT: implement an opt-in multilingual recognizer adapter with language confidence, bounded PCM and exact final-transcript semantics. Compare Indonesian baseline before enabling; do not relabel Indonesian Zipformer as multilingual.

@@ -8,7 +8,8 @@ import json
 from pathlib import Path
 import wave
 import math
-import audioop
+from array import array
+import sys
 
 
 def sha256_file(path, *, max_bytes=2_500_000_000):
@@ -45,13 +46,16 @@ def wav_metrics(path, *, max_bytes=12_000_000):
         if channels != 1 or width != 2 or rate not in (16000, 22050, 24000, 44100, 48000) or not 0 < frames <= rate * 120:
             raise ValueError("Unsupported WAV format")
         pcm = source.readframes(frames)
-    peak = audioop.max(pcm, 2)
-    rms = audioop.rms(pcm, 2)
+    samples = array('h')
+    samples.frombytes(pcm)
+    if sys.byteorder != 'little':
+        samples.byteswap()
+    peak = max(abs(x) for x in samples)
+    rms = math.sqrt(sum(x * x for x in samples) / len(samples))
     return {"duration_seconds": round(frames / rate, 4), "sample_rate": rate,
             "peak_fraction": round(peak / 32768, 6),
             "rms_dbfs": round(20 * math.log10(max(rms, 1) / 32768), 3),
-            "clipped_samples": sum(1 for i in range(0, len(pcm), 2)
-                                   if abs(int.from_bytes(pcm[i:i+2], "little", signed=True)) >= 32767),
+            "clipped_samples": sum(1 for x in samples if abs(x) >= 32767),
             "acoustic_quality_verified": False}
 
 

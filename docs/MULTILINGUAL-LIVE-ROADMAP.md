@@ -60,3 +60,23 @@ Status: foundation branch only. Not deployed or enabled. Existing Indonesian pro
 - Explicit operator approval before production installer apply.
 
 Do not change the production service, environment, credentials, model assets, current API/Codex access or `main` as part of this foundation.
+
+
+## Verified local-audit handoff and development changes (2026-11-06)
+- Hermes read-only audit of branch snapshot dbbd3a5 recorded Indonesian Zipformer WER 9/75 words (12%) on 12 small human recordings, and stateful paced streaming; not representative of spontaneous conversation.
+- Existing Supertonic-3 SDK/model produced local WAV for id/en/ja, plus id-tagged mixed text. Eight WAVs were generated; perceptual pronunciation, naturalness and speaker identity remain unaccepted.
+- Added offline `supertonic_language_admission.py`: distinguishes 31 native SDK declarations, id/en/ja successful synthesis audit, and id-only production approval.
+- Added `multilingual_tts_request.py`: explicit text/language/profile request contract for isolated candidates; accepts only audited id/en/ja with conditioning_b. This is NOT a native worker, inference entrypoint, or live language routing.
+- Added focused unit tests for the contracts. They have not been executed on the production/runtime interpreter; do not label stage 2 passed.
+- Keep natural_v1 source pins, id-only native worker, service, websocket, and main unchanged.
+
+## Required stage 2 completion gate
+1. Run all new unit tests in a supported isolated checkout; resolve any failures.
+2. Implement a separately hash-pinned multilingual native worker candidate using the original Supertonic-3 SDK/model. Preserve tokenizer/context/selected-style DP checks, 12 steps, 1.05 speed, 28 s DP bound, WAV bounds, network denial, memory/CPU limits, admission and source pins. Do not weaken the existing natural_v1.
+3. Run real isolated worker inference id/en/ja and code-switching; compare id PCM and performance against the fixed baseline; obtain human listening evaluation for en/ja/code-switching and style. A generated WAV is not quality approval.
+4. Only after the reviewed worker passes, integrate explicit language routing behind an opt-in path, retaining structured-delivery validation, source-span ACK, cancellation and rollback. Production remains unchanged until approval.
+
+## Later stages
+- Zipformer multilingual: source/trainability audit, legally usable balanced recordings, matching acoustic checkpoints/tokenizer, independent WER per language and code-switching, no relabeling the Indonesian checkpoint.
+- Real-time conversation: validate streaming provider envelope boundaries before TTS, measure speech-end-to-first-audible latency, and separately test interruption, microphone recovery and ordered playback ACK.
+- Self-improvement: collect consented evaluation cases, compare candidates against pinned baseline and require review before promotion.

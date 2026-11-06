@@ -30,6 +30,14 @@ Status: foundation branch only. Not deployed or enabled. Existing Indonesian pro
 - Expressive synthesis requires checking the pinned Supertonic-3 model's supported languages, styles, and actual conditioning capabilities. Preserve reviewed natural_v1 native controls and worker hashes until a separately tested upgrade is approved.
 - Streaming provider-to-playback remains pending and must retain delivery-envelope validation and source-span ACK.
 
+## Existing local engine inspection (2026-11-06)
+- Inspected `sela_live/audio/stt.py`: `ZipformerState` uses persistent sherpa decoder state and feeds only new samples for growing PCM prefixes.
+- Inspected `voice_app/zipformer_worker.py`: the older worker explicitly re-decodes bounded WAV prefixes. Do not conflate that transport with the newer stateful core.
+- Inspected `sela_live/audio/tts.py`: `natural_v1` explicitly pins Indonesian language, tokenizer admission, selected style and 12-step synthesis.
+- Inspected `voice_app/supertonic3_worker.py`: Supertonic has selected conditioning profiles and bounded numeric delivery controls, but no proven native emotional conditioning.
+- Added `sela_live/audio/local_voice_audit.py` and source-level test for conservative offline verification. This is not a runtime model-weight audit.
+- **Not yet tested:** installed model metadata, tokenizer inventory, multilingual acoustic accuracy, language pronunciation, subjective expressive quality, or real-device latency.
+
 ## Next isolated milestones
 1. STT: implement an opt-in multilingual recognizer adapter with language confidence, bounded PCM and exact final-transcript semantics. Compare Indonesian baseline before enabling; do not relabel Indonesian Zipformer as multilingual.
 2. TTS: validate per-language capability and pronunciation on a separate reviewed worker/model; retain existing Supertonic B/12/id natural_v1 unchanged until approved. Preserve source text, source-span ACK, and hash/manifest checks.

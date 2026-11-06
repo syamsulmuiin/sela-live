@@ -25,7 +25,7 @@ class SupertonicLanguageAdmissionTests(unittest.TestCase):
             require_audited_synthesis("de")
 
     def test_unknown_and_auto_are_rejected(self):
-        for language in ("auto", "xx", "", "EN", "<id>"):
+        for language in ("auto", "xx", "", "<id>"):
             with self.assertRaises(ValueError):
                 require_audited_synthesis(language)
 

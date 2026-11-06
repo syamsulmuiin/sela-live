@@ -19,6 +19,10 @@ Status: foundation branch only. Not deployed or enabled. Existing Indonesian pro
 - No production runtime, deployed service, authentication, or voice model changed.
 - Tests are committed but have not yet been executed in a supported runtime.
 
+- Added `voice_app/provider_streaming.py` with an opt-in plain-text streaming adapter. Structured delivery JSON remains full-buffer validated; no server wiring yet.
+- Added `sela_live/audio/voice_capabilities.py` for explicit multilingual STT / expressive TTS capability negotiation. Installed models remain Indonesian-only.
+- Added isolated unit tests for both modules. Tests not executed in target runtime.
+
 ## Next isolated milestones
 1. STT: implement an opt-in multilingual recognizer adapter with language confidence, bounded PCM and exact final-transcript semantics. Compare Indonesian baseline before enabling; do not relabel Indonesian Zipformer as multilingual.
 2. TTS: validate per-language capability and pronunciation on a separate reviewed worker/model; retain existing Supertonic B/12/id natural_v1 unchanged until approved. Preserve source text, source-span ACK, and hash/manifest checks.

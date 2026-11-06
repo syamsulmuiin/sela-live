@@ -13,6 +13,12 @@ Status: foundation branch only. Not deployed or enabled. Existing Indonesian pro
 - `sela_live/audio/language_contract.py`: strict, provider-neutral final-transcript and speech-segment metadata. It does not infer language, claim multilingual recognition, or change synthesis.
 - `tests/python/test_language_contract.py`: inference-free validation tests.
 
+## Development progress (2026-11-06)
+- Added provider-neutral language and final-turn contracts, plus inference-free tests.
+- Added bounded incremental text segmentation and tests; **not connected to the live provider or TTS path**.
+- No production runtime, deployed service, authentication, or voice model changed.
+- Tests are committed but have not yet been executed in a supported runtime.
+
 ## Next isolated milestones
 1. STT: implement an opt-in multilingual recognizer adapter with language confidence, bounded PCM and exact final-transcript semantics. Compare Indonesian baseline before enabling; do not relabel Indonesian Zipformer as multilingual.
 2. TTS: validate per-language capability and pronunciation on a separate reviewed worker/model; retain existing Supertonic B/12/id natural_v1 unchanged until approved. Preserve source text, source-span ACK, and hash/manifest checks.

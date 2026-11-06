@@ -38,6 +38,13 @@ Status: foundation branch only. Not deployed or enabled. Existing Indonesian pro
 - Added `sela_live/audio/local_voice_audit.py` and source-level test for conservative offline verification. This is not a runtime model-weight audit.
 - **Not yet tested:** installed model metadata, tokenizer inventory, multilingual acoustic accuracy, language pronunciation, subjective expressive quality, or real-device latency.
 
+## Installed asset and real audio audit preparation (2026-11-06)
+- Added `sela_live/audio/installed_asset_audit.py`: read-only SHA-256/size inventory for explicitly named local model files, and objective PCM WAV signal metrics (duration, RMS, peak, clipped samples). Python 3.13 compatible.
+- Added `tests/python/test_installed_asset_audit.py` with synthetic fixtures; tests have not been executed on the installed runtime.
+- These tools do **not** run STT/TTS inference or prove model language coverage, word error rate, voice naturalness, or expressiveness.
+- Installed model binaries and real recorded/generated WAVs are not available via the GitHub repository alone. Collect operator-approved model hashes/metadata and anonymized audio test files from the deployment machine for actual verification.
+- No credentials, model assets, production services, or reviewed manifests were modified.
+
 ## Next isolated milestones
 1. STT: implement an opt-in multilingual recognizer adapter with language confidence, bounded PCM and exact final-transcript semantics. Compare Indonesian baseline before enabling; do not relabel Indonesian Zipformer as multilingual.
 2. TTS: validate per-language capability and pronunciation on a separate reviewed worker/model; retain existing Supertonic B/12/id natural_v1 unchanged until approved. Preserve source text, source-span ACK, and hash/manifest checks.
